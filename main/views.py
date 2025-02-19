@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
 
 def index(request):
     return render(request, 'index.html')
@@ -9,11 +10,16 @@ def about(request):
 def start_test(request):
     return render(request, 'start_test.html')
 
-def login(request):
-    return render(request, 'login.html')
-
 def more(request):
     return render(request, 'more.html')
 
 def temperaments(request):
     return render(request, 'temperaments.html')
+
+@login_required
+def profile(request):
+    return render(request, 'profile.html')
+
+@login_required
+def settings(request):
+    return render(request, 'settings.html')

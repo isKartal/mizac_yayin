@@ -19,7 +19,7 @@ def user_register(request):
                 user = User.objects.create_user(username=username, email=email, password=password)
                 user.save()
                 login(request, user)
-                return redirect('login')  # Ana sayfaya yönlendirme
+                return redirect('login')
         else:
             messages.error(request, "Şifreler uyuşmuyor.")
     
@@ -35,7 +35,7 @@ def user_login(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect('index')  # Ana sayfaya yönlendirme
+            return redirect('index')
         else:
             messages.error(request, "Kullanıcı adı veya şifre yanlış.")
 
