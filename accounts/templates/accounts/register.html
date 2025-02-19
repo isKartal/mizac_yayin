@@ -1,0 +1,30 @@
+{% load static %}
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kayıt Ol</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <div class="auth-container">
+        <h2>Kayıt Ol</h2>
+        {% if messages %}
+            {% for message in messages %}
+                <p class="error-message">{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+        <form class="auth-form" method="POST">
+            {% csrf_token %}
+            <input type="text" name="username" placeholder="Kullanıcı Adı" required>
+            <input type="email" name="email" placeholder="E-Posta" required>
+            <input type="password" name="password" placeholder="Şifre" required>
+            <input type="password" name="password2" placeholder="Şifreyi Tekrar Girin" required>
+            <button type="submit">Kayıt Ol</button>
+        </form>
+        <div class="auth-links">
+            <a href="{% url 'login' %}">Zaten hesabın var mı? Giriş Yap</a>
+        </div>
+    </div>
+</body>
+</html>
