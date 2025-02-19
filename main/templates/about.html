@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MİZAÇLAR</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <a href="{% url 'index' %}" class="logo">LOGO</a>
+        </div>
+        <nav>
+            <a href="{% url 'temperaments' %}" class="nav-button">MİZAÇLAR</a>
+            <a href="{% url 'start_test' %}" class="nav-button">TESTE BAŞLA</a>
+            {% if user.is_authenticated %}
+                <div class="profile-dropdown">
+                    <button class="nav-button profile-button">PROFİL</button>
+                    <div class="dropdown-content">
+                        <a href="{% url 'profile' %}">Profil</a>
+                        <a href="{% url 'settings' %}">Profil Ayarları</a>
+                        <a href="{% url 'logout' %}">Çıkış Yap</a>
+                    </div>
+                </div>
+            {% else %}
+                <a href="{% url 'login' %}" class="nav-button">GİRİŞ YAP</a>
+            {% endif %}
+        </nav>
+    </header>
+    <main>
+        <!-- Hakkımızda Bölümü -->
+        <section class="about-section">
+            <div class="container">
+                <h2>Bizi Tanıyın</h2>
+                <p>4 Mizaç, insan doğasının temel yapı taşlarını anlamanızı sağlayan bir platformdur.  
+                   Mizaçlar, insanların düşünce yapısını, duygusal tepkilerini ve iletişim tarzlarını belirleyen  
+                   doğuştan gelen karakter özellikleridir.</p>
+                <p>Amacımız, bireylerin kendilerini daha iyi tanımalarına yardımcı olmak ve  
+                   kişisel gelişimlerine katkı sağlamaktır. Testimizi çözerek kendi mizaç tipinizi öğrenebilir  
+                   ve hayatınızdaki farkındalığı artırabilirsiniz.</p>
+            </div>
+        </section>
+    
+        <!-- Ekibimiz Bölümü -->
+        <section class="team-section">
+            <div class="container">
+                <h2>Ekibimiz</h2>
+                <div class="team-grid">
+                    <div class="team-member">
+                        <h3>Mustafa Enes Kartal</h3>
+                        <p><strong>İçerik Yöneticisi</strong></p>
+                        <p>Bilgilendirici içerikler ve mizaç testleri oluşturarak platformun bilgi kaynağını yönetir.</p>
+                    </div>
+    
+                    <div class="team-member">
+                        <h3>İsmail Berk Kartal</h3>
+                        <p><strong>Yazılım Geliştirici</strong></p>
+                        <p>Web sitesinin altyapısını geliştirir, teknik işlevselliği sağlar ve kullanıcı deneyimini optimize eder.</p>
+                    </div>
+    
+                    <div class="team-member">
+                        <h3>Ömer Faruk Göregen</h3>
+                        <p><strong>Ürün Yöneticisi</strong></p>
+                        <p>Proje yönetimini üstlenir, görev dağılımlarını yapar ve stratejik planlamaları yönetir.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    
+        <!-- İletişim Bölümü -->
+        <section class="contact-section">
+            <div class="container">
+                <h2>Bize Ulaşın</h2>
+                <p>Herhangi bir sorunuz veya öneriniz için bizimle iletişime geçebilirsiniz.</p>
+                <a href="mailto:info@4mizac.com" class="contact-button">İletişime Geç</a>
+            </div>
+        </section>
+    
+        <footer>
+            <p>&copy; 2025 4 Mizaç | Tüm hakları saklıdır.</p>
+        </footer>
+    </main>
+    
