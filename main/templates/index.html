@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MİZAÇLAR</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <div class="logo">LOGO</div>
+            <a href="{% url 'about' %}" class="nav-button">HAKKINDA</a>
+        </div>
+        <nav>
+            <a href="{% url 'temperaments' %}" class="nav-button">MİZAÇLAR</a>
+            <a href="{% url 'start_test' %}" class="nav-button">TESTE BAŞLA</a>
+            <a href="{% url 'login' %}" class="nav-button">GİRİŞ YAP</a>
+        </nav>
+    </header>
+    <main class="main">
+        <section class="hero" style="background-image: url('{% static 'images/4.jpg' %}');">
+            <div class="hero-content">
+                <h5>BU TEST NEYE GÖRE HAZIRLANMIŞTIR:</h5>
+                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Debitis qui porro sed id hic dolorum vel laborum, assumenda natus sapiente architecto ea totam velit quo sit error officia temporibus! Vero. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero ipsum pariatur commodi, maiores accusantium voluptas aperiam voluptatum sint vel laudantium tenetur temporibus. Possimus nihil laudantium tempore consequuntur molestiae, dolore quasi? Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum aliquam est deleniti eveniet repudiandae quam, mollitia vitae facere ullam veniam ad magnam assumenda excepturi eius voluptatum perspiciatis nihil nesciunt fugiat!</p>
+            </div>
+            <a href="{% url 'start_test' %}" class="test-button">TESTE BAŞLA</a>
+        </section>
+        <section class="elements">
+            <h2>MİZAÇLAR</h2>
+            <div class="element-grid">
+                <div class="element" style="background-image: url('{% static 'images/fire.jpg' %}');">
+                    <h3>ATEŞ</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias, reiciendis odit soluta, repellat consequatur delectus temporibus aut, nihil est dolore magnam. Facilis laborum voluptatem laudantium perspiciatis est eveniet repellat consequatur.</p>
+                    <a href="{% url 'more' %}" class="more-link">DAHA FAZLASI İÇİN →</a>
+                </div>
+                <div class="element" style="background-image: url('{% static 'images/air.jpg' %}');">
+                    <h3>HAVA</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias, reiciendis odit soluta, repellat consequatur delectus temporibus aut, nihil est dolore magnam. Facilis laborum voluptatem laudantium perspiciatis est eveniet repellat consequatur.</p>
+                    <a href="{% url 'more' %}" class="more-link">DAHA FAZLASI İÇİN →</a>
+                </div>
+                <div class="element" style="background-image: url('{% static 'images/water.jpg' %}');">
+                    <h3>SU</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias, reiciendis odit soluta, repellat consequatur delectus temporibus aut, nihil est dolore magnam. Facilis laborum voluptatem laudantium perspiciatis est eveniet repellat consequatur.</p>
+                    <a href="{% url 'more' %}" class="more-link">DAHA FAZLASI İÇİN →</a>
+                </div>
+                <div class="element" style="background-image: url('{% static 'images/earth.jpg' %}');">
+                    <h3>TOPRAK</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias, reiciendis odit soluta, repellat consequatur delectus temporibus aut, nihil est dolore magnam. Facilis laborum voluptatem laudantium perspiciatis est eveniet repellat consequatur.</p>
+                    <a href="{% url 'more' %}" class="more-link">DAHA FAZLASI İÇİN →</a>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <!-- Footer şimdilik boş -->
+    </footer>
+</body>
+</html>
