@@ -1,0 +1,78 @@
+/* Authentication (Login & Register) Sayfa Stilleri */
+.auth-container {
+    max-width: 400px;
+    margin: 80px auto;
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: 'Poppins', sans-serif;
+}
+
+.auth-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #2c3e50;
+}
+
+.auth-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.auth-form input[type="text"],
+.auth-form input[type="email"],
+.auth-form input[type="password"] {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: border-color 0.3s;
+}
+
+.auth-form input[type="text"]:focus,
+.auth-form input[type="email"]:focus,
+.auth-form input[type="password"]:focus {
+    border-color: #3498db;
+    outline: none;
+}
+
+.auth-form button {
+    padding: 12px;
+    background-color: #3498db;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.auth-form button:hover {
+    background-color: #2c3e50;
+    transform: translateY(-2px);
+}
+
+.auth-links {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.auth-links a {
+    color: #3498db;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.auth-links a:hover {
+    color: #2c3e50;
+}
+
+/* Hata Mesajları İçin */
+.error-message {
+    color: #e74c3c;
+    margin-bottom: 15px;
+    text-align: center;
+    font-size: 14px;
+}
