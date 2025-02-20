@@ -17,7 +17,19 @@
         <nav>
             <a href="{% url 'temperaments' %}" class="nav-button">MİZAÇLAR</a>
             <a href="{% url 'start_test' %}" class="nav-button">TESTE BAŞLA</a>
-            <a href="{% url 'login' %}" class="nav-button">GİRİŞ YAP</a>
+            {% if user.is_authenticated %}
+                <div class="profile-dropdown">
+                    <button class="nav-button profile-button">PROFİL</button>
+                    <div class="dropdown-content">
+                        <a href="{% url 'profiles' %}">Mizacım</a>
+                        <a href="{% url 'profiles' %}">Önerilerim</a>
+                        <a href="{% url 'profiles' %}">Profil Ayarlarım</a>
+                        <a href="{% url 'logout' %}">Çıkış Yap</a>
+                    </div>
+                </div>
+            {% else %}
+                <a href="{% url 'login' %}" class="nav-button">GİRİŞ YAP</a>
+            {% endif %}
         </nav>
     </header>
     

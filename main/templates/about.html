@@ -12,6 +12,7 @@
     <header>
         <div class="logo-container">
             <a href="{% url 'index' %}" class="logo">LOGO</a>
+            <a href="{% url 'about' %}" class="nav-button">HAKKINDA</a>
         </div>
         <nav>
             <a href="{% url 'temperaments' %}" class="nav-button">MİZAÇLAR</a>
@@ -20,7 +21,9 @@
                 <div class="profile-dropdown">
                     <button class="nav-button profile-button">PROFİL</button>
                     <div class="dropdown-content">
-                        <a href="{% url 'profiles' %}">Profil</a>
+                        <a href="{% url 'profiles' %}">Mizacım</a>
+                        <a href="{% url 'profiles' %}">Önerilerim</a>
+                        <a href="{% url 'profiles' %}">Profil Ayarlarım</a>
                         <a href="{% url 'logout' %}">Çıkış Yap</a>
                     </div>
                 </div>
