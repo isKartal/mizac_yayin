@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'main',
     'accounts',
     'profiles',
+    'temperaments',
 ]
 
 MIDDLEWARE = [
