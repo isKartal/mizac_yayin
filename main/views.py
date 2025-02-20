@@ -15,11 +15,3 @@ def more(request):
 
 def temperaments(request):
     return render(request, 'temperaments.html')
-
-@login_required
-def profile(request):
-    return render(request, 'profile.html')
-
-@login_required
-def settings(request):
-    return render(request, 'settings.html')
