@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MİZAÇLAR</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <a href="{% url 'index' %}" class="logo">LOGO</a>
+            <a href="{% url 'about' %}" class="nav-button">HAKKINDA</a>
+        </div>
+        <nav>
+            <a href="{% url 'temperaments' %}" class="nav-button">MİZAÇLAR</a>
+            <a href="{% url 'start_test' %}" class="nav-button">TESTE BAŞLA</a>
+            <a href="{% url 'login' %}" class="nav-button">GİRİŞ YAP</a>
+        </nav>
+    </header>
