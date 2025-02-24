@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MİZAÇLAR</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <div class="nav-container">
+        <a href="{% url 'index' %}" class="nav-item">LOGO</a>
+        <a href="{% url 'about' %}" class="nav-item">HAKKINDA</a>
+        <a href="{% url 'temperaments' %}" class="nav-item">MİZAÇLAR</a>
+        <a href="{% url 'start_test' %}" class="nav-item">TESTE BAŞLA</a>
+        {% if user.is_authenticated %}
+            <div style="position: relative;">
+                <button class="profile-button">PROFİL</button>
+                <div class="dropdown-content">
+                    <a href="{% url 'profiles' %}">Mizacım</a>
+                    <a href="{% url 'profiles' %}">Önerilerim</a>
+                    <a href="{% url 'profiles' %}">Profil Ayarlarım</a>
+                    <a href="{% url 'logout' %}">Çıkış Yap</a>
+                </div>
+            </div>
+        {% else %}
+            <a href="{% url 'login' %}" class="nav-item">GİRİŞ YAP</a>
+        {% endif %}
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const profileButton = document.querySelector('.profile-button');
+            const dropdownContent = document.querySelector('.dropdown-content');
+
+            profileButton.addEventListener('click', function() {
+                dropdownContent.style.display = dropdownContent.style.display === 'block' ? 'none' : 'block';
+            });
+
+            // Close the dropdown if clicked outside
+            document.addEventListener('click', function(event) {
+                if (!event.target.matches('.profile-button')) {
+                    dropdownContent.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>

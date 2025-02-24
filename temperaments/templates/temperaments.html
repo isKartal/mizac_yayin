@@ -9,34 +9,31 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header>
-        <div class="logo-container">
-            <a href="{% url 'index' %}" class="logo">LOGO</a>
-            <a href="{% url 'about' %}" class="nav-button">HAKKINDA</a>
-        </div>
-        <nav>
-            <a href="{% url 'temperaments' %}" class="nav-button">MİZAÇLAR</a>
-            <a href="{% url 'start_test' %}" class="nav-button">TESTE BAŞLA</a>
-            {% if user.is_authenticated %}
-                <div class="profile-dropdown">
-                    <button class="nav-button profile-button">PROFİL</button>
-                    <div class="dropdown-content">
-                        <a href="{% url 'profiles' %}">Mizacım</a>
-                        <a href="{% url 'profiles' %}">Önerilerim</a>
-                        <a href="{% url 'profiles' %}">Profil Ayarlarım</a>
-                        <a href="{% url 'logout' %}">Çıkış Yap</a>
-                    </div>
+    <div class="nav-container">
+        <a href="{% url 'index' %}" class="nav-item">LOGO</a>
+        <a href="{% url 'about' %}" class="nav-item">HAKKINDA</a>
+        <a href="{% url 'temperaments' %}" class="nav-item">MİZAÇLAR</a>
+        <a href="{% url 'start_test' %}" class="nav-item">TESTE BAŞLA</a>
+        {% if user.is_authenticated %}
+            <div style="position: relative;">
+                <button class="profile-button">PROFİL</button>
+                <div class="dropdown-content">
+                    <a href="{% url 'profiles' %}">Mizacım</a>
+                    <a href="{% url 'profiles' %}">Önerilerim</a>
+                    <a href="{% url 'profiles' %}">Profil Ayarlarım</a>
+                    <a href="{% url 'logout' %}">Çıkış Yap</a>
                 </div>
-            {% else %}
-                <a href="{% url 'login' %}" class="nav-button">GİRİŞ YAP</a>
-            {% endif %}
-        </nav>
-    </header>
+            </div>
+        {% else %}
+            <a href="{% url 'login' %}" class="nav-item">GİRİŞ YAP</a>
+        {% endif %}
+    </div>
     
     <section class="mizac-section">
         <div class="mizac-info">
-            <h2 class="mizac-title">MİZAÇ NEDİR?</h2>
-            <p>Mizaç, bireyin doğuştan getirdiği ve hayatı boyunca büyük ölçüde değişmeyen temel özellikler bütünüdür. İnsanların olaylara verdiği tepkiler, eğilimleri ve davranış kalıpları mizaçları doğrultusunda şekillenir.</p>
+            <h2 class="mizac-title">Mizaçlar Nedir ?</h2>
+            <p>Mizaç, bir kişinin etrafında olup bitenlere verdiği tepkileri belirleyen ve doğuştan gelen karakter ve kişilik özellikleridir. Bu özellikler bir kişiyi diğerlerinden ayıran kendine özgü davranışsal eğilimlerine neden olur.
+                Mizaç sosyallik, duygusallık, kararlılık gibi birçok farklı davranış özelliğinin bir araya gelmesiyle ortaya çıkar, yani çok boyutludur. Her bir davranış özelliği hepimizde farklı ölçülerde bulunur ve bu özelliklerin farklı oranlarda birleşimi sonucunda eşsiz mizaçlar ve biricik kişiler oluşur. Araştırmalar birçok kişilik özelliğinden bahsetse de mizacın boyutları kişilik özelliklerine kıyasla daha azdır. Çünkü mizacın boyutlarının belirlenmesinde kişinin tek bir olayda verdiği tepkiden ziyade genel olarak nasıl tepki gösterdiği belirleyici faktördür. Örneğin birinin sık sık kalabalık önünde konuşma yaptığını bilmektense bu kişinin konuşmasını nasıl yaptığını incelemek (hızlı, yavaş, tutuk, vurgulu) mizacı hakkında daha iyi bilgi verir. Yani mizaç belirgin kişilik özelliklerinden daha geniş bir çerçevede kişilik eğilimlerini yansıtır. Genel davranış eğilimlerinin nasıl belirgin davranışlara dönüşeceği, bu eğilimlerin kişinin büyüdüğü çevreyle girdiği etkileşime bağlıdır. Mizaçtaki bireysel farklılıklar yaşamın daha ilk yıllarında dahi gözlemlenebilir. Birçok bebek daha yaşamının ilk günlerinde bile çevresi tarafından utangaç, uyumlu, fazla hareketli ya da uysal gibi ifadelerle tanımlanabilir.</p>
         </div>
         <div class="mizac-buttons">
             <a href="{% url 'fire_more' %}" class="mizac-button" style="background-image: url('{% static 'images/fire.jpg' %}');">
@@ -160,4 +157,22 @@
     }
     </style>
 </body>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const profileButton = document.querySelector('.profile-button');
+        const dropdownContent = document.querySelector('.dropdown-content');
+
+        profileButton.addEventListener('click', function() {
+            dropdownContent.style.display = dropdownContent.style.display === 'block' ? 'none' : 'block';
+        });
+
+        // Close the dropdown if clicked outside
+        document.addEventListener('click', function(event) {
+            if (!event.target.matches('.profile-button')) {
+                dropdownContent.style.display = 'none';
+            }
+        });
+    });
+</script>
 </html>

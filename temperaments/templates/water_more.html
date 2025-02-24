@@ -111,29 +111,25 @@
     </style>
 </head>
 <body>
-    <header>
-        <div class="logo-container">
-            <a href="{% url 'index' %}" class="logo">LOGO</a>
-            <a href="{% url 'about' %}" class="nav-button">HAKKINDA</a>
-        </div>
-        <nav>
-            <a href="{% url 'temperaments' %}" class="nav-button">MİZAÇLAR</a>
-            <a href="{% url 'start_test' %}" class="nav-button">TESTE BAŞLA</a>
-            {% if user.is_authenticated %}
-                <div class="profile-dropdown">
-                    <button class="nav-button profile-button">PROFİL</button>
-                    <div class="dropdown-content">
-                        <a href="{% url 'profiles' %}">Mizacım</a>
-                        <a href="{% url 'profiles' %}">Önerilerim</a>
-                        <a href="{% url 'profiles' %}">Profil Ayarlarım</a>
-                        <a href="{% url 'logout' %}">Çıkış Yap</a>
-                    </div>
+    <div class="nav-container">
+        <a href="{% url 'index' %}" class="nav-item">LOGO</a>
+        <a href="{% url 'about' %}" class="nav-item">HAKKINDA</a>
+        <a href="{% url 'temperaments' %}" class="nav-item">MİZAÇLAR</a>
+        <a href="{% url 'start_test' %}" class="nav-item">TESTE BAŞLA</a>
+        {% if user.is_authenticated %}
+            <div style="position: relative;">
+                <button class="profile-button">PROFİL</button>
+                <div class="dropdown-content">
+                    <a href="{% url 'profiles' %}">Mizacım</a>
+                    <a href="{% url 'profiles' %}">Önerilerim</a>
+                    <a href="{% url 'profiles' %}">Profil Ayarlarım</a>
+                    <a href="{% url 'logout' %}">Çıkış Yap</a>
                 </div>
-            {% else %}
-                <a href="{% url 'login' %}" class="nav-button">GİRİŞ YAP</a>
-            {% endif %}
-        </nav>
-    </header>
+            </div>
+        {% else %}
+            <a href="{% url 'login' %}" class="nav-item">GİRİŞ YAP</a>
+        {% endif %}
+    </div>
 
     <section class="mizac-section">
         <div class="mizac-info">
@@ -152,4 +148,22 @@
         </div>
     </section>
 </body>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const profileButton = document.querySelector('.profile-button');
+        const dropdownContent = document.querySelector('.dropdown-content');
+
+        profileButton.addEventListener('click', function() {
+            dropdownContent.style.display = dropdownContent.style.display === 'block' ? 'none' : 'block';
+        });
+
+        // Close the dropdown if clicked outside
+        document.addEventListener('click', function(event) {
+            if (!event.target.matches('.profile-button')) {
+                dropdownContent.style.display = 'none';
+            }
+        });
+    });
+</script>
 </html>

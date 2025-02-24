@@ -6,39 +6,34 @@
     <title>MİZAÇLAR</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header>
-        <div class="logo-container">
-            <a href="{% url 'index' %}" class="logo">LOGO</a>
-            <a href="{% url 'about' %}" class="nav-button">HAKKINDA</a>
-        </div>
-        <nav>
-            <a href="{% url 'temperaments' %}" class="nav-button">MİZAÇLAR</a>
-            <a href="{% url 'start_test' %}" class="nav-button">TESTE BAŞLA</a>
-            {% if user.is_authenticated %}
-                <div class="profile-dropdown">
-                    <button class="nav-button profile-button">PROFİL</button>
-                    <div class="dropdown-content">
-                        <a href="{% url 'profiles' %}">Mizacım</a>
-                        <a href="{% url 'profiles' %}">Önerilerim</a>
-                        <a href="{% url 'profiles' %}">Profil Ayarlarım</a>
-                        <a href="{% url 'logout' %}">Çıkış Yap</a>
-                    </div>
+    <div class="nav-container">
+        <a href="{% url 'index' %}" class="nav-item">LOGO</a>
+        <a href="{% url 'about' %}" class="nav-item">HAKKINDA</a>
+        <a href="{% url 'temperaments' %}" class="nav-item">MİZAÇLAR</a>
+        <a href="{% url 'start_test' %}" class="nav-item">TESTE BAŞLA</a>
+        {% if user.is_authenticated %}
+            <div style="position: relative;">
+                <button class="profile-button">PROFİL</button>
+                <div class="dropdown-content">
+                    <a href="{% url 'profiles' %}">Mizacım</a>
+                    <a href="{% url 'profiles' %}">Önerilerim</a>
+                    <a href="{% url 'profiles' %}">Profil Ayarlarım</a>
+                    <a href="{% url 'logout' %}">Çıkış Yap</a>
                 </div>
-            {% else %}
-                <a href="{% url 'login' %}" class="nav-button">GİRİŞ YAP</a>
-            {% endif %}
-        </nav>
-    </header>
-    <main class="main">
-        <section class="hero" style="background-image: url('{% static 'images/4.jpg' %}');">
-            <div class="hero-content">
-                <h5>BU TEST NEYE GÖRE HAZIRLANMIŞTIR:</h5>
-                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Debitis qui porro sed id hic dolorum vel laborum, assumenda natus sapiente architecto ea totam velit quo sit error officia temporibus! Vero. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero ipsum pariatur commodi, maiores accusantium voluptas aperiam voluptatum sint vel laudantium tenetur temporibus. Possimus nihil laudantium tempore consequuntur molestiae, dolore quasi? Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum aliquam est deleniti eveniet repudiandae quam, mollitia vitae facere ullam veniam ad magnam assumenda excepturi eius voluptatum perspiciatis nihil nesciunt fugiat!</p>
             </div>
-            <a href="{% url 'start_test' %}" class="test-button">TESTE BAŞLA</a>
+        {% else %}
+            <a href="{% url 'login' %}" class="nav-item">GİRİŞ YAP</a>
+        {% endif %}
+    </div>
+    <main>
+        <section style="background-image: url('{% static 'images/main.jpg' %}');">
+            <div>
+                <h5>Mizaçlar Nedir</h5>
+                <p>Mizaç, bir kişinin etrafında olup bitenlere verdiği tepkileri belirleyenve doğuştan gelen karakter ve kişilik özellikleridir mizacınızı öğrenmek istiyorsanız hemen testi çözebilirsiniz.</p>
+            </div>
+            <a href="{% url 'start_test' %}">TESTE BAŞLA</a>
         </section>
         <section class="elements">
             <h2>MİZAÇLAR</h2>
@@ -69,23 +64,22 @@
     <footer>
         <p>&copy; 2025 4 Mizaç | Tüm hakları saklıdır.</p>
     </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const profileButton = document.querySelector('.profile-button');
+            const dropdownContent = document.querySelector('.dropdown-content');
+
+            profileButton.addEventListener('click', function() {
+                dropdownContent.style.display = dropdownContent.style.display === 'block' ? 'none' : 'block';
+            });
+
+            // Close the dropdown if clicked outside
+            document.addEventListener('click', function(event) {
+                if (!event.target.matches('.profile-button')) {
+                    dropdownContent.style.display = 'none';
+                }
+            });
+        });
+    </script>
 </body>
 </html>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const profileButton = document.querySelector('.profile-button');
-        const dropdownContent = document.querySelector('.dropdown-content');
-
-        profileButton.addEventListener('click', function() {
-            dropdownContent.style.display = dropdownContent.style.display === 'block' ? 'none' : 'block';
-        });
-
-        // Close the dropdown if clicked outside
-        document.addEventListener('click', function(event) {
-            if (!event.target.matches('.profile-button')) {
-                dropdownContent.style.display = 'none';
-            }
-        });
-    });
-</script>
