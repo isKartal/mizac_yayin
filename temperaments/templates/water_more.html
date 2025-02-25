@@ -1,123 +1,75 @@
 <!DOCTYPE html>
 <html lang="tr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Su Mizacı Özellikleri</title>
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>MİZAÇLAR</title>
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Poppins', sans-serif;
-            background-color: #f9f9f9;
-            margin: 0;
-            padding: 0;
         }
-
-        /* --- Mizaç İçeriği --- */
+        
         .mizac-section {
             display: flex;
-            align-items: flex-start; /* İçeriği üst tarafa hizalar */
+            align-items: flex-start;
             justify-content: center;
             gap: 40px;
-            max-width: 1500px;
-            margin: 50px auto;
             padding: 40px 20px;
-            background: #ffffff;
-            border-radius: 12px;
-            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+            background-color: hsla(0, 0.00%, 100.00%, 0.97);
         }
         
         .mizac-info {
-            max-width: 450px;
+            max-width: 600px;
             color: #333;
             font-size: 18px;
-            display: flex;
-            flex-direction: column;
-            align-self: flex-start; /* Üst kısma hizalar */
+            align-self: flex-start;
         }
         
+        .mizac-title {
+            font-size: 32px;
+            font-weight: bold;
+            color: #222;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
 
         .mizac-image {
             max-width: 350px;
             border-radius: 12px;
             box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.1);
         }
-        .mizac-title {
-            font-size: 32px;
-            font-weight: bold;
-            color: #005f73;
-            margin-bottom: 15px;
-            text-transform: uppercase;
-        }
 
-        .mizac-info p {
-            font-size: 16px;
-            line-height: 1.6;
-            color: #444;
-            margin-bottom: 15px;
-        }
-
-        /* --- Mizaç Kelimeleri --- */
-        .mizac-keywords {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            margin-top: 15px;
-        }
-
-        .keyword {
-            background-color: #0077b6;
-            color: white;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 14px;
-            font-weight: bold;
-            text-transform: uppercase;
-            text-align: center;
-            box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
-            transition: 0.3s ease;
-            width: max-content;
-        }
-
-        .keyword:hover {
-            background-color: #005f73;
-            transform: scale(1.05);
-        }
-
-        /* --- Mobil Uyum --- */
         @media (max-width: 768px) {
             .mizac-section {
                 flex-direction: column;
                 text-align: center;
                 align-items: center;
-                padding: 30px;
             }
-
             .mizac-info {
                 text-align: center;
-                align-items: center;
+                align-self: center;
             }
-
             .mizac-title {
                 text-align: center;
-            }
-
-            .mizac-keywords {
-                align-items: center;
             }
         }
     </style>
 </head>
 <body>
     <div class="nav-container">
-        <a href="{% url 'index' %}" class="nav-item">LOGO</a>
-        <a href="{% url 'about' %}" class="nav-item">HAKKINDA</a>
-        <a href="{% url 'temperaments' %}" class="nav-item">MİZAÇLAR</a>
-        <a href="{% url 'start_test' %}" class="nav-item">TESTE BAŞLA</a>
+        <a href="{% url 'index' %}" class="logo">MİZAÇ</a> 
+    
+        <div class="nav-links">
+            <a href="{% url 'about' %}" class="nav-item">HAKKINDA</a>
+            <a href="{% url 'temperaments' %}" class="nav-item">MİZAÇLAR</a>
+            <a href="{% url 'start_test' %}" class="nav-item">TESTE BAŞLA</a>
+        </div>
+    
         {% if user.is_authenticated %}
-            <div style="position: relative;">
+            <div class="profile-container">
                 <button class="profile-button">PROFİL</button>
                 <div class="dropdown-content">
                     <a href="{% url 'profiles' %}">Mizacım</a>
@@ -127,7 +79,7 @@
                 </div>
             </div>
         {% else %}
-            <a href="{% url 'login' %}" class="nav-item">GİRİŞ YAP</a>
+            <a href="{% url 'login' %}" class="nav-item profile-container">GİRİŞ YAP</a>
         {% endif %}
     </div>
 
@@ -142,9 +94,6 @@
         </div>
         <div class="mizac-keywords">
             <img src="{% static 'images/water.jpg' %}" alt="Su Mizacı Karakteri" class="mizac-image">
-            <span class="keyword">Duygusal</span>
-            <span class="keyword">Sezgisel</span>
-            <span class="keyword">Hassas</span>
         </div>
     </section>
 </body>

@@ -9,6 +9,11 @@ body {
     background-color: #ece9e3;
 }
 
+.nav-item, .profile-button, .logo {
+    font-family: 'Montserrat', sans-serif; 
+    font-weight: 600; /* İstersen 400 veya 700 yapabilirsin */
+}
+
 header {
     display: flex;
     justify-content: space-between;
@@ -129,6 +134,25 @@ main section:first-child a:hover {
     background-color: gray;
 }
 
+.mizac-nedir-title {
+    font-family: 'Poppins', serif !important;
+    font-size: 20vw; /* Ekran genişliğine göre otomatik ölçeklenir */
+    font-weight: bold;
+    margin-top: 5vh; /* Yazıyı aşağı kaydır */
+    text-align: center;
+    color: #292321;
+    
+}
+
+.mizac-nedir-text {
+    font-family: 'Lora', serif !important;
+    font-weight: 900 !important; /* Yarı kalın */
+    font-size:25vw;
+    line-height: 1.6;
+    color: #555;
+    text-align: center;
+}
+
 .elements {
     padding: 40px 20px;
     text-align: center;
@@ -214,11 +238,26 @@ footer {
 
 .nav-container {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     width: 100%;
     background-color: #ece9e3;
     padding: 10px 50px;
+    gap: 15px;
     align-items: center;
+}
+
+.nav-links {
+    display: flex;
+    gap: 70px; /* Butonlar arasındaki boşluğu belirler */
+}
+
+.nav-container .logo {
+    margin-right: auto; /* LOGO'yu en sola alır */
+}
+
+.profile-container {
+    margin-left: auto; /* PROFİL butonunu en sağa alır */
+    position: relative;
 }
 
 .nav-item {
@@ -226,7 +265,7 @@ footer {
     color: black;
     font-weight: bold;
     font-size: 18px;
-    padding: 10px 15px;
+    padding: 8px 12px;
     position: relative;
 }
 
@@ -234,12 +273,21 @@ footer {
     color: gray;
 }
 
+.logo {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+    font-size: 35px;
+    padding: 8px 12px;
+    position: relative;
+}
+
 .profile-button {
     background: none;
     border: none;
     cursor: pointer;
     font-weight: bold;
-    font-size: 18px;
+    font-size: 25px;
     padding: 10px 15px;
 }
 
