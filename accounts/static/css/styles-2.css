@@ -1,7 +1,25 @@
-body{
-    background-color: #ece9e3;
-    margin-top: 250px;
+/* Genel Stil Ayarları */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
+
+body {
+    font-family: 'Lora', serif;
+    background-color: #ece9e3;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.page-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Auth Container Stilleri */
 .auth-container {
     max-width: 400px;
     margin: 80px auto;
@@ -72,7 +90,6 @@ body{
     color: black;
 }
 
-/* Hata Mesajları İçin */
 .error-message {
     color: red;
     margin-bottom: 15px;

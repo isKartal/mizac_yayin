@@ -1,73 +1,22 @@
 <!DOCTYPE html>
 <html lang="tr">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>MİZAÇLAR</title>
-        {% load static %}
-        <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-        }
-        
-        .mizac-section {
-            display: flex;
-            align-items: flex-start;
-            justify-content: center;
-            gap: 40px;
-            padding: 40px 20px;
-            background-color: hsla(0, 0.00%, 100.00%, 0.97);
-        }
-        
-        .mizac-info {
-            max-width: 600px;
-            color: #333;
-            font-size: 18px;
-            align-self: flex-start;
-        }
-        
-        .mizac-title {
-            font-size: 32px;
-            font-weight: bold;
-            color: #222;
-            margin-bottom: 15px;
-            text-transform: uppercase;
-        }
-
-        .mizac-image {
-            max-width: 350px;
-            border-radius: 12px;
-            box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        @media (max-width: 768px) {
-            .mizac-section {
-                flex-direction: column;
-                text-align: center;
-                align-items: center;
-            }
-            .mizac-info {
-                text-align: center;
-                align-self: center;
-            }
-            .mizac-title {
-                text-align: center;
-            }
-        }
-    </style>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MİZAÇLAR</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles-4.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lora&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="nav-container">
-        <a href="{% url 'index' %}" class="logo">MİZAÇ</a> 
-    
+        <a href="{% url 'index' %}" class="logo">MİZAÇ</a>
         <div class="nav-links">
             <a href="{% url 'about' %}" class="nav-item">HAKKINDA</a>
             <a href="{% url 'temperaments' %}" class="nav-item">MİZAÇLAR</a>
             <a href="{% url 'start_test' %}" class="nav-item">TESTE BAŞLA</a>
         </div>
-    
         {% if user.is_authenticated %}
             <div class="profile-container">
                 <button class="profile-button">PROFİL</button>
@@ -92,27 +41,27 @@
                 Sanatsal ve felsefi konulara ilgi duyarlar, ancak zaman zaman aşırı hassas olabilirler.
             </p>
         </div>
-        <div class="mizac-keywords">
+        <div class="mizac-image-container">
             <img src="{% static 'images/water.jpg' %}" alt="Su Mizacı Karakteri" class="mizac-image">
         </div>
     </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const profileButton = document.querySelector('.profile-button');
+            const dropdownContent = document.querySelector('.dropdown-content');
+
+            profileButton.addEventListener('click', function() {
+                dropdownContent.style.display = dropdownContent.style.display === 'block' ? 'none' : 'block';
+            });
+
+            // Close the dropdown if clicked outside
+            document.addEventListener('click', function(event) {
+                if (!event.target.matches('.profile-button')) {
+                    dropdownContent.style.display = 'none';
+                }
+            });
+        });
+    </script>
 </body>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const profileButton = document.querySelector('.profile-button');
-        const dropdownContent = document.querySelector('.dropdown-content');
-
-        profileButton.addEventListener('click', function() {
-            dropdownContent.style.display = dropdownContent.style.display === 'block' ? 'none' : 'block';
-        });
-
-        // Close the dropdown if clicked outside
-        document.addEventListener('click', function(event) {
-            if (!event.target.matches('.profile-button')) {
-                dropdownContent.style.display = 'none';
-            }
-        });
-    });
-</script>
 </html>

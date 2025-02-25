@@ -5,19 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MİZAÇLAR</title>
     {% load static %}
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/styles-5.css' %}">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lora&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- Navbar -->
     <div class="nav-container">
         <a href="{% url 'index' %}" class="logo">MİZAÇ</a> 
-    
         <div class="nav-links">
             <a href="{% url 'about' %}" class="nav-item">HAKKINDA</a>
             <a href="{% url 'temperaments' %}" class="nav-item">MİZAÇLAR</a>
             <a href="{% url 'start_test' %}" class="nav-item">TESTE BAŞLA</a>
         </div>
-    
         {% if user.is_authenticated %}
             <div class="profile-container">
                 <button class="profile-button">PROFİL</button>
@@ -32,18 +32,27 @@
             <a href="{% url 'login' %}" class="nav-item profile-container">GİRİŞ YAP</a>
         {% endif %}
     </div>
+
+    <!-- Ana İçerik -->
     <main>
+        <!-- Hakkında Bölümü -->
         <section class="about-section">
             <div class="container">
                 <h2>Bizi Tanıyın</h2>
-                <p>4 Mizaç, insan doğasının temel yapı taşlarını anlamanızı sağlayan bir platformdur.  
-                   Mizaçlar, insanların düşünce yapısını, duygusal tepkilerini ve iletişim tarzlarını belirleyen  
-                   doğuştan gelen karakter özellikleridir.</p>
-                <p>Amacımız, bireylerin kendilerini daha iyi tanımalarına yardımcı olmak ve  
-                   kişisel gelişimlerine katkı sağlamaktır. Testimizi çözerek kendi mizaç tipinizi öğrenebilir  
-                   ve hayatınızdaki farkındalığı artırabilirsiniz.</p>
+                <p>
+                    4 Mizaç, insan doğasının temel yapı taşlarını anlamanızı sağlayan bir platformdur.  
+                    Mizaçlar, insanların düşünce yapısını, duygusal tepkilerini ve iletişim tarzlarını belirleyen  
+                    doğuştan gelen karakter özellikleridir.
+                </p>
+                <p>
+                    Amacımız, bireylerin kendilerini daha iyi tanımalarına yardımcı olmak ve  
+                    kişisel gelişimlerine katkı sağlamaktır. Testimizi çözerek kendi mizaç tipinizi öğrenebilir  
+                    ve hayatınızdaki farkındalığı artırabilirsiniz.
+                </p>
             </div>
         </section>
+
+        <!-- Takım Bölümü -->
         <section class="team-section">
             <div class="container">
                 <h2>Ekibimiz</h2>
@@ -53,13 +62,11 @@
                         <p><strong>İçerik Yöneticisi</strong></p>
                         <p>Bilgilendirici içerikler ve mizaç testleri oluşturarak platformun bilgi kaynağını yönetir.</p>
                     </div>
-    
                     <div class="team-member">
                         <h3>İsmail Berk Kartal</h3>
                         <p><strong>Yazılım Geliştirici</strong></p>
                         <p>Web sitesinin altyapısını geliştirir, teknik işlevselliği sağlar ve kullanıcı deneyimini optimize eder.</p>
                     </div>
-    
                     <div class="team-member">
                         <h3>Ömer Faruk Göregen</h3>
                         <p><strong>Ürün Yöneticisi</strong></p>
@@ -68,6 +75,8 @@
                 </div>
             </div>
         </section>
+
+        <!-- İletişim Bölümü -->
         <section class="contact-section">
             <div class="container">
                 <h2>Bize Ulaşın</h2>
@@ -76,18 +85,21 @@
             </div>
         </section>
     </main>
+
+    <!-- Footer -->
     <footer>
         <p>&copy; 2025 4 Mizaç | Tüm hakları saklıdır.</p>
     </footer>
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const profileButton = document.querySelector('.profile-button');
             const dropdownContent = document.querySelector('.dropdown-content');
-    
+
             profileButton.addEventListener('click', function() {
                 dropdownContent.style.display = dropdownContent.style.display === 'block' ? 'none' : 'block';
             });
-    
+
             // Close the dropdown if clicked outside
             document.addEventListener('click', function(event) {
                 if (!event.target.matches('.profile-button')) {

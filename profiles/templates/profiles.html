@@ -5,46 +5,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MİZAÇLAR</title>
     {% load static %}
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/styles-3.css' %}">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600&display=swap" rel="stylesheet">
-
 </head>
 <body>
-    <div class="nav-container">
-        <a href="{% url 'index' %}" class="logo">MİZAÇ</a> 
-    
-        <div class="nav-links">
-            <a href="{% url 'about' %}" class="nav-item">HAKKINDA</a>
-            <a href="{% url 'temperaments' %}" class="nav-item">MİZAÇLAR</a>
-            <a href="{% url 'start_test' %}" class="nav-item">TESTE BAŞLA</a>
-        </div>
-    
-        {% if user.is_authenticated %}
-            <div class="profile-container">
-                <button class="profile-button">PROFİL</button>
-                <div class="dropdown-content">
-                    <a href="{% url 'profiles' %}">Mizacım</a>
-                    <a href="{% url 'profiles' %}">Önerilerim</a>
-                    <a href="{% url 'profiles' %}">Profil Ayarlarım</a>
-                    <a href="{% url 'logout' %}">Çıkış Yap</a>
-                </div>
+    <div class="page-container">
+        <div class="nav-container">
+            <a href="{% url 'index' %}" class="logo">MİZAÇ</a> 
+            <div class="nav-links">
+                <a href="{% url 'about' %}" class="nav-item">HAKKINDA</a>
+                <a href="{% url 'temperaments' %}" class="nav-item">MİZAÇLAR</a>
+                <a href="{% url 'start_test' %}" class="nav-item">TESTE BAŞLA</a>
             </div>
-        {% else %}
-            <a href="{% url 'login' %}" class="nav-item profile-container">GİRİŞ YAP</a>
-        {% endif %}
+            {% if user.is_authenticated %}
+                <div class="profile-container">
+                    <button class="profile-button">PROFİL</button>
+                    <div class="dropdown-content">
+                        <a href="{% url 'profiles' %}">Mizacım</a>
+                        <a href="{% url 'profiles' %}">Önerilerim</a>
+                        <a href="{% url 'profiles' %}">Profil Ayarlarım</a>
+                        <a href="{% url 'logout' %}">Çıkış Yap</a>
+                    </div>
+                </div>
+            {% else %}
+                <a href="{% url 'login' %}" class="nav-item profile-container">GİRİŞ YAP</a>
+            {% endif %}
+        </div>
     </div>
-
+    <footer>
+        <p>&copy; 2025 4 Mizaç | Tüm hakları saklıdır.</p>
+    </footer>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const profileButton = document.querySelector('.profile-button');
             const dropdownContent = document.querySelector('.dropdown-content');
-    
+
             profileButton.addEventListener('click', function() {
                 dropdownContent.style.display = dropdownContent.style.display === 'block' ? 'none' : 'block';
             });
-    
+
             // Close the dropdown if clicked outside
             document.addEventListener('click', function(event) {
                 if (!event.target.matches('.profile-button')) {
@@ -53,3 +54,5 @@
             });
         });
     </script>
+</body>
+</html>
