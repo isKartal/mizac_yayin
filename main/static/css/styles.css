@@ -7,6 +7,8 @@
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #ece9e3;
+    max-width: 100vw;
+    overflow-x: hidden;
 }
 
 .nav-item, .profile-button, .logo {
@@ -14,13 +16,15 @@ body {
     font-weight: 600; /* İstersen 400 veya 700 yapabilirsin */
 }
 
+
 header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 50px;
     background-color: #ece9e3;
     border-bottom: 1px solid #ddd;
+    flex-wrap: wrap;
+    padding: 20px 5%;
 }
 
 header div {
@@ -87,18 +91,29 @@ main {
 }
 
 main section:first-child {
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
     width: 100%;
-    min-height: 100vh;
+    min-height: 100vh; /* Ekran yüksekliği kadar yer kaplasın */
+    background-image: url('main.jpg'); /* Görselin yolu */
+    background-size: 100% 80%; /* Görselin tüm alanı kaplamasını sağlar */
+    background-position: top center;  /* Ortalar */
+    background-repeat: no-repeat;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
     flex-direction: column;
-    padding: 20px;
+    padding: 5vw; /* Padding'i ekran genişliğine göre ayarlar */
 }
+
+/* Responsive ayarlamalar için */
+@media (max-width: 768px) {
+    main section:first-child {
+        min-height: 70vh; /* Mobilde çok uzun olmaması için */
+        padding: 10vw; /* Daha rahat bir görünüm için */
+    }
+}
+
+
 
 main section:first-child div {
     max-width: 500px;
@@ -136,27 +151,32 @@ main section:first-child a:hover {
 
 .mizac-nedir-title {
     font-family: 'Poppins', serif !important;
-    font-size: 20vw; /* Ekran genişliğine göre otomatik ölçeklenir */
-    font-weight: bold;
-    margin-top: 5vh; /* Yazıyı aşağı kaydır */
+    font-size: min(24vw, 30px) !important; /* Maksimum 120px, genişliğe göre ölçeklenir */
+    font-weight: 900 !important;
+    margin-top: 10vh;
     text-align: center;
     color: #292321;
-    
 }
 
 .mizac-nedir-text {
     font-family: 'Lora', serif !important;
-    font-weight: 900 !important; /* Yarı kalın */
-    font-size:25vw;
+    font-weight: 900 !important;
+    font-size: min(22vw, 25px) !important; /* Maksimum 110px, genişliğe göre ölçeklenir */
     line-height: 1.6;
     color: #555;
     text-align: center;
 }
 
 .elements {
-    padding: 40px 20px;
-    text-align: center;
+    padding: 0px 0; /* Yükseklik padding'i 20px, yanlar 0px */
+    text-align: center; /* Yazıları yatayda ortalar */
+    display: flex; /* Flexbox kullanarak dikeyde de hizalama yapabilirsin */
+    flex-direction: column; /* Öğeleri dikey sıralar */
+    justify-content: center; /* Dikeyde ortalar */
+    align-items: center; /* Yatayda ortalar */
+    margin-top: -75px; /* Bu değeri ihtiyacına göre ayarla */
 }
+
 
 .elements h2 {
     margin-bottom: 30px;
@@ -165,10 +185,11 @@ main section:first-child a:hover {
 
 .element-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 30px;
-    max-width: 1200px;
     margin: 0 auto;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    max-width: 90vw;
+    padding: 0 5%;
 }
 
 .element {
@@ -238,12 +259,13 @@ footer {
 
 .nav-container {
     display: flex;
-    justify-content: center;
     width: 100%;
     background-color: #ece9e3;
-    padding: 10px 50px;
     gap: 15px;
     align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 10px 2%;
 }
 
 .nav-links {
@@ -315,6 +337,7 @@ footer {
 
 .hero-section {
     display: flex;
+    flex-wrap: wrap;
     min-height: 600px;
 }
 
@@ -328,6 +351,10 @@ footer {
     position: relative;
 }
 
+.element-panel, .content-panel {
+    flex: 1 1 50%; /* Büyük ekranlarda bölünmesi için */
+    min-width: 400px;
+}
 .content-panel {
     flex: 1;
     display: flex;
@@ -390,9 +417,11 @@ footer {
 .team-grid {
     display: flex;
     justify-content: center;
-    gap: 20px;
-    flex-wrap: wrap;
     margin-top: 30px;
+    flex-wrap: wrap;
+    gap: 5%;
+    max-width: 90vw;
+
 }
 
 .team-member {
@@ -400,9 +429,9 @@ footer {
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 30%;
-    min-width: 280px;
     transition: 0.3s ease-in-out;
+    width: calc(33% - 10px);
+    min-width: 280px;
 }
 
 .team-member:hover {
