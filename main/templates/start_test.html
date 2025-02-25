@@ -6,15 +6,20 @@
     <title>MİZAÇLAR</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="nav-container">
-        <a href="{% url 'index' %}" class="nav-item">LOGO</a>
-        <a href="{% url 'about' %}" class="nav-item">HAKKINDA</a>
-        <a href="{% url 'temperaments' %}" class="nav-item">MİZAÇLAR</a>
-        <a href="{% url 'start_test' %}" class="nav-item">TESTE BAŞLA</a>
+        <a href="{% url 'index' %}" class="logo">MİZAÇ</a> 
+    
+        <div class="nav-links">
+            <a href="{% url 'about' %}" class="nav-item">HAKKINDA</a>
+            <a href="{% url 'temperaments' %}" class="nav-item">MİZAÇLAR</a>
+            <a href="{% url 'start_test' %}" class="nav-item">TESTE BAŞLA</a>
+        </div>
+    
         {% if user.is_authenticated %}
-            <div style="position: relative;">
+            <div class="profile-container">
                 <button class="profile-button">PROFİL</button>
                 <div class="dropdown-content">
                     <a href="{% url 'profiles' %}">Mizacım</a>
@@ -24,10 +29,9 @@
                 </div>
             </div>
         {% else %}
-            <a href="{% url 'login' %}" class="nav-item">GİRİŞ YAP</a>
+            <a href="{% url 'login' %}" class="nav-item profile-container">GİRİŞ YAP</a>
         {% endif %}
     </div>
-
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const profileButton = document.querySelector('.profile-button');
