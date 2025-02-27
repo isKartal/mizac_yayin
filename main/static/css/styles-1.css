@@ -106,18 +106,17 @@ main {
 }
 
 main section:first-child {
-    width: 100%;
-    min-height: 100vh;
-    background-image: url('main.jpg');
-    background-size: 100% 80%;
-    background-position: top center;
+    background-size: 300px 300px;
+    background-position: center top;
     background-repeat: no-repeat;
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
     text-align: center;
     flex-direction: column;
     padding: 5vw;
+    margin-top: -45px; /* Bu değeri ihtiyaca göre ayarlayabilirsiniz */
 }
 
 @media (max-width: 768px) {
@@ -161,23 +160,87 @@ main section:first-child a:hover {
     background-color: gray;
 }
 
-/* Mizac Nedir Bölümü */
+.mizac-nedir-title,
+.start-test-button {
+    display: inline-block; /* Elemanları yan yana yerleştirir */
+    vertical-align: middle; /* Ortalanmış şekilde hizalar */
+    text-align: center;
+    white-space: nowrap; /* Metnin satır değiştirmesini engeller */
+}
+
 .mizac-nedir-title {
     font-family: 'Poppins', serif;
-    font-size: min(24vw, 30px);
+    font-size: min(24vw, 33px) !important;
     font-weight: 900;
-    margin-top: 10vh;
-    text-align: center;
+    margin-top: 15px;
     color: #292321;
+    position: absolute;
+    bottom: 350px;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .mizac-nedir-text {
     font-family: 'Lora', serif;
-    font-weight: 900;
-    font-size: min(22vw, 25px);
+    font-weight: 900 !important;
+    font-size: min(20vw, 25px) !important; /* Orantılı büyüme */
     line-height: 1.6;
-    color: #555;
+    color: #292321;
+    position: absolute;
+    bottom: 80px; /* Yazıyı yukarı/aşağı kaydır */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1050%; /* Metnin genişliğini belirler */
+    max-width: 600px; /* Maksimum genişlik ayarı */
+    padding: 10px;
+}
+
+.first-word {
+    display: block; /* İlk kelimeyi tek satıra al */
     text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+section {
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+    position: relative;
+}
+
+.content-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: #ece9e3;
+    padding: 0 20px;
+    z-index: 2;
+}
+
+.start-test-button {
+    margin-top: 20px;
+    background-color: black;
+    color: white;
+    padding: 15px 30px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+    font-size: 18px;
+}
+
+.start-test-button:hover {
+    background-color: gray;
+}
+
+section .start-test-button {
+    position: absolute;
+    bottom: 0px;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 /* Elementler Bölümü */
@@ -197,27 +260,46 @@ main section:first-child a:hover {
 }
 
 .element-grid {
-    display: grid;
-    gap: 30px;
-    margin: 0 auto;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    max-width: 90vw;
-    padding: 0 5%;
+    position: relative;
+    width: 100vw;
+    height: 100vh; /* Sayfanın tamamını kaplasın */
 }
 
 .element {
+    position: absolute;
+    width: 269px; /* Element boyutunu kendine göre ayarla */
+    height: 336px;
     background-size: cover;
     background-position: center;
     padding: 30px;
-    border-radius: 8px;
+    border-radius: 63px; /* Daha oval bir şekil için artırıldı */
     color: white;
     text-align: left;
     display: flex;
     flex-direction: column;
-    min-height: 350px;
     justify-content: space-between;
     transition: transform 0.3s;
-    position: relative;
+    overflow: hidden; /* Kenarları düzgün görmek için */
+}
+
+.element:nth-child(1) { /* Sol üst köşe */
+    top: -620px;
+    left: 100px;
+}
+
+.element:nth-child(2) { /* Sağ üst köşe */
+    top: -150px;
+    left: 100px;
+}
+
+.element:nth-child(3) { /* Sol alt köşe */
+    bottom: 550px;
+    left: 1150px;
+}
+
+.element:nth-child(4) { /* Sağ alt köşe */
+    bottom: 1020px;
+    left: 1150px;
 }
 
 .element::before {
@@ -260,6 +342,6 @@ main section:first-child a:hover {
 }
 
 .more-link:hover {
-    color: white;
+    color: #ece9e3;
 }
 
