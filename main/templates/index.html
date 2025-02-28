@@ -36,47 +36,68 @@
         {% endif %}
     </div>
     <main>
-        <section style="background-image: url('{% static 'images/logom2.jpg' %}');">
-            <section class="content-container">
-                <div class="content">
-                    <h5 class="mizac-nedir-title">Mizac Nedir?</h5>
-                    <p class="mizac-nedir-text">Mizaç, 
-                        bir kişinin etrafında 
-                        olup bitenlere verdiği 
-                        tepkileri belirleyen
-                         ve doğuştan gelen 
-                        karakter ve kişilik
-                         özellikleridir mizacınızı 
-                        öğrenmek istiyorsanız
-                        hemen testi çözebilirsiniz.</p>
-                </div>
-                <a href="{% url 'test_list' %}" class="start-test-button">TESTE BAŞLA</a> <!-- Teste Başla butonu burada -->
-            </section>
+        <section class="main-background" style="background-image: url('{% static 'images/logom2.jpg' %}');">
+        </section>
+    
+        <!-- Görselin ALTINDAKİ içerik -->
+        <section class="content-container">
+            <h1 class="mizac-nedir-title">Mizaç Nedir?</h1>
+            <p class="mizac-nedir-text">
+                Mizaç, bir kişinin etrafında olup bitenlere verdiği tepkileri belirleyen
+                ve doğuştan gelen karakter ve kişilik özellikleridir. Mizaçınızı öğrenmek 
+                istiyorsanız hemen testi çözebilirsiniz.
+            </p>
+            <a href="{% url 'test_list' %}" class="start-test-button">TESTE BAŞLA</a> <!-- Teste Başla butonu burada -->
         </section>
         <section class="elements">
             <div class="element-grid">
-                <div class="element" style="background-image: url('{% static 'images/2.jpg' %}');">
-                    <h3>ATEŞ</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestbus aut, nihil est dolore magnam. Facilis laborum voluptatem laudantium perspiciatis est eveniet repellat consequatur.</p>
-                    <a href="{% url 'fire_more' %}" class="more-link">DAHA FAZLASI İÇİN →</a>
+                <!-- Ateş Elementi -->
+                <div class="element-wrapper">
+                    <div class="element" style="background-image: url('{% static 'images/2.jpg' %}');">
+                        <div class="element-content">
+                            <h3>ATEŞ</h3>
+                            <p>Ateş elementi hareketli, enerjik ve tutkulu yapıları simgeler.</p>
+                            <a href="{% url 'fire_more' %}" class="more-link">DAHA FAZLASI İÇİN →</a>
+                        </div>
+                    </div>
                 </div>
-                <div class="element" style="background-image: url('{% static 'images/1.jpg' %}');">
-                    <h3>HAVA</h3>
-                    <p>Lorem ipsum dolor sit spiciatis est eveniet repellat consequatur.</p>
-                    <a href="{% url 'air_more' %}" class="more-link">DAHA FAZLASI İÇİN →</a>
+        
+                <!-- Hava Elementi -->
+                <div class="element-wrapper">
+                    <div class="element" style="background-image: url('{% static 'images/1.jpg' %}');">
+                        <div class="element-content">
+                            <h3>HAVA</h3>
+                            <p>Hava elementi iletişimi, zekayı ve değişkenliği temsil eder.</p>
+                            <a href="{% url 'air_more' %}" class="more-link">DAHA FAZLASI İÇİN →</a>
+                        </div>
+                    </div>
                 </div>
-                <div class="element" style="background-image: url('{% static 'images/4.jpg' %}');">
-                    <h3>SU</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestbus aut, nihil est dolore magnam. Facilis laborum voluptatem laudantium perspiciatis est eveniet repellat consequatur.</p>
-                    <a href="{% url 'water_more' %}" class="more-link">DAHA FAZLASI İÇİN →</a>
+        
+                <!-- Toprak Elementi -->
+                <div class="element-wrapper">
+                    <div class="element" style="background-image: url('{% static 'images/3.jpg' %}');">
+                        <div class="element-content">
+                            <h3>TOPRAK</h3>
+                            <p>Toprak elementi güven, sağlamlık ve pratikliği simgeler.</p>
+                            <a href="{% url 'earth_more' %}" class="more-link">DAHA FAZLASI İÇİN →</a>
+                        </div>
+                    </div>
                 </div>
-                <div class="element" style="background-image: url('{% static 'images/3.jpg' %}');">
-                    <h3>TOPRAK</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Moleut, nihil est dolore magnam. Facilis laborum voluptatem laudantium perspiciatis est eveniet repellat consequatur.</p>
-                    <a href="{% url 'earth_more' %}" class="more-link">DAHA FAZLASI İÇİN →</a>
+        
+                <!-- Su Elementi -->
+                <div class="element-wrapper">
+                    <div class="element" style="background-image: url('{% static 'images/4.jpg' %}');">
+                        <div class="element-content">
+                            <h3>SU</h3>
+                            <p>Su elementi duygular, derinlik ve sezgisel yetenekleri ifade eder.</p>
+                            <a href="{% url 'water_more' %}" class="more-link">DAHA FAZLASI İÇİN →</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
+        
+        
     </main>
     <footer>
         <p>&copy; 2025 4 Mizaç | Tüm hakları saklıdır.</p>
@@ -96,6 +117,28 @@
                     dropdownContent.style.display = 'none';
                 }
             });
+        });
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const elements = document.querySelectorAll(".element");
+    
+            function checkScroll() {
+                const triggerBottom = window.innerHeight * 0.9;
+    
+                elements.forEach(element => {
+                    const elementTop = element.getBoundingClientRect().top;
+                    
+                    if (elementTop < triggerBottom) {
+                        element.classList.add("show");
+                    }
+                });
+            }
+    
+            // Sayfa yüklendiğinde ve kaydırıldığında kontrol et
+            window.addEventListener("scroll", checkScroll);
+            checkScroll();
         });
     </script>
 </body>
