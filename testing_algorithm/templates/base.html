@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mizaç Testi - {% block title %}Anasayfa{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/styles-7.css' %}">
+</head>
+<body>
+    <div class="page-container">
+        <header>
+            <nav class="nav-container">
+                <div class="logo">
+                    <a href="{% url 'test_list' %}">Mizaç Testi</a>
+                </div>
+                <ul class="nav-links">
+                    <li><a class="nav-item" href="{% url 'test_list' %}">Testler</a></li>
+                    {% if user.is_authenticated %}
+                        <li><a class="nav-item" href="#">Profilim</a></li>
+                        <li><a class="nav-item" href="{% url 'logout' %}">Çıkış</a></li>
+                    {% else %}
+                        <li><a class="nav-item" href="{% url 'login' %}">Giriş</a></li>
+                        <li><a class="nav-item" href="{% url 'register' %}">Kayıt Ol</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            {% block content %}{% endblock %}
+        </main>
+
+        <footer>
+            <p>&copy; 2025 Mizaç Testi. Tüm hakları saklıdır.</p>
+        </footer>
+    </div>
+</body>
+</html>

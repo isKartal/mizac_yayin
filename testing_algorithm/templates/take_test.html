@@ -1,0 +1,25 @@
+<!-- take_test.html -->
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="test-container">
+    <h1>{{ test.title }}</h1>
+    <p class="test-description">{{ test.description }}</p>
+
+    <form method="post" class="test-form">
+        {% csrf_token %}
+        
+        {% for field in form %}
+            <div class="question-container">
+                <h3 class="question-text">{{ field.label }}</h3>
+                <div class="choices-container">
+                    {{ field }}
+                </div>
+            </div>
+        {% endfor %}
+        
+        <button type="submit" class="btn btn-primary">Testi Tamamla</button>
+    </form>
+</div>
+{% endblock %}

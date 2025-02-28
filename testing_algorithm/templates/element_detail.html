@@ -1,0 +1,29 @@
+
+<!-- element_detail.html -->
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="element-detail {{ element.name|lower }}">
+    <h1>{{ element.name }} Elementi</h1>
+    
+    {% if element.image %}
+        <img src="{{ element.image.url }}" alt="{{ element.name }}" class="element-image">
+    {% endif %}
+    
+    <div class="element-full-description">
+        <p>{{ element.description }}</p>
+    </div>
+    
+    <h2>Karakteristik Özellikler</h2>
+    <div class="characteristics">
+        {{ element.characteristics|linebreaks }}
+    </div>
+    
+    <h2>Tavsiyeler</h2>
+    <div class="recommendations">
+        {{ element.recommendations|linebreaks }}
+    </div>
+    
+    <a href="{% url 'test_list' %}" class="btn btn-secondary">Testlere Dön</a>
+</div>
+{% endblock %}
