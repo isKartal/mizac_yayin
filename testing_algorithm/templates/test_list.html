@@ -1,0 +1,20 @@
+
+<!-- test_list.html -->
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="test-list-container">
+    <h1>Mizaç Testleri</h1>
+    <div class="test-cards">
+        {% for test in tests %}
+        <div class="test-card">
+            <h2>{{ test.title }}</h2>
+            <p>{{ test.description }}</p>
+            <a href="{% url 'take_test' test.id %}" class="btn btn-primary">Testi Başlat</a>
+        </div>
+        {% empty %}
+        <p>Şu anda mevcut test bulunmamaktadır.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

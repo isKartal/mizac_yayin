@@ -1,0 +1,363 @@
+/* style.css */
+:root {
+    --fire-color: #ff5722;
+    --air-color: #03a9f4;
+    --water-color: #3f51b5;
+    --earth-color: #795548;
+    --primary-color: #4CAF50;
+    --secondary-color: #2196F3;
+    --text-color: #333;
+    --light-bg: #f5f5f5;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
+    background-color: var(--light-bg);
+}
+
+header {
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 1rem 0;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.logo a {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.menu {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.menu li {
+    margin-left: 1.5rem;
+}
+
+.menu a {
+    text-decoration: none;
+    color: var(--text-color);
+    font-weight: 500;
+}
+
+.menu a:hover {
+    color: var(--primary-color);
+}
+
+main {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 2rem;
+}
+
+footer {
+    text-align: center;
+    padding: 2rem 0;
+    background-color: white;
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Butonlar */
+.btn {
+    display: inline-block;
+    padding: 0.5rem 1.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background-color 0.3s;
+    border: none;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #388e3c;
+}
+
+.btn-secondary {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+.btn-secondary:hover {
+    background-color: #1976d2;
+}
+
+/* Test Listesi */
+.test-list-container {
+    padding: 2rem 0;
+}
+
+.test-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.test-card {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.test-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.test-card h2 {
+    margin-top: 0;
+    color: var(--primary-color);
+}
+
+.test-card .btn {
+    margin-top: 1rem;
+}
+
+/* Test Sayfası */
+.test-container {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    margin: 2rem 0;
+}
+
+.test-description {
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+}
+
+.question-container {
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    border-left: 4px solid var(--primary-color);
+}
+
+.question-text {
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+.choices-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.choices-container ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.choices-container li {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+}
+
+.choices-container li:hover {
+    background-color: #e8f5e9;
+}
+
+.choices-container input[type="radio"] {
+    margin-right: 10px;
+}
+
+.test-form button[type="submit"] {
+    margin-top: 2rem;
+    padding: 0.75rem 2rem;
+    font-size: 1.1rem;
+}
+
+/* Sonuç Sayfası */
+.result-container {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    margin: 2rem 0;
+}
+
+.dominant-element {
+    text-align: center;
+    margin-bottom: 2rem;
+    padding: 2rem;
+    border-radius: 8px;
+    color: white;
+}
+
+.dominant-element.ateş {
+    background-color: var(--fire-color);
+}
+
+.dominant-element.hava {
+    background-color: var(--air-color);
+}
+
+.dominant-element.su {
+    background-color: var(--water-color);
+}
+
+.dominant-element.toprak {
+    background-color: var(--earth-color);
+}
+
+.element-image {
+    max-width: 200px;
+    margin: 1.5rem auto;
+    display: block;
+    border-radius: 50%;
+}
+
+.element-scores {
+    margin: 2rem 0;
+}
+
+.score-container {
+    margin-top: 1.5rem;
+}
+
+.score-bar {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    background-color: #f5f5f5;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.element-name {
+    min-width: 100px;
+    padding: 0.5rem 1rem;
+    font-weight: 500;
+}
+
+.score-value {
+    padding: 0.5rem 0;
+    color: white;
+    text-align: right;
+    padding-right: 1rem;
+    transition: width 1s ease-in-out;
+}
+
+.score-value.ateş {
+    background-color: var(--fire-color);
+}
+
+.score-value.hava {
+    background-color: var(--air-color);
+}
+
+.score-value.su {
+    background-color: var(--water-color);
+}
+
+.score-value.toprak {
+    background-color: var(--earth-color);
+}
+
+.characteristics, .recommendations {
+    margin: 2rem 0;
+    padding: 1.5rem;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+}
+
+/* Element Detay Sayfası */
+.element-detail {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    margin: 2rem 0;
+}
+
+.element-detail h1 {
+    color: white;
+    padding: 1rem;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.element-detail.ateş h1 {
+    background-color: var(--fire-color);
+}
+
+.element-detail.hava h1 {
+    background-color: var(--air-color);
+}
+
+.element-detail.su h1 {
+    background-color: var(--water-color);
+}
+
+.element-detail.toprak h1 {
+    background-color: var(--earth-color);
+}
+
+.element-full-description {
+    margin: 2rem 0;
+    font-size: 1.1rem;
+    line-height: 1.8;
+}
+
+/* Mobil Duyarlı Tasarım */
+@media (max-width: 768px) {
+    nav {
+        flex-direction: column;
+        padding: 1rem;
+    }
+    
+    .menu {
+        margin-top: 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .menu li {
+        margin: 0.5rem;
+    }
+    
+    .test-cards {
+        grid-template-columns: 1fr;
+    }
+    
+    .question-container {
+        padding: 1rem;
+    }
+    
+    .dominant-element {
+        padding: 1rem;
+    }
+}

@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'accounts',
     'profiles',
     'temperaments',
+    'testing_algorithm',
 ]
 
 MIDDLEWARE = [
