@@ -227,3 +227,75 @@ footer {
 .contact-button:hover {
     background: gray;
 }
+
+/* NAVBAR */
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 5%;
+    background-color: #ece9e3;
+    border-bottom: 1px solid #ddd;
+    flex-wrap: wrap;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.nav-links {
+    display: flex;
+    gap: 30px;
+}
+
+/* Hamburger Butonu */
+.hamburger-button {
+    display: none;
+    font-size: 24px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+/* Mobil Görünüm İçin */
+@media (max-width: 768px) {
+    .nav-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 5%;
+        position: relative;
+    }
+
+    /* Menü butonu görünür hale getirildi */
+    .hamburger-button {
+        display: block;
+        font-size: 32px;
+        cursor: pointer;
+        color: black;
+    }
+
+    /* Mobilde linkler gizli olacak */
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        background: #ece9e3;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        padding: 10px;
+        text-align: center;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Açık menü */
+    .nav-links.open {
+        display: flex;
+    }
+
+    .nav-item {
+        padding: 10px;
+        display: block;
+        font-size: 18px;
+    }
+}
