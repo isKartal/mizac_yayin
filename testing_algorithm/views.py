@@ -2,56 +2,83 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .models import Test, Question, Choice, TestResult, ElementType
-from .forms import TestForm
 
-def test_list(request):
-    tests = Test.objects.all()
-    return render(request, 'test_list.html', {'tests': tests})
+def direct_to_test(request):
+    first_test = Test.objects.first()  # Veritabanındaki ilk testi al
+    if first_test:
+        return redirect('take_test', test_id=first_test.id, question_index=0)
+    return redirect('/')  # Eğer test yoksa ana sayfaya yönlendir
 
 @login_required
-def take_test(request, test_id):
+def take_test(request, test_id, question_index=0):
     test = get_object_or_404(Test, id=test_id)
-    
+
+    # Kullanıcının bu testi daha önce çözüp çözmediğini kontrol et
+    existing_result = TestResult.objects.filter(user=request.user, test=test).first()
+    if existing_result:
+        return redirect('test_result', result_id=existing_result.id)  # Zaten çözdüyse doğrudan sonucu göster
+
+    questions = list(test.questions.all())
+    total_questions = len(questions)
+
+    if question_index >= total_questions:
+        answers = request.session.get('test_answers', {})
+
+        fire_score = 0
+        air_score = 0
+        water_score = 0
+        earth_score = 0
+
+        for question_id, choice_id in answers.items():
+            choice = get_object_or_404(Choice, id=choice_id)
+            element = choice.element_type.name
+
+            if element == 'Ateş':
+                fire_score += choice.score
+            elif element == 'Hava':
+                air_score += choice.score
+            elif element == 'Su':
+                water_score += choice.score
+            elif element == 'Toprak':
+                earth_score += choice.score
+
+        result = TestResult(
+            user=request.user,
+            test=test,
+            fire_score=fire_score,
+            air_score=air_score,
+            water_score=water_score,
+            earth_score=earth_score
+        )
+
+        result.calculate_dominant_element()
+        request.session['test_result_id'] = result.id
+
+        return redirect('test_result', result_id=result.id)
+
+    current_question = questions[question_index]
+    choices = Choice.objects.filter(question=current_question)
+
     if request.method == 'POST':
-        form = TestForm(test, request.POST)
-        if form.is_valid():
-            # Element puanlarını hesapla
-            fire_score = 0
-            air_score = 0
-            water_score = 0
-            earth_score = 0
-            
-            for field_name, choice_id in form.cleaned_data.items():
-                choice = get_object_or_404(Choice, id=choice_id)
-                element = choice.element_type.name
-                
-                if element == 'Ateş':
-                    fire_score += choice.score
-                elif element == 'Hava':
-                    air_score += choice.score
-                elif element == 'Su':
-                    water_score += choice.score
-                elif element == 'Toprak':
-                    earth_score += choice.score
-            
-            # Sonucu kaydet
-            result = TestResult(
-                user=request.user,
-                test=test,
-                fire_score=fire_score,
-                air_score=air_score,
-                water_score=water_score,
-                earth_score=earth_score
-            )
-            
-            # En yüksek element puanını bul
-            result.calculate_dominant_element()
-            
-            return redirect('test_result', result_id=result.id)
-    else:
-        form = TestForm(test)
-    
-    return render(request, 'take_test.html', {'form': form, 'test': test})
+        selected_choice_id = request.POST.get('choice')
+        if selected_choice_id:
+            selected_choice = get_object_or_404(Choice, id=selected_choice_id)
+
+            if 'test_answers' not in request.session:
+                request.session['test_answers'] = {}
+
+            request.session['test_answers'][f'question_{current_question.id}'] = selected_choice.id
+            request.session.modified = True
+
+            return redirect('take_test', test_id=test_id, question_index=question_index + 1)
+
+    return render(request, 'take_test.html', {
+        'test': test,
+        'current_question': current_question,
+        'choices': choices,
+        'question_index': question_index,
+        'total_questions': total_questions
+    })
 
 @login_required
 def test_result(request, result_id):

@@ -15,9 +15,8 @@
                     <a href="{% url 'test_list' %}">Mizaç Testi</a>
                 </div>
                 <ul class="nav-links">
-                    <li><a class="nav-item" href="{% url 'test_list' %}">Testler</a></li>
                     {% if user.is_authenticated %}
-                        <li><a class="nav-item" href="#">Profilim</a></li>
+                        <li><a class="nav-item" href="{% url 'profiles' %}">Profilim</a></li>
                         <li><a class="nav-item" href="{% url 'logout' %}">Çıkış</a></li>
                     {% else %}
                         <li><a class="nav-item" href="{% url 'login' %}">Giriş</a></li>

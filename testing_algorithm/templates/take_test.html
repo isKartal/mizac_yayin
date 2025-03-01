@@ -1,4 +1,3 @@
-<!-- take_test.html -->
 {% extends 'base.html' %}
 {% load static %}
 
@@ -10,16 +9,27 @@
     <form method="post" class="test-form">
         {% csrf_token %}
         
-        {% for field in form %}
-            <div class="question-container">
-                <h3 class="question-text">{{ field.label }}</h3>
-                <div class="choices-container">
-                    {{ field }}
-                </div>
+        <div class="question-container">
+            <h3 class="question-text">{{ current_question.text }}</h3>
+            <div class="choices-container">
+                {% for choice in choices %}
+                    <label>
+                        <input type="radio" name="choice" value="{{ choice.id }}" required>
+                        {{ choice.text }}
+                    </label><br>
+                {% endfor %}
             </div>
-        {% endfor %}
-        
-        <button type="submit" class="btn btn-primary">Testi Tamamla</button>
+        </div>
+
+        <button type="submit" class="btn btn-primary">
+            {% if question_index < total_questions|add:-1 %}
+                Sonraki Soru
+            {% else %}
+                Testi Tamamla
+            {% endif %}
+        </button>
     </form>
+
+    <p>Soru {{ question_index|add:1 }} / {{ total_questions }}</p>
 </div>
 {% endblock %}
