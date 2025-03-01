@@ -363,9 +363,93 @@ footer {
     z-index: 10;
 }
 
+/* NAVBAR */
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 5%;
+    background-color: #ece9e3;
+    border-bottom: 1px solid #ddd;
+    flex-wrap: wrap;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
 
-/* Mobil Görünüm */
-@media (max-width: 1200px) {
+.nav-links {
+    display: flex;
+    gap: 30px;
+}
+
+/* Hamburger Butonu */
+.hamburger-button {
+    display: none;
+    font-size: 24px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+/* Mobil Görünüm İçin */
+@media (max-width: 768px) {
+    .nav-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 5%;
+        position: relative;
+    }
+
+    /* Menü butonu görünür hale getirildi */
+    .hamburger-button {
+        display: block;
+        font-size: 32px;
+        cursor: pointer;
+        color: black;
+    }
+
+    /* Mobilde linkler gizli olacak */
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        background: #ece9e3;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        padding: 10px;
+        text-align: center;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Açık menü */
+    .nav-links.open {
+        display: flex;
+    }
+
+    .nav-item {
+        padding: 10px;
+        display: block;
+        font-size: 18px;
+    }
+}
+
+/* SCROLL ANİMASYONU */
+.element {
+    position: relative;
+    opacity: 0; /* Başlangıçta görünmez */
+    transform: translateY(30px); /* Aşağıda başlasın */
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+/* Scroll ile ekrana gelince göster */
+.element.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+@media (max-width: 1300px) {
     .element-grid {
         display: flex;
         flex-direction: column;
@@ -373,11 +457,22 @@ footer {
         gap: 20px;
         height: auto;
         padding: 20px;
+        margin-top: 50px; /* Elemanları aşağı kaydırır */
     }
 
     /* Metin mobilde en üste gelsin */
     .text-container {
         order: -1;
+    }
+
+    /* Mizac Nedir Başlığı ve Açıklama Mobilde Üste Çıksın */
+    .content-container {
+        position: relative;
+        top: auto;
+        left: auto;
+        transform: none;
+        padding: 10vw 5vw;
+        z-index: 50; /* Metnin en üstte kalmasını sağlar */
     }
 
     /* Elementler Ateş -> Su -> Toprak -> Hava şeklinde sıralansın */

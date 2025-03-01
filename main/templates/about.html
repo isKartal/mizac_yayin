@@ -10,14 +10,20 @@
     <link href="https://fonts.googleapis.com/css2?family=Lora&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Navbar -->
     <div class="nav-container">
         <a href="{% url 'index' %}" class="logo">MİZAÇ</a> 
+
+        <!-- Hamburger Menü Butonu -->
+        <button class="hamburger-button" aria-label="Menüyü Aç/Kapat">
+            ☰
+        </button>
+
         <div class="nav-links">
             <a href="{% url 'about' %}" class="nav-item">HAKKINDA</a>
             <a href="{% url 'temperaments' %}" class="nav-item">MİZAÇLAR</a>
             <a href="{% url 'test_list' %}" class="nav-item">TESTE BAŞLA</a>
         </div>
+
         {% if user.is_authenticated %}
             <div class="profile-container">
                 <button class="profile-button">PROFİL</button>
@@ -108,5 +114,36 @@
             });
         });
     </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const hamburgerButton = document.querySelector(".hamburger-button");
+            const navLinks = document.querySelector(".nav-links");
+    
+            hamburgerButton.addEventListener("click", function () {
+                navLinks.classList.toggle("open");
+            });
+    
+            // Scroll ile elementlerin görünmesi
+            const elements = document.querySelectorAll(".element");
+    
+            function checkScroll() {
+                const triggerBottom = window.innerHeight * 0.9;
+    
+                elements.forEach(element => {
+                    const elementTop = element.getBoundingClientRect().top;
+                    
+                    if (elementTop < triggerBottom) {
+                        element.classList.add("show");
+                    }
+                });
+            }
+    
+            // Sayfa yüklendiğinde ve kaydırıldığında kontrol et
+            window.addEventListener("scroll", checkScroll);
+            checkScroll();
+        });
+    </script>
+    
 </body>
 </html>
