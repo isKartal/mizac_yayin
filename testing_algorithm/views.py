@@ -2,6 +2,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .models import Test, Question, Choice, TestResult, ElementType
+from django.contrib import messages
 
 def direct_to_test(request):
     first_test = Test.objects.first()  # Veritabanındaki ilk testi al
@@ -16,6 +17,7 @@ def take_test(request, test_id, question_index=0):
     # Kullanıcının bu testi daha önce çözüp çözmediğini kontrol et
     existing_result = TestResult.objects.filter(user=request.user, test=test).first()
     if existing_result:
+        messages.error(request, "Bu testi zaten çözdünüz ve tekrar çözemezsiniz!")
         return redirect('test_result', result_id=existing_result.id)  # Zaten çözdüyse doğrudan sonucu göster
 
     questions = list(test.questions.all())

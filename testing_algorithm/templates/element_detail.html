@@ -1,13 +1,13 @@
-
-<!-- element_detail.html -->
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
 <div class="element-detail {{ element.name|lower }}">
     <h1>{{ element.name }} Elementi</h1>
     
-    {% if element.image %}
-        <img src="{{ element.image.url }}" alt="{{ element.name }}" class="element-image">
+    {% if dominant_element.image %}
+        <img src="{{ dominant_element.image.url }}" alt="{{ dominant_element.name }}" class="element-image">
+    {% else %}
+        <p>Görsel bulunamadı.</p>
     {% endif %}
     
     <div class="element-full-description">
