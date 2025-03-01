@@ -1,5 +1,3 @@
-
-<!-- test_result.html -->
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
@@ -10,6 +8,8 @@
         <h2>Baskın Elementiniz: {{ dominant_element.name }}</h2>
         {% if dominant_element.image %}
             <img src="{{ dominant_element.image.url }}" alt="{{ dominant_element.name }}" class="element-image">
+        {% else %}
+            <p>Görsel bulunamadı.</p>
         {% endif %}
         
         <div class="element-description">
