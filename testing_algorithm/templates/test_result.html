@@ -2,43 +2,35 @@
 {% load static %}
 {% block content %}
 <div class="result-container">
-    <h1>Mizaç Testi Sonucunuz</h1>
-    
-    <div class="dominant-element {{ dominant_element.name|lower }}">
-        <h2>Baskın Elementiniz: {{ dominant_element.name }}</h2>
-        {% if dominant_element.image %}
-            <img src="{{ dominant_element.image.url }}" alt="{{ dominant_element.name }}" class="element-image">
-        {% else %}
-            <p>Görsel bulunamadı.</p>
-        {% endif %}
+    <h1 class="result-title">Mizaç Testi Sonucunuz</h1>
+
+    <!-- Baskın Element Kartı -->
+    <div class="dominant-element-card {{ dominant_element.name|lower }}">
         
-        <div class="element-description">
-            <p>{{ dominant_element.description }}</p>
-        </div>
+        <!-- Statik klasörden resim çekme -->
+        {% if dominant_element.name == "Ateş" %}
+            <img src="{% static 'images/fire.jpg' %}" alt="Ateş" class="element-image">
+        {% elif dominant_element.name == "Hava" %}
+            <img src="{% static 'images/air.jpg' %}" alt="Hava" class="element-image">
+        {% elif dominant_element.name == "Su" %}
+            <img src="{% static 'images/water.jpg' %}" alt="Su" class="element-image">
+        {% elif dominant_element.name == "Toprak" %}
+            <img src="{% static 'images/earth.jpg' %}" alt="Toprak" class="element-image">
+        {% else %}
+            <p class="no-image-text">Görsel bulunamadı.</p>
+        {% endif %}
+        <h2 class="element-title"> {{ dominant_element.name }}</h2>
     </div>
-    
-    <div class="element-scores">
-        <h3>Element Dağılımınız</h3>
-        <div class="score-container">
-            {% for element, score in element_scores.items %}
-                <div class="score-bar">
-                    <div class="element-name">{{ element }}</div>
-                    <div class="score-value {{ element|lower }}" style="width: {{ score }}%;">{{ score }}%</div>
-                </div>
-            {% endfor %}
-        </div>
-    </div>
-    
-    <div class="characteristics">
+
+    <!-- Özellikler Bölümü -->
+    <div class="element-details">
         <h3>{{ dominant_element.name }} Elementinin Özellikleri</h3>
-        <div>{{ dominant_element.characteristics|linebreaks }}</div>
+        <p class="element-description">{{ dominant_element.characteristics|linebreaks }}</p>
     </div>
-    
-    <div class="recommendations">
-        <h3>Sizin İçin Öneriler</h3>
-        <div>{{ dominant_element.recommendations|linebreaks }}</div>
+
+    <!-- Detaylı Bilgi Butonu -->
+    <div class="button-container">
+        <a href="{% url 'element_detail' dominant_element.id %}" class="btn btn-primary">Daha Fazla Bilgi</a>
     </div>
-    
-    <a href="{% url 'element_detail' dominant_element.id %}" class="btn btn-primary">Daha Fazla Bilgi</a>
 </div>
 {% endblock %}

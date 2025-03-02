@@ -32,6 +32,22 @@ body {
     flex-direction: column;
 }
 
+.element-title {
+    font-size: 24px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: black !important; /* Yazıyı siyah yap */
+}
+.result-container, .element-details, .dominant-element-card {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    margin: 2rem auto;
+    max-width: 800px;
+    text-align: center;
+    border: 3px solid black; /* Siyah çerçeve ekleme */
+}
 /* Navigasyon Stilleri */
 .nav-container {
     display: flex;
@@ -246,125 +262,122 @@ main {
     width: 100%;
 }
 
-/* Sonuç Sayfası */
 .result-container {
     background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
     padding: 2rem;
-    margin: 2rem 0;
+    margin: 2rem auto;
+    max-width: 800px;
+    text-align: center;
 }
 
-.result-container h1 {
+/* Başlık Stili */
+.result-title {
     font-family: 'Poppins', sans-serif;
-    color: #292321;
-    text-align: center;
+    color: #222;
+    font-size: 28px;
     margin-bottom: 1.5rem;
 }
 
-.dominant-element {
-    text-align: center;
-    margin-bottom: 2rem;
+/* Baskın Element Kartı */
+.dominant-element-card {
     padding: 2rem;
-    border-radius: 8px;
+    border-radius: 10px;
     color: white;
+    margin-bottom: 1.5rem;
 }
 
-.dominant-element h2 {
-    font-family: 'Poppins', sans-serif;
-    margin-bottom: 1rem;
+/* Element Başlığı */
+.element-title {
+    font-size: 24px;
+    font-weight: bold;
+    text-transform: uppercase;
 }
 
-.dominant-element.ateş {
-    background-color: var(--fire-color);
-}
-
-.dominant-element.hava {
-    background-color: var(--air-color);
-}
-
-.dominant-element.su {
-    background-color: var(--water-color);
-}
-
-.dominant-element.toprak {
-    background-color: var(--earth-color);
-}
-
+/* Element Resmi */
 .element-image {
     max-width: 200px;
-    margin: 1.5rem auto;
-    display: block;
     border-radius: 50%;
+    display: block;
+    margin: 1.5rem auto;
+    padding: 5px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
 }
 
-.element-scores {
-    margin: 2rem 0;
-}
-
-.element-scores h3 {
-    font-family: 'Poppins', sans-serif;
-    color: #292321;
-    text-align: center;
-    margin-bottom: 1rem;
-}
-
-.score-container {
-    margin-top: 1.5rem;
-}
-
-.score-bar {
-    display: flex;
-    align-items: center;
-    margin-bottom: 1rem;
-    background-color: #f5f5f5;
-    border-radius: 4px;
-    overflow: hidden;
-}
-
-.element-name {
-    min-width: 100px;
-    padding: 0.5rem 1rem;
-    font-weight: 500;
-    font-family: 'Montserrat', sans-serif;
-}
-
-.score-value {
-    padding: 0.5rem 0;
+/* Eğer Görsel Yoksa */
+.no-image-text {
+    font-size: 16px;
     color: white;
-    text-align: right;
-    padding-right: 1rem;
-    transition: width 1s ease-in-out;
+    font-style: italic;
 }
 
-.score-value.ateş {
-    background-color: var(--fire-color);
-}
-
-.score-value.hava {
-    background-color: var(--air-color);
-}
-
-.score-value.su {
-    background-color: var(--water-color);
-}
-
-.score-value.toprak {
-    background-color: var(--earth-color);
-}
-
-.characteristics, .recommendations {
-    margin: 2rem 0;
-    padding: 1.5rem;
+/* Element Özellikleri */
+.element-details {
     background-color: #f9f9f9;
+    padding: 1.5rem;
     border-radius: 8px;
+    margin: 1.5rem 0;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
 }
 
-.characteristics h3, .recommendations h3 {
-    font-family: 'Poppins', sans-serif;
-    color: #292321;
-    margin-bottom: 1rem;
+.element-details h3 {
+    font-size: 22px;
+    color: #333;
+    margin-bottom: 10px;
 }
+
+/* Açıklama Metni */
+.element-description {
+    font-size: 18px;
+    color: #555;
+    line-height: 1.6;
+}
+
+/* Buton Stili */
+.button-container {
+    margin-top: 2rem;
+}
+
+.btn-primary {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    border-radius: 5px;
+    background-color: black;
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.btn-primary:hover {
+    background-color: gray;
+    transform: scale(1.05);
+}
+
+/* Mobil Uyum */
+@media (max-width: 768px) {
+    .result-container {
+        padding: 1rem;
+    }
+
+    .dominant-element-card {
+        padding: 1rem;
+    }
+
+    .element-details {
+        padding: 1rem;
+    }
+
+    .element-image {
+        max-width: 150px;
+    }
+
+    .btn-primary {
+        padding: 0.5rem 1rem;
+    }
+}
+
 
 /* Element Detay Sayfası */
 .element-detail {
