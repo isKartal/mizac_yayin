@@ -3,7 +3,6 @@
 {% block content %}
 <div class="element-detail {{ element.name|lower }}">
     <h1>{{ element.name }} Elementi</h1>
-    
     {% if dominant_element.image %}
         <img src="{{ dominant_element.image.url }}" alt="{{ dominant_element.name }}" class="element-image">
     {% else %}
