@@ -3,9 +3,8 @@ from django.db import models
 from django.contrib.auth.models import User
 
 class ElementType(models.Model):
-    name = models.CharField(max_length=50)  # Ateş, Hava, Su, Toprak
+    name = models.CharField(max_length=50)
     description = models.TextField()
-    image = models.ImageField(upload_to='elements/', null=True, blank=True)
     characteristics = models.TextField()
     recommendations = models.TextField()
     
@@ -40,13 +39,11 @@ class TestResult(models.Model):
     test = models.ForeignKey(Test, on_delete=models.CASCADE)
     date_taken = models.DateTimeField(auto_now_add=True)
     
-    # Sonuçlar
     fire_score = models.IntegerField(default=0)
     air_score = models.IntegerField(default=0)
     water_score = models.IntegerField(default=0)
     earth_score = models.IntegerField(default=0)
-    
-    # Dominant element
+
     dominant_element = models.ForeignKey(ElementType, on_delete=models.CASCADE)
     
     def __str__(self):

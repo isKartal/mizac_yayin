@@ -3,11 +3,21 @@
 {% block content %}
 <div class="element-detail {{ element.name|lower }}">
     <h1>{{ element.name }} Elementi</h1>
-    {% if dominant_element.image %}
-        <img src="{{ dominant_element.image.url }}" alt="{{ dominant_element.name }}" class="element-image">
-    {% else %}
-        <p>Görsel bulunamadı.</p>
-    {% endif %}
+    
+    <div class="dominant-element-card {{ dominant_element.name|lower }}">
+        {% if element.name == "Ateş" %}
+            <img src="{% static 'images/fire.jpg' %}" alt="Ateş" class="element-image">
+        {% elif element.name == "Hava" %}
+            <img src="{% static 'images/air.jpg' %}" alt="Hava" class="element-image">
+        {% elif element.name == "Su" %}
+            <img src="{% static 'images/water.jpg' %}" alt="Su" class="element-image">
+        {% elif element.name == "Toprak" %}
+            <img src="{% static 'images/earth.jpg' %}" alt="Toprak" class="element-image">
+        {% else %}
+            <p class="no-image-text">Görsel bulunamadı.</p>
+        {% endif %}
+        <h2 class="element-title"> {{ dominant_element.name }}</h2>
+    </div>
     
     <div class="element-full-description">
         <p>{{ element.description }}</p>

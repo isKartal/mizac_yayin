@@ -3,11 +3,8 @@
 {% block content %}
 <div class="result-container">
     <h1 class="result-title">Mizaç Testi Sonucunuz</h1>
-
-    <!-- Baskın Element Kartı -->
+    
     <div class="dominant-element-card {{ dominant_element.name|lower }}">
-        
-        <!-- Statik klasörden resim çekme -->
         {% if dominant_element.name == "Ateş" %}
             <img src="{% static 'images/fire.jpg' %}" alt="Ateş" class="element-image">
         {% elif dominant_element.name == "Hava" %}
@@ -22,13 +19,11 @@
         <h2 class="element-title"> {{ dominant_element.name }}</h2>
     </div>
 
-    <!-- Özellikler Bölümü -->
     <div class="element-details">
         <h3>{{ dominant_element.name }} Elementinin Özellikleri</h3>
         <p class="element-description">{{ dominant_element.characteristics|linebreaks }}</p>
     </div>
 
-    <!-- Detaylı Bilgi Butonu -->
     <div class="button-container">
         <a href="{% url 'element_detail' dominant_element.id %}" class="btn btn-primary">Daha Fazla Bilgi</a>
     </div>

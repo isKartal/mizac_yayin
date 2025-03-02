@@ -1,24 +1,21 @@
 # views.py
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from .models import Test, Question, Choice, TestResult, ElementType
-from django.contrib import messages
+from .models import Test, Choice, TestResult, ElementType
 
 def direct_to_test(request):
-    first_test = Test.objects.first()  # Veritabanındaki ilk testi al
+    first_test = Test.objects.first()
     if first_test:
         return redirect('take_test', test_id=first_test.id, question_index=0)
-    return redirect('/')  # Eğer test yoksa ana sayfaya yönlendir
+    return redirect('/')
 
 @login_required
 def take_test(request, test_id, question_index=0):
     test = get_object_or_404(Test, id=test_id)
 
-    # Kullanıcının bu testi daha önce çözüp çözmediğini kontrol et
     existing_result = TestResult.objects.filter(user=request.user, test=test).first()
     if existing_result:
-        messages.error(request, "Bu testi zaten çözdünüz ve tekrar çözemezsiniz!")
-        return redirect('test_result', result_id=existing_result.id)  # Zaten çözdüyse doğrudan sonucu göster
+        return redirect('test_result', result_id=existing_result.id)
 
     questions = list(test.questions.all())
     total_questions = len(questions)
@@ -86,10 +83,8 @@ def take_test(request, test_id, question_index=0):
 def test_result(request, result_id):
     result = get_object_or_404(TestResult, id=result_id, user=request.user)
     
-    # Toplam puan hesapla
     total_score = result.fire_score + result.air_score + result.water_score + result.earth_score
     
-    # Yüzde hesapla
     element_scores = {
         'Ateş': int((result.fire_score / total_score) * 100) if total_score > 0 else 0,
         'Hava': int((result.air_score / total_score) * 100) if total_score > 0 else 0,
