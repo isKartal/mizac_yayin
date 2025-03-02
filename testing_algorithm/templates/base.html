@@ -16,7 +16,6 @@
             <div class="nav-container">
                 <a href="{% url 'index' %}" class="logo">MİZAÇ</a> 
 
-                <!-- Hamburger Menü Butonu -->
                 <button class="hamburger-button" aria-label="Menüyü Aç/Kapat">
                     ☰
                 </button>
@@ -62,7 +61,6 @@
                     dropdownContent.style.display = dropdownContent.style.display === 'block' ? 'none' : 'block';
                 });
                 
-                // Close the dropdown if clicked outside
                 document.addEventListener('click', function(event) {
                     if (!event.target.matches('.profile-button')) {
                         dropdownContent.style.display = 'none';
@@ -70,7 +68,6 @@
                 });
             }
             
-            // Hamburger menü için
             const hamburgerButton = document.querySelector(".hamburger-button");
             const navLinks = document.querySelector(".nav-links");
             
