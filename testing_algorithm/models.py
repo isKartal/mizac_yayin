@@ -56,7 +56,10 @@ class TestResult(models.Model):
             'Su': self.water_score,
             'Toprak': self.earth_score
         }
-        
+
         dominant = max(scores, key=scores.get)
-        self.dominant_element = ElementType.objects.get(name=dominant)
-        self.save()
+        self.dominant_element = ElementType.objects.filter(name=dominant).first()
+
+        if self.dominant_element:
+            self.save()
+
