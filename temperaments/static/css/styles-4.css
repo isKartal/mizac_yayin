@@ -13,6 +13,12 @@ body {
     min-height: 100vh;
 }
 
+.logo-img {
+    height: 50px; /* Logonun boyutunu ayarlayabilirsin */
+    width: auto;
+    display: block;
+}
+
 .page-container {
     flex: 1;
     display: flex;

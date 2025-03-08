@@ -10,6 +10,12 @@
     --light-bg: #ece9e3;
 }
 
+.logo-img {
+    height: 50px; /* Logonun boyutunu ayarlayabilirsin */
+    width: auto;
+    display: block;
+}
+
 * {
     margin: 0;
     padding: 0;

@@ -335,6 +335,12 @@ footer {
     transform: scale(1.05);
 }
 
+.logo-img {
+    height: 50px; /* Logonun boyutunu ayarlayabilirsin */
+    width: auto;
+    display: block;
+}
+
 /* Elementlerin görünümü */
 .element {
     position: relative;
