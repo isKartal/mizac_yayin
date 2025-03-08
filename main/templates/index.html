@@ -13,19 +13,21 @@
 </head>
 <body>
     <div class="nav-container">
-        <a href="{% url 'index' %}" class="logo">MİZAÇ</a> 
-
+        <a href="{% url 'index' %}" class="logo">
+            <img src="{% static 'images/logo.jpg' %}" alt="MİZAÇ" class="logo-img">
+        </a>
+    
         <!-- Hamburger Menü Butonu -->
         <button class="hamburger-button" aria-label="Menüyü Aç/Kapat">
             ☰
         </button>
-
+    
         <div class="nav-links">
             <a href="{% url 'about' %}" class="nav-item">HAKKINDA</a>
             <a href="{% url 'temperaments' %}" class="nav-item">MİZAÇLAR</a>
             <a href="{% url 'test_list' %}" class="nav-item">TESTE BAŞLA</a>
         </div>
-
+    
         {% if user.is_authenticated %}
             <div class="profile-container">
                 <button class="profile-button">PROFİL</button>
