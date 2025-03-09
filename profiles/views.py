@@ -5,14 +5,14 @@ from testing_algorithm.models import TestResult, ElementType
 @login_required
 def profiles(request):
     """ Profil ana sayfasını gösterir """
-    return render(request, 'profiles.html')
+    return render(request, 'profiles/profiles.html')
 
 @login_required
 def my_temperament(request):
     """ Kullanıcının en son yaptığı testi ve mizaç sonucunu gösterir """
     test_result = TestResult.objects.filter(user=request.user).order_by('-date_taken').first()
 
-    return render(request, 'my_temperament.html', {
+    return render(request, 'profiles/my_temperament.html', {
         'result': test_result,
         'dominant_element': test_result.dominant_element if test_result else None,
         'element_scores': {
@@ -30,6 +30,6 @@ def my_suggestions(request):
 
     element = test_result.dominant_element if test_result else None
 
-    return render(request, 'my_suggestions.html', {
+    return render(request, 'profiles/my_suggestions.html', {
         'element': element
     })

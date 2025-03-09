@@ -71,7 +71,7 @@ def take_test(request, test_id, question_index=0):
 
             return redirect('take_test', test_id=test_id, question_index=question_index + 1)
 
-    return render(request, 'take_test.html', {
+    return render(request, 'testing_algorithm/take_test.html', {
         'test': test,
         'current_question': current_question,
         'choices': choices,
@@ -98,8 +98,8 @@ def test_result(request, result_id):
         'dominant_element': result.dominant_element,
     }
     
-    return render(request, 'test_result.html', context)
+    return render(request, 'testing_algorithm/test_result.html', context)
 
 def element_detail(request, element_id):
     element = get_object_or_404(ElementType, id=element_id)
-    return render(request, 'element_detail.html', {'element': element})
+    return render(request, 'testing_algorithm/element_detail.html', {'element': element})
