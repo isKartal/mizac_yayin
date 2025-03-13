@@ -5,6 +5,18 @@
     box-sizing: border-box;
 }
 
+:root {
+    --primary-color: #292321;
+    --secondary-color: #ece9e3;
+    --accent-color: #d4a017;
+    --text-color: #292321;
+    --light-text: #fafafa;
+    --dark-bg: #121212;
+    --border-radius: 12px;
+    --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
+}
+
 body {
     font-family: 'Lora', serif;
     background-color: #ece9e3;
@@ -25,15 +37,34 @@ body {
     flex-direction: column;
 }
 
-/* Navigasyon Stilleri */
+/* Header ve Navigasyon */
 .nav-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 20px 5%;
-    background-color: #ece9e3;
-    border-bottom: 1px solid #ddd;
-    flex-wrap: wrap;
+    background-color: var(--secondary-color);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    transition: var(--transition);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo-img {
+    height: 45px;
+    width: auto;
+    border-radius: 8px;
+    transition: var(--transition);
+}
+
+.logo-img:hover {
+    transform: scale(1.05);
 }
 
 .nav-links {
@@ -41,24 +72,50 @@ body {
     gap: 30px;
 }
 
-.nav-item, .profile-button, .logo {
+.nav-item, .login-button {
     font-family: 'Montserrat', sans-serif;
     font-weight: 600;
     text-decoration: none;
-    color: black;
-    padding: 8px 12px;
-    transition: color 0.3s ease;
+    color: var(--primary-color);
+    padding: 8px 16px;
+    transition: var(--transition);
+    position: relative;
 }
 
-.nav-item:hover, .profile-button:hover {
-    color: gray;
+.nav-item::after, .login-button::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 50%;
+    background-color: var(--accent-color);
+    transition: var(--transition);
+    transform: translateX(-50%);
 }
 
-.logo {
-    font-size: 35px;
-    font-weight: bold;
+.nav-item:hover::after, .login-button:hover::after {
+    width: 70%;
 }
 
+.login-button {
+    border: 2px solid var(--primary-color);
+    border-radius: var(--border-radius);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.login-button:hover {
+    background-color: var(--primary-color);
+    color: var(--light-text);
+}
+
+.login-button:hover::after {
+    width: 0;
+}
+
+/* Profil Dropdown */
 .profile-container {
     position: relative;
 }
@@ -67,29 +124,66 @@ body {
     background: none;
     border: none;
     cursor: pointer;
-    font-size: 25px;
+    font-size: 24px;
+    color: var(--primary-color);
+    transition: var(--transition);
+    padding: 8px;
+}
+
+.profile-button:hover {
+    color: var(--accent-color);
+    transform: scale(1.05);
 }
 
 .dropdown-content {
     display: none;
     position: absolute;
-    background-color: #ece9e3;
-    min-width: 180px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
     right: 0;
+    background-color: white;
+    min-width: 200px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    overflow: hidden;
+    z-index: 1000;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: var(--transition);
+}
+
+.dropdown-content.show {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .dropdown-content a {
     padding: 12px 16px;
-    display: block;
-    text-align: left;
+    display: flex;
+    align-items: center;
+    gap: 10px;
     text-decoration: none;
-    color: black;
+    color: var(--primary-color);
+    transition: var(--transition);
 }
 
 .dropdown-content a:hover {
-    background-color: #ece9e3;
+    background-color: var(--secondary-color);
+    color: var(--accent-color);
+}
+
+/* Hamburger Menü */
+.hamburger-button {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 24px;
+    color: var(--primary-color);
+    transition: var(--transition);
+}
+
+.hamburger-button:hover, .hamburger-button.active {
+    color: var(--accent-color);
 }
 
 /* Footer Stilleri */

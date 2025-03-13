@@ -4,45 +4,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mizaç Testi - {% block title %}Anasayfa{% endblock %}</title>
-    <link rel="stylesheet" href="{% static 'css/styles-7.css' %}">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600&display=swap" rel="stylesheet">
+    <title>MİZAÇLAR</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Poppins:wght@400;600;700;900&family=Lora:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
     <div class="page-container">
-        <header>
-            <div class="nav-container">
-                <a href="{% url 'index' %}" class="logo">
-                    <img src="{% static 'images/logo.jpg' %}" alt="MİZAÇ" class="logo-img">
-                </a>
-            
-                <!-- Hamburger Menü Butonu -->
-                <button class="hamburger-button" aria-label="Menüyü Aç/Kapat">
-                    ☰
-                </button>
-            
-                <div class="nav-links">
-                    <a href="{% url 'about' %}" class="nav-item">HAKKINDA</a>
-                    <a href="{% url 'temperaments' %}" class="nav-item">MİZAÇLAR</a>
-                    <a href="{% url 'test_list' %}" class="nav-item">TESTE BAŞLA</a>
-                </div>
-            
-                {% if user.is_authenticated %}
-                    <div class="profile-container">
-                        <button class="profile-button">PROFİL</button>
-                        <div class="dropdown-content">
-                            <a href="{% url 'my_temperament' %}">Mizacım</a>
-                            <a href="{% url 'my_suggestions' %}">Önerilerim</a>
-                            <a href="{% url 'profiles' %}">Profil Ayarlarım</a>
-                            <a href="{% url 'logout' %}">Çıkış Yap</a>
-                        </div>
+        <header class="nav-container">
+            <a href="{% url 'index' %}" class="logo">
+                <img src="{% static 'images/logo.jpg' %}" alt="MİZAÇ" class="logo-img">
+            </a>
+        
+            <!-- Hamburger Menü Butonu -->
+            <button class="hamburger-button" aria-label="Menüyü Aç/Kapat">
+                <i class="fas fa-bars"></i>
+            </button>
+        
+            <nav class="nav-links">
+                <a href="{% url 'about' %}" class="nav-item">HAKKINDA</a>
+                <a href="{% url 'temperaments' %}" class="nav-item">MİZAÇLAR</a>
+                <a href="{% url 'test_list' %}" class="nav-item">TESTE BAŞLA</a>
+            </nav>
+        
+            {% if user.is_authenticated %}
+                <div class="profile-container">
+                    <button class="profile-button"><i class="fas fa-user-circle"></i></button>
+                    <div class="dropdown-content">
+                        <a href="{% url 'my_temperament' %}"><i class="fas fa-star"></i> Mizacım</a>
+                        <a href="{% url 'my_suggestions' %}"><i class="fas fa-lightbulb"></i> Önerilerim</a>
+                        <a href="{% url 'profiles' %}"><i class="fas fa-cog"></i> Profil Ayarlarım</a>
+                        <a href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i> Çıkış Yap</a>
                     </div>
-                {% else %}
-                    <a href="{% url 'login' %}" class="nav-item profile-container">GİRİŞ YAP</a>
-                {% endif %}
-            </div>
+                </div>
+            {% else %}
+                <a href="{% url 'login' %}" class="nav-item login-button"><i class="fas fa-sign-in-alt"></i> GİRİŞ YAP</a>
+            {% endif %}
         </header>
 
         <main>
@@ -56,27 +56,57 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // Profil dropdown menüsü
             const profileButton = document.querySelector('.profile-button');
+            const dropdownContent = document.querySelector('.dropdown-content');
+
             if (profileButton) {
-                const dropdownContent = document.querySelector('.dropdown-content');
-                
-                profileButton.addEventListener('click', function() {
-                    dropdownContent.style.display = dropdownContent.style.display === 'block' ? 'none' : 'block';
+                profileButton.addEventListener('click', function(event) {
+                    dropdownContent.classList.toggle('show');
+                    event.stopPropagation();
                 });
-                
-                document.addEventListener('click', function(event) {
-                    if (!event.target.matches('.profile-button')) {
-                        dropdownContent.style.display = 'none';
+
+                // Dropdown dışına tıklandığında kapansın
+                document.addEventListener('click', function() {
+                    if (dropdownContent.classList.contains('show')) {
+                        dropdownContent.classList.remove('show');
                     }
                 });
             }
-            
+
+            // Mobil menü için hamburger butonu
             const hamburgerButton = document.querySelector(".hamburger-button");
             const navLinks = document.querySelector(".nav-links");
-            
-            hamburgerButton.addEventListener("click", function () {
+
+            hamburgerButton.addEventListener("click", function() {
                 navLinks.classList.toggle("open");
+                hamburgerButton.classList.toggle("active");
             });
+
+            // Scroll ile elementlerin görünmesi
+            const elements = document.querySelectorAll(".element");
+            const sections = document.querySelectorAll("section");
+
+            function checkScroll() {
+                const triggerBottom = window.innerHeight * 0.8;
+
+                elements.forEach(element => {
+                    const elementTop = element.getBoundingClientRect().top;
+                    if (elementTop < triggerBottom) {
+                        element.classList.add("show");
+                    }
+                });
+
+                sections.forEach(section => {
+                    const sectionTop = section.getBoundingClientRect().top;
+                    if (sectionTop < triggerBottom) {
+                        section.classList.add("show-section");
+                    }
+                });
+            }
+
+            window.addEventListener("scroll", checkScroll);
+            checkScroll(); // İlk yüklendiğinde de kontrol et
         });
     </script>
 </body>
