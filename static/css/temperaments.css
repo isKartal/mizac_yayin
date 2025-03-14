@@ -1,78 +1,75 @@
-/* Genel Stil Ayarları */
-* {
+/* HTML ve body yüksekliği tam doldurur */
+html, body {
+    height: 100%;
+  }
+  
+  /* Reset */
+  * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-}
-
-:root {
+  }
+  
+  /* Root Değişkenleri */
+  :root {
     --primary-color: #292321;
-    --secondary-color: #ece9e3;
-    --accent-color: #d4a017;
+    --secondary-color: #f8f5f0;
+    --accent-color: #e9b44c;
     --text-color: #292321;
     --light-text: #fafafa;
-    --dark-bg: #121212;
-    --border-radius: 12px;
-    --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    --transition: all 0.3s ease;
-}
-
-body {
-    font-family: 'Lora', serif;
-    background-color: #ece9e3;
+    --dark-bg: #1a1a1a;
+    --border-radius: 16px;
+    --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
+    --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  }
+  
+  /* Genel Gövde Stili */
+  body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+    line-height: 1.6;
+  }
+  
+  /* Sayfa Konteyneri: Flex sayesinde footer her zaman en alta yapışık */
+  .page-container {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-}
-
-.logo-img {
-    height: 50px; /* Logonun boyutunu ayarlayabilirsin */
-    width: auto;
-    display: block;
-}
-
-.page-container {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-}
-
-/* Header ve Navigasyon */
-.nav-container {
+  }
+  
+  /* Header ve Navigasyon */
+  .nav-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 5%;
-    background-color: var(--secondary-color);
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    padding: 15px 5%;
+    background-color: rgba(248, 245, 240, 0.95);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.04);
     position: sticky;
     top: 0;
     z-index: 1000;
     transition: var(--transition);
-}
-
-.logo {
-    display: flex;
-    align-items: center;
-}
-
-.logo-img {
-    height: 45px;
+  }
+  
+  .logo-img {
+    height: 48px;
     width: auto;
-    border-radius: 8px;
+    border-radius: 10px;
     transition: var(--transition);
-}
-
-.logo-img:hover {
+  }
+  
+  .logo-img:hover {
     transform: scale(1.05);
-}
-
-.nav-links {
+  }
+  
+  .nav-links {
     display: flex;
-    gap: 30px;
-}
-
-.nav-item, .login-button {
+    gap: 36px;
+  }
+  
+  .nav-item, .login-button {
     font-family: 'Montserrat', sans-serif;
     font-weight: 600;
     text-decoration: none;
@@ -80,9 +77,10 @@ body {
     padding: 8px 16px;
     transition: var(--transition);
     position: relative;
-}
-
-.nav-item::after, .login-button::after {
+    letter-spacing: 0.5px;
+  }
+  
+  .nav-item::after, .login-button::after {
     content: '';
     position: absolute;
     width: 0;
@@ -92,35 +90,30 @@ body {
     background-color: var(--accent-color);
     transition: var(--transition);
     transform: translateX(-50%);
-}
-
-.nav-item:hover::after, .login-button:hover::after {
+  }
+  
+  .nav-item:hover::after, .login-button:hover::after {
     width: 70%;
-}
-
-.login-button {
-    border: 2px solid var(--primary-color);
+  }
+  
+  .login-button {
+    border: 2px solid var(--accent-color);
     border-radius: var(--border-radius);
     display: flex;
     align-items: center;
-    gap: 6px;
-}
-
-.login-button:hover {
-    background-color: var(--primary-color);
+    gap: 8px;
+  }
+  
+  .login-button:hover {
+    background-color: var(--accent-color);
     color: var(--light-text);
-}
-
-.login-button:hover::after {
-    width: 0;
-}
-
-/* Profil Dropdown */
-.profile-container {
+  }
+  
+  .profile-container {
     position: relative;
-}
-
-.profile-button {
+  }
+  
+  .profile-button {
     background: none;
     border: none;
     cursor: pointer;
@@ -128,19 +121,19 @@ body {
     color: var(--primary-color);
     transition: var(--transition);
     padding: 8px;
-}
-
-.profile-button:hover {
+  }
+  
+  .profile-button:hover {
     color: var(--accent-color);
     transform: scale(1.05);
-}
-
-.dropdown-content {
+  }
+  
+  .dropdown-content {
     display: none;
     position: absolute;
     right: 0;
     background-color: white;
-    min-width: 200px;
+    min-width: 220px;
     border-radius: var(--border-radius);
     box-shadow: var(--box-shadow);
     overflow: hidden;
@@ -148,31 +141,31 @@ body {
     opacity: 0;
     transform: translateY(10px);
     transition: var(--transition);
-}
-
-.dropdown-content.show {
+  }
+  
+  .dropdown-content.show {
     display: block;
     opacity: 1;
     transform: translateY(0);
-}
-
-.dropdown-content a {
-    padding: 12px 16px;
+  }
+  
+  .dropdown-content a {
+    padding: 14px 18px;
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
     text-decoration: none;
     color: var(--primary-color);
     transition: var(--transition);
-}
-
-.dropdown-content a:hover {
+  }
+  
+  .dropdown-content a:hover {
     background-color: var(--secondary-color);
     color: var(--accent-color);
-}
-
-/* Hamburger Menü */
-.hamburger-button {
+  }
+  
+  /* Hamburger Menü */
+  .hamburger-button {
     display: none;
     background: none;
     border: none;
@@ -180,130 +173,120 @@ body {
     font-size: 24px;
     color: var(--primary-color);
     transition: var(--transition);
-}
-
-.hamburger-button:hover, .hamburger-button.active {
+  }
+  
+  .hamburger-button:hover,
+  .hamburger-button.active {
     color: var(--accent-color);
-}
-
-/* Footer Stilleri */
-footer {
+  }
+  
+  /* Section Header (About sayfası stiline benzer) */
+  .section-header {
     text-align: center;
-    padding: 20px;
-    background-color: black;
-    color: white;
-    margin-top: auto; /* Footer'ı en alta sabitler */
-}
-
-/* Ana İçerik Stilleri */
-.content {
-    flex: 1; /* İçeriği genişletir, footer'ı en alta iter */
-    padding: 20px;
-}
-
-.mizac-section {
+    margin-bottom: 40px;
+  }
+  
+  .section-header h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    text-transform: uppercase;
+    margin-bottom: 15px;
+  }
+  
+  .underline {
+    height: 4px;
+    width: 60px;
+    background: var(--accent-color);
+    margin: 0 auto;
+  }
+  
+  /* Mizac Bölümü */
+  .mizac-section {
+    padding: 60px 0;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 60px 5%;
-    background-color: #ece9e3;
-    max-width: 1300px;
-    margin: 0 auto;
-}
-
-.mizac-info {
-    width: 100%;
+  }
+  
+  .mizac-info {
+    width: 90%;
+    max-width: 1200px;
     margin-bottom: 40px;
-    color: #333;
-    font-size: 18px;
-    text-align: left;
-}
-
-.mizac-title {
-    font-size: 36px;
-    font-weight: bold;
-    color: #222;
-    margin-bottom: 20px;
-    text-transform: uppercase;
-}
-
-.mizac-image-container {
+    text-align: center;
+  }
+  
+  .mizac-image-container {
+    width: 90%;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .mizac-image {
     width: 100%;
-    display: flex;
-    justify-content: center;
-}
-
-.mizac-image {
-    max-width: 100%;
     height: auto;
-    max-height: 500px;
+    max-height: 300px;
     object-fit: cover;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-/* Responsive tasarım güncellemeleri */
-@media (max-width: 768px) {
-    .mizac-section {
-        padding: 40px 5%;
-    }
-    
-    .mizac-image {
-        max-height: 350px;
-    }
-}
-
-.mizac-buttons {
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    transition: var(--transition);
+  }
+  
+  .mizac-image:hover {
+    transform: scale(1.05);
+  }
+  
+  /* Mizac Butonları (Anasayfa) */
+  .mizac-buttons {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     gap: 15px;
-    padding: 0 20px;
-    max-width: 1300px;
-    margin: 0 auto;
-}
-
-.mizac-button {
+    margin-top: 20px;
+    width: 90%;
+    max-width: 1200px;
+  }
+  
+  .mizac-button {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 230px;  /* 260px'den 230px'e küçüldü */
-    height: 195px; /* 220px'den 195px'e küçüldü */
+    width: 230px;
+    height: 195px;
     background-size: cover;
     background-position: center;
-    border-radius: 10px;
+    border-radius: var(--border-radius);
     text-decoration: none;
     position: relative;
     overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: var(--box-shadow);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     color: white;
     text-align: center;
-    margin: 5px;  /* 10px'den 5px'e küçüldü */
-}
-
-.mizac-button span {
+  }
+  
+  .mizac-button span {
     position: relative;
     z-index: 2;
-    font-size: 22px;  /* 24px'den 22px'e küçüldü */
+    font-size: 22px;
     font-weight: bold;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
-}
-
-.mizac-button li {
-    font-size: 14px;  /* 16px'den 14px'e küçüldü */
+  }
+  
+  .mizac-button li {
+    font-size: 14px;
     position: relative;
     z-index: 2;
     color: rgba(255, 255, 255, 0.9);
-}
-
-.mizac-button ul {
-    background: none;
+  }
+  
+  .mizac-button ul {
+    list-style: none;
     padding: 5px;
-}
-
-.mizac-button::before {
+  }
+  
+  .mizac-button::before {
     content: '';
     position: absolute;
     top: 0;
@@ -311,98 +294,139 @@ footer {
     right: 0;
     bottom: 0;
     background: rgba(0, 0, 0, 0.3);
-}
-
-.mizac-button:hover {
+  }
+  
+  .mizac-button:hover {
     transform: scale(1.05);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-}
-
-@media (max-width: 992px) {
-    .mizac-buttons {
-        justify-content: center;
+  }
+  
+  /* Footer: About sayfasıyla aynı yapı */
+  footer {
+    background-color: var(--dark-bg);
+    color: var(--light-text);
+    padding: 80px 0 30px;
+    margin-top: auto;
+  }
+  
+  .footer-content {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    gap: 60px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-bottom: 40px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .footer-logo {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .footer-logo-img {
+    height: 60px;
+    border-radius: 10px;
+  }
+  
+  .footer-logo p {
+    font-size: 16px;
+    opacity: 0.8;
+    margin-top: 10px;
+  }
+  
+  .footer-links {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+  }
+  
+  .footer-column h3 {
+    font-size: 18px;
+    margin-bottom: 20px;
+    color: var(--accent-color);
+    font-weight: 600;
+  }
+  
+  .footer-column ul {
+    list-style: none;
+  }
+  
+  .footer-column ul li {
+    margin-bottom: 12px;
+  }
+  
+  .footer-column ul li a {
+    color: var(--light-text);
+    text-decoration: none;
+    transition: var(--transition);
+    opacity: 0.8;
+  }
+  
+  .footer-column ul li a:hover {
+    color: var(--accent-color);
+    opacity: 1;
+    transform: translateX(5px);
+  }
+  
+  .footer-bottom {
+    text-align: center;
+    padding-top: 30px;
+    font-size: 14px;
+    opacity: 0.7;
+  }
+  
+  /* Responsive Ayarlar */
+  @media (max-width: 768px) {
+    .nav-container {
+      padding: 15px 5%;
     }
     
-    .mizac-button {
-        width: 45%;
-        max-width: 230px;
+    .hamburger-button {
+      display: block;
     }
-}
-
-@media (max-width: 768px) {
+    
+    .nav-links {
+      display: none;
+      flex-direction: column;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      background-color: white;
+      padding: 20px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      gap: 15px;
+      z-index: 999;
+    }
+    
+    .nav-links.open {
+      display: flex;
+    }
+  }
+  
+  @media (max-width: 992px) {
     .mizac-button {
-        width: 100%;
-        max-width: 260px;
-        height: 220px;
+      width: 45%;
+      max-width: 230px;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .mizac-button {
+      width: 100%;
+      max-width: 260px;
+      height: 220px;
     }
     
     .mizac-button span {
-        font-size: 24px;
+      font-size: 24px;
     }
     
     .mizac-button li {
-        font-size: 16px;
+      font-size: 16px;
     }
-}
-
-/* Footer Stilleri */
-footer {
-    text-align: center;
-    padding: 20px;
-    background-color: black;
-    color: white;
-    margin-top: auto; /* Footer'ı en alta sabitler */
-}
-
-/* Hamburger Butonu */
-.hamburger-button {
-    display: none;
-    font-size: 24px;
-    background: none;
-    border: none;
-    cursor: pointer;
-}
-
-/* Mobil Görünüm İçin */
-@media (max-width: 768px) {
-    .nav-container {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 15px 5%;
-        position: relative;
-    }
-
-    /* Menü butonu görünür hale getirildi */
-    .hamburger-button {
-        display: block;
-        font-size: 32px;
-        cursor: pointer;
-        color: black;
-    }
-
-    /* Mobilde linkler gizli olacak */
-    .nav-links {
-        display: none;
-        flex-direction: column;
-        background: #ece9e3;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        width: 100%;
-        padding: 10px;
-        text-align: center;
-        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    }
-
-    /* Açık menü */
-    .nav-links.open {
-        display: flex;
-    }
-
-    .nav-item {
-        padding: 10px;
-        display: block;
-        font-size: 18px;
-    }
-}
+  }
+  

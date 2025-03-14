@@ -1,117 +1,117 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MİZAÇLAR</title>
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'css/temperaments.css' %}">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Poppins:wght@400;600;700;900&family=Lora:wght@400;600;700&display=swap" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MİZAÇLAR - Su Mizacı</title>
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/temperaments.css' %}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- About temasıyla uyumlu fontlar -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
-    <div class="page-container">
-        <header class="nav-container">
-            <a href="{% url 'index' %}" class="logo">
-                <img src="{% static 'images/logo.jpg' %}" alt="MİZAÇ" class="logo-img">
-            </a>
-        
-            <!-- Hamburger Menü Butonu -->
-            <button class="hamburger-button" aria-label="Menüyü Aç/Kapat">
-                <i class="fas fa-bars"></i>
-            </button>
-        
-            <nav class="nav-links">
-                <a href="{% url 'about' %}" class="nav-item">HAKKINDA</a>
-                <a href="{% url 'temperaments' %}" class="nav-item">MİZAÇLAR</a>
-                <a href="{% url 'test_list' %}" class="nav-item">TESTE BAŞLA</a>
-            </nav>
-        
-            {% if user.is_authenticated %}
-                <div class="profile-container">
-                    <button class="profile-button"><i class="fas fa-user-circle"></i></button>
-                    <div class="dropdown-content">
-                        <a href="{% url 'my_temperament' %}"><i class="fas fa-star"></i> Mizacım</a>
-                        <a href="{% url 'my_suggestions' %}"><i class="fas fa-lightbulb"></i> Önerilerim</a>
-                        <a href="{% url 'profiles' %}"><i class="fas fa-cog"></i> Profil Ayarlarım</a>
-                        <a href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i> Çıkış Yap</a>
-                    </div>
-                </div>
-            {% else %}
-                <a href="{% url 'login' %}" class="nav-item login-button"><i class="fas fa-sign-in-alt"></i> GİRİŞ YAP</a>
-            {% endif %}
-        </header>
-
+  <div class="page-container">
+    <!-- Header -->
+    <header class="nav-container">
+      <a href="{% url 'index' %}" class="logo">
+        <img src="{% static 'images/logo.jpg' %}" alt="MİZAÇ" class="logo-img">
+      </a>
+      <button class="hamburger-button" aria-label="Menüyü Aç/Kapat">
+        <i class="fas fa-bars"></i>
+      </button>
+      <nav class="nav-links">
+        <a href="{% url 'about' %}" class="nav-item">HAKKINDA</a>
+        <a href="{% url 'temperaments' %}" class="nav-item">MİZAÇLAR</a>
+        <a href="{% url 'test_list' %}" class="nav-item">TESTE BAŞLA</a>
+      </nav>
+      {% if user.is_authenticated %}
+      <div class="profile-container">
+        <button class="profile-button"><i class="fas fa-user-circle"></i></button>
+        <div class="dropdown-content">
+          <a href="{% url 'my_temperament' %}"><i class="fas fa-star"></i> Mizacım</a>
+          <a href="{% url 'my_suggestions' %}"><i class="fas fa-lightbulb"></i> Önerilerim</a>
+          <a href="{% url 'profiles' %}"><i class="fas fa-cog"></i> Profil Ayarlarım</a>
+          <a href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i> Çıkış Yap</a>
+        </div>
+      </div>
+      {% else %}
+      <a href="{% url 'login' %}" class="nav-item login-button"><i class="fas fa-sign-in-alt"></i> GİRİŞ YAP</a>
+      {% endif %}
+    </header>
+    
+    <!-- Mizac Bölümü -->
     <section class="mizac-section">
-        <div class="mizac-info">
-            <h2 class="mizac-title">Su Mizacı Özellikleri</h2>
-            <p>
-                Su mizacı, doğası gereği sakin, derin ve uyumlu bireylerin temsil ettiği bir mizacıdır. 
-                Duygusal zekâsı yüksek, empati yeteneği güçlü ve sezgisel bir yapıya sahiptirler. 
-                Sanatsal ve felsefi konulara ilgi duyarlar, ancak zaman zaman aşırı hassas olabilirler.
-            </p>
-        </div>
-        <div class="mizac-image-container">
-            <img src="{% static 'images/water.jpg' %}" alt="Su Mizacı Karakteri" class="mizac-image">
-        </div>
+      <div class="mizac-info">
+        <h2 class="mizac-title">Su Mizacı Özellikleri</h2>
+        <p>
+          Su mizacı, sakin, derin ve uyumlu bireyleri temsil eder. Bu mizaca sahip kişiler, duygusal zekâları ve empati yetenekleri ile öne çıkar.
+        </p>
+      </div>
+      <div class="mizac-image-container">
+        <img src="{% static 'images/water.jpg' %}" alt="Su Mizacı Karakteri" class="mizac-image">
+      </div>
     </section>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Profil dropdown menüsü
-            const profileButton = document.querySelector('.profile-button');
-            const dropdownContent = document.querySelector('.dropdown-content');
-
-            if (profileButton) {
-                profileButton.addEventListener('click', function(event) {
-                    dropdownContent.classList.toggle('show');
-                    event.stopPropagation();
-                });
-
-                // Dropdown dışına tıklandığında kapansın
-                document.addEventListener('click', function() {
-                    if (dropdownContent.classList.contains('show')) {
-                        dropdownContent.classList.remove('show');
-                    }
-                });
-            }
-
-            // Mobil menü için hamburger butonu
-            const hamburgerButton = document.querySelector(".hamburger-button");
-            const navLinks = document.querySelector(".nav-links");
-
-            hamburgerButton.addEventListener("click", function() {
-                navLinks.classList.toggle("open");
-                hamburgerButton.classList.toggle("active");
-            });
-
-            // Scroll ile elementlerin görünmesi
-            const elements = document.querySelectorAll(".element");
-            const sections = document.querySelectorAll("section");
-
-            function checkScroll() {
-                const triggerBottom = window.innerHeight * 0.8;
-
-                elements.forEach(element => {
-                    const elementTop = element.getBoundingClientRect().top;
-                    if (elementTop < triggerBottom) {
-                        element.classList.add("show");
-                    }
-                });
-
-                sections.forEach(section => {
-                    const sectionTop = section.getBoundingClientRect().top;
-                    if (sectionTop < triggerBottom) {
-                        section.classList.add("show-section");
-                    }
-                });
-            }
-
-            window.addEventListener("scroll", checkScroll);
-            checkScroll(); // İlk yüklendiğinde de kontrol et
+    
+    <!-- Footer -->
+    <footer>
+      <div class="footer-content">
+        <div class="footer-logo">
+          <img src="{% static 'images/l2.jpg' %}" alt="MİZAÇ" class="footer-logo-img">
+          <p>Kendini keşfetmenin yeni yolu</p>
+        </div>
+        <div class="footer-links">
+          <div class="footer-column">
+            <h3>Hızlı Bağlantılar</h3>
+            <ul>
+              <li><a href="{% url 'index' %}">Ana Sayfa</a></li>
+              <li><a href="{% url 'about' %}">Hakkında</a></li>
+              <li><a href="{% url 'temperaments' %}">Mizaçlar</a></li>
+              <li><a href="{% url 'test_list' %}">Testler</a></li>
+            </ul>
+          </div>
+          <div class="footer-column">
+            <h3>Destek</h3>
+            <ul>
+              <li><a href="#">SSS</a></li>
+              <li><a href="#">Kullanım Şartları</a></li>
+              <li><a href="#">Gizlilik Politikası</a></li>
+              <li><a href="#">İletişim</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 4 Mizaç | Tüm hakları saklıdır.</p>
+      </div>
+    </footer>
+  </div>
+  
+  <!-- JavaScript -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const profileButton = document.querySelector('.profile-button');
+      const dropdownContent = document.querySelector('.dropdown-content');
+      if (profileButton) {
+        profileButton.addEventListener('click', function(event) {
+          dropdownContent.classList.toggle('show');
+          event.stopPropagation();
         });
-    </script>
+        document.addEventListener('click', function() {
+          if (dropdownContent.classList.contains('show')) {
+            dropdownContent.classList.remove('show');
+          }
+        });
+      }
+      const hamburgerButton = document.querySelector(".hamburger-button");
+      const navLinks = document.querySelector(".nav-links");
+      hamburgerButton.addEventListener("click", function() {
+        navLinks.classList.toggle("open");
+        hamburgerButton.classList.toggle("active");
+      });
+    });
+  </script>
 </body>
 </html>
