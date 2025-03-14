@@ -13,7 +13,7 @@ html, body {
   /* Root Değişkenleri */
   :root {
     --primary-color: #292321;
-    --secondary-color: #f8f5f0;
+    --secondary-color: #ece9e3;
     --accent-color: #e9b44c;
     --text-color: #292321;
     --light-text: #fafafa;
@@ -44,7 +44,7 @@ html, body {
     justify-content: space-between;
     align-items: center;
     padding: 15px 5%;
-    background-color: rgba(248, 245, 240, 0.95);
+    background-color: #ece9e3;
     backdrop-filter: blur(10px);
     box-shadow: 0 2px 15px rgba(0, 0, 0, 0.04);
     position: sticky;

@@ -7,7 +7,7 @@
 
 :root {
     --primary-color: #292321;
-    --secondary-color: #f8f5f0;
+    --secondary-color: #ece9e3;
     --accent-color: #e9b44c;
     --text-color: #292321;
     --light-text: #fafafa;
@@ -45,7 +45,7 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 15px 5%;
-    background-color: rgba(248, 245, 240, 0.95);
+    background-color: #ece9e3;
     backdrop-filter: blur(10px);
     box-shadow: 0 2px 15px rgba(0, 0, 0, 0.04);
     position: sticky;
@@ -612,22 +612,22 @@ footer {
 
 /* Element özellikleri */
 .fire-icon {
-    color: #e74c3c;
-    background-color: rgba(231, 76, 60, 0.1);
+    color: #bc1823;
+    background-color: rgba(235, 67, 49, 0.1);
 }
 
 .air-icon {
-    color: #3498db;
-    background-color: rgba(52, 152, 219, 0.1);
+    color: #c9c9c6;
+    background-color: rgba(10, 14, 19, 0.1);
 }
 
 .earth-icon {
-    color: #27ae60;
+    color: #6d412a;
     background-color: rgba(39, 174, 96, 0.1);
 }
 
 .water-icon {
-    color: #00acc1;
+    color: #145da0;
     background-color: rgba(0, 172, 193, 0.1);
 }
 
