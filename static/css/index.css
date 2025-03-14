@@ -7,14 +7,14 @@
 
 :root {
     --primary-color: #292321;
-    --secondary-color: #ece9e3;
-    --accent-color: #d4a017;
+    --secondary-color: #f8f5f0;
+    --accent-color: #e9b44c;
     --text-color: #292321;
     --light-text: #fafafa;
-    --dark-bg: #121212;
-    --border-radius: 12px;
-    --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    --transition: all 0.3s ease;
+    --dark-bg: #1a1a1a;
+    --border-radius: 16px;
+    --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
+    --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 body {
@@ -23,6 +23,14 @@ body {
     color: var(--text-color);
     max-width: 100vw;
     overflow-x: hidden;
+    line-height: 1.6;
+}
+
+.container {
+    width: 100%;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 5%;
 }
 
 .page-container {
@@ -36,13 +44,21 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 5%;
-    background-color: var(--secondary-color);
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    padding: 15px 5%;
+    background-color: rgba(248, 245, 240, 0.95);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.04);
     position: sticky;
     top: 0;
     z-index: 1000;
     transition: var(--transition);
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
 }
 
 .logo {
@@ -51,9 +67,9 @@ body {
 }
 
 .logo-img {
-    height: 45px;
+    height: 48px;
     width: auto;
-    border-radius: 8px;
+    border-radius: 10px;
     transition: var(--transition);
 }
 
@@ -63,7 +79,7 @@ body {
 
 .nav-links {
     display: flex;
-    gap: 30px;
+    gap: 36px;
 }
 
 .nav-item, .login-button {
@@ -74,6 +90,7 @@ body {
     padding: 8px 16px;
     transition: var(--transition);
     position: relative;
+    letter-spacing: 0.5px;
 }
 
 .nav-item::after, .login-button::after {
@@ -93,15 +110,15 @@ body {
 }
 
 .login-button {
-    border: 2px solid var(--primary-color);
+    border: 2px solid var(--accent-color);
     border-radius: var(--border-radius);
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 8px;
 }
 
 .login-button:hover {
-    background-color: var(--primary-color);
+    background-color: var(--accent-color);
     color: var(--light-text);
 }
 
@@ -134,7 +151,7 @@ body {
     position: absolute;
     right: 0;
     background-color: white;
-    min-width: 200px;
+    min-width: 220px;
     border-radius: var(--border-radius);
     box-shadow: var(--box-shadow);
     overflow: hidden;
@@ -151,10 +168,10 @@ body {
 }
 
 .dropdown-content a {
-    padding: 12px 16px;
+    padding: 14px 18px;
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
     text-decoration: none;
     color: var(--primary-color);
     transition: var(--transition);
@@ -183,7 +200,7 @@ body {
 /* Hero Bölümü */
 .hero-section {
     position: relative;
-    height: 80vh;
+    height: 85vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -205,7 +222,7 @@ body {
 }
 
 .hero-content {
-    max-width: 800px;
+    max-width: 850px;
     text-align: center;
     color: var(--light-text);
     position: relative;
@@ -224,28 +241,30 @@ body {
 
 .mizac-nedir-title {
     font-family: 'Poppins', serif;
-    font-size: clamp(36px, 5vw, 56px);
-    font-weight: 900;
-    margin-bottom: 20px;
+    font-size: clamp(40px, 5vw, 64px);
+    font-weight: 800;
+    margin-bottom: 24px;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    letter-spacing: -0.5px;
 }
 
 .mizac-nedir-text {
     font-family: 'Lora', serif;
     font-weight: 500;
-    font-size: clamp(18px, 2vw, 24px);
+    font-size: clamp(18px, 2vw, 22px);
     line-height: 1.6;
-    max-width: 700px;
-    margin: 0 auto 30px;
+    max-width: 740px;
+    margin: 0 auto 36px;
+    opacity: 0.95;
 }
 
 .start-test-button {
     display: inline-flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
     background-color: var(--accent-color);
     color: var(--light-text);
-    padding: 16px 32px;
+    padding: 16px 36px;
     text-decoration: none;
     border-radius: var(--border-radius);
     font-weight: 600;
@@ -261,7 +280,7 @@ body {
 
 /* Element Bölümü */
 .elements-section {
-    padding: 100px 5%;
+    padding: 120px 0;
     opacity: 0;
     transform: translateY(30px);
     transition: var(--transition);
@@ -274,10 +293,12 @@ body {
 
 .section-title {
     text-align: center;
-    font-size: clamp(28px, 4vw, 42px);
-    margin-bottom: 60px;
+    font-size: clamp(32px, 4vw, 44px);
+    margin-bottom: 20px;
     position: relative;
     padding-bottom: 15px;
+    font-weight: 700;
+    color: var(--primary-color);
 }
 
 .section-title::after {
@@ -291,6 +312,14 @@ body {
     background-color: var(--accent-color);
 }
 
+.section-description {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 60px;
+    font-size: 18px;
+    color: #666;
+}
+
 .element-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -299,96 +328,131 @@ body {
     margin: 0 auto;
 }
 
-.element-wrapper {
-    position: relative;
-}
-
-.element {
-    position: relative;
-    height: 350px;
+.element-card {
+    background-color: white;
     border-radius: var(--border-radius);
     overflow: hidden;
     box-shadow: var(--box-shadow);
+    transition: var(--transition);
+    padding: 40px 30px;
+    text-align: center;
     transform: translateY(30px);
     opacity: 0;
     transition: var(--transition);
 }
 
-.element::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.6));
-    z-index: 1;
-}
-
-.element.show {
+.element-card.appear {
     opacity: 1;
     transform: translateY(0);
 }
 
-.element-content {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    padding: 30px;
-    color: var(--light-text);
-    z-index: 2;
-    transition: var(--transition);
-}
-
-.element:hover .element-content {
+.element-card:hover {
     transform: translateY(-10px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
 }
 
 .element-icon {
-    font-size: 50px;
-    margin-bottom: 30px;
-    opacity: 0.9;
+    font-size: 48px;
+    margin-bottom: 24px;
     color: var(--accent-color);
+    display: inline-block;
+    padding: 20px;
+    border-radius: 50%;
+    background-color: rgba(233, 180, 76, 0.1);
 }
 
-.element-content h3 {
-    font-size: 24px;
+.element-card h3 {
+    font-size: 26px;
     font-weight: 700;
-    margin-bottom: 10px;
+    margin-bottom: 16px;
+    color: var(--primary-color);
 }
 
-.element-content p {
+.element-card p {
     font-size: 16px;
-    margin-bottom: 20px;
-    opacity: 0.9;
+    margin-bottom: 24px;
+    color: #666;
+    line-height: 1.7;
 }
 
-.more-link {
+.element-link {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    color: var(--light-text);
-    background-color: rgba(255, 255, 255, 0.2);
-    padding: 10px 20px;
-    border-radius: 30px;
-    text-decoration: none;
+    color: var(--accent-color);
     font-weight: 600;
-    font-size: 14px;
+    text-decoration: none;
     transition: var(--transition);
 }
 
-.more-link:hover {
-    background-color: var(--accent-color);
-    color: var(--light-text);
+.element-link:hover {
+    color: var(--primary-color);
     transform: translateX(5px);
+}
+
+/* Advantage Section */
+.advantage-section {
+    padding: 120px 0;
+    background-color: #f0ece5;
+}
+
+.advantage-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.advantage-card {
+    background-color: white;
+    border-radius: var(--border-radius);
+    padding: 40px 30px;
+    text-align: center;
+    box-shadow: var(--box-shadow);
+    transition: var(--transition);
+    transform: translateY(30px);
+    opacity: 0;
+}
+
+.advantage-card.appear {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.advantage-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+}
+
+.advantage-icon {
+    font-size: 36px;
+    color: var(--accent-color);
+    margin-bottom: 24px;
+    display: inline-block;
+    padding: 20px;
+    border-radius: 50%;
+    background-color: rgba(233, 180, 76, 0.1);
+}
+
+.advantage-card h3 {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    color: var(--primary-color);
+}
+
+.advantage-card p {
+    font-size: 16px;
+    color: #666;
+    line-height: 1.7;
 }
 
 /* CTA Bölümü */
 .cta-section {
     background-color: var(--primary-color);
     color: var(--light-text);
-    padding: 80px 5%;
+    padding: 100px 0;
     text-align: center;
     opacity: 0;
     transform: translateY(30px);
@@ -406,23 +470,24 @@ body {
 }
 
 .cta-content h2 {
-    font-size: clamp(28px, 4vw, 42px);
-    margin-bottom: 15px;
+    font-size: clamp(32px, 4vw, 44px);
+    margin-bottom: 24px;
+    font-weight: 700;
 }
 
 .cta-content p {
     font-size: 18px;
-    margin-bottom: 30px;
+    margin-bottom: 36px;
     opacity: 0.9;
 }
 
 .cta-button {
     display: inline-flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
     background-color: var(--accent-color);
     color: var(--light-text);
-    padding: 16px 32px;
+    padding: 16px 36px;
     border-radius: var(--border-radius);
     text-decoration: none;
     font-weight: 600;
@@ -439,88 +504,159 @@ body {
 
 /* Footer */
 footer {
-    background-color: #292321;     /* var(--dark-bg) yerine doğrudan renk kodu */
+    background-color: var(--dark-bg);
     color: var(--light-text);
-    padding: 60px 5% 20px;
+    padding: 80px 0 30px;
     margin-top: auto;
 }
 
 .footer-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    gap: 60px;
     max-width: 1200px;
     margin: 0 auto;
-    padding-bottom: 30px;
+    padding-bottom: 40px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-logo {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
 }
 
 .footer-logo-img {
     height: 60px;
-    border-radius: 8px;
+    border-radius: 10px;
 }
 
-.footer-logo-img1 {
-    height: 60px;
-    border-radius: 8px;
+.footer-logo p {
+    font-size: 16px;
+    opacity: 0.8;
+    margin-top: 10px;
 }
 
 .footer-links {
-    display: flex;
-    gap: 30px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
 }
 
-.footer-links a {
+.footer-column h3 {
+    font-size: 18px;
+    margin-bottom: 20px;
+    color: var(--accent-color);
+    font-weight: 600;
+}
+
+.footer-column ul {
+    list-style: none;
+}
+
+.footer-column ul li {
+    margin-bottom: 12px;
+}
+
+.footer-column ul li a {
     color: var(--light-text);
     text-decoration: none;
     transition: var(--transition);
+    opacity: 0.8;
 }
 
-.footer-links a:hover {
+.footer-column ul li a:hover {
     color: var(--accent-color);
+    opacity: 1;
+    transform: translateX(5px);
 }
 
-.footer-social {
+.footer-social h3 {
+    font-size: 18px;
+    margin-bottom: 20px;
+    color: var(--accent-color);
+    font-weight: 600;
+}
+
+.social-icons {
     display: flex;
-    gap: 20px;
+    gap: 16px;
+    margin-top: 15px;
 }
 
-.footer-social a {
+.social-icons a {
     color: var(--light-text);
-    font-size: 24px;
+    font-size: 18px;
     transition: var(--transition);
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.footer-social a:hover {
+.social-icons a:hover {
     color: var(--accent-color);
+    background-color: rgba(255, 255, 255, 0.2);
     transform: translateY(-3px);
 }
 
 .footer-bottom {
     text-align: center;
-    padding-top: 20px;
+    padding-top: 30px;
     font-size: 14px;
     opacity: 0.7;
 }
 
+/* Element özellikleri */
+.fire-icon {
+    color: #e74c3c;
+    background-color: rgba(231, 76, 60, 0.1);
+}
+
+.air-icon {
+    color: #3498db;
+    background-color: rgba(52, 152, 219, 0.1);
+}
+
+.earth-icon {
+    color: #27ae60;
+    background-color: rgba(39, 174, 96, 0.1);
+}
+
+.water-icon {
+    color: #00acc1;
+    background-color: rgba(0, 172, 193, 0.1);
+}
+
+/* Animasyon sınıfları */
+.appear {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+}
+
 /* Responsive */
-@media (max-width: 992px) {
-    .element-grid {
-        grid-template-columns: 1fr;
+@media (max-width: 1100px) {
+    .element-grid, .advantage-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
     }
     
     .footer-content {
-        flex-direction: column;
-        gap: 30px;
-        text-align: center;
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+    }
+    
+    .footer-social {
+        grid-column: span 2;
     }
 }
 
 @media (max-width: 768px) {
     .nav-container {
         padding: 15px 5%;
-        flex-wrap: wrap;
     }
     
     .hamburger-button {
@@ -548,38 +684,53 @@ footer {
     
     .hero-section {
         height: auto;
-        padding: 100px 5%;
+        padding: 120px 5%;
     }
     
-    .section-title {
-        margin-bottom: 40px;
+    .advantage-grid {
+        grid-template-columns: 1fr;
     }
     
     .element-grid {
+        grid-template-columns: 1fr;
         gap: 30px;
     }
     
-    .element {
-        height: 300px;
+    .footer-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    
+    .footer-logo {
+        align-items: center;
     }
     
     .footer-links {
-        flex-direction: column;
-        gap: 15px;
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    
+    .social-icons {
+        justify-content: center;
     }
 }
 
 @media (max-width: 480px) {
-    .element-content {
-        padding: 20px;
+    .element-card, .advantage-card {
+        padding: 30px 20px;
     }
     
-    .element-icon {
-        font-size: 28px;
+    .element-icon, .advantage-icon {
+        font-size: 36px;
+        padding: 15px;
     }
     
-    .element-content h3 {
+    .element-card h3, .advantage-card h3 {
         font-size: 20px;
+    }
+    
+    .section-title {
+        font-size: 28px;
     }
     
     .cta-content h2 {
@@ -587,7 +738,7 @@ footer {
     }
     
     .start-test-button, .cta-button {
-        padding: 12px 24px;
+        padding: 14px 28px;
         font-size: 16px;
     }
 }
