@@ -8,13 +8,122 @@
   <link rel="stylesheet" href="{% static 'css/temperaments.css' %}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <!-- About temasıyla uyumlu fontlar -->
+  <!-- Uyumlu fontlar -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <style>
+    /* Su Mizacı Sayfası Özel Stilleri */
+    .water-personality {
+      padding: 80px 0;
+      background: linear-gradient(135deg, #ece9e3);
+    }
+    .water-personality-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 40px;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 5%;
+      flex-wrap: wrap;
+    }
+    /* Sol: Metin ve Bilgi Kartları */
+    .water-personality-text {
+      flex: 1 1 500px;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.3s;
+    }
+    .water-personality-title {
+      font-size: clamp(32px, 4vw, 44px);
+      font-weight: 700;
+      color: #292321;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    .water-personality-desc {
+      font-size: 18px;
+      color: #555;
+      margin-bottom: 40px;
+      line-height: 1.6;
+    }
+    /* Bilgi Kartları */
+    .water-personality-cards {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .water-personality-card {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.07);
+      padding: 20px;
+      flex: 1 1 150px;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: default;
+    }
+    .water-personality-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    }
+    .water-personality-card i {
+      font-size: 28px;
+      color: #e9b44c;
+      margin-bottom: 10px;
+    }
+    .water-personality-card h3 {
+      font-size: 1.1rem;
+      margin-bottom: 8px;
+      color: #292321;
+    }
+    .water-personality-card p {
+      font-size: 0.9rem;
+      color: #666;
+      line-height: 1.4;
+    }
+    /* Sağ: Görsel Bölümü */
+    .water-personality-image {
+      flex: 1 1 100px;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.3s;
+      text-align: center;
+    }
+    .water-personality-image img {
+      width: 100%;
+      max-width: 500px;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.07);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .water-personality-image img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    }
+    /* Görünürlük Sınıfı */
+    .appear {
+      opacity: 1 !important;
+      transform: translateY(0) !important;
+    }
+    /* Responsive Ayarlar */
+    @media (max-width: 768px) {
+      .water-personality-container {
+        flex-direction: column;
+        text-align: center;
+      }
+      .water-personality-text, .water-personality-image {
+        flex: 1 1 100%;
+      }
+      .water-personality-cards {
+        justify-content: center;
+      }
+    }
+  </style>
 </head>
 <body>
   <div class="page-container">
-    <!-- Header -->
+    <!-- Header (Global) -->
     <header class="nav-container">
       <a href="{% url 'index' %}" class="logo">
         <img src="{% static 'images/logo.jpg' %}" alt="MİZAÇ" class="logo-img">
@@ -42,20 +151,41 @@
       {% endif %}
     </header>
     
-    <!-- Mizac Bölümü -->
-    <section class="mizac-section">
-      <div class="mizac-info">
-        <h2 class="mizac-title">Su Mizacı Özellikleri</h2>
-        <p>
-          Su mizacı, sakin, derin ve uyumlu bireyleri temsil eder. Bu mizaca sahip kişiler, duygusal zekâları ve empati yetenekleri ile öne çıkar.
-        </p>
-      </div>
-      <div class="mizac-image-container">
-        <img src="{% static 'images/water.jpg' %}" alt="Su Mizacı Karakteri" class="mizac-image">
+    <!-- Su Mizacının Kişilik Bölümü -->
+    <section class="water-personality">
+      <div class="water-personality-container">
+        <!-- Sol: Metin ve Bilgi Kartları -->
+        <div class="water-personality-text">
+          <h1 class="water-personality-title">Su Mizacının Derinliği</h1>
+          <p class="water-personality-desc">
+            Su mizacına sahip bireyler, sakin, derin ve uyumlu yapılarıyla öne çıkar. Duygusal zekâları ve güçlü empati yetenekleri sayesinde çevrelerine ilham verirler.
+          </p>
+          <div class="water-personality-cards">
+            <div class="water-personality-card">
+              <i class="fas fa-heart"></i>
+              <h3>Empati</h3>
+              <p>Başkalarının duygularını içtenlikle anlayabilme.</p>
+            </div>
+            <div class="water-personality-card">
+              <i class="fas fa-water"></i>
+              <h3>Duygusallık</h3>
+              <p>Derin hisler ve sezgisel yaklaşımlar.</p>
+            </div>
+            <div class="water-personality-card">
+              <i class="fas fa-eye"></i>
+              <h3>Sezgi</h3>
+              <p>İçsel farkındalık ve bilgelik.</p>
+            </div>
+          </div>
+        </div>
+        <!-- Sağ: Görsel Bölümü -->
+        <div class="water-personality-image">
+          <img src="{% static 'images/water-personality.jpg' %}" alt="Su Mizacının Derinliği">
+        </div>
       </div>
     </section>
     
-    <!-- Footer -->
+    <!-- Footer (Global) -->
     <footer>
       <div class="footer-content">
         <div class="footer-logo">
@@ -64,40 +194,39 @@
         </div>
         <div class="footer-links">
           <div class="footer-column">
-              <h3>Hızlı Bağlantılar</h3>
-              <ul>
-                  <li><a href="{% url 'index' %}">Ana Sayfa</a></li>
-                  <li><a href="{% url 'about' %}">Hakkında</a></li>
-                  <li><a href="{% url 'temperaments' %}">Mizaçlar</a></li>
-                  <li><a href="{% url 'test_list' %}">Testler</a></li>
-              </ul>
+            <h3>Hızlı Bağlantılar</h3>
+            <ul>
+              <li><a href="{% url 'index' %}">Ana Sayfa</a></li>
+              <li><a href="{% url 'about' %}">Hakkında</a></li>
+              <li><a href="{% url 'temperaments' %}">Mizaçlar</a></li>
+              <li><a href="{% url 'test_list' %}">Testler</a></li>
+            </ul>
           </div>
           <div class="footer-column">
-              <h3>Destek</h3>
-              <ul>
-                  <li><a href="#">Gizlilik Politikası</a></li>
-                  <li><a href="{% url 'about' %}">İletişim</a></li>
-              </ul>
+            <h3>Destek</h3>
+            <ul>
+              <li><a href="#">Gizlilik Politikası</a></li>
+              <li><a href="{% url 'about' %}">İletişim</a></li>
+            </ul>
           </div>
-      </div>
-      <div class="footer-social">
+        </div>
+        <div class="footer-social">
           <h3>Bizi Takip Edin</h3>
           <div class="social-icons">
-              <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-              <a href="#" aria-label="Youtube"><i class="fab fa-youtube"></i></a>
+            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" aria-label="Youtube"><i class="fab fa-youtube"></i></a>
           </div>
+        </div>
       </div>
-  </div>
-  <div class="footer-bottom">
-      <p>&copy; 2025 4 Mizaç | Tüm hakları saklıdır.</p>
-  </div>
-</div>
-</footer>
+      <div class="footer-bottom">
+        <p>&copy; 2025 4 Mizaç | Tüm hakları saklıdır.</p>
+      </div>
+    </footer>
   </div>
   
-  <!-- JavaScript -->
   <script>
     document.addEventListener('DOMContentLoaded', function() {
+      // Profil dropdown işlemleri
       const profileButton = document.querySelector('.profile-button');
       const dropdownContent = document.querySelector('.dropdown-content');
       if (profileButton) {
@@ -111,11 +240,25 @@
           }
         });
       }
+      // Hamburger menü işlemleri
       const hamburgerButton = document.querySelector(".hamburger-button");
       const navLinks = document.querySelector(".nav-links");
       hamburgerButton.addEventListener("click", function() {
         navLinks.classList.toggle("open");
         hamburgerButton.classList.toggle("active");
+      });
+      
+      // Intersection Observer: water-personality-text ve water-personality-image görünür olduğunda "appear" sınıfını ekle
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('appear');
+          }
+        });
+      }, { threshold: 0.1 });
+      
+      document.querySelectorAll('.water-personality-text, .water-personality-image').forEach(el => {
+        observer.observe(el);
       });
     });
   </script>

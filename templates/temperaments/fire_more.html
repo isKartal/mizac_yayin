@@ -8,13 +8,226 @@
   <link rel="stylesheet" href="{% static 'css/temperaments.css' %}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <!-- About temasıyla uyumlu fontlar -->
+  <!-- Uyumlu fontlar -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <style>
+    /* Ateş Mizacı Sayfası Özel Stilleri */
+    .fire-personality {
+      padding: 80px 0;
+      background: linear-gradient(135deg, #ece9e3);
+    }
+    .fire-personality-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 40px;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 5%;
+      flex-wrap: wrap;
+    }
+    /* Sol: Metin ve Bilgi Kartları */
+    .fire-personality-text {
+      flex: 1 1 500px;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.3s;
+    }
+    .fire-personality-title {
+      font-size: clamp(32px, 4vw, 44px);
+      font-weight: 700;
+      color: #292321;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    .fire-personality-desc {
+      font-size: 18px;
+      color: #555;
+      margin-bottom: 40px;
+      line-height: 1.6;
+    }
+    /* Bilgi Kartları */
+    .fire-personality-cards {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .fire-personality-card {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.07);
+      padding: 20px;
+      flex: 1 1 150px;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: default;
+    }
+    .fire-personality-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    }
+    .fire-personality-card i {
+      font-size: 28px;
+      color: #e9b44c;
+      margin-bottom: 10px;
+      /* Animasyon ekleniyor */
+      animation: flicker 2s infinite;
+    }
+    .fire-personality-card h3 {
+      font-size: 1.1rem;
+      margin-bottom: 8px;
+      color: #292321;
+    }
+    .fire-personality-card p {
+      font-size: 0.9rem;
+      color: #666;
+      line-height: 1.4;
+    }
+    /* Sağ: Görsel Bölümü */
+    .fire-personality-image {
+      flex: 1 1 100px;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.3s;
+      text-align: center;
+    }
+    .fire-personality-image img {
+      width: 100%;
+      max-width: 500px;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.07);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .fire-personality-image img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    }
+    /* Flip Kart İçin */
+    .flip-card {
+      background-color: transparent;
+      width: 220px;
+      height: 300px;
+      perspective: 1200px;
+    }
+    .flip-card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+      transform-style: preserve-3d;
+    }
+    .flip-card:hover .flip-card-inner {
+      transform: rotateY(180deg);
+    }
+    .flip-card-front,
+    .flip-card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+      backface-visibility: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      transition: transform 0.6s;
+    }
+    .flip-card-front {
+      background: linear-gradient(135deg, #ffffff, #f9f9f9);
+      color: #292321;
+    }
+    .flip-card-back {
+      background: linear-gradient(135deg, #e9b44c, #ff7e5f);
+      color: #fafafa;
+      transform: rotateY(180deg);
+      text-align: center;
+    }
+    .card-circle {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 12px;
+      transition: background-color 0.3s ease;
+    }
+    .card-circle i {
+      font-size: 32px;
+      /* Animasyon ekleniyor */
+      animation: flicker 2s infinite;
+    }
+    /* Fire icon animasyonu (flicker efekti) */
+    @keyframes flicker {
+      0% { transform: scale(1) rotate(0deg); opacity: 1; }
+      50% { transform: scale(1.1) rotate(3deg); opacity: 0.9; }
+      100% { transform: scale(1) rotate(0deg); opacity: 1; }
+    }
+    /* Renk Ayarları */
+    .card-circle.fire {
+      color: #bc1823;
+      background-color: rgba(235, 67, 49, 0.1);
+    }
+    .card-circle.air {
+      color: #c9c9c6;
+      background-color: rgba(10, 14, 19, 0.1);
+    }
+    .card-circle.water {
+      color: #145da0;
+      background-color: rgba(0, 172, 193, 0.1);
+    }
+    .card-circle.earth {
+      color: #6d412a;
+      background-color: rgba(39, 174, 96, 0.1);
+    }
+    .flip-card-front h3,
+    .flip-card-back h3 {
+      font-size: 1.6rem;
+      margin-bottom: 10px;
+    }
+    .flip-card-back p {
+      font-size: 0.95rem;
+      margin-bottom: 15px;
+      line-height: 1.4;
+    }
+    .card-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      color: inherit;
+      font-weight: 600;
+      transition: transform 0.3s;
+    }
+    .card-link:hover {
+      transform: translateX(5px);
+    }
+    /* Görünürlük Sınıfı */
+    .appear {
+      opacity: 1 !important;
+      transform: translateY(0) !important;
+    }
+    /* Responsive Ayarlar */
+    @media (max-width: 768px) {
+      .fire-personality-container {
+        flex-direction: column;
+        text-align: center;
+      }
+      .fire-personality-text, .fire-personality-image {
+        flex: 1 1 100%;
+      }
+      .fire-personality-cards {
+        justify-content: center;
+      }
+    }
+  </style>
 </head>
 <body>
   <div class="page-container">
-    <!-- Header -->
+    <!-- Header (global) -->
     <header class="nav-container">
       <a href="{% url 'index' %}" class="logo">
         <img src="{% static 'images/logo.jpg' %}" alt="MİZAÇ" class="logo-img">
@@ -42,20 +255,41 @@
       {% endif %}
     </header>
     
-    <!-- Mizac Bölümü -->
-    <section class="mizac-section">
-      <div class="mizac-info">
-        <h2 class="mizac-title">Ateş Mizacı Özellikleri</h2>
-        <p>
-          Ateş mizacı, hırslı, lider ruhlu ve enerjik bireyleri temsil eder. Bu mizaca sahip kişiler, dinamik ve atılgan özellikleriyle öne çıkar.
-        </p>
-      </div>
-      <div class="mizac-image-container">
-        <img src="{% static 'images/fire.jpg' %}" alt="Ateş Mizacı Karakteri" class="mizac-image">
+    <!-- Ateş Mizacının Kişilik Bölümü -->
+    <section class="fire-personality">
+      <div class="fire-personality-container">
+        <!-- Sol: Metin ve Bilgi Kartları -->
+        <div class="fire-personality-text">
+          <h1 class="fire-personality-title">Ateş Mizacının Gücü</h1>
+          <p class="fire-personality-desc">
+            Ateş mizacına sahip bireyler, hırslı, lider ruhlu ve enerjik yapılarıyla öne çıkar. Dinamik, atılgan ve tutku dolu olan bu kişiler risk almayı sever ve yenilikçi çözümler üretirler.
+          </p>
+          <div class="fire-personality-cards">
+            <div class="fire-personality-card">
+              <i class="fas fa-bolt"></i>
+              <h3>Enerji</h3>
+              <p>Yüksek motivasyon ve canlılık.</p>
+            </div>
+            <div class="fire-personality-card">
+              <i class="fas fa-chess-king"></i>
+              <h3>Liderlik</h3>
+              <p>Önderlik etme ve yön verme yeteneği.</p>
+            </div>
+            <div class="fire-personality-card">
+              <i class="fas fa-fire-alt"></i>
+              <h3>Tutku</h3>
+              <p>İçten ve tutkulu yaklaşımlar.</p>
+            </div>
+          </div>
+        </div>
+        <!-- Sağ: Görsel Bölümü -->
+        <div class="fire-personality-image">
+          <img src="{% static 'images/fire-personality.jpg' %}" alt="Ateş Mizacı">
+        </div>
       </div>
     </section>
     
-    <!-- Footer -->
+    <!-- Footer (global) -->
     <footer>
       <div class="footer-content">
         <div class="footer-logo">
@@ -64,40 +298,39 @@
         </div>
         <div class="footer-links">
           <div class="footer-column">
-              <h3>Hızlı Bağlantılar</h3>
-              <ul>
-                  <li><a href="{% url 'index' %}">Ana Sayfa</a></li>
-                  <li><a href="{% url 'about' %}">Hakkında</a></li>
-                  <li><a href="{% url 'temperaments' %}">Mizaçlar</a></li>
-                  <li><a href="{% url 'test_list' %}">Testler</a></li>
-              </ul>
+            <h3>Hızlı Bağlantılar</h3>
+            <ul>
+              <li><a href="{% url 'index' %}">Ana Sayfa</a></li>
+              <li><a href="{% url 'about' %}">Hakkında</a></li>
+              <li><a href="{% url 'temperaments' %}">Mizaçlar</a></li>
+              <li><a href="{% url 'test_list' %}">Testler</a></li>
+            </ul>
           </div>
           <div class="footer-column">
-              <h3>Destek</h3>
-              <ul>
-                  <li><a href="#">Gizlilik Politikası</a></li>
-                  <li><a href="{% url 'about' %}">İletişim</a></li>
-              </ul>
+            <h3>Destek</h3>
+            <ul>
+              <li><a href="#">Gizlilik Politikası</a></li>
+              <li><a href="{% url 'about' %}">İletişim</a></li>
+            </ul>
           </div>
-      </div>
-      <div class="footer-social">
+        </div>
+        <div class="footer-social">
           <h3>Bizi Takip Edin</h3>
           <div class="social-icons">
-              <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-              <a href="#" aria-label="Youtube"><i class="fab fa-youtube"></i></a>
+            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" aria-label="Youtube"><i class="fab fa-youtube"></i></a>
           </div>
+        </div>
       </div>
-  </div>
-  <div class="footer-bottom">
-      <p>&copy; 2025 4 Mizaç | Tüm hakları saklıdır.</p>
-  </div>
-</div>
-</footer>
+      <div class="footer-bottom">
+        <p>&copy; 2025 4 Mizaç | Tüm hakları saklıdır.</p>
+      </div>
+    </footer>
   </div>
   
-  <!-- JavaScript -->
   <script>
     document.addEventListener('DOMContentLoaded', function() {
+      // Profil dropdown işlemleri
       const profileButton = document.querySelector('.profile-button');
       const dropdownContent = document.querySelector('.dropdown-content');
       if (profileButton) {
@@ -111,11 +344,30 @@
           }
         });
       }
+      // Hamburger menü işlemleri
       const hamburgerButton = document.querySelector(".hamburger-button");
       const navLinks = document.querySelector(".nav-links");
       hamburgerButton.addEventListener("click", function() {
         navLinks.classList.toggle("open");
         hamburgerButton.classList.toggle("active");
+      });
+      
+      // Intersection Observer: fire-personality-text ve fire-personality-image görünür olduğunda "appear" sınıfını ekle
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('appear');
+          }
+        });
+      }, { threshold: 0.1 });
+      
+      document.querySelectorAll('.fire-personality-text, .fire-personality-image').forEach(el => {
+        observer.observe(el);
+      });
+      
+      // Ek olarak flip kartlardaki ikonlara da animasyon uygulamak için observer (opsiyonel)
+      document.querySelectorAll('.flip-card').forEach(el => {
+        observer.observe(el);
       });
     });
   </script>

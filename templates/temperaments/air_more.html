@@ -11,9 +11,134 @@
   <!-- About temasıyla uyumlu fontlar -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <style>
+    /* Air Mizacı Kişilik Sayfası Özel Stilleri */
+    .air-personality {
+      padding: 80px 0;
+      background: linear-gradient(135deg, #ece9e3);
+    }
+    
+    .air-personality-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 40px;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 5%;
+      flex-wrap: wrap;
+    }
+    
+    /* Metin (sol) Bölümü */
+    .air-personality-text {
+      flex: 1 1 500px;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: var(--transition);
+    }
+    
+    .air-personality-text .air-personality-title {
+      font-size: clamp(32px, 4vw, 44px);
+      font-weight: 700;
+      color: var(--primary-color);
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    
+    .air-personality-text .air-personality-desc {
+      font-size: 18px;
+      color: #555;
+      margin-bottom: 40px;
+      line-height: 1.6;
+    }
+    
+    /* Bilgi Kartları */
+    .air-personality-cards {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    
+    .air-personality-card {
+      background: #fff;
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow);
+      padding: 20px;
+      flex: 1 1 150px;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: default;
+    }
+    
+    .air-personality-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    }
+    
+    .air-personality-card i {
+      font-size: 28px;
+      color: var(--accent-color);
+      margin-bottom: 10px;
+    }
+    
+    .air-personality-card h3 {
+      font-size: 1.1rem;
+      margin-bottom: 8px;
+      color: var(--primary-color);
+    }
+    
+    .air-personality-card p {
+      font-size: 0.9rem;
+      color: #666;
+      line-height: 1.4;
+    }
+    
+    /* Görsel (sağ) Bölümü */
+    .air-personality-image {
+      flex: 1 1 100px;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: var(--transition);
+      text-align: center;
+    }
+    
+    .air-personality-image img {
+      width: 100%;
+      max-width: 500px;
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .air-personality-image img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    }
+    
+    /* Görünürlük Sınıfı (Intersection Observer ile eklenir) */
+    .appear {
+      opacity: 1 !important;
+      transform: translateY(0) !important;
+    }
+    
+    /* Responsive Ayarlar */
+    @media (max-width: 768px) {
+      .air-personality-container {
+        flex-direction: column;
+        text-align: center;
+      }
+      .air-personality-text, .air-personality-image {
+        flex: 1 1 100%;
+      }
+      .air-personality-cards {
+        justify-content: center;
+      }
+    }
+  </style>
 </head>
 <body>
   <div class="page-container">
+    <!-- Header (global) -->
     <header class="nav-container">
       <a href="{% url 'index' %}" class="logo">
         <img src="{% static 'images/logo.jpg' %}" alt="MİZAÇ" class="logo-img">
@@ -41,18 +166,41 @@
       {% endif %}
     </header>
     
-    <section class="mizac-section">
-      <div class="mizac-info">
-        <h2 class="mizac-title">Hava Mizacı Özellikleri</h2>
-        <p>
-          Hava mizacı, esnek, sosyal ve yaratıcı bireyleri temsil eder. Bu mizaca sahip kişiler, iletişimde ve düşünce tarzlarında dinamiktir.
-        </p>
-      </div>
-      <div class="mizac-image-container">
-        <img src="{% static 'images/air.jpg' %}" alt="Hava Mizacı Karakteri" class="mizac-image">
+    <!-- Air Mizacı Kişilik Bölümü -->
+    <section class="air-personality">
+      <div class="air-personality-container">
+        <!-- Sol: Metin ve Kartlar -->
+        <div class="air-personality-text">
+          <h1 class="air-personality-title">Hava Mizacının Gücü</h1>
+          <p class="air-personality-desc">
+            Hava mizacına sahip bireyler, yenilikçi fikirleri, güçlü iletişim yetenekleri ve açık zihinleriyle tanınır. Esnek düşünce yapıları sayesinde her ortamda uyum sağlarlar.
+          </p>
+          <div class="air-personality-cards">
+            <div class="air-personality-card">
+              <i class="fas fa-comments"></i>
+              <h3>İletişim</h3>
+              <p>Akıcı ve etkili konuşma yeteneği.</p>
+            </div>
+            <div class="air-personality-card">
+              <i class="fas fa-brain"></i>
+              <h3>Analitik</h3>
+              <p>Farklı bakış açılarıyla derin düşünme.</p>
+            </div>
+            <div class="air-personality-card">
+              <i class="fas fa-lightbulb"></i>
+              <h3>Yaratıcılık</h3>
+              <p>Yeni fikirler ve inovatif çözümler üretme.</p>
+            </div>
+          </div>
+        </div>
+        <!-- Sağ: Görsel -->
+        <div class="air-personality-image">
+          <img src="{% static 'images/air-personality.jpg' %}" alt="Hava Mizacı">
+        </div>
       </div>
     </section>
     
+    <!-- Footer (global) -->
     <footer>
       <div class="footer-content">
         <div class="footer-logo">
@@ -84,16 +232,15 @@
               <a href="#" aria-label="Youtube"><i class="fab fa-youtube"></i></a>
           </div>
       </div>
-  </div>
-  <div class="footer-bottom">
-      <p>&copy; 2025 4 Mizaç | Tüm hakları saklıdır.</p>
-  </div>
-</div>
-</footer>
+      <div class="footer-bottom">
+          <p>&copy; 2025 4 Mizaç | Tüm hakları saklıdır.</p>
+      </div>
+    </footer>
   </div>
   
   <script>
     document.addEventListener('DOMContentLoaded', function() {
+      // Profil dropdown ve hamburger menü işlemleri
       const profileButton = document.querySelector('.profile-button');
       const dropdownContent = document.querySelector('.dropdown-content');
       if (profileButton) {
@@ -112,6 +259,19 @@
       hamburgerButton.addEventListener("click", function() {
         navLinks.classList.toggle("open");
         hamburgerButton.classList.toggle("active");
+      });
+      
+      // Intersection Observer: air-personality-text ve air-personality-image görünür olduğunda "appear" sınıfı ekle
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('appear');
+          }
+        });
+      }, { threshold: 0.1 });
+      
+      document.querySelectorAll('.air-personality-text, .air-personality-image').forEach(el => {
+        observer.observe(el);
       });
     });
   </script>
