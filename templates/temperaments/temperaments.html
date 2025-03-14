@@ -41,51 +41,81 @@
       {% endif %}
     </header>
     
-    <section class="mizac-section">
-      <div class="section-header">
-        <h2 class="mizac-title">Mizaçlar Nedir ?</h2>
-        <div class="underline"></div>
+    <section class="temperaments-overview">
+      <div class="container">
+        <h2 class="section-title">Mizaç Nedir?</h2>
+        <p class="section-description">Temel mizaç tiplerinden hangisine sahip olduğunuzu keşfetmek için kartlara tıklayın.</p>
+        <div class="flip-cards">
+          <!-- Ateş Kartı -->
+          <div class="flip-card">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <div class="card-circle fire">
+                  <i class="fas fa-fire"></i>
+                </div>
+                <h3>Ateş</h3>
+              </div>
+              <div class="flip-card-back">
+                <h3>Ateş</h3>
+                <p>Enerjik, tutkulu, lider ruhlu.</p>
+                <a href="{% url 'fire_more' %}" class="card-link">Daha Fazlası <i class="fas fa-arrow-right"></i></a>
+              </div>
+            </div>
+          </div>
+    
+          <!-- Hava Kartı -->
+          <div class="flip-card">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <div class="card-circle air">
+                  <i class="fas fa-wind"></i>
+                </div>
+                <h3>Hava</h3>
+              </div>
+              <div class="flip-card-back">
+                <h3>Hava</h3>
+                <p>İletişim, analitik, sosyal.</p>
+                <a href="{% url 'air_more' %}" class="card-link">Daha Fazlası <i class="fas fa-arrow-right"></i></a>
+              </div>
+            </div>
+          </div>
+    
+          <!-- Su Kartı -->
+          <div class="flip-card">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <div class="card-circle water">
+                  <i class="fas fa-water"></i>
+                </div>
+                <h3>Su</h3>
+              </div>
+              <div class="flip-card-back">
+                <h3>Su</h3>
+                <p>Duygusal, empatik, sakin.</p>
+                <a href="{% url 'water_more' %}" class="card-link">Daha Fazlası <i class="fas fa-arrow-right"></i></a>
+              </div>
+            </div>
+          </div>
+    
+          <!-- Toprak Kartı -->
+          <div class="flip-card">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <div class="card-circle earth">
+                  <i class="fas fa-mountain"></i>
+                </div>
+                <h3>Toprak</h3>
+              </div>
+              <div class="flip-card-back">
+                <h3>Toprak</h3>
+                <p>Güvenilir, sabırlı, disiplinli.</p>
+                <a href="{% url 'earth_more' %}" class="card-link">Daha Fazlası <i class="fas fa-arrow-right"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="mizac-info">
-        <p>
-          Mizaç, bir kişinin etrafında olup bitenlere verdiği tepkileri belirleyen ve doğuştan gelen kişilik özellikleridir. Bu özellikler, bireyin davranış kalıplarını ve sosyal etkileşimlerini şekillendirir.
-        </p>
-      </div>
-      <div class="mizac-buttons">
-        <a href="{% url 'fire_more' %}" class="mizac-button" style="background-image: url('{% static 'images/fire.jpg' %}');">
-          <span>Ateş</span>
-          <ul>
-            <li>Hırslı</li>
-            <li>Lider Ruhlu</li>
-            <li>Enerjik</li>
-          </ul>
-        </a>
-        <a href="{% url 'air_more' %}" class="mizac-button" style="background-image: url('{% static 'images/air.jpg' %}');">
-          <span>Hava</span>
-          <ul>
-            <li>Esnek</li>
-            <li>Sosyal</li>
-            <li>Yaratıcı</li>
-          </ul>
-        </a>
-        <a href="{% url 'water_more' %}" class="mizac-button" style="background-image: url('{% static 'images/water.jpg' %}');">
-          <span>Su</span>
-          <ul>
-            <li>Duygusal</li>
-            <li>Empatik</li>
-            <li>Sakin</li>
-          </ul>
-        </a>
-        <a href="{% url 'earth_more' %}" class="mizac-button" style="background-image: url('{% static 'images/earth.jpg' %}');">
-          <span>Toprak</span>
-          <ul>
-            <li>Güvenilir</li>
-            <li>Sabırlı</li>
-            <li>Disiplinli</li>
-          </ul>
-        </a>
-      </div>
-    </section>
+    </section>    
     
     <footer>
       <div class="footer-content">
@@ -118,16 +148,15 @@
               <a href="#" aria-label="Youtube"><i class="fab fa-youtube"></i></a>
           </div>
       </div>
-  </div>
-  <div class="footer-bottom">
-      <p>&copy; 2025 4 Mizaç | Tüm hakları saklıdır.</p>
-  </div>
-</div>
-</footer>
+      <div class="footer-bottom">
+          <p>&copy; 2025 4 Mizaç | Tüm hakları saklıdır.</p>
+      </div>
+    </footer>
   </div>
   
   <script>
     document.addEventListener('DOMContentLoaded', function() {
+      // Profil dropdown ve hamburger menü işlemleri
       const profileButton = document.querySelector('.profile-button');
       const dropdownContent = document.querySelector('.dropdown-content');
       if (profileButton) {
@@ -146,6 +175,19 @@
       hamburgerButton.addEventListener("click", function() {
         navLinks.classList.toggle("open");
         hamburgerButton.classList.toggle("active");
+      });
+      
+      // Intersection Observer: Kartlar görünür olduğunda animasyon ekle
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('appear');
+          }
+        });
+      }, { threshold: 0.1 });
+      
+      document.querySelectorAll('.flip-card').forEach(el => {
+        observer.observe(el);
       });
     });
   </script>
