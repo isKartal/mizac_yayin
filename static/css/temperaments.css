@@ -376,6 +376,45 @@ html, body {
     font-size: 14px;
     opacity: 0.7;
   }
+
+  .footer-social h3 {
+    font-size: 18px;
+    margin-bottom: 20px;
+    color: var(--accent-color);
+    font-weight: 600;
+}
+
+.social-icons {
+    display: flex;
+    gap: 16px;
+    margin-top: 15px;
+}
+
+.social-icons a {
+    color: var(--light-text);
+    font-size: 18px;
+    transition: var(--transition);
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.social-icons a:hover {
+    color: var(--accent-color);
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-3px);
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 30px;
+    font-size: 14px;
+    opacity: 0.7;
+}
   
   /* Responsive Ayarlar */
   @media (max-width: 768px) {

@@ -95,29 +95,35 @@
         </div>
         <div class="footer-links">
           <div class="footer-column">
-            <h3>Hızlı Bağlantılar</h3>
-            <ul>
-              <li><a href="{% url 'index' %}">Ana Sayfa</a></li>
-              <li><a href="{% url 'about' %}">Hakkında</a></li>
-              <li><a href="{% url 'temperaments' %}">Mizaçlar</a></li>
-              <li><a href="{% url 'test_list' %}">Testler</a></li>
-            </ul>
+              <h3>Hızlı Bağlantılar</h3>
+              <ul>
+                  <li><a href="{% url 'index' %}">Ana Sayfa</a></li>
+                  <li><a href="{% url 'about' %}">Hakkında</a></li>
+                  <li><a href="{% url 'temperaments' %}">Mizaçlar</a></li>
+                  <li><a href="{% url 'test_list' %}">Testler</a></li>
+              </ul>
           </div>
           <div class="footer-column">
-            <h3>Destek</h3>
-            <ul>
-              <li><a href="#">SSS</a></li>
-              <li><a href="#">Kullanım Şartları</a></li>
-              <li><a href="#">Gizlilik Politikası</a></li>
-              <li><a href="#">İletişim</a></li>
-            </ul>
+              <h3>Destek</h3>
+              <ul>
+                  <li><a href="#">Gizlilik Politikası</a></li>
+                  <li><a href="{% url 'about' %}">İletişim</a></li>
+              </ul>
           </div>
-        </div>
       </div>
-      <div class="footer-bottom">
-        <p>&copy; 2025 4 Mizaç | Tüm hakları saklıdır.</p>
+      <div class="footer-social">
+          <h3>Bizi Takip Edin</h3>
+          <div class="social-icons">
+              <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+              <a href="#" aria-label="Youtube"><i class="fab fa-youtube"></i></a>
+          </div>
       </div>
-    </footer>
+  </div>
+  <div class="footer-bottom">
+      <p>&copy; 2025 4 Mizaç | Tüm hakları saklıdır.</p>
+  </div>
+</div>
+</footer>
   </div>
   
   <script>
