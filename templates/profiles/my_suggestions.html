@@ -1,46 +1,42 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-<div class="result-container">
+<div class="container">
+  <div class="result-container">
     <h1 class="result-title">Önerilerim:</h1>
-
     {% if element %}
-    <div class="element-detail {{ element.name|lower }}">
+      <div class="element-detail {{ element.name|lower }}">
         <h1>{{ element.name }} Elementi</h1>
-        
         <div class="dominant-element-card {{ dominant_element.name|lower }}">
-            {% if element.name == "Ateş" %}
-                <img src="{% static 'images/fire.jpg' %}" alt="Ateş" class="element-image">
-            {% elif element.name == "Hava" %}
-                <img src="{% static 'images/air.jpg' %}" alt="Hava" class="element-image">
-            {% elif element.name == "Su" %}
-                <img src="{% static 'images/water.jpg' %}" alt="Su" class="element-image">
-            {% elif element.name == "Toprak" %}
-                <img src="{% static 'images/earth.jpg' %}" alt="Toprak" class="element-image">
-            {% else %}
-                <p class="no-image-text">Görsel bulunamadı.</p>
-            {% endif %}
-            <h2 class="element-title"> {{ dominant_element.name }}</h2>
+          {% if element.name == "Ateş" %}
+            <img src="{% static 'images/fire.jpg' %}" alt="Ateş" class="element-image">
+          {% elif element.name == "Hava" %}
+            <img src="{% static 'images/air.jpg' %}" alt="Hava" class="element-image">
+          {% elif element.name == "Su" %}
+            <img src="{% static 'images/water.jpg' %}" alt="Su" class="element-image">
+          {% elif element.name == "Toprak" %}
+            <img src="{% static 'images/earth.jpg' %}" alt="Toprak" class="element-image">
+          {% else %}
+            <p class="no-image-text">Görsel bulunamadı.</p>
+          {% endif %}
+          <h2 class="element-title">{{ dominant_element.name }}</h2>
         </div>
-        
         <div class="element-full-description">
-            <p>{{ element.description }}</p>
+          <p>{{ element.description }}</p>
         </div>
-        
         <h2>Karakteristik Özellikler</h2>
         <div class="characteristics">
-            {{ element.characteristics|linebreaks }}
+          {{ element.characteristics|linebreaks }}
         </div>
-        
         <h2>Tavsiyeler</h2>
         <div class="recommendations">
-            {{ element.recommendations|linebreaks }}
+          {{ element.recommendations|linebreaks }}
         </div>
-        
         <a href="/" class="btn btn-secondary">Ana Menüye Dön</a>
-    </div>
+      </div>
     {% else %}
-        <p class="no-result-text">Henüz bir mizaç testi çözmediniz.</p>
+      <p class="no-result-text">Henüz bir mizaç testi çözmediniz.</p>
     {% endif %}
+  </div>
 </div>
 {% endblock %}

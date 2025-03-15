@@ -1,11 +1,13 @@
 {% extends 'base.html' %}
 {% block content %}
-<div class="profile-container">
+<div class="container">
+  <div class="profile-settings-container">
     <h1>Profil Sayfam</h1>
 
     <div class="profile-sections">
-        <a href="{% url 'my_temperament' %}" class="btn btn-primary">Mizacım</a>
-        <a href="{% url 'my_suggestions' %}" class="btn btn-secondary">Önerilerim</a>
+      <a href="{% url 'my_temperament' %}" class="btn btn-secondary">Mizacım</a>
+      <a href="{% url 'my_suggestions' %}" class="btn btn-secondary">Önerilerim</a>
     </div>
+  </div>
 </div>
 {% endblock %}

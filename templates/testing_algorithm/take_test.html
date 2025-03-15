@@ -1,35 +1,32 @@
 {% extends 'base.html' %}
 {% load static %}
-
 {% block content %}
-<div class="test-container">
+<div class="container">
+  <div class="test-container">
     <h1>{{ test.title }}</h1>
     <p class="test-description">{{ test.description }}</p>
-
     <form method="post" class="test-form">
-        {% csrf_token %}
-        
-        <div class="question-container">
-            <h3 class="question-text">{{ current_question.text }}</h3>
-            <div class="choices-container">
-                {% for choice in choices %}
-                    <label>
-                        <input type="radio" name="choice" value="{{ choice.id }}" required>
-                        {{ choice.text }}
-                    </label><br>
-                {% endfor %}
-            </div>
+      {% csrf_token %}
+      <div class="question-container">
+        <h3 class="question-text">{{ current_question.text }}</h3>
+        <div class="choices-container">
+          {% for choice in choices %}
+            <label>
+              <input type="radio" name="choice" value="{{ choice.id }}" required>
+              {{ choice.text }}
+            </label><br>
+          {% endfor %}
         </div>
-
-        <button type="submit" class="btn btn-primary">
-            {% if question_index < total_questions|add:-1 %}
-                Sonraki Soru
-            {% else %}
-                Testi Tamamla
-            {% endif %}
-        </button>
+      </div>
+      <button type="submit" class="btn btn-primary">
+        {% if question_index < total_questions|add:-1 %}
+          Sonraki Soru
+        {% else %}
+          Testi Tamamla
+        {% endif %}
+      </button>
     </form>
-
     <p>Soru {{ question_index|add:1 }} / {{ total_questions }}</p>
+  </div>
 </div>
 {% endblock %}
