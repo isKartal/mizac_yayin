@@ -1,31 +1,30 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-<div class="result-container">
+<div class="container">
+  <div class="result-container">
     <h1 class="result-title">Mizaç Testi Sonucunuz</h1>
-    
     <div class="dominant-element-card {{ dominant_element.name|lower }}">
-        {% if dominant_element.name == "Ateş" %}
-            <img src="{% static 'images/fire.jpg' %}" alt="Ateş" class="element-image">
-        {% elif dominant_element.name == "Hava" %}
-            <img src="{% static 'images/air.jpg' %}" alt="Hava" class="element-image">
-        {% elif dominant_element.name == "Su" %}
-            <img src="{% static 'images/water.jpg' %}" alt="Su" class="element-image">
-        {% elif dominant_element.name == "Toprak" %}
-            <img src="{% static 'images/earth.jpg' %}" alt="Toprak" class="element-image">
-        {% else %}
-            <p class="no-image-text">Görsel bulunamadı.</p>
-        {% endif %}
-        <h2 class="element-title"> {{ dominant_element.name }}</h2>
+      {% if dominant_element.name == "Ateş" %}
+        <img src="{% static 'images/fire.jpg' %}" alt="Ateş" class="element-image">
+      {% elif dominant_element.name == "Hava" %}
+        <img src="{% static 'images/air.jpg' %}" alt="Hava" class="element-image">
+      {% elif dominant_element.name == "Su" %}
+        <img src="{% static 'images/water.jpg' %}" alt="Su" class="element-image">
+      {% elif dominant_element.name == "Toprak" %}
+        <img src="{% static 'images/earth.jpg' %}" alt="Toprak" class="element-image">
+      {% else %}
+        <p class="no-image-text">Görsel bulunamadı.</p>
+      {% endif %}
+      <h2 class="element-title">{{ dominant_element.name }}</h2>
     </div>
-
     <div class="element-details">
-        <h3>{{ dominant_element.name }} Elementinin Özellikleri</h3>
-        <p class="element-description">{{ dominant_element.characteristics|linebreaks }}</p>
+      <h3>{{ dominant_element.name }} Elementinin Özellikleri</h3>
+      <p class="element-description">{{ dominant_element.characteristics|linebreaks }}</p>
     </div>
-
     <div class="button-container">
-        <a href="{% url 'element_detail' dominant_element.id %}" class="btn btn-primary">Daha Fazla Bilgi</a>
+      <a href="{% url 'element_detail' dominant_element.id %}" class="btn btn-primary">Daha Fazla Bilgi</a>
     </div>
+  </div>
 </div>
 {% endblock %}
