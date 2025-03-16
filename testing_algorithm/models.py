@@ -6,10 +6,18 @@ class ElementType(models.Model):
     name = models.CharField(max_length=50)
     description = models.TextField()
     characteristics = models.TextField()
-    recommendations = models.TextField()
-    
+    # Önceki sürümde yer alan recommendations alanı kaldırıldı.
+
     def __str__(self):
         return self.name
+
+class Recommendation(models.Model):
+    element = models.ForeignKey(ElementType, on_delete=models.CASCADE, related_name="recommendations")
+    text = models.TextField()
+    order = models.PositiveIntegerField(default=0, help_text="Önerilerin sıralaması için kullanılabilir.")
+
+    def __str__(self):
+        return self.text[:50]
 
 class Test(models.Model):
     title = models.CharField(max_length=200)
@@ -56,10 +64,8 @@ class TestResult(models.Model):
             'Su': self.water_score,
             'Toprak': self.earth_score
         }
-
         dominant = max(scores, key=scores.get)
-        self.dominant_element = ElementType.objects.filter(name=dominant).first()
-
-        if self.dominant_element:
+        dominant_element = ElementType.objects.filter(name=dominant).first()
+        if dominant_element:
+            self.dominant_element = dominant_element
             self.save()
-

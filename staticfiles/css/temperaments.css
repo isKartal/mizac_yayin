@@ -459,7 +459,7 @@ footer {
     top: 100%;
     left: 0;
     width: 100%;
-    background-color: white;
+    background-color: #ece9e3;
     padding: 20px;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
     text-align: center;
@@ -491,5 +491,81 @@ footer {
   
   .flip-card-back p {
     font-size: 0.85rem;
+  }
+}
+
+/* Mobil Footer Düzenlemeleri */
+@media (max-width: 768px) {
+  .footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    text-align: center;
+    padding: 0 20px;
+  }
+  .footer-logo, .footer-links, .footer-social {
+    width: 100%;
+  }
+  .footer-logo {
+    margin-bottom: 20px;
+  }
+  .footer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .footer-column {
+    margin-bottom: 15px;
+  }
+  .footer-column h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  .footer-column ul {
+    padding: 0;
+    list-style: none;
+  }
+  .footer-column ul li {
+    margin: 8px 0;
+  }
+  .footer-column ul li a {
+    font-size: 16px;
+    color: var(--light-text);
+    opacity: 0.9;
+  }
+  .footer-social h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  .social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+  }
+  .social-icons a {
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .footer-bottom {
+    margin-top: 20px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer-column h3, 
+  .footer-social h3 {
+    font-size: 16px;
+  }
+  .footer-column ul li a {
+    font-size: 14px;
+  }
+  .footer-bottom {
+    font-size: 12px;
   }
 }
