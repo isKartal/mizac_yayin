@@ -23,4 +23,5 @@ urlpatterns = [
     path('temperaments/', include('temperaments.urls')),
     path('profiles/', include('profiles.urls')),
     path('testing_algorithm/', include('testing_algorithm.urls')),
+    path('nested_admin/', include('nested_admin.urls')),
 ]

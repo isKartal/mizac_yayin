@@ -30,7 +30,13 @@
         </div>
         <h2>Tavsiyeler</h2>
         <div class="recommendations">
-          {{ element.recommendations|linebreaks }}
+          {% for recommendation in element.recommendations.all|dictsort:"order" %}
+            <div class="öneri-kutusu">
+              {{ recommendation.text }}
+            </div>
+          {% empty %}
+            <p>Tavsiye bulunamadı.</p>
+          {% endfor %}
         </div>
         <a href="/" class="btn btn-secondary">Ana Menüye Dön</a>
       </div>
