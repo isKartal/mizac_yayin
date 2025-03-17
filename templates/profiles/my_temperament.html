@@ -3,31 +3,45 @@
 {% block content %}
 <div class="container">
   <div class="result-container">
-    <h1 class="result-title">Mizacınız:</h1>
+    <h1 class="result-title">Mizacınız</h1>
+    
     {% if result %}
-      <div class="dominant-element-card {{ dominant_element.name|lower }}">
-        {% if dominant_element.name == "Ateş" %}
-          <img src="{% static 'images/fire.jpg' %}" alt="Ateş" class="element-image">
-        {% elif dominant_element.name == "Hava" %}
-          <img src="{% static 'images/air.jpg' %}" alt="Hava" class="element-image">
-        {% elif dominant_element.name == "Su" %}
-          <img src="{% static 'images/water.jpg' %}" alt="Su" class="element-image">
-        {% elif dominant_element.name == "Toprak" %}
-          <img src="{% static 'images/earth.jpg' %}" alt="Toprak" class="element-image">
-        {% else %}
-          <p class="no-image-text">Görsel bulunamadı.</p>
-        {% endif %}
-        <h2 class="element-title">{{ dominant_element.name }}</h2>
+      <div class="result-content">
+        <div class="dominant-element-card {{ dominant_element.name|lower }}">
+          {% if dominant_element.name == "Ateş" %}
+            <div class="element-icon"><i class="fas fa-fire"></i></div>
+            <img src="{% static 'images/fire.jpg' %}" alt="Ateş" class="element-image">
+          {% elif dominant_element.name == "Hava" %}
+            <div class="element-icon"><i class="fas fa-wind"></i></div>
+            <img src="{% static 'images/air.jpg' %}" alt="Hava" class="element-image">
+          {% elif dominant_element.name == "Su" %}
+            <div class="element-icon"><i class="fas fa-water"></i></div>
+            <img src="{% static 'images/water.jpg' %}" alt="Su" class="element-image">
+          {% elif dominant_element.name == "Toprak" %}
+            <div class="element-icon"><i class="fas fa-mountain"></i></div>
+            <img src="{% static 'images/earth.jpg' %}" alt="Toprak" class="element-image">
+          {% else %}
+            <p class="no-image-text">Görsel bulunamadı.</p>
+          {% endif %}
+          <h2 class="element-title">{{ dominant_element.name }}</h2>
+        </div>
+        
+        <div class="element-details">
+          <h3>{{ dominant_element.name }} Elementinin Özellikleri</h3>
+          <div class="element-description">{{ dominant_element.characteristics|linebreaks }}</div>
+        </div>
       </div>
-      <div class="element-details">
-        <h3>{{ dominant_element.name }} Elementinin Özellikleri</h3>
-        <p class="element-description">{{ dominant_element.characteristics|linebreaks }}</p>
-      </div>
+      
       <div class="button-container">
-        <a href="{% url 'my_suggestions' %}" class="btn btn-primary">Daha Fazla Bilgi</a>
+        <a href="{% url 'my_suggestions' %}" class="btn btn-primary">Önerilerim</a>
+        <a href="{% url 'temperaments' %}" class="btn btn-secondary">Tüm Mizaçlar</a>
       </div>
     {% else %}
-      <p class="no-result-text">Henüz bir mizaç testi çözmediniz.</p>
+      <div class="no-result-container">
+        <div class="no-result-icon"><i class="fas fa-search"></i></div>
+        <p class="no-result-text">Henüz bir mizaç testi çözmediniz.</p>
+        <a href="{% url 'test_list' %}" class="btn btn-primary">Teste Başla</a>
+      </div>
     {% endif %}
   </div>
 </div>

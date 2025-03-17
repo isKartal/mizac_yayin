@@ -5,43 +5,57 @@
   <div class="element-detail {{ element.name|lower }}">
     <h1>{{ element.name }} Elementi</h1>
     
-    <div class="dominant-element-card {{ element.name|lower }}">
-      {% if element.name == "Ateş" %}
-        <img src="{% static 'images/fire.jpg' %}" alt="Ateş" class="element-image">
-      {% elif element.name == "Hava" %}
-        <img src="{% static 'images/air.jpg' %}" alt="Hava" class="element-image">
-      {% elif element.name == "Su" %}
-        <img src="{% static 'images/water.jpg' %}" alt="Su" class="element-image">
-      {% elif element.name == "Toprak" %}
-        <img src="{% static 'images/earth.jpg' %}" alt="Toprak" class="element-image">
-      {% else %}
-        <p class="no-image-text">Görsel bulunamadı.</p>
-      {% endif %}
-      <h2 class="element-title">{{ element.name }}</h2>
+    <div class="element-card-container">
+      <div class="dominant-element-card {{ element.name|lower }}">
+        {% if element.name == "Ateş" %}
+          <div class="element-icon"><i class="fas fa-fire"></i></div>
+          <img src="{% static 'images/fire.jpg' %}" alt="Ateş" class="element-image">
+        {% elif element.name == "Hava" %}
+          <div class="element-icon"><i class="fas fa-wind"></i></div>
+          <img src="{% static 'images/air.jpg' %}" alt="Hava" class="element-image">
+        {% elif element.name == "Su" %}
+          <div class="element-icon"><i class="fas fa-water"></i></div>
+          <img src="{% static 'images/water.jpg' %}" alt="Su" class="element-image">
+        {% elif element.name == "Toprak" %}
+          <div class="element-icon"><i class="fas fa-mountain"></i></div>
+          <img src="{% static 'images/earth.jpg' %}" alt="Toprak" class="element-image">
+        {% else %}
+          <p class="no-image-text">Görsel bulunamadı.</p>
+        {% endif %}
+        <h2 class="element-title">{{ element.name }}</h2>
+      </div>
     </div>
     
     <div class="element-full-description">
       <p>{{ element.description }}</p>
     </div>
     
-    <h2>Karakteristik Özellikler</h2>
-    <div class="characteristics">
-      {{ element.characteristics|linebreaks }}
-    </div>
-    
-    <h2>Tavsiyeler</h2>
-    <div class="recommendations">
-      {% for recommendation in element.recommendations.all|dictsort:"order" %}
-        <div class="öneri-kutusu">
-          {{ recommendation.text }}
+    <div class="element-sections">
+      <div class="element-section">
+        <h2>Karakteristik Özellikler</h2>
+        <div class="characteristics">
+          {{ element.characteristics|linebreaks }}
         </div>
-      {% empty %}
-        <p>Tavsiye bulunamadı.</p>
-      {% endfor %}
+      </div>
+    
+      <div class="element-section">
+        <h2>Tavsiyeler</h2>
+        <div class="recommendations">
+          {% for recommendation in element.recommendations.all|dictsort:"order" %}
+            <div class="öneri-kutusu">
+              <div class="öneri-numara">{{ forloop.counter }}</div>
+              <div class="öneri-içerik">{{ recommendation.text }}</div>
+            </div>
+          {% empty %}
+            <p class="no-data-message">Tavsiye bulunamadı.</p>
+          {% endfor %}
+        </div>
+      </div>
     </div>
     
     <div class="button-container">
-      <a href="/" class="btn btn-secondary">Ana Menüye Dön</a>
+      <a href="/" class="btn btn-primary">Ana Menüye Dön</a>
+      <a href="{% url 'temperaments' %}" class="btn btn-secondary">Diğer Mizaçlar</a>
     </div>
   </div>
 </div>

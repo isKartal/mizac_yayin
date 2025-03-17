@@ -5,28 +5,37 @@
   <div class="test-container">
     <h1>{{ test.title }}</h1>
     <p class="test-description">{{ test.description }}</p>
+    
+    <div class="test-progress">
+      <div class="progress-bar">
+        <div class="progress-fill" style="width: {{ question_index|add:1 }}00%"></div>
+      </div>
+      <p class="progress-text">Soru {{ question_index|add:1 }} / {{ total_questions }}</p>
+    </div>
+    
     <form method="post" class="test-form">
       {% csrf_token %}
       <div class="question-container">
         <h3 class="question-text">{{ current_question.text }}</h3>
         <div class="choices-container">
           {% for choice in choices %}
-            <label>
+            <label class="choice-label">
               <input type="radio" name="choice" value="{{ choice.id }}" required>
-              {{ choice.text }}
-            </label><br>
+              <span class="choice-text">{{ choice.text }}</span>
+            </label>
           {% endfor %}
         </div>
       </div>
-      <button type="submit" class="btn btn-primary">
-        {% if question_index < total_questions|add:-1 %}
-          Sonraki Soru
-        {% else %}
-          Testi Tamamla
-        {% endif %}
-      </button>
+      <div class="form-buttons">
+        <button type="submit" class="btn btn-primary">
+          {% if question_index < total_questions|add:-1 %}
+            <i class="fas fa-arrow-right"></i> Sonraki Soru
+          {% else %}
+            <i class="fas fa-check"></i> Testi Tamamla
+          {% endif %}
+        </button>
+      </div>
     </form>
-    <p>Soru {{ question_index|add:1 }} / {{ total_questions }}</p>
   </div>
 </div>
 {% endblock %}
