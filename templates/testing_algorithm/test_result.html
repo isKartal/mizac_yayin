@@ -4,26 +4,41 @@
 <div class="container">
   <div class="result-container">
     <h1 class="result-title">Mizaç Testi Sonucunuz</h1>
-    <div class="dominant-element-card {{ dominant_element.name|lower }}">
-      {% if dominant_element.name == "Ateş" %}
-        <img src="{% static 'images/fire.jpg' %}" alt="Ateş" class="element-image">
-      {% elif dominant_element.name == "Hava" %}
-        <img src="{% static 'images/air.jpg' %}" alt="Hava" class="element-image">
-      {% elif dominant_element.name == "Su" %}
-        <img src="{% static 'images/water.jpg' %}" alt="Su" class="element-image">
-      {% elif dominant_element.name == "Toprak" %}
-        <img src="{% static 'images/earth.jpg' %}" alt="Toprak" class="element-image">
-      {% else %}
-        <p class="no-image-text">Görsel bulunamadı.</p>
-      {% endif %}
-      <h2 class="element-title">{{ dominant_element.name }}</h2>
+    
+    <div class="result-content">
+      <div class="dominant-element-card {{ dominant_element.name|lower }}">
+        {% if dominant_element.name == "Ateş" %}
+          <div class="element-badge">Ateş</div>
+          <div class="element-icon"><i class="fas fa-fire"></i></div>
+          <img src="{% static 'images/fire.jpg' %}" alt="Ateş" class="element-image">
+        {% elif dominant_element.name == "Hava" %}
+          <div class="element-badge">Hava</div>
+          <div class="element-icon"><i class="fas fa-wind"></i></div>
+          <img src="{% static 'images/air.jpg' %}" alt="Hava" class="element-image">
+        {% elif dominant_element.name == "Su" %}
+          <div class="element-badge">Su</div>
+          <div class="element-icon"><i class="fas fa-water"></i></div>
+          <img src="{% static 'images/water.jpg' %}" alt="Su" class="element-image">
+        {% elif dominant_element.name == "Toprak" %}
+          <div class="element-badge">Toprak</div>
+          <div class="element-icon"><i class="fas fa-mountain"></i></div>
+          <img src="{% static 'images/earth.jpg' %}" alt="Toprak" class="element-image">
+        {% else %}
+          <p class="no-image-text">Görsel bulunamadı.</p>
+        {% endif %}
+        <h2 class="element-title">{{ dominant_element.name }}</h2>
+      </div>
+      
+      <div class="element-details">
+        <h3>{{ dominant_element.name }} Elementinin Özellikleri</h3>
+        <div class="element-description">{{ dominant_element.characteristics|linebreaks }}</div>
+      </div>
     </div>
-    <div class="element-details">
-      <h3>{{ dominant_element.name }} Elementinin Özellikleri</h3>
-      <p class="element-description">{{ dominant_element.characteristics|linebreaks }}</p>
-    </div>
+    
     <div class="button-container">
       <a href="{% url 'element_detail' dominant_element.id %}" class="btn btn-primary">Daha Fazla Bilgi</a>
+      <a href="{% url 'my_suggestions' %}" class="btn btn-accent">Önerilerim</a>
+      <a href="/" class="btn btn-secondary">Ana Sayfa</a>
     </div>
   </div>
 </div>
