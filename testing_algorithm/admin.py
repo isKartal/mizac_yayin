@@ -1,12 +1,12 @@
 # admin.py
 import nested_admin
 from django.contrib import admin
-from .models import ElementType, Recommendation, Test, Question, Choice, TestResult
+from .models import ElementType, Recommendation, Test, Question, Choice, TestResult, TestResultDetail
 
-# ElementType için Recommendation inline'ı (nested inline kullanılabilir)
+# ElementType için Recommendation inline'ı
 class RecommendationInline(nested_admin.NestedTabularInline):
     model = Recommendation
-    extra = 1  # Varsayılan olarak 1 boş form
+    extra = 1
 
 class ElementTypeAdmin(admin.ModelAdmin):
     list_display = ('name',)
@@ -14,16 +14,15 @@ class ElementTypeAdmin(admin.ModelAdmin):
 
 admin.site.register(ElementType, ElementTypeAdmin)
 
-# Test için nested inline yapılandırması: Test > Question > Choice
-
+# Test için nested inline yapılandırması
 class ChoiceInline(nested_admin.NestedTabularInline):
     model = Choice
-    extra = 1  # Her soru için varsayılan 1 boş şık formu
+    extra = 1
 
 class QuestionInline(nested_admin.NestedTabularInline):
     model = Question
-    extra = 1  # Her test için varsayılan 1 boş soru formu
-    inlines = [ChoiceInline]  # Her soruya ait şıkları inline ekle
+    extra = 1
+    inlines = [ChoiceInline]
 
 class TestAdmin(nested_admin.NestedModelAdmin):
     list_display = ('title', 'description')
@@ -31,8 +30,7 @@ class TestAdmin(nested_admin.NestedModelAdmin):
 
 admin.site.register(Test, TestAdmin)
 
-# Eğer ayrı olarak da düzenlemek isterseniz, Question ve Choice için standart adminler:
-class QuestionAdmin(admin.ModelAdmin):
+class QuestionAdmin(nested_admin.NestedModelAdmin):
     list_display = ('text', 'test')
     inlines = [ChoiceInline]
 
@@ -43,9 +41,30 @@ class ChoiceAdmin(admin.ModelAdmin):
 
 admin.site.register(Choice, ChoiceAdmin)
 
-# TestResult için basit bir admin yapılandırması:
+# TestResultDetail için admin yapılandırması
+class TestResultDetailInline(admin.TabularInline):
+    model = TestResultDetail
+    readonly_fields = ('question', 'selected_choice', 'score', 'element_type')
+    extra = 0
+    can_delete = False
+    
+    def has_add_permission(self, request, obj=None):
+        return False
+
+# TestResult için admin yapılandırması
 class TestResultAdmin(admin.ModelAdmin):
-    list_display = ('user', 'test', 'dominant_element', 'date_taken')
+    list_display = ('user', 'test', 'dominant_element', 'fire_score', 'air_score', 'water_score', 'earth_score', 'date_taken')
     list_filter = ('user', 'test', 'dominant_element')
+    readonly_fields = ('date_taken', 'fire_score', 'air_score', 'water_score', 'earth_score', 'dominant_element')
+    inlines = [TestResultDetailInline]
+    
+    fieldsets = (
+        ('Kullanıcı Bilgileri', {
+            'fields': ('user', 'test', 'date_taken')
+        }),
+        ('Element Puanları', {
+            'fields': ('fire_score', 'air_score', 'water_score', 'earth_score', 'dominant_element')
+        }),
+    )
 
 admin.site.register(TestResult, TestResultAdmin)
