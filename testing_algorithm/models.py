@@ -69,3 +69,17 @@ class TestResult(models.Model):
         if dominant_element:
             self.dominant_element = dominant_element
             self.save()
+
+class TestResultDetail(models.Model):
+    test_result = models.ForeignKey(TestResult, on_delete=models.CASCADE, related_name='details')
+    question = models.ForeignKey(Question, on_delete=models.CASCADE)
+    selected_choice = models.ForeignKey(Choice, on_delete=models.CASCADE)
+    score = models.IntegerField()
+    element_type = models.ForeignKey(ElementType, on_delete=models.CASCADE)
+    
+    def __str__(self):
+        return f"{self.question.text[:30]} - {self.score} puan"
+    
+    class Meta:
+        verbose_name = "Test Sonuç Detayı"
+        verbose_name_plural = "Test Sonuç Detayları"
