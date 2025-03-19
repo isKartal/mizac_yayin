@@ -1,7 +1,7 @@
 # views.py
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from .models import Test, Choice, TestResult, ElementType
+from .models import Test, Choice, Question, TestResult, ElementType, TestResultDetail
 
 def direct_to_test(request):
     first_test = Test.objects.first()
@@ -28,19 +28,6 @@ def take_test(request, test_id, question_index=0):
         water_score = 0
         earth_score = 0
 
-        for question_id, choice_id in answers.items():
-            choice = get_object_or_404(Choice, id=choice_id)
-            element = choice.element_type.name
-
-            if element == 'Ateş':
-                fire_score += choice.score
-            elif element == 'Hava':
-                air_score += choice.score
-            elif element == 'Su':
-                water_score += choice.score
-            elif element == 'Toprak':
-                earth_score += choice.score
-
         result = TestResult(
             user=request.user,
             test=test,
@@ -52,6 +39,38 @@ def take_test(request, test_id, question_index=0):
 
         result.calculate_dominant_element()
         request.session['test_result_id'] = result.id
+        
+        # Detay kayıtlarını oluştur
+        for question_id, choice_id in answers.items():
+            choice = get_object_or_404(Choice, id=choice_id)
+            question_id_cleaned = int(question_id.replace('question_', ''))
+            question = get_object_or_404(Question, id=question_id_cleaned)
+            
+            TestResultDetail.objects.create(
+                test_result=result,
+                question=question,
+                selected_choice=choice,
+                score=choice.score,
+                element_type=choice.element_type
+            )
+            
+            # Element puanlarını güncelle
+            element = choice.element_type.name
+            if element == 'Ateş':
+                fire_score += choice.score
+            elif element == 'Hava':
+                air_score += choice.score
+            elif element == 'Su':
+                water_score += choice.score
+            elif element == 'Toprak':
+                earth_score += choice.score
+                
+        # Son puanları kaydet
+        result.fire_score = fire_score
+        result.air_score = air_score
+        result.water_score = water_score
+        result.earth_score = earth_score
+        result.save()
 
         return redirect('test_result', result_id=result.id)
 
