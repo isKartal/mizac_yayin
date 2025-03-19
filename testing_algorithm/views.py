@@ -27,20 +27,45 @@ def take_test(request, test_id, question_index=0):
         air_score = 0
         water_score = 0
         earth_score = 0
-
+        
+        # Calculate scores first
+        for question_id, choice_id in answers.items():
+            choice = get_object_or_404(Choice, id=choice_id)
+            element = choice.element_type.name
+            if element == 'Ateş':
+                fire_score += choice.score
+            elif element == 'Hava':
+                air_score += choice.score
+            elif element == 'Su':
+                water_score += choice.score
+            elif element == 'Toprak':
+                earth_score += choice.score
+        
+        # Find the dominant element
+        scores = {
+            'Ateş': fire_score,
+            'Hava': air_score,
+            'Su': water_score,
+            'Toprak': earth_score
+        }
+        dominant_name = max(scores, key=scores.get)
+        dominant_element = ElementType.objects.filter(name=dominant_name).first()
+        
+        # Now create the TestResult with the correct dominant element
         result = TestResult(
             user=request.user,
             test=test,
             fire_score=fire_score,
             air_score=air_score,
             water_score=water_score,
-            earth_score=earth_score
+            earth_score=earth_score,
+            dominant_element=dominant_element  # Set the dominant element here
         )
-
-        result.calculate_dominant_element()
+        result.save()
+        
         request.session['test_result_id'] = result.id
         
-        # Detay kayıtlarını oluştur
+        # Create detail records
         for question_id, choice_id in answers.items():
             choice = get_object_or_404(Choice, id=choice_id)
             question_id_cleaned = int(question_id.replace('question_', ''))
@@ -53,27 +78,11 @@ def take_test(request, test_id, question_index=0):
                 score=choice.score,
                 element_type=choice.element_type
             )
-            
-            # Element puanlarını güncelle
-            element = choice.element_type.name
-            if element == 'Ateş':
-                fire_score += choice.score
-            elif element == 'Hava':
-                air_score += choice.score
-            elif element == 'Su':
-                water_score += choice.score
-            elif element == 'Toprak':
-                earth_score += choice.score
-                
-        # Son puanları kaydet
-        result.fire_score = fire_score
-        result.air_score = air_score
-        result.water_score = water_score
-        result.earth_score = earth_score
-        result.save()
-
+        
         return redirect('test_result', result_id=result.id)
 
+    # Rest of the code remains the same...
+    
     current_question = questions[question_index]
     choices = Choice.objects.filter(question=current_question)
 
