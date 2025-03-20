@@ -1,31 +1,128 @@
 {% load static %}
+<!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kayıt Ol</title>
-    <link rel="stylesheet" href="{% static 'css/accounts.css' %}">
-    <link href="https://fonts.googleapis.com/css2?family=Lora&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kayıt Ol</title>
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/accounts.css' %}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
-    <div class="auth-container">
-        <h2>Kayıt Ol</h2>
-        {% if messages %}
-            {% for message in messages %}
-                <p class="error-message">{{ message }}</p>
-            {% endfor %}
-        {% endif %}
-        <form class="auth-form" method="POST">
-            {% csrf_token %}
-            <input type="text" name="username" placeholder="Kullanıcı Adı" required>
-            <input type="email" name="email" placeholder="E-Posta" required>
-            <input type="password" name="password" placeholder="Şifre" required>
-            <input type="password" name="password2" placeholder="Şifreyi Tekrar Girin" required>
-            <button type="submit">Kayıt Ol</button>
-        </form>
-        <div class="auth-links">
-            <a href="{% url 'login' %}">Zaten hesabın var mı? Giriş Yap</a>
+
+    <header class="nav-container">
+        <a href="{% url 'index' %}" class="logo">
+          <img src="{% static 'images/logo.jpg' %}" alt="MİZAÇ" class="logo-img">
+        </a>
+        <!-- Hamburger Menü -->
+        <button class="hamburger-button" aria-label="Menüyü Aç/Kapat">
+          <i class="fas fa-bars"></i>
+        </button>
+        <nav class="nav-links">
+          <a href="{% url 'about' %}" class="nav-item">HAKKINDA</a>
+          <a href="{% url 'temperaments' %}" class="nav-item">MİZAÇLAR</a>
+          <a href="{% url 'test_list' %}" class="nav-item">TESTE BAŞLA</a>
+        </nav>
+        <div class="nav-right">
+          {% if user.is_authenticated %}
+          <div class="profile-container">
+            <button class="profile-button">
+              <i class="fas fa-user-circle"></i>
+              <span class="username-display">{{ user.username }}</span>
+            </button>
+            <div class="dropdown-content">
+              <div class="dropdown-username">{{ user.username }}</div>
+              <a href="{% url 'my_temperament' %}"><i class="fas fa-star"></i> Mizacım</a>
+              <a href="{% url 'my_suggestions' %}"><i class="fas fa-lightbulb"></i> Önerilerim</a>
+              <a href="{% url 'profiles' %}"><i class="fas fa-cog"></i> Profil Ayarlarım</a>
+              <a href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i> Çıkış Yap</a>
+            </div>
+          </div>
+          {% else %}
+          <a href="{% url 'login' %}" class="nav-item login-button"><i class="fas fa-sign-in-alt"></i> GİRİŞ YAP</a>
+          {% endif %}
         </div>
+      </header>
+
+    <div class="main-content">
+        {% block content %}
+        <div class="auth-container">
+            <h2>Kayıt Ol</h2>
+            {% if messages %}
+                {% for message in messages %}
+                    <p class="error-message">{{ message }}</p>
+                {% endfor %}
+            {% endif %}
+            <form class="auth-form" method="POST">
+                {% csrf_token %}
+                <input type="text" name="username" placeholder="Kullanıcı Adı" required>
+                <input type="email" name="email" placeholder="E-Posta" required>
+                <input type="password" name="password" placeholder="Şifre" required>
+                <input type="password" name="password2" placeholder="Şifreyi Tekrar Girin" required>
+                <button type="submit">Kayıt Ol</button>
+            </form>
+            <div class="auth-links">
+                <a href="{% url 'login' %}">Zaten hesabın var mı? Giriş Yap</a>
+            </div>
+        </div>
+        {% endblock %}
     </div>
+
+    <footer>
+        <div class="footer-content">
+          <div class="footer-logo">
+            <img src="{% static 'images/l2.jpg' %}" alt="MİZAÇ" class="footer-logo-img">
+            <p>Kendini keşfetmenin yeni yolu</p>
+          </div>
+          <div class="footer-links">
+            <div class="footer-column">
+              <h3>Hızlı Bağlantılar</h3>
+              <ul>
+                <li><a href="{% url 'index' %}">Ana Sayfa</a></li>
+                <li><a href="{% url 'about' %}">Hakkında</a></li>
+                <li><a href="{% url 'temperaments' %}">Mizaçlar</a></li>
+                <li><a href="{% url 'test_list' %}">Testler</a></li>
+              </ul>
+            </div>
+            <div class="footer-column">
+              <h3>Destek</h3>
+              <ul>
+                <li><a href="#">Gizlilik Politikası</a></li>
+                <li><a href="{% url 'about' %}">İletişim</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2025 4 Mizaç | Tüm hakları saklıdır.</p>
+        </div>
+      </footer>
+      <script>
+        document.addEventListener('DOMContentLoaded', function() {
+          const profileButton = document.querySelector('.profile-button');
+          const dropdownContent = document.querySelector('.dropdown-content');
+          if (profileButton) {
+            profileButton.addEventListener('click', function(event) {
+              dropdownContent.classList.toggle('show');
+              event.stopPropagation();
+            });
+            document.addEventListener('click', function() {
+              if (dropdownContent && dropdownContent.classList.contains('show')) {
+                dropdownContent.classList.remove('show');
+              }
+            });
+          }
+          const hamburgerButton = document.querySelector(".hamburger-button");
+          const navLinks = document.querySelector(".nav-links");
+          hamburgerButton.addEventListener("click", function() {
+            navLinks.classList.toggle("open");
+            hamburgerButton.classList.toggle("active");
+          });
+        });
+      </script>
 </body>
 </html>
