@@ -153,8 +153,12 @@
       </nav>
       {% if user.is_authenticated %}
       <div class="profile-container">
-        <button class="profile-button"><i class="fas fa-user-circle"></i></button>
+        <button class="profile-button">
+          <i class="fas fa-user-circle"></i>
+          <span class="username-display">{{ user.username }}</span>
+        </button>
         <div class="dropdown-content">
+          <div class="dropdown-username">{{ user.username }}</div>
           <a href="{% url 'my_temperament' %}"><i class="fas fa-star"></i> Mizacım</a>
           <a href="{% url 'my_suggestions' %}"><i class="fas fa-lightbulb"></i> Önerilerim</a>
           <a href="{% url 'profiles' %}"><i class="fas fa-cog"></i> Profil Ayarlarım</a>

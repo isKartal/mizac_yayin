@@ -112,26 +112,41 @@ body {
 }
 
 .profile-button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
   background: none;
-  border: none;
+  border: 2px solid transparent;
+  border-radius: var(--border-radius);
   cursor: pointer;
-  font-size: 24px;
-  color: var(--primary-color);
+  padding: 8px 12px;
   transition: var(--transition);
-  padding: 8px;
+  color: var(--primary-color);
 }
 
 .profile-button:hover {
-  color: var(--accent-color);
-  transform: scale(1.05);
+  border-color: var(--accent-color);
+  background-color: rgba(233, 180, 76, 0.1);
+}
+
+.profile-button i {
+  font-size: 20px;
+  color: var(--primary-color);
+}
+
+.username-display {
+  font-weight: 600;
+  color: var(--primary-color);
+  font-family: 'Montserrat', sans-serif;
 }
 
 .dropdown-content {
   display: none;
   position: absolute;
   right: 0;
+  top: 120%;
   background-color: white;
-  min-width: 220px;
+  min-width: 240px;
   border-radius: var(--border-radius);
   box-shadow: var(--box-shadow);
   overflow: hidden;
@@ -139,12 +154,22 @@ body {
   opacity: 0;
   transform: translateY(10px);
   transition: var(--transition);
+  border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .dropdown-content.show {
   display: block;
   opacity: 1;
   transform: translateY(0);
+}
+
+.dropdown-username {
+  padding: 14px 18px;
+  font-weight: 600;
+  border-bottom: 1px solid #eee;
+  color: var(--primary-color);
+  background-color: var(--secondary-color);
+  font-family: 'Montserrat', sans-serif;
 }
 
 .dropdown-content a {
@@ -728,6 +753,10 @@ footer {
   .container {
     width: 95%;
     padding: 15px;
+  }
+
+  .username-display {
+    display: none;
   }
   
   .element-detail {

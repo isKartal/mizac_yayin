@@ -132,26 +132,41 @@ body {
 }
 
 .profile-button {
+    display: flex;
+    align-items: center;
+    gap: 10px;
     background: none;
-    border: none;
+    border: 2px solid transparent;
+    border-radius: var(--border-radius);
     cursor: pointer;
-    font-size: 24px;
-    color: var(--primary-color);
+    padding: 8px 12px;
     transition: var(--transition);
-    padding: 8px;
+    color: var(--primary-color);
 }
 
 .profile-button:hover {
-    color: var(--accent-color);
-    transform: scale(1.05);
+    border-color: var(--accent-color);
+    background-color: rgba(233, 180, 76, 0.1);
+}
+
+.profile-button i {
+    font-size: 20px;
+    color: var(--primary-color);
+}
+
+.username-display {
+    font-weight: 600;
+    color: var(--primary-color);
+    font-family: 'Montserrat', sans-serif;
 }
 
 .dropdown-content {
     display: none;
     position: absolute;
     right: 0;
+    top: 120%;
     background-color: white;
-    min-width: 220px;
+    min-width: 240px;
     border-radius: var(--border-radius);
     box-shadow: var(--box-shadow);
     overflow: hidden;
@@ -159,12 +174,22 @@ body {
     opacity: 0;
     transform: translateY(10px);
     transition: var(--transition);
+    border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .dropdown-content.show {
     display: block;
     opacity: 1;
     transform: translateY(0);
+}
+
+.dropdown-username {
+    padding: 14px 18px;
+    font-weight: 600;
+    border-bottom: 1px solid #eee;
+    color: var(--primary-color);
+    background-color: var(--secondary-color);
+    font-family: 'Montserrat', sans-serif;
 }
 
 .dropdown-content a {
@@ -394,6 +419,14 @@ body {
 .advantage-section {
     padding: 120px 0;
     background-color: #f0ece5;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: var(--transition);
+}
+
+.advantage-section.show-section {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .advantage-grid {
@@ -647,10 +680,11 @@ footer {
     .footer-content {
         grid-template-columns: 1fr 1fr;
         gap: 40px;
-      }
-      .footer-social {
+    }
+    
+    .footer-social {
         grid-column: span 2;
-      }
+    }
 }
 
 @media (max-width: 768px) {
@@ -707,59 +741,75 @@ footer {
         gap: 30px;
         text-align: center;
         padding: 0 20px;
-      }
-      .footer-logo, .footer-links, .footer-social {
+    }
+    
+    .footer-logo, .footer-links, .footer-social {
         width: 100%;
-      }
-      .footer-logo {
+    }
+    
+    .footer-logo {
         margin-bottom: 20px;
-      }
-      .footer-links {
+    }
+    
+    .footer-links {
         display: flex;
         flex-direction: column;
         gap: 20px;
-      }
-      .footer-column {
+    }
+    
+    .footer-column {
         margin-bottom: 15px;
-      }
-      .footer-column h3 {
+    }
+    
+    .footer-column h3 {
         font-size: 18px;
         margin-bottom: 10px;
-      }
-      .footer-column ul {
+    }
+    
+    .footer-column ul {
         padding: 0;
         list-style: none;
-      }
-      .footer-column ul li {
+    }
+    
+    .footer-column ul li {
         margin: 8px 0;
-      }
-      .footer-column ul li a {
+    }
+    
+    .footer-column ul li a {
         font-size: 16px;
         color: var(--light-text);
         opacity: 0.9;
-      }
-      .footer-social h3 {
+    }
+    
+    .footer-social h3 {
         font-size: 18px;
         margin-bottom: 10px;
-      }
-      .social-icons {
+    }
+    
+    .social-icons {
         display: flex;
         justify-content: center;
         gap: 16px;
-      }
-      .social-icons a {
+    }
+    
+    .social-icons a {
         width: 40px;
         height: 40px;
         font-size: 18px;
         display: flex;
         align-items: center;
         justify-content: center;
-      }
-      .footer-bottom {
+    }
+    
+    .footer-bottom {
         margin-top: 20px;
         font-size: 14px;
-      }
     }
+    
+    .username-display {
+        display: none;
+    }
+}
 
 @media (max-width: 480px) {
     .element-card, .advantage-card {
@@ -787,14 +837,17 @@ footer {
         padding: 14px 28px;
         font-size: 16px;
     }
+    
     .footer-column h3, 
-  .footer-social h3 {
-    font-size: 16px;
-  }
-  .footer-column ul li a {
-    font-size: 14px;
-  }
-  .footer-bottom {
-    font-size: 12px;
-  }
+    .footer-social h3 {
+        font-size: 16px;
+    }
+    
+    .footer-column ul li a {
+        font-size: 14px;
+    }
+    
+    .footer-bottom {
+        font-size: 12px;
+    }
 }
