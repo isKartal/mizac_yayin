@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load socialaccount %}
 {% block content %}
 <div class="container">
   <div class="profile-settings-container">
@@ -27,6 +28,22 @@
         <h3>Önerilerim</h3>
         <p>Mizacınıza özel tavsiye ve önerileri keşfedin</p>
       </a>
+
+      <div class="social-connections">
+        <h3>Sosyal Hesap Bağlantılarım</h3>
+        {% if user.socialaccount_set.all %}
+          <p>Bağlı olan hesaplar:</p>
+          <ul>
+            {% for account in user.socialaccount_set.all %}
+              <li>{{ account.provider|title }} – {{ account.extra_data.email }}</li>
+            {% endfor %}
+          </ul>
+          <a href="{% url 'socialaccount_connections' %}" class="btn btn-secondary">Bağlantıları Yönet</a>
+        {% else %}
+          <p>Henüz bir sosyal hesap bağlanmamış.</p>
+          <a href="{% provider_login_url 'google' process='connect' %}" class="btn btn-primary">Google Hesabımı Bağla</a>
+        {% endif %}
+      </div>
       
       <div class="profile-actions">
         <a href="{% url 'test_list' %}" class="btn btn-accent">

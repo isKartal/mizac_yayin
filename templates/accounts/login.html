@@ -1,4 +1,5 @@
 {% load static %}
+{% load socialaccount %}
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -51,22 +52,31 @@
     <div class="main-content">
         {% block content %}
         <div class="auth-container">
-            <h2>Giriş Yap</h2>
-            {% if messages %}
-                {% for message in messages %}
-                    <p class="error-message">{{ message }}</p>
-                {% endfor %}
-            {% endif %}
-            <form class="auth-form" method="POST">
-                {% csrf_token %}
-                <input type="text" name="username" placeholder="Kullanıcı Adı" required>
-                <input type="password" name="password" placeholder="Şifre" required>
-                <button type="submit">Giriş Yap</button>
-            </form>
-            <div class="auth-links">
-                <a href="{% url 'register' %}">Hesabın yok mu? Kayıt Ol</a>
-            </div>
-        </div>
+          <h2>Giriş Yap</h2>
+          {% if messages %}
+              {% for message in messages %}
+                  <p class="error-message">{{ message }}</p>
+              {% endfor %}
+          {% endif %}
+          <form class="auth-form" method="POST">
+              {% csrf_token %}
+              <input type="text" name="username" placeholder="Kullanıcı Adı" required>
+              <input type="password" name="password" placeholder="Şifre" required>
+              <button type="submit">Giriş Yap</button>
+          </form>
+          
+          <!-- Google ile giriş butonu -->
+          <div class="social-login">
+              <p>veya</p>
+              <a href="{% provider_login_url 'google' %}" class="google-login-btn">
+                  <i class="fab fa-google"></i> Google ile Giriş Yap
+              </a>
+          </div>
+          
+          <div class="auth-links">
+              <a href="{% url 'register' %}">Hesabın yok mu? Kayıt Ol</a>
+          </div>
+      </div>
         {% endblock %}
     </div>
 
