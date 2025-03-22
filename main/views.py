@@ -8,6 +8,8 @@ def index(request):
 def about(request):
     return render(request, 'main/about.html')
 
+from django.http import JsonResponse
+
 def contact_view(request):
     if request.method == 'POST':
         name = request.POST.get('name')
@@ -16,6 +18,5 @@ def contact_view(request):
         subject = f"Yeni Mesaj: {name}"
         message_body = f"Mesaj: {message}\nGönderen: {email}"
         send_mail(subject, message_body, settings.EMAIL_HOST_USER, ['4mizacinfo@gmail.com'])
-        context = {'success_message': 'Mesajınız başarıyla gönderilmiştir.'}
-        return render(request, 'main/about.html', context)
-    return redirect('about')
+        return JsonResponse({'success': 'Mesajınız başarıyla gönderilmiştir.'})
+    return JsonResponse({'error': 'Geçersiz istek.'}, status=400)

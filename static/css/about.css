@@ -557,6 +557,23 @@ footer {
   opacity: 0.7;
 }
 
+.success-notification {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #4caf50;  /* Başarı mesajı için yeşil ton */
+  color: #fff;
+  padding: 15px;
+  border-radius: 5px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  transition: opacity 0.5s;
+  z-index: 1000;
+}
+.success-notification.show {
+  opacity: 1;
+}
+
 /* Responsive Ayarlar */
 @media (max-width: 1100px) {
   .element-grid, .stats-grid{
