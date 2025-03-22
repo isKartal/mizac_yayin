@@ -1,16 +1,10 @@
 # admin.py
 import nested_admin
 from django.contrib import admin
-from .models import ElementType, Recommendation, Test, Question, Choice, TestResult, TestResultDetail
-
-# ElementType için Recommendation inline'ı
-class RecommendationInline(nested_admin.NestedTabularInline):
-    model = Recommendation
-    extra = 1
+from .models import ElementType, Test, Question, Choice, TestResult, TestResultDetail
 
 class ElementTypeAdmin(admin.ModelAdmin):
     list_display = ('name',)
-    inlines = [RecommendationInline]
 
 admin.site.register(ElementType, ElementTypeAdmin)
 
