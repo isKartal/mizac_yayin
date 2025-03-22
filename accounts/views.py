@@ -18,14 +18,17 @@ def user_register(request):
             else:
                 user = User.objects.create_user(username=username, email=email, password=password)
                 user.save()
-                login(request, user)
-                return redirect('login')
+                # Kullanıcıyı authenticate ederek backend bilgisini ekliyoruz
+                user = authenticate(request, username=username, password=password)
+                if user is not None:
+                    login(request, user)
+                    return redirect('login')
+                else:
+                    messages.error(request, "Kullanıcı doğrulaması yapılamadı.")
         else:
             messages.error(request, "Şifreler uyuşmuyor.")
     
     return render(request, 'accounts/register.html')
-
-from django.contrib.auth import authenticate, login
 
 def user_login(request):
     if request.method == 'POST':
@@ -41,8 +44,7 @@ def user_login(request):
 
     return render(request, 'accounts/login.html')
 
-from django.contrib.auth import logout
-
 def user_logout(request):
+    from django.contrib.auth import logout
     logout(request)
     return redirect('index')
