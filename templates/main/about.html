@@ -48,7 +48,7 @@
     </header>
 
     <main>
-    <!-- Hakkında Bölümü -->
+      <!-- Hakkında Bölümü -->
       <section class="about-section">
         <div class="container">
           <div class="section-header">
@@ -59,8 +59,6 @@
             <div class="about-text">
               <p>
                 4 Mizaç teorisi, insanların doğuştan gelen temel özelliklerini ve eğilimlerini anlamamıza yardımcı olur. Ekibimiz, bu değerli bilgileri bir araya getirerek kullanıcılarımıza kapsamlı testler ve kişisel öneriler sunan bir platform oluşturdu. Amacımız, insanların kendilerini daha iyi tanımalarına yardımcı olmak; kimi zaman olumsuz gördükleri bazı özelliklerin aslında doğalarının bir parçası olduğunu ve bunun gelişimin bir parçası olabileceğini fark etmelerini sağlamaktır. Ayrıca, bireylerin güçlü ve zayıf yönlerini keşfederek, bunları nasıl en verimli şekilde geliştirebileceklerini göstermeyi hedefliyoruz.
-
-                Bilimsel bir altyapımız bulunmamakla birlikte, İbn-i Sina'dan günümüze kadar uzanan mizaç teorisini en doğru ve anlaşılır şekilde sunmaya özen gösteriyoruz. Kadim bilgilerin rehberliğinde, insanların kendilerini keşfetme yolculuklarında güvenilir bir kaynak olmayı amaçlıyoruz.
               </p>
               <p>
                 Testimizi çözerek kendi mizaç tipinizi öğrenebilir ve hayatınızdaki farkındalığı artırabilirsiniz.
@@ -82,7 +80,7 @@
               <div class="member-info">
                 <h3>Mustafa Enes Kartal</h3>
                 <p class="member-title"><i class="fas fa-pencil-alt"></i> Content Director</p>
-                <p class="member-bio"> Bilgilendirici içerikler ve mizaç testleri oluşturarak platformun bilgi kaynağını yönetir. 29 Mayıs Üniversitesi Psikoloji Bölümü mezunudur. </p>
+                <p class="member-bio">Bilgilendirici içerikler ve mizaç testleri oluşturarak platformun bilgi kaynağını yönetir. 29 Mayıs Üniversitesi Psikoloji Bölümü mezunudur.</p>
                 <div class="social-links">
                   <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
                   <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
@@ -93,7 +91,7 @@
               <div class="member-info">
                 <h3>İsmail Berk Kartal</h3>
                 <p class="member-title"><i class="fas fa-code"></i> Web Developer</p>
-                <p class="member-bio">Web sitesinin altyapısını geliştirir, teknik işlevselliği sağlar ve kullanıcı deneyimini optimize eder. 42 İstanbul’da eğitim almış olup, İstanbul Üniversitesi Bilgisayar Programcılığı bölümünde öğrenimine devam etmektedir. </p>
+                <p class="member-bio">Web sitesinin altyapısını geliştirir, teknik işlevselliği sağlar ve kullanıcı deneyimini optimize eder. 42 İstanbul’da eğitim almış olup, İstanbul Üniversitesi Bilgisayar Programcılığı bölümünde öğrenimine devam etmektedir.</p>
                 <div class="social-links">
                   <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
                   <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
@@ -104,7 +102,7 @@
               <div class="member-info">
                 <h3>Ömer Faruk Göregen</h3>
                 <p class="member-title"><i class="fas fa-tasks"></i> Product Manager</p>
-                <p class="member-bio"> Proje yönetimini üstlenir, görev dağılımını yapar ve stratejik planlamaları yönetir. 42 İstanbul yazılım öğrencisi olup, Bilişim ve Yönetim Bilimleri alanında eğitim almaktadır.</p>
+                <p class="member-bio">Proje yönetimini üstlenir, görev dağılımını yapar ve stratejik planlamaları yönetir. 42 İstanbul yazılım öğrencisi olup, Bilişim ve Yönetim Bilimleri alanında eğitim almaktadır.</p>
                 <div class="social-links">
                   <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
                   <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
@@ -133,20 +131,26 @@
                 <p>İstanbul, Türkiye</p>
               </div>
               <div class="social-media">
-                  <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                  <a href="#" aria-label="Youtube"><i class="fab fa-youtube"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="Youtube"><i class="fab fa-youtube"></i></a>
               </div>
             </div>
             <div class="contact-form">
-              <form>
+              {% if success_message %}
+                <div class="success-message" style="margin-bottom: 20px; color: green; font-weight: bold;">
+                  {{ success_message }}
+                </div>
+              {% endif %}
+              <form action="{% url 'contact' %}" method="post">
+                {% csrf_token %}
                 <div class="form-group">
-                  <input type="text" placeholder="Adınız" required>
+                  <input type="text" name="name" placeholder="Adınız" required>
                 </div>
                 <div class="form-group">
-                  <input type="email" placeholder="E-posta Adresiniz" required>
+                  <input type="email" name="email" placeholder="E-posta Adresiniz" required>
                 </div>
                 <div class="form-group">
-                  <textarea placeholder="Mesajınız" rows="5" required></textarea>
+                  <textarea name="message" placeholder="Mesajınız" rows="5" required></textarea>
                 </div>
                 <button type="submit" class="contact-button">Mesaj Gönder</button>
               </form>

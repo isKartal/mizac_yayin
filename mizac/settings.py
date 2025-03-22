@@ -185,3 +185,10 @@ SOCIALACCOUNT_PROVIDERS = {
 LOGIN_REDIRECT_URL = '/'  # Giriş sonrası yönlendirilecek sayfa
 SOCIALACCOUNT_AUTO_SIGNUP = True
 SOCIALACCOUNT_LOGIN_ON_GET = True
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = '4mizacinfo@gmail.com'   # Gmail adresiniz
+EMAIL_HOST_PASSWORD = 'ruht rhii mlnc yaow'        # Uygulama şifresi kullanmanız tavsiye edilir
