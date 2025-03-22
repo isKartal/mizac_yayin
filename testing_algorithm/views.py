@@ -6,8 +6,25 @@ from .models import Test, Choice, Question, TestResult, ElementType, TestResultD
 def direct_to_test(request):
     first_test = Test.objects.first()
     if first_test:
-        return redirect('take_test', test_id=first_test.id, question_index=0)
+        return redirect('test_intro', test_id=first_test.id)
     return redirect('/')
+
+@login_required
+def test_intro(request, test_id):
+    test = get_object_or_404(Test, id=test_id)
+    
+    # Kullanıcı daha önce bu testi tamamlamış mı kontrol et
+    existing_result = TestResult.objects.filter(user=request.user, test=test).first()
+    if existing_result:
+        return redirect('test_result', result_id=existing_result.id)
+    
+    # Test hakkında bilgileri hazırla
+    question_count = test.questions.count()
+    
+    return render(request, 'testing_algorithm/test_intro.html', {
+        'test': test,
+        'question_count': question_count
+    })
 
 @login_required
 def take_test(request, test_id, question_index=0):
