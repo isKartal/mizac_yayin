@@ -127,7 +127,3 @@ def test_result(request, result_id):
     }
     
     return render(request, 'testing_algorithm/test_result.html', context)
-
-def element_detail(request, element_id):
-    element = get_object_or_404(ElementType, id=element_id)
-    return render(request, 'testing_algorithm/element_detail.html', {'element': element})
