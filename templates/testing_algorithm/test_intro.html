@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="container">
+  <div class="test-intro-container">
+    <h1>Mizaç Testine Hoş Geldiniz</h1>
+    
+    <div class="test-info">
+      <div class="intro-card">
+        <h2><i class="fas fa-info-circle"></i> Test Hakkında</h2>
+        <p>Bu test, dört temel mizaç elementini (Ateş, Hava, Su ve Toprak) kullanarak kişiliğinizi değerlendirir. Sonuçlar, baskın mizaç özelliklerinizi ve nasıl daha dengeli bir yaşam sürebileceğinizi anlamanıza yardımcı olacaktır.</p>
+      </div>
+      
+      <div class="test-instructions">
+        <h2><i class="fas fa-exclamation-triangle"></i> Dikkat Edilmesi Gerekenler</h2>
+        <ul>
+          <li>Testte toplam <strong>{{ question_count }}</strong> soru bulunmaktadır.</li>
+          <li>Her soruda size en uygun olan cevabı seçin.</li>
+          <li>İlk düşündüğünüz cevap genellikle en doğrusudur.</li>
+          <li>Test sırasında geri dönüş yapılamaz, bu nedenle cevaplarınızı dikkatle seçin.</li>
+          <li>Testin doğru sonuç vermesi için soruları dürüstçe cevaplayın.</li>
+          <li>Testi tamamladıktan sonra, sonuçlarınızı görüntüleyebilir ve detaylı mizaç analizinize erişebilirsiniz.</li>
+        </ul>
+      </div>
+      
+      <div class="time-estimate">
+        <h2><i class="fas fa-clock"></i> Tahmini Süre</h2>
+        <p>Testin tamamlanması yaklaşık <strong>5-10 dakika</strong> sürecektir.</p>
+      </div>
+    </div>
+    
+    <div class="button-container">
+      <a href="{% url 'take_test' test_id=test.id question_index=0 %}" class="btn btn-primary btn-lg start-test-btn">
+        <i class="fas fa-play-circle"></i> Teste Başla
+      </a>
+    </div>
+  </div>
+</div>
+{% endblock %}

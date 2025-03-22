@@ -1132,3 +1132,75 @@ footer {
   margin: 20px 0;
   border-left: 4px solid #28a745;
 }
+
+/* Test intro page styles */
+.test-intro-container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.test-info {
+  margin: 2rem 0;
+}
+
+.intro-card, .test-instructions, .time-estimate {
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.test-instructions ul {
+  padding-left: 1.5rem;
+  margin-top: 1rem;
+}
+
+.test-instructions li {
+  margin-bottom: 0.8rem;
+  line-height: 1.5;
+}
+
+.start-test-btn {
+  font-size: 1.2rem;
+  padding: 0.8rem 2rem;
+  transition: transform 0.2s ease;
+}
+
+.start-test-btn:hover {
+  transform: scale(1.05);
+}
+
+.button-container {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.btn-lg {
+  font-size: 1.2rem;
+  padding: 0.8rem 2rem;
+}
+
+.btn-primary {
+  background-color: #4c6ef5;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  display: inline-block;
+  text-decoration: none;
+  text-align: center;
+}
+
+.btn-primary:hover {
+  background-color: #3b5bdb;
+}
+
+/* İkonlar için stiller */
+.fas {
+  margin-right: 0.5rem;
+}
