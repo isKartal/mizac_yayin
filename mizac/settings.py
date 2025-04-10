@@ -88,17 +88,10 @@ TEMPLATES = [
 WSGI_APPLICATION = 'mizac.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/3.2/ref/settings/#databases
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'mizac_db',      # Oluşturduğunuz veritabanı adı
-        'USER': 'postgres',        # Veritabanı kullanıcısı
-        'PASSWORD': 'tadmin131203',            # Kullanıcı şifresi
-        'HOST': 'localhost',            # Genellikle localhost
-        'PORT': '5432',                 # PostgreSQL'in varsayılan portu
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',  # Bu dosya projenizin kök dizininde oluşturulacak
     }
 }
 
