@@ -5,22 +5,41 @@
   <div class="result-container">
     <h1 class="result-title">Mizaç Testi Sonucunuz</h1>
     
+    <div class="result-summary">
+      <div class="element-properties">
+        <div class="property-item">
+          <span class="property-label">Sıcaklık:</span>
+          <span class="property-value">{{ warmth_text }}</span>
+          <div class="intensity-bar">
+            <div class="intensity-fill" style="width: {{ warmth_intensity }}0%"></div>
+          </div>
+        </div>
+        <div class="property-item">
+          <span class="property-label">Nem:</span>
+          <span class="property-value">{{ moisture_text }}</span>
+          <div class="intensity-bar">
+            <div class="intensity-fill" style="width: {{ moisture_intensity }}0%"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
     <div class="result-content">
       <div class="dominant-element-card {{ dominant_element.name|lower }}">
         {% if dominant_element.name == "Ateş" %}
-          <div class="element-badge">Ateş</div>
+          <div class="element-badge">Sıcak + Kuru</div>
           <div class="element-icon"><i class="fas fa-fire"></i></div>
           <img src="{% static 'images/fire.jpg' %}" alt="Ateş" class="element-image">
         {% elif dominant_element.name == "Hava" %}
-          <div class="element-badge">Hava</div>
+          <div class="element-badge">Sıcak + Nemli</div>
           <div class="element-icon"><i class="fas fa-wind"></i></div>
           <img src="{% static 'images/air.jpg' %}" alt="Hava" class="element-image">
         {% elif dominant_element.name == "Su" %}
-          <div class="element-badge">Su</div>
+          <div class="element-badge">Soğuk + Nemli</div>
           <div class="element-icon"><i class="fas fa-water"></i></div>
           <img src="{% static 'images/water.jpg' %}" alt="Su" class="element-image">
         {% elif dominant_element.name == "Toprak" %}
-          <div class="element-badge">Toprak</div>
+          <div class="element-badge">Soğuk + Kuru</div>
           <div class="element-icon"><i class="fas fa-mountain"></i></div>
           <img src="{% static 'images/earth.jpg' %}" alt="Toprak" class="element-image">
         {% else %}
@@ -41,4 +60,64 @@
     </div>
   </div>
 </div>
+
+<style>
+  .result-summary {
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  .element-properties {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .property-item {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .property-label {
+    font-weight: 600;
+    width: 80px;
+  }
+  
+  .property-value {
+    font-weight: 500;
+    color: #4a6fa5;
+    width: 80px;
+  }
+  
+  .intensity-bar {
+    flex: 1;
+    height: 8px;
+    background-color: #e9ecef;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  
+  .intensity-fill {
+    height: 100%;
+    background-color: #4a6fa5;
+    border-radius: 4px;
+  }
+  
+  .element-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 0.8em;
+    font-weight: 500;
+  }
+</style>
 {% endblock %}

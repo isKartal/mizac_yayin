@@ -6,9 +6,13 @@
     <h1>{{ test.title }}</h1>
     <p class="test-description">{{ test.description }}</p>
     
+    <div class="test-phase-indicator">
+      <span class="phase-badge">{{ phase }}</span>
+    </div>
+    
     <div class="test-progress">
       <div class="progress-bar">
-        <div class="progress-fill" style="width: {{ question_index|add:1 }}00%"></div>
+        <div class="progress-fill" style="width: {{ progress_percentage }}%"></div>
       </div>
       <p class="progress-text">Soru {{ question_index|add:1 }} / {{ total_questions }}</p>
     </div>
@@ -38,4 +42,20 @@
     </form>
   </div>
 </div>
+
+<style>
+  .test-phase-indicator {
+    text-align: center;
+    margin-bottom: 15px;
+  }
+  
+  .phase-badge {
+    background-color: #4a6fa5;
+    color: white;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 0.9em;
+    font-weight: 500;
+  }
+</style>
 {% endblock %}
