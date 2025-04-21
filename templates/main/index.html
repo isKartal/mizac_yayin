@@ -19,30 +19,40 @@
                 <a href="{% url 'index' %}" class="logo">
                     <img src="{% static 'images/logo.jpg' %}" alt="MİZAÇ" class="logo-img">
                 </a>
-            
                 <!-- Hamburger Menü Butonu -->
                 <button class="hamburger-button" aria-label="Menüyü Aç/Kapat">
-                    <i class="fas fa-bars"></i>
+                    <i class="fas fa-bars" id="menu-icon"></i>
                 </button>
             
                 <nav class="nav-links">
                     <a href="{% url 'about' %}" class="nav-item">HAKKINDA</a>
                     <a href="{% url 'temperaments' %}" class="nav-item">MİZAÇLAR</a>
                     <a href="{% url 'test_list' %}" class="nav-item">TESTE BAŞLA</a>
+                    
+                    <!-- Mobil görünümde profil/giriş butonları -->
+                    <div class="mobile-auth">
+                        {% if user.is_authenticated %}
+                            <a href="{% url 'my_temperament' %}" class="nav-item mobile-only"><i class="fas fa-star"></i> MİZACIM</a>
+                            <a href="{% url 'profiles' %}" class="nav-item mobile-only"><i class="fas fa-cog"></i> PROFİL</a>
+                            <a href="{% url 'logout' %}" class="nav-item mobile-only"><i class="fas fa-sign-out-alt"></i> ÇIKIŞ YAP</a>
+                        {% else %}
+                            <a href="{% url 'login' %}" class="nav-item mobile-only"><i class="fas fa-sign-in-alt"></i> GİRİŞ YAP</a>
+                        {% endif %}
+                    </div>
                 </nav>
             
                 {% if user.is_authenticated %}
                 <div class="profile-container">
                     <button class="profile-button">
-                    <i class="fas fa-user-circle"></i>
-                    <span class="username-display">{{ user.username }}</span>
+                        <i class="fas fa-user-circle"></i>
+                        <span class="username-display">{{ user.username }}</span>
                     </button>
                     <div class="dropdown-content">
-                    <div class="dropdown-username">{{ user.username }}</div>
-                    <a href="{% url 'my_temperament' %}"><i class="fas fa-star"></i> Mizacım</a>
-                    <a href="{% url 'my_suggestions' %}"><i class="fas fa-lightbulb"></i> Önerilerim</a>
-                    <a href="{% url 'profiles' %}"><i class="fas fa-cog"></i> Profil Ayarlarım</a>
-                    <a href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i> Çıkış Yap</a>
+                        <div class="dropdown-username">{{ user.username }}</div>
+                        <a href="{% url 'my_temperament' %}"><i class="fas fa-star"></i> Mizacım</a>
+                        <a href="{% url 'my_suggestions' %}"><i class="fas fa-lightbulb"></i> Önerilerim</a>
+                        <a href="{% url 'profiles' %}"><i class="fas fa-cog"></i> Profil Ayarlarım</a>
+                        <a href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i> Çıkış Yap</a>
                     </div>
                 </div>
                 {% else %}
@@ -50,7 +60,40 @@
                 {% endif %}
             </div>
         </header>
-
+        
+        <!-- Yan Çekmece Menü - Header dışında olmalı -->
+        <div class="menu-overlay"></div>
+        <div class="side-menu">
+            {% if user.is_authenticated %}
+            <div class="side-menu-header">
+                <div class="user-info">
+                    <i class="fas fa-user-circle user-avatar"></i>
+                    <div class="user-name">{{ user.username }}</div>
+                </div>
+            </div>
+            {% endif %}
+            
+            <nav class="side-menu-nav">
+                <a href="{% url 'about' %}" class="side-menu-item"><i class="fas fa-info-circle"></i> HAKKINDA</a>
+                <a href="{% url 'temperaments' %}" class="side-menu-item"><i class="fas fa-balance-scale"></i> MİZAÇLAR</a>
+                <a href="{% url 'test_list' %}" class="side-menu-item"><i class="fas fa-tasks"></i> TESTE BAŞLA</a>
+                
+                {% if user.is_authenticated %}
+                <div class="side-menu-section">
+                    <div class="section-title">PROFİL</div>
+                    <a href="{% url 'my_temperament' %}" class="side-menu-item"><i class="fas fa-star"></i> Mizacım</a>
+                    <a href="{% url 'my_suggestions' %}" class="side-menu-item"><i class="fas fa-lightbulb"></i> Önerilerim</a>
+                    <a href="{% url 'profiles' %}" class="side-menu-item"><i class="fas fa-cog"></i> Profil Ayarlarım</a>
+                    <a href="{% url 'logout' %}" class="side-menu-item"><i class="fas fa-sign-out-alt"></i> Çıkış Yap</a>
+                </div>
+                {% else %}
+                <div class="side-menu-section">
+                    <a href="{% url 'login' %}" class="side-menu-item active"><i class="fas fa-sign-in-alt"></i> GİRİŞ YAP</a>
+                </div>
+                {% endif %}
+            </nav>
+        </div>
+        
         <main>
             <section class="hero-section">
                 <div class="hero-content">
@@ -198,13 +241,13 @@
             // Profil dropdown menüsü
             const profileButton = document.querySelector('.profile-button');
             const dropdownContent = document.querySelector('.dropdown-content');
-
+        
             if (profileButton) {
                 profileButton.addEventListener('click', function(event) {
                     dropdownContent.classList.toggle('show');
                     event.stopPropagation();
                 });
-
+        
                 // Dropdown dışına tıklandığında kapansın
                 document.addEventListener('click', function() {
                     if (dropdownContent && dropdownContent.classList.contains('show')) {
@@ -212,18 +255,67 @@
                     }
                 });
             }
+        
+            // Header scroll efekti
+            const header = document.querySelector('.nav-container');
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 100) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+        
+            const hamburgerButton = document.querySelector('.hamburger-button');
+const sideMenu = document.querySelector('.side-menu');
+const menuOverlay = document.querySelector('.menu-overlay');
+const menuIcon = document.getElementById('menu-icon');
+const body = document.body;
 
-            // Mobil menü için hamburger butonu
-            const hamburgerButton = document.querySelector(".hamburger-button");
-            const navLinks = document.querySelector(".nav-links");
+// Hamburger menü tıklaması
+if (hamburgerButton && sideMenu) {
+    hamburgerButton.addEventListener('click', function() {
+        sideMenu.classList.toggle('open');
+        menuOverlay.classList.toggle('active');
+        
+        // Hamburger ikonunu değiştir
+        if (menuIcon.classList.contains('fa-bars')) {
+            menuIcon.classList.remove('fa-bars');
+            menuIcon.classList.add('fa-times');
+            // Menü açıkken sayfanın kaydırılmasını engelle
+            body.style.overflow = 'hidden';
+        } else {
+            menuIcon.classList.remove('fa-times');
+            menuIcon.classList.add('fa-bars');
+            // Menü kapandığında sayfanın kaydırılmasına izin ver
+            body.style.overflow = '';
+        }
+    });
+}
 
-            if (hamburgerButton && navLinks) {
-                hamburgerButton.addEventListener("click", function() {
-                    navLinks.classList.toggle("open");
-                    hamburgerButton.classList.toggle("active");
-                });
-            }
+// Overlay tıklaması ile menüyü kapat
+if (menuOverlay) {
+    menuOverlay.addEventListener('click', function() {
+        sideMenu.classList.remove('open');
+        menuOverlay.classList.remove('active');
+        menuIcon.classList.remove('fa-times');
+        menuIcon.classList.add('fa-bars');
+        body.style.overflow = '';
+    });
+}
 
+// Yan menüdeki linklere tıklandığında menüyü kapat
+const menuLinks = document.querySelectorAll('.side-menu-item');
+menuLinks.forEach(link => {
+    link.addEventListener('click', function() {
+        sideMenu.classList.remove('open');
+        menuOverlay.classList.remove('active');
+        menuIcon.classList.remove('fa-times');
+        menuIcon.classList.add('fa-bars');
+        body.style.overflow = '';
+    });
+});
+        
             // Sayfa elementi görünürlüğü için IntersectionObserver kullanımı
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
@@ -234,12 +326,12 @@
             }, {
                 threshold: 0.1
             });
-
+        
             // Animasyon eklenecek elementler
             document.querySelectorAll('.element-card, .advantage-card, .section-title, .section-description').forEach(el => {
                 observer.observe(el);
             });
-
+        
             // Sectionlar için görünürlük animasyonu
             const sectionObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
@@ -250,7 +342,7 @@
             }, {
                 threshold: 0.1
             });
-
+        
             document.querySelectorAll('.elements-section, .advantage-section, .cta-section').forEach(section => {
                 sectionObserver.observe(section);
             });
