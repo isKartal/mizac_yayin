@@ -51,19 +51,36 @@ class Question(models.Model):
 class Choice(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE, related_name='choices')
     text = models.CharField(max_length=200)
-    score = models.IntegerField()  # +1 veya -1
+    
+    # Sıcak/soğuk puanları (için kullanılan skorlar)
+    warm_score = models.IntegerField(default=0)  # Sıcak puanı
+    cold_score = models.IntegerField(default=0)  # Soğuk puanı
+    
+    # Nemli/kuru puanları (için kullanılan skorlar)
+    moist_score = models.IntegerField(default=0)  # Nemli puanı
+    dry_score = models.IntegerField(default=0)   # Kuru puanı
     
     def __str__(self):
-        return f"{self.text} (Puan: {self.score})"
+        question_type = self.question.question_type
+        if question_type == 'WARM':
+            return f"{self.text} (Sıcak: {self.warm_score}, Soğuk: {self.cold_score})"
+        else:
+            return f"{self.text} (Nemli: {self.moist_score}, Kuru: {self.dry_score})"
 
 class TestResult(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     test = models.ForeignKey(Test, on_delete=models.CASCADE)
     date_taken = models.DateTimeField(auto_now_add=True)
     
-    # Puanlar
-    warm_score = models.IntegerField(default=0)  # Sıcaklık puanı (pozitif = sıcak, negatif = soğuk)
-    moist_score = models.IntegerField(default=0)  # Nem puanı (pozitif = nemli, negatif = kuru)
+    # Net puanlar
+    warm_score = models.IntegerField(default=0)  # Net sıcaklık puanı (pozitif = sıcak, negatif = soğuk)
+    moist_score = models.IntegerField(default=0)  # Net nem puanı (pozitif = nemli, negatif = kuru)
+    
+    # Ham puanlar
+    raw_warm_score = models.IntegerField(default=0)  # Ham sıcak puanı
+    raw_cold_score = models.IntegerField(default=0)  # Ham soğuk puanı
+    raw_moist_score = models.IntegerField(default=0)  # Ham nemli puanı
+    raw_dry_score = models.IntegerField(default=0)   # Ham kuru puanı
     
     # Sonuç olarak belirlenen element
     dominant_element = models.ForeignKey(ElementType, on_delete=models.CASCADE)
@@ -97,6 +114,12 @@ class TestResultDetail(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     selected_choice = models.ForeignKey(Choice, on_delete=models.CASCADE)
     score = models.IntegerField()
+    
+    # Detaylı skor bilgisi
+    warm_score = models.IntegerField(default=0)
+    cold_score = models.IntegerField(default=0)
+    moist_score = models.IntegerField(default=0)
+    dry_score = models.IntegerField(default=0)
     
     def __str__(self):
         return f"{self.question.text[:30]} - {self.score} puan"

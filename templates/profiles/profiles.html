@@ -29,6 +29,27 @@
         <p>Mizacınıza özel tavsiye ve önerileri keşfedin</p>
       </a>
 
+      <div class="profile-actions">
+        <h3>Test İşlemleri</h3>
+        <p>Mizaç testinizi yeniden çözmek veya sonuçlarınızı sıfırlamak için buradaki seçenekleri kullanabilirsiniz.</p>
+        
+        <!-- Testi yeniden çözme butonu -->
+        <button id="restart-test-btn" class="btn btn-warning">
+          <i class="fas fa-redo"></i> Mizaç Testini Yeniden Çöz
+        </button>
+        
+        <div id="confirmation-dialog" class="confirmation-dialog" style="display: none;">
+          <div class="confirmation-content">
+            <h4><i class="fas fa-exclamation-triangle"></i> Uyarı</h4>
+            <p>Testi yeniden çözmek istediğinize emin misiniz? Mevcut test sonuçlarınız silinecektir.</p>
+            <div class="confirmation-buttons">
+              <button id="cancel-restart" class="btn btn-secondary">İptal</button>
+              <a href="{% url 'restart_test' %}" class="btn btn-danger">Evet, Testi Yeniden Çöz</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      
       <div class="social-connections">
         <h3>Sosyal Hesap Bağlantılarım</h3>
         {% if user.socialaccount_set.all %}
@@ -47,7 +68,7 @@
       
       <div class="profile-actions">
         <a href="{% url 'test_list' %}" class="btn btn-accent">
-          <i class="fas fa-clipboard-list"></i> Yeni Test Çöz
+          <i class="fas fa-clipboard-list"></i> Testlere Göz At
         </a>
         <a href="{% url 'logout' %}" class="btn btn-secondary">
           <i class="fas fa-sign-out-alt"></i> Çıkış Yap
@@ -56,4 +77,92 @@
     </div>
   </div>
 </div>
+
+<style>
+  .confirmation-dialog {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .confirmation-content {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    max-width: 500px;
+    width: 90%;
+    text-align: center;
+  }
+  
+  .confirmation-content h4 {
+    color: #e74c3c;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+  
+  .confirmation-content p {
+    margin-bottom: 20px;
+    line-height: 1.5;
+  }
+  
+  .confirmation-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+  }
+  
+  .btn-warning {
+    background-color: #f39c12;
+    color: white;
+  }
+  
+  .btn-warning:hover {
+    background-color: #e67e22;
+  }
+  
+  .btn-danger {
+    background-color: #e74c3c;
+    color: white;
+  }
+  
+  .btn-danger:hover {
+    background-color: #c0392b;
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const restartTestBtn = document.getElementById('restart-test-btn');
+    const confirmationDialog = document.getElementById('confirmation-dialog');
+    const cancelRestartBtn = document.getElementById('cancel-restart');
+    
+    // Testi yeniden çöz butonuna tıklandığında onay diyaloğunu göster
+    restartTestBtn.addEventListener('click', function() {
+      confirmationDialog.style.display = 'flex';
+    });
+    
+    // İptal butonuna tıklandığında onay diyaloğunu kapat
+    cancelRestartBtn.addEventListener('click', function() {
+      confirmationDialog.style.display = 'none';
+    });
+    
+    // Diyalog dışına tıklandığında diyaloğu kapat
+    confirmationDialog.addEventListener('click', function(event) {
+      if (event.target === confirmationDialog) {
+        confirmationDialog.style.display = 'none';
+      }
+    });
+  });
+</script>
 {% endblock %}
