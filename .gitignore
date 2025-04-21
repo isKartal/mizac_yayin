@@ -1,7 +1,6 @@
 echo "__pycache__/
 *.pyc
 *.pyo
-*.sqlite3
 .env
 *.log
 *.idea/
