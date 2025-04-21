@@ -39,7 +39,8 @@ class QuestionAdmin(nested_admin.NestedModelAdmin):
 admin.site.register(Question, QuestionAdmin)
 
 class ChoiceAdmin(admin.ModelAdmin):
-    list_display = ('text', 'question', 'score')
+    # 'score' yerine yeni puan alanlarını göster
+    list_display = ('text', 'question', 'warm_score', 'cold_score', 'moist_score', 'dry_score')
     list_filter = ('question__question_type',)
 
 admin.site.register(Choice, ChoiceAdmin)
