@@ -207,20 +207,6 @@ body {
     color: var(--accent-color);
 }
 
-/* Hamburger Menü */
-.hamburger-button {
-    display: none;
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 24px;
-    color: var(--primary-color);
-    transition: var(--transition);
-}
-
-.hamburger-button:hover, .hamburger-button.active {
-    color: var(--accent-color);
-}
 
 /* Hero Bölümü */
 .hero-section {
@@ -670,6 +656,142 @@ footer {
     transform: translateY(0) !important;
 }
 
+.hamburger-button {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 24px;
+    color: var(--primary-color);
+    transition: var(--transition);
+    z-index: 1001;
+}
+
+.hamburger-button:hover, .hamburger-button.active {
+    color: var(--accent-color);
+    transform: scale(1.1);
+}
+
+/* Yan Çekmece Menü */
+.side-menu {
+    position: fixed;
+    top: 0;
+    right: -300px; /* Başlangıçta ekranın dışında */
+    width: 300px;
+    height: 100vh;
+    background-color: var(--secondary-color);
+    box-shadow: -5px 0 20px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    transition: right 0.3s ease;
+    padding: 80px 20px 30px;
+    overflow-y: auto;
+}
+
+.side-menu.open {
+    right: 0; /* Menü açıldığında ekranın içine gelir */
+}
+
+.menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.menu-overlay.active {
+    display: block;
+    opacity: 1;
+}
+
+.side-menu-header {
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.user-avatar {
+    font-size: 28px;
+    color: var(--primary-color);
+}
+
+.user-name {
+    font-weight: 600;
+    font-size: 18px;
+    color: var(--primary-color);
+}
+
+.side-menu-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.side-menu-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 15px;
+    border-radius: var(--border-radius);
+    text-decoration: none;
+    color: var(--primary-color);
+    font-weight: 500;
+    transition: var(--transition);
+    gap: 12px;
+}
+
+.side-menu-item:hover {
+    background-color: rgba(233, 180, 76, 0.1);
+    color: var(--accent-color);
+}
+
+.side-menu-item i {
+    width: 24px;
+    font-size: 18px;
+}
+
+.side-menu-item.active {
+    background-color: var(--accent-color);
+    color: var(--light-text);
+}
+
+.side-menu .section-title {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 10px;
+    padding-left: 15px;
+    text-align: left;
+    font-weight: normal;
+}
+
+.side-menu .section-title::after {
+    display: none;
+}
+/* Scroll Efekti */
+.nav-container.scrolled {
+    padding: 8px 5%;
+    background-color: rgba(236, 233, 227, 0.98);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.mobile-only {
+    display: none !important;
+}
+
+.mobile-auth {
+    display: none;
+}
 /* Responsive */
 @media (max-width: 1100px) {
     .element-grid, .advantage-grid {
@@ -685,34 +807,124 @@ footer {
     .footer-social {
         grid-column: span 2;
     }
-}
 
-@media (max-width: 768px) {
-    .nav-container {
-        padding: 15px 5%;
+    .nav-links {
+        gap: 20px;
+    }
+    
+    .nav-item {
+        padding: 6px 10px;
+        font-size: 15px;
+    }
+    
+    .nav-links, .profile-container, .login-button {
+        display: none;
     }
     
     .hamburger-button {
         display: block;
     }
     
+    .header-content {
+        display: flex;
+        justify-content: space-between;
+    }
+}
+
+@media (max-width: 768px) {
+    .nav-container {
+        padding: 10px 5%;
+    }
+    
+    .logo-img {
+        height: 40px;
+    }
+    
+    /* Hamburger Menü Görünür Olsun */
+    .hamburger-button {
+        display: block;
+    }
+    
+    /* Profil Butonu Düzenlemeleri */
+    .username-display {
+        display: none;
+    }
+    
+    .profile-button {
+        padding: 8px;
+    }
+    
     .nav-links {
         display: none;
         flex-direction: column;
-        position: absolute;
-        top: 100%;
+        position: fixed;
+        top: 0;
         left: 0;
         width: 100%;
-        background-color: #ece9e3;
-        padding: 20px;
+        height: 100vh;
+        background-color: rgba(236, 233, 227, 0.98);
+        padding: 80px 20px 40px;
         box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
         text-align: center;
-        gap: 15px;
-        z-index: 999;
+        gap: 20px;
+        z-index: 1000;
+        justify-content: center;
+        align-items: center;
+        -webkit-backdrop-filter: blur(10px);
+        backdrop-filter: blur(10px);
     }
     
     .nav-links.open {
         display: flex;
+        animation: fadeIn 0.3s ease forwards;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+
+    /* Mobil Menü Öğeleri */
+    .nav-item {
+        font-size: 18px;
+        padding: 12px 20px;
+        width: 200px;
+        text-align: center;
+        border-radius: var(--border-radius);
+    }
+    
+    .nav-item:hover {
+        background-color: rgba(233, 180, 76, 0.1);
+    }
+    
+    .nav-item::after {
+        display: none;
+    }
+    
+    /* Mobil Menüde Ek Profil/Giriş Butonları */
+    .mobile-auth {
+        display: flex;
+    }
+    
+    .mobile-only {
+        display: flex !important;
+        justify-content: center;
+        background-color: rgba(255, 255, 255, 0.5);
+        border-radius: var(--border-radius);
+        padding: 12px 20px !important;
+    }
+    
+    .mobile-only:hover {
+        background-color: rgba(233, 180, 76, 0.2);
+    }
+    
+    /* Menü İkon Geçiş Efekti */
+    .hamburger-button .fas {
+        transition: all 0.3s ease;
     }
     
     .hero-section {
@@ -805,13 +1017,35 @@ footer {
         margin-top: 20px;
         font-size: 14px;
     }
-    
-    .username-display {
-        display: none;
-    }
 }
 
 @media (max-width: 480px) {
+
+    .nav-container {
+        padding: 10px 4%;
+    }
+    
+    .nav-container.scrolled {
+        padding: 6px 4%;
+    }
+    
+    .side-menu {
+        width: 270px;
+    }
+    
+    .logo-img {
+        height: 40px;
+    }
+
+    .login-button {
+        padding: 7px 12px;
+        font-size: 15px;
+    }
+    
+    .dropdown-content {
+        min-width: 220px;
+        right: -10px;
+    }
     .element-card, .advantage-card {
         padding: 30px 20px;
     }
