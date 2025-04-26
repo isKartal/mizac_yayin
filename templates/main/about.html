@@ -1,290 +1,172 @@
-<!DOCTYPE html>
-<html lang="tr">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MİZAÇLAR | Hakkında</title>
-  {% load static %}
-  <link rel="stylesheet" href="{% static 'css/about.css' %}">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <!-- Index temasıyla uyumlu fontlar -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-  
-  <!-- Bildirim kutusu için ek CSS -->
-  <style>
-    .success-notification {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background-color: #4caf50;  /* Başarı mesajı için yeşil ton */
-      color: #fff;
-      padding: 15px;
-      border-radius: 5px;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-      opacity: 0;
-      transition: opacity 0.5s;
-      z-index: 1000;
-    }
-    .success-notification.show {
-      opacity: 1;
-    }
-  </style>
-</head>
-<body>
-  <div class="page-container">
-    <!-- Header -->
-    <header class="nav-container">
-      <a href="{% url 'index' %}" class="logo">
-        <img src="{% static 'images/logo.jpg' %}" alt="MİZAÇ" class="logo-img">
-      </a>
-      <!-- Hamburger Menü -->
-      <button class="hamburger-button" aria-label="Menüyü Aç/Kapat">
-        <i class="fas fa-bars"></i>
-      </button>
-      <nav class="nav-links">
-        <a href="{% url 'about' %}" class="nav-item">HAKKINDA</a>
-        <a href="{% url 'temperaments' %}" class="nav-item">MİZAÇLAR</a>
-        <a href="{% url 'test_list' %}" class="nav-item">TESTE BAŞLA</a>
-      </nav>
-      {% if user.is_authenticated %}
-      <div class="profile-container">
-        <button class="profile-button">
-          <i class="fas fa-user-circle"></i>
-          <span class="username-display">{{ user.username }}</span>
-        </button>
-        <div class="dropdown-content">
-          <div class="dropdown-username">{{ user.username }}</div>
-          <a href="{% url 'my_temperament' %}"><i class="fas fa-star"></i> Mizacım</a>
-          <a href="{% url 'my_suggestions' %}"><i class="fas fa-lightbulb"></i> Önerilerim</a>
-          <a href="{% url 'profiles' %}"><i class="fas fa-cog"></i> Profil Ayarlarım</a>
-          <a href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i> Çıkış Yap</a>
-        </div>
-      </div>
-      {% else %}
-      <a href="{% url 'login' %}" class="nav-item login-button"><i class="fas fa-sign-in-alt"></i> GİRİŞ YAP</a>
-      {% endif %}
-    </header>
+{% extends 'base.html' %}
+{% load static %}
 
-    <main>
-      <!-- Hakkında Bölümü -->
-      <section class="about-section">
-        <div class="container">
-          <div class="section-header">
-            <h2>Bizi Tanıyın</h2>
-            <div class="underline"></div>
-          </div>
-          <div class="about-content">
-            <div class="about-text">
-              <p>
-                4 Mizaç teorisi, insanların doğuştan gelen temel özelliklerini ve eğilimlerini anlamamıza yardımcı olur. Ekibimiz, bu değerli bilgileri bir araya getirerek kullanıcılarımıza kapsamlı testler ve kişisel öneriler sunan bir platform oluşturdu. Amacımız, insanların kendilerini daha iyi tanımalarına yardımcı olmak; kimi zaman olumsuz gördükleri bazı özelliklerin aslında doğalarının bir parçası olduğunu ve bunun gelişimin bir parçası olabileceğini fark etmelerini sağlamaktır.
-              </p>
-              <p>
-                Testimizi çözerek kendi mizaç tipinizi öğrenebilir ve hayatınızdaki farkındalığı artırabilirsiniz.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-      
-      <!-- Takım Bölümü -->
-      <section class="team-section">
-        <div class="container">
-          <div class="section-header">
-            <h2>Ekibimiz</h2>
-            <div class="underline"></div>
-          </div>
-          <div class="team-grid">
-            <div class="team-member">
-              <div class="member-info">
-                <h3>Mustafa Enes Kartal</h3>
-                <p class="member-title"><i class="fas fa-pencil-alt"></i> Content Director</p>
-                <p class="member-bio">Bilgilendirici içerikler ve mizaç testleri oluşturarak platformun bilgi kaynağını yönetir. Psikoloji Bölümü mezunudur.</p>
-                <div class="social-links">
-                  <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                  <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                </div>
-              </div>
-            </div>
-            <div class="team-member">
-              <div class="member-info">
-                <h3>İsmail Berk Kartal</h3>
-                <p class="member-title"><i class="fas fa-code"></i> Web Developer</p>
-                <p class="member-bio">Web sitesinin altyapısını geliştirir, teknik işlevselliği sağlar ve kullanıcı deneyimini optimize eder.</p>
-                <div class="social-links">
-                  <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                  <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
-                </div>
-              </div>
-            </div>
-            <div class="team-member">
-              <div class="member-info">
-                <h3>Ömer Faruk Göregen</h3>
-                <p class="member-title"><i class="fas fa-tasks"></i> Product Manager</p>
-                <p class="member-bio">Proje yönetimini üstlenir, görev dağılımını yapar ve stratejik planlamaları yönetir.</p>
-                <div class="social-links">
-                  <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                  <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      
-      <!-- İletişim Bölümü -->
-      <section class="contact-section">
-        <div class="container">
-          <div class="section-header">
-            <h2>Bize Ulaşın</h2>
-            <div class="underline"></div>
-          </div>
-          <div class="contact-content">
-            <div class="contact-info">
-              <div class="contact-item">
-                <i class="fas fa-envelope"></i>
-                <p>4mizacinfo@gmail.com</p>
-              </div>
-              <div class="contact-item">
-                <i class="fas fa-map-marker-alt"></i>
-                <p>İstanbul, Türkiye</p>
-              </div>
-              <div class="social-media">
-                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                <a href="#" aria-label="Youtube"><i class="fab fa-youtube"></i></a>
-              </div>
-            </div>
-            <div class="contact-form">
-              <form id="contactForm" action="{% url 'contact' %}" method="post">
-                {% csrf_token %}
-                <div class="form-group">
-                  <input type="text" name="name" placeholder="Adınız" required>
-                </div>
-                <div class="form-group">
-                  <input type="email" name="email" placeholder="E-posta Adresiniz" required>
-                </div>
-                <div class="form-group">
-                  <textarea name="message" placeholder="Mesajınız" rows="5" required></textarea>
-                </div>
-                <button type="submit" class="contact-button">Mesaj Gönder</button>
-              </form>
-            </div>
-          </div>
-        </div>
-      </section>
-    </main>
-    
-    <!-- Footer -->
-    <footer>
-      <div class="footer-content">
-        <div class="footer-logo">
-          <img src="{% static 'images/l2.jpg' %}" alt="MİZAÇ" class="footer-logo-img">
-          <p>Kendini keşfetmenin yeni yolu</p>
-        </div>
-        <div class="footer-links">
-          <div class="footer-column">
-            <h3>Hızlı Bağlantılar</h3>
-            <ul>
-              <li><a href="{% url 'index' %}">Ana Sayfa</a></li>
-              <li><a href="{% url 'about' %}">Hakkında</a></li>
-              <li><a href="{% url 'temperaments' %}">Mizaçlar</a></li>
-              <li><a href="{% url 'test_list' %}">Testler</a></li>
-            </ul>
-          </div>
-          <div class="footer-column">
-            <h3>Destek</h3>
-            <ul>
-              <li><a href="#">Gizlilik Politikası</a></li>
-              <li><a href="{% url 'about' %}">İletişim</a></li>
-            </ul>
-          </div>
-        </div>
+{% block title %}MİZAÇLAR | Hakkında{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/about.css' %}">
+{% endblock %}
+
+{% block content %}
+<!-- Hakkında Bölümü -->
+<section class="about-section">
+  <div class="container">
+    <div class="section-header">
+      <h2>Bizi Tanıyın</h2>
+      <div class="underline"></div>
+    </div>
+    <div class="about-content">
+      <div class="about-text">
+        <p>
+          4 Mizaç teorisi, insanların doğuştan gelen temel özelliklerini ve eğilimlerini anlamamıza yardımcı olur. Ekibimiz, bu değerli bilgileri bir araya getirerek kullanıcılarımıza kapsamlı testler ve kişisel öneriler sunan bir platform oluşturdu. Amacımız, insanların kendilerini daha iyi tanımalarına yardımcı olmak; kimi zaman olumsuz gördükleri bazı özelliklerin aslında doğalarının bir parçası olduğunu ve bunun gelişimin bir parçası olabileceğini fark etmelerini sağlamaktır.
+        </p>
+        <p>
+          Testimizi çözerek kendi mizaç tipinizi öğrenebilir ve hayatınızdaki farkındalığı artırabilirsiniz.
+        </p>
       </div>
-      <div class="footer-bottom">
-        <p>&copy; 2025 4 Mizaç | Tüm hakları saklıdır.</p>
-      </div>
-    </footer>
-    
-    <!-- Başarı mesajı için bildirim kutusu -->
-    <div id="successNotification" class="success-notification" style="display: none;"></div>
-    
+    </div>
   </div>
-  
-  <!-- JavaScript Kodları -->
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      // Profil dropdown işlemleri
-      const profileButton = document.querySelector('.profile-button');
-      const dropdownContent = document.querySelector('.dropdown-content');
-      if (profileButton) {
-        profileButton.addEventListener('click', function(event) {
-          dropdownContent.classList.toggle('show');
-          event.stopPropagation();
-        });
-        document.addEventListener('click', function() {
-          if (dropdownContent.classList.contains('show')) {
-            dropdownContent.classList.remove('show');
-          }
-        });
-      }
+</section>
+
+<!-- Takım Bölümü -->
+<section class="team-section">
+  <div class="container">
+    <div class="section-header">
+      <h2>Ekibimiz</h2>
+      <div class="underline"></div>
+    </div>
+    <div class="team-grid">
+      <div class="team-member">
+        <div class="member-info">
+          <h3>Mustafa Enes Kartal</h3>
+          <p class="member-title"><i class="fas fa-pencil-alt"></i> Content Director</p>
+          <p class="member-bio">Bilgilendirici içerikler ve mizaç testleri oluşturarak platformun bilgi kaynağını yönetir. Psikoloji Bölümü mezunudur.</p>
+          <div class="social-links">
+            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="team-member">
+        <div class="member-info">
+          <h3>İsmail Berk Kartal</h3>
+          <p class="member-title"><i class="fas fa-code"></i> Web Developer</p>
+          <p class="member-bio">Web sitesinin altyapısını geliştirir, teknik işlevselliği sağlar ve kullanıcı deneyimini optimize eder.</p>
+          <div class="social-links">
+            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="team-member">
+        <div class="member-info">
+          <h3>Ömer Faruk Göregen</h3>
+          <p class="member-title"><i class="fas fa-tasks"></i> Product Manager</p>
+          <p class="member-bio">Proje yönetimini üstlenir, görev dağılımını yapar ve stratejik planlamaları yönetir.</p>
+          <div class="social-links">
+            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- İletişim Bölümü -->
+<section class="contact-section">
+  <div class="container">
+    <div class="section-header">
+      <h2>Bize Ulaşın</h2>
+      <div class="underline"></div>
+    </div>
+    <div class="contact-content">
+      <div class="contact-info">
+        <div class="contact-item">
+          <i class="fas fa-envelope"></i>
+          <p>4mizacinfo@gmail.com</p>
+        </div>
+        <div class="contact-item">
+          <i class="fas fa-map-marker-alt"></i>
+          <p>İstanbul, Türkiye</p>
+        </div>
+        <div class="social-media">
+          <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#" aria-label="Youtube"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+      <div class="contact-form">
+        <form id="contactForm" action="{% url 'contact' %}" method="post">
+          {% csrf_token %}
+          <div class="form-group">
+            <input type="text" name="name" placeholder="Adınız" required>
+          </div>
+          <div class="form-group">
+            <input type="email" name="email" placeholder="E-posta Adresiniz" required>
+          </div>
+          <div class="form-group">
+            <textarea name="message" placeholder="Mesajınız" rows="5" required></textarea>
+          </div>
+          <button type="submit" class="contact-button">Mesaj Gönder</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Başarı mesajı için bildirim kutusu -->
+<div id="successNotification" class="success-notification" style="display: none;"></div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // AJAX ile form gönderimi
+    const contactForm = document.getElementById('contactForm');
+    contactForm.addEventListener('submit', function(e) {
+      e.preventDefault(); // Sayfanın yenilenmesini engelle
       
-      // Hamburger menü işlemleri
-      const hamburgerButton = document.querySelector(".hamburger-button");
-      const navLinks = document.querySelector(".nav-links");
-      hamburgerButton.addEventListener("click", function() {
-        navLinks.classList.toggle("open");
-        hamburgerButton.classList.toggle("active");
-      });
+      // Form verilerini topla
+      const formData = new FormData(contactForm);
       
-      // AJAX ile form gönderimi
-      const contactForm = document.getElementById('contactForm');
-      contactForm.addEventListener('submit', function(e) {
-        e.preventDefault(); // Sayfanın yenilenmesini engelle
+      // AJAX isteğini gönder
+      fetch(contactForm.action, {
+        method: 'POST',
+        body: formData
+      })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Ağ hatası oluştu.');
+        }
+        return response.json(); // JSON yanıt bekleniyor
+      })
+      .then(data => {
+        console.log('Sunucudan gelen veri:', data);
+        const successNotification = document.getElementById('successNotification');
+        // Sunucudan gelen JSON içerisinde 'success' varsa onu, yoksa varsayılan mesajı kullan
+        successNotification.innerText = data.success || 'Mesaj gönderilmiştir.';
+        successNotification.style.display = 'block';
         
-        // Form verilerini topla
-        const formData = new FormData(contactForm);
+        // Bildirimi kısa bir gecikmeyle görünür yap
+        setTimeout(function(){
+          successNotification.classList.add('show');
+        }, 100);
         
-        // AJAX isteğini gönder
-        fetch(contactForm.action, {
-          method: 'POST',
-          body: formData
-        })
-        .then(response => {
-          if (!response.ok) {
-            throw new Error('Ağ hatası oluştu.');
-          }
-          return response.json(); // JSON yanıt bekleniyor
-        })
-        .then(data => {
-          console.log('Sunucudan gelen veri:', data);
-          const successNotification = document.getElementById('successNotification');
-          // Sunucudan gelen JSON içerisinde 'success' varsa onu, yoksa varsayılan mesajı kullan
-          successNotification.innerText = data.success || 'Mesaj gönderilmiştir.';
-          successNotification.style.display = 'block';
-          
-          // Bildirimi kısa bir gecikmeyle görünür yap
+        // 5 saniye sonra bildirimi kaybolacak şekilde ayarla
+        setTimeout(function(){
+          successNotification.classList.remove('show');
           setTimeout(function(){
-            successNotification.classList.add('show');
-          }, 100);
-          
-          // 5 saniye sonra bildirimi kaybolacak şekilde ayarla
-          setTimeout(function(){
-            successNotification.classList.remove('show');
-            setTimeout(function(){
-              successNotification.style.display = 'none';
-            }, 500);
-          }, 5000);
-          
-          // Formu temizle
-          contactForm.reset();
-        })
-        .catch(error => {
-          console.error('Hata:', error);
-        });
+            successNotification.style.display = 'none';
+          }, 500);
+        }, 5000);
+        
+        // Formu temizle
+        contactForm.reset();
+      })
+      .catch(error => {
+        console.error('Hata:', error);
       });
-      
     });
-  </script>
-</body>
-</html>
+  });
+</script>
+{% endblock %}
