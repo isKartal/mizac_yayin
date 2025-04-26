@@ -58,15 +58,36 @@
 /* Ön Yüz */
 .flip-card-front {
   background: linear-gradient(135deg, #ffffff, #f9f9f9);
-  color: var(--primary-color);
+  color: #222;
 }
 
 /* Arka Yüz */
 .flip-card-back {
-  background: linear-gradient(135deg, var(--accent-color), #ff7e5f);
   color: var(--light-text);
   transform: rotateY(180deg);
   text-align: center;
+}
+
+/* Elementlere özel arka yüz renkleri */
+.flip-card .flip-card-back {
+  background: linear-gradient(135deg, var(--accent-color), #ff7e5f);
+}
+
+/* Her element için özel arka plan renkleri */
+.flip-card:nth-child(1) .flip-card-back {
+  background: linear-gradient(135deg, #e74c3c, #ff9966); /* Ateş */
+}
+
+.flip-card:nth-child(2) .flip-card-back {
+  background: linear-gradient(135deg, #3498db, #a1c4fd); /* Hava */
+}
+
+.flip-card:nth-child(3) .flip-card-back {
+  background: linear-gradient(135deg, #2980b9, #48c6ef); /* Su */
+}
+
+.flip-card:nth-child(4) .flip-card-back {
+  background: linear-gradient(135deg, #e67e22, #dfa579); /* Toprak */
 }
 
 /* Kart İkonu */
@@ -78,7 +99,41 @@
   align-items: center;
   justify-content: center;
   margin-bottom: 12px;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease;
+}
+
+/* Element ikonları için renk tanımlamaları */
+.card-circle.fire {
+  background-color: rgba(231, 76, 60, 0.15);
+}
+
+.card-circle.air {
+  background-color: rgba(52, 152, 219, 0.15);
+}
+
+.card-circle.water {
+  background-color: rgba(41, 128, 185, 0.15);
+}
+
+.card-circle.earth {
+  background-color: rgba(230, 126, 34, 0.15);
+}
+
+/* İkon renkleri */
+.card-circle.fire i {
+  color: #e74c3c;
+}
+
+.card-circle.air i {
+  color: #3498db;
+}
+
+.card-circle.water i {
+  color: #2980b9;
+}
+
+.card-circle.earth i {
+  color: #e67e22;
 }
 
 .card-circle i {
@@ -89,6 +144,11 @@
 .flip-card-back h3 {
   font-size: 1.6rem;
   margin-bottom: 10px;
+  color: #222; /* Yazılar siyah kalsın */
+}
+
+.flip-card-back h3 {
+  color: white; /* Arka yüzdeki başlıklar beyaz olsun */
 }
 
 .flip-card-back p {
