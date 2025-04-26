@@ -1,6 +1,13 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load socialaccount %}
+
+{% block title %}MİZAÇLAR | Profil Ayarlarım{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/profiles.css' %}">
+{% endblock %}
+
 {% block content %}
 <div class="container">
   <div class="profile-settings-container">
@@ -77,70 +84,9 @@
     </div>
   </div>
 </div>
+{% endblock %}
 
-<style>
-  .confirmation-dialog {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-  }
-  
-  .confirmation-content {
-    background-color: white;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-    max-width: 500px;
-    width: 90%;
-    text-align: center;
-  }
-  
-  .confirmation-content h4 {
-    color: #e74c3c;
-    margin-bottom: 15px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-  }
-  
-  .confirmation-content p {
-    margin-bottom: 20px;
-    line-height: 1.5;
-  }
-  
-  .confirmation-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-  }
-  
-  .btn-warning {
-    background-color: #f39c12;
-    color: white;
-  }
-  
-  .btn-warning:hover {
-    background-color: #e67e22;
-  }
-  
-  .btn-danger {
-    background-color: #e74c3c;
-    color: white;
-  }
-  
-  .btn-danger:hover {
-    background-color: #c0392b;
-  }
-</style>
-
+{% block extra_js %}
 <script>
   document.addEventListener('DOMContentLoaded', function() {
     const restartTestBtn = document.getElementById('restart-test-btn');

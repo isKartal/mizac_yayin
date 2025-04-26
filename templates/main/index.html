@@ -1,352 +1,145 @@
-<!DOCTYPE html>
-<html lang="tr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MİZAÇLAR | Kendini Keşfet</title>
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'css/index.css' %}">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Montserrat:wght@400;500;600;700&family=Lora:wght@400;500;600&display=swap" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <meta name="description" content="Dört temel mizaç tipiyle kendinizi keşfedin. Ücretsiz testlerle kişiliğinizi, güçlü yanlarınızı ve potansiyelinizi ortaya çıkarın.">
-</head>
-<body>
-    <div class="page-container">
-        <header class="nav-container">
-            <div class="header-content">
-                <a href="{% url 'index' %}" class="logo">
-                    <img src="{% static 'images/logo.jpg' %}" alt="MİZAÇ" class="logo-img">
-                </a>
-                <!-- Hamburger Menü Butonu -->
-                <button class="hamburger-button" aria-label="Menüyü Aç/Kapat">
-                    <i class="fas fa-bars" id="menu-icon"></i>
-                </button>
-            
-                <nav class="nav-links">
-                    <a href="{% url 'about' %}" class="nav-item">HAKKINDA</a>
-                    <a href="{% url 'temperaments' %}" class="nav-item">MİZAÇLAR</a>
-                    <a href="{% url 'test_list' %}" class="nav-item">TESTE BAŞLA</a>
-                    
-                    <!-- Mobil görünümde profil/giriş butonları -->
-                    <div class="mobile-auth">
-                        {% if user.is_authenticated %}
-                            <a href="{% url 'my_temperament' %}" class="nav-item mobile-only"><i class="fas fa-star"></i> MİZACIM</a>
-                            <a href="{% url 'profiles' %}" class="nav-item mobile-only"><i class="fas fa-cog"></i> PROFİL</a>
-                            <a href="{% url 'logout' %}" class="nav-item mobile-only"><i class="fas fa-sign-out-alt"></i> ÇIKIŞ YAP</a>
-                        {% else %}
-                            <a href="{% url 'login' %}" class="nav-item mobile-only"><i class="fas fa-sign-in-alt"></i> GİRİŞ YAP</a>
-                        {% endif %}
-                    </div>
-                </nav>
-            
-                {% if user.is_authenticated %}
-                <div class="profile-container">
-                    <button class="profile-button">
-                        <i class="fas fa-user-circle"></i>
-                        <span class="username-display">{{ user.username }}</span>
-                    </button>
-                    <div class="dropdown-content">
-                        <div class="dropdown-username">{{ user.username }}</div>
-                        <a href="{% url 'my_temperament' %}"><i class="fas fa-star"></i> Mizacım</a>
-                        <a href="{% url 'my_suggestions' %}"><i class="fas fa-lightbulb"></i> Önerilerim</a>
-                        <a href="{% url 'profiles' %}"><i class="fas fa-cog"></i> Profil Ayarlarım</a>
-                        <a href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i> Çıkış Yap</a>
-                    </div>
-                </div>
-                {% else %}
-                    <a href="{% url 'login' %}" class="login-button"><i class="fas fa-sign-in-alt"></i> GİRİŞ YAP</a>
-                {% endif %}
-            </div>
-        </header>
-        
-        <!-- Yan Çekmece Menü - Header dışında olmalı -->
-        <div class="menu-overlay"></div>
-        <div class="side-menu">
-            {% if user.is_authenticated %}
-            <div class="side-menu-header">
-                <div class="user-info">
-                    <i class="fas fa-user-circle user-avatar"></i>
-                    <div class="user-name">{{ user.username }}</div>
-                </div>
-            </div>
-            {% endif %}
-            
-            <nav class="side-menu-nav">
-                <a href="{% url 'about' %}" class="side-menu-item"><i class="fas fa-info-circle"></i> HAKKINDA</a>
-                <a href="{% url 'temperaments' %}" class="side-menu-item"><i class="fas fa-balance-scale"></i> MİZAÇLAR</a>
-                <a href="{% url 'test_list' %}" class="side-menu-item"><i class="fas fa-tasks"></i> TESTE BAŞLA</a>
-                
-                {% if user.is_authenticated %}
-                <div class="side-menu-section">
-                    <div class="section-title">PROFİL</div>
-                    <a href="{% url 'my_temperament' %}" class="side-menu-item"><i class="fas fa-star"></i> Mizacım</a>
-                    <a href="{% url 'my_suggestions' %}" class="side-menu-item"><i class="fas fa-lightbulb"></i> Önerilerim</a>
-                    <a href="{% url 'profiles' %}" class="side-menu-item"><i class="fas fa-cog"></i> Profil Ayarlarım</a>
-                    <a href="{% url 'logout' %}" class="side-menu-item"><i class="fas fa-sign-out-alt"></i> Çıkış Yap</a>
-                </div>
-                {% else %}
-                <div class="side-menu-section">
-                    <a href="{% url 'login' %}" class="side-menu-item active"><i class="fas fa-sign-in-alt"></i> GİRİŞ YAP</a>
-                </div>
-                {% endif %}
-            </nav>
-        </div>
-        
-        <main>
-            <section class="hero-section">
-                <div class="hero-content">
-                    <h1 class="mizac-nedir-title">Mizacınızı Keşfedin</h1>
-                    <p class="mizac-nedir-text">
-                        Mizaç, bir kişinin doğuştan gelen, hayata bakışını ve tepkilerini şekillendiren karakter özellikleridir.
-                        4 ana mizaç tipinden hangisine sahip olduğunuzu öğrenmek için ücretsiz testimizi çözün.
-                    </p>
-                    <a href="{% url 'test_list' %}" class="start-test-button">TESTE BAŞLA <i class="fas fa-arrow-right"></i></a>
-                </div>
-            </section>
-            
-            <section class="elements-section">
-                <div class="container">
-                    <h2 class="section-title">Dört Temel Mizaç</h2>
-                    <p class="section-description">Antik çağlardan günümüze kadar süregelen dört temel mizaç tipini tanıyın ve kendinizi keşfedin.</p>
-                    
-                    <div class="element-grid">
-                        <!-- Ateş Elementi -->
-                        <div class="element-card">
-                            <div class="element-icon fire-icon">
-                                <i class="fas fa-fire"></i>
-                            </div>
-                            <h3>ATEŞ</h3>
-                            <p>Ateş mizaçlı kişiler enerjik, tutkulu ve liderlik özelliklerine sahiptir. Hızlı karar verme yetenekleri ve yenilikçi düşünce tarzları ile tanınırlar.</p>
-                            <a href="{% url 'fire_more' %}" class="element-link">DAHA FAZLASI <i class="fas fa-arrow-right"></i></a>
-                        </div>
-                
-                        <!-- Hava Elementi -->
-                        <div class="element-card">
-                            <div class="element-icon air-icon">
-                                <i class="fas fa-wind"></i>
-                            </div>
-                            <h3>HAVA</h3>
-                            <p>Hava mizaçlı kişiler iletişime açık, analitik ve sosyal yönleri güçlü kişilerdir. Farklı bakış açıları geliştirme ve analiz etme konusunda ustadırlar.</p>
-                            <a href="{% url 'air_more' %}" class="element-link">DAHA FAZLASI <i class="fas fa-arrow-right"></i></a>
-                        </div>
-                
-                        <!-- Toprak Elementi -->
-                        <div class="element-card">
-                            <div class="element-icon earth-icon">
-                                <i class="fas fa-mountain"></i>
-                            </div>
-                            <h3>TOPRAK</h3>
-                            <p>Toprak mizaçlı kişiler güvenilir, kararlı ve pratik düşünce yapısına sahiptirler. Organizasyon ve planlama konularında doğal yetenekleri vardır.</p>
-                            <a href="{% url 'earth_more' %}" class="element-link">DAHA FAZLASI <i class="fas fa-arrow-right"></i></a>
-                        </div>
-                
-                        <!-- Su Elementi -->
-                        <div class="element-card">
-                            <div class="element-icon water-icon">
-                                <i class="fa-solid fa-fire-flame-simple"></i>
-                            </div>
-                            <h3>SU</h3>
-                            <p>Su mizaçlı kişiler duygusal derinliğe, güçlü sezgilere ve empati yeteneğine sahiptir. İlişkiler konusunda hassas ve anlayışlı bir yaklaşım sergilerler.</p>
-                            <a href="{% url 'water_more' %}" class="element-link">DAHA FAZLASI <i class="fas fa-arrow-right"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            
-            <section class="advantage-section">
-                <div class="container">
-                    <h2 class="section-title">Mizacınızı Bilmenin Avantajları</h2>
-                    <p class="section-description">Kendinizi daha iyi tanımanın ve mizacınızı anlamanın size sağlayacağı faydaları keşfedin.</p>
-                    <div class="advantage-grid">
-                        <div class="advantage-card">
-                            <div class="advantage-icon">
-                                <i class="fas fa-brain"></i>
-                            </div>
-                            <h3>Kendinizi Anlama</h3>
-                            <p>Davranışlarınızın ve tepkilerinizin arkasındaki nedenleri daha iyi anlayarak kendi potansiyelinizi keşfedin.</p>
-                        </div>
-                        <div class="advantage-card">
-                            <div class="advantage-icon">
-                                <i class="fas fa-users"></i>
-                            </div>
-                            <h3>Daha İyi İlişkiler</h3>
-                            <p>Kendi mizacınızı ve başkalarının mizaçlarını anlayarak daha sağlıklı ve anlamlı ilişkiler kurun.</p>
-                        </div>
-                        <div class="advantage-card">
-                            <div class="advantage-icon">
-                                <i class="fas fa-chart-line"></i>
-                            </div>
-                            <h3>Kariyer Gelişimi</h3>
-                            <p>Mizacınıza uygun kariyer seçeneklerini belirleyerek çalışma hayatınızda daha başarılı ve mutlu olun.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            
-            <section class="cta-section">
-                <div class="container">
-                    <div class="cta-content">
-                        <h2>Mizacınızı Keşfetmeye Hazır Mısınız?</h2>
-                        <p>Ücretsiz mizaç testimiz ile kendinizi daha iyi tanıyın ve kişisel gelişiminize yön verin.</p>
-                        <a href="{% url 'test_list' %}" class="cta-button">ŞİMDİ TESTE BAŞLA <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </div>
-            </section>
-        </main>
+{% extends 'base.html' %}
+{% load static %}
 
-        <footer>
-            <div class="container">
-                <div class="footer-content">
-                    <div class="footer-logo">
-                        <img src="{% static 'images/l2.jpg' %}" alt="MİZAÇ" class="footer-logo-img">
-                        <p>Kendini keşfetmenin yeni yolu</p>
-                    </div>
-                    <div class="footer-links">
-                        <div class="footer-column">
-                            <h3>Hızlı Bağlantılar</h3>
-                            <ul>
-                                <li><a href="{% url 'index' %}">Ana Sayfa</a></li>
-                                <li><a href="{% url 'about' %}">Hakkında</a></li>
-                                <li><a href="{% url 'temperaments' %}">Mizaçlar</a></li>
-                                <li><a href="{% url 'test_list' %}">Testler</a></li>
-                            </ul>
-                        </div>
-                        <div class="footer-column">
-                            <h3>Destek</h3>
-                            <ul>
-                                <li><a href="#">Gizlilik Politikası</a></li>
-                                <li><a href="{% url 'about' %}">İletişim</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="footer-social">
-                        <h3>Bizi Takip Edin</h3>
-                        <div class="social-icons">
-                            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                            <a href="#" aria-label="Youtube"><i class="fab fa-youtube"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="footer-bottom">
-                    <p>&copy; 2025 4 Mizaç | Tüm hakları saklıdır.</p>
-                </div>
-            </div>
-        </footer>
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/index.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="hero-section">
+    <div class="hero-content">
+        <h1 class="mizac-nedir-title">Mizacınızı Keşfedin</h1>
+        <p class="mizac-nedir-text">
+            Mizaç, bir kişinin doğuştan gelen, hayata bakışını ve tepkilerini şekillendiren karakter özellikleridir.
+            4 ana mizaç tipinden hangisine sahip olduğunuzu öğrenmek için ücretsiz testimizi çözün.
+        </p>
+        <a href="{% url 'test_list' %}" class="start-test-button">TESTE BAŞLA <i class="fas fa-arrow-right"></i></a>
     </div>
+</section>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Profil dropdown menüsü
-            const profileButton = document.querySelector('.profile-button');
-            const dropdownContent = document.querySelector('.dropdown-content');
+<section class="elements-section">
+    <div class="container">
+        <h2 class="section-title">Dört Temel Mizaç</h2>
+        <p class="section-description">Antik çağlardan günümüze kadar süregelen dört temel mizaç tipini tanıyın ve kendinizi keşfedin.</p>
         
-            if (profileButton) {
-                profileButton.addEventListener('click', function(event) {
-                    dropdownContent.classList.toggle('show');
-                    event.stopPropagation();
-                });
-        
-                // Dropdown dışına tıklandığında kapansın
-                document.addEventListener('click', function() {
-                    if (dropdownContent && dropdownContent.classList.contains('show')) {
-                        dropdownContent.classList.remove('show');
-                    }
-                });
-            }
-        
-            // Header scroll efekti
-            const header = document.querySelector('.nav-container');
-            window.addEventListener('scroll', function() {
-                if (window.scrollY > 100) {
-                    header.classList.add('scrolled');
-                } else {
-                    header.classList.remove('scrolled');
+        <div class="element-grid">
+            <!-- Ateş Elementi -->
+            <div class="element-card">
+                <div class="element-icon fire-icon">
+                    <i class="fas fa-fire"></i>
+                </div>
+                <h3>ATEŞ</h3>
+                <p>Ateş mizaçlı kişiler enerjik, tutkulu ve liderlik özelliklerine sahiptir. Hızlı karar verme yetenekleri ve yenilikçi düşünce tarzları ile tanınırlar.</p>
+                <a href="{% url 'fire_more' %}" class="element-link">DAHA FAZLASI <i class="fas fa-arrow-right"></i></a>
+            </div>
+    
+            <!-- Hava Elementi -->
+            <div class="element-card">
+                <div class="element-icon air-icon">
+                    <i class="fas fa-wind"></i>
+                </div>
+                <h3>HAVA</h3>
+                <p>Hava mizaçlı kişiler iletişime açık, analitik ve sosyal yönleri güçlü kişilerdir. Farklı bakış açıları geliştirme ve analiz etme konusunda ustadırlar.</p>
+                <a href="{% url 'air_more' %}" class="element-link">DAHA FAZLASI <i class="fas fa-arrow-right"></i></a>
+            </div>
+    
+            <!-- Toprak Elementi -->
+            <div class="element-card">
+                <div class="element-icon earth-icon">
+                    <i class="fas fa-mountain"></i>
+                </div>
+                <h3>TOPRAK</h3>
+                <p>Toprak mizaçlı kişiler güvenilir, kararlı ve pratik düşünce yapısına sahiptirler. Organizasyon ve planlama konularında doğal yetenekleri vardır.</p>
+                <a href="{% url 'earth_more' %}" class="element-link">DAHA FAZLASI <i class="fas fa-arrow-right"></i></a>
+            </div>
+    
+            <!-- Su Elementi -->
+            <div class="element-card">
+                <div class="element-icon water-icon">
+                    <i class="fa-solid fa-fire-flame-simple"></i>
+                </div>
+                <h3>SU</h3>
+                <p>Su mizaçlı kişiler duygusal derinliğe, güçlü sezgilere ve empati yeteneğine sahiptir. İlişkiler konusunda hassas ve anlayışlı bir yaklaşım sergilerler.</p>
+                <a href="{% url 'water_more' %}" class="element-link">DAHA FAZLASI <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="advantage-section">
+    <div class="container">
+        <h2 class="section-title">Mizacınızı Bilmenin Avantajları</h2>
+        <p class="section-description">Kendinizi daha iyi tanımanın ve mizacınızı anlamanın size sağlayacağı faydaları keşfedin.</p>
+        <div class="advantage-grid">
+            <div class="advantage-card">
+                <div class="advantage-icon">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <h3>Kendinizi Anlama</h3>
+                <p>Davranışlarınızın ve tepkilerinizin arkasındaki nedenleri daha iyi anlayarak kendi potansiyelinizi keşfedin.</p>
+            </div>
+            <div class="advantage-card">
+                <div class="advantage-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <h3>Daha İyi İlişkiler</h3>
+                <p>Kendi mizacınızı ve başkalarının mizaçlarını anlayarak daha sağlıklı ve anlamlı ilişkiler kurun.</p>
+            </div>
+            <div class="advantage-card">
+                <div class="advantage-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h3>Kariyer Gelişimi</h3>
+                <p>Mizacınıza uygun kariyer seçeneklerini belirleyerek çalışma hayatınızda daha başarılı ve mutlu olun.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="cta-section">
+    <div class="container">
+        <div class="cta-content">
+            <h2>Mizacınızı Keşfetmeye Hazır Mısınız?</h2>
+            <p>Ücretsiz mizaç testimiz ile kendinizi daha iyi tanıyın ve kişisel gelişiminize yön verin.</p>
+            <a href="{% url 'test_list' %}" class="cta-button">ŞİMDİ TESTE BAŞLA <i class="fas fa-arrow-right"></i></a>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Sayfa elementi görünürlüğü için IntersectionObserver kullanımı
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('appear');
                 }
             });
-        
-            const hamburgerButton = document.querySelector('.hamburger-button');
-const sideMenu = document.querySelector('.side-menu');
-const menuOverlay = document.querySelector('.menu-overlay');
-const menuIcon = document.getElementById('menu-icon');
-const body = document.body;
-
-// Hamburger menü tıklaması
-if (hamburgerButton && sideMenu) {
-    hamburgerButton.addEventListener('click', function() {
-        sideMenu.classList.toggle('open');
-        menuOverlay.classList.toggle('active');
-        
-        // Hamburger ikonunu değiştir
-        if (menuIcon.classList.contains('fa-bars')) {
-            menuIcon.classList.remove('fa-bars');
-            menuIcon.classList.add('fa-times');
-            // Menü açıkken sayfanın kaydırılmasını engelle
-            body.style.overflow = 'hidden';
-        } else {
-            menuIcon.classList.remove('fa-times');
-            menuIcon.classList.add('fa-bars');
-            // Menü kapandığında sayfanın kaydırılmasına izin ver
-            body.style.overflow = '';
-        }
-    });
-}
-
-// Overlay tıklaması ile menüyü kapat
-if (menuOverlay) {
-    menuOverlay.addEventListener('click', function() {
-        sideMenu.classList.remove('open');
-        menuOverlay.classList.remove('active');
-        menuIcon.classList.remove('fa-times');
-        menuIcon.classList.add('fa-bars');
-        body.style.overflow = '';
-    });
-}
-
-// Yan menüdeki linklere tıklandığında menüyü kapat
-const menuLinks = document.querySelectorAll('.side-menu-item');
-menuLinks.forEach(link => {
-    link.addEventListener('click', function() {
-        sideMenu.classList.remove('open');
-        menuOverlay.classList.remove('active');
-        menuIcon.classList.remove('fa-times');
-        menuIcon.classList.add('fa-bars');
-        body.style.overflow = '';
-    });
-});
-        
-            // Sayfa elementi görünürlüğü için IntersectionObserver kullanımı
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('appear');
-                    }
-                });
-            }, {
-                threshold: 0.1
-            });
-        
-            // Animasyon eklenecek elementler
-            document.querySelectorAll('.element-card, .advantage-card, .section-title, .section-description').forEach(el => {
-                observer.observe(el);
-            });
-        
-            // Sectionlar için görünürlük animasyonu
-            const sectionObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('show-section');
-                    }
-                });
-            }, {
-                threshold: 0.1
-            });
-        
-            document.querySelectorAll('.elements-section, .advantage-section, .cta-section').forEach(section => {
-                sectionObserver.observe(section);
-            });
+        }, {
+            threshold: 0.1
         });
-    </script>
-</body>
-</html>
+    
+        // Animasyon eklenecek elementler
+        document.querySelectorAll('.element-card, .advantage-card, .section-title, .section-description').forEach(el => {
+            observer.observe(el);
+        });
+    
+        // Sectionlar için görünürlük animasyonu
+        const sectionObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('show-section');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+    
+        document.querySelectorAll('.elements-section, .advantage-section, .cta-section').forEach(section => {
+            sectionObserver.observe(section);
+        });
+    });
+</script>
+{% endblock %}
