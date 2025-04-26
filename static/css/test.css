@@ -2,462 +2,677 @@
 
 /* Test intro page styles */
 .test-intro-container {
-    max-width: 800px;
-    margin: 2rem auto;
-    padding: 2rem;
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.test-info {
+  margin: 2rem 0;
+}
+
+.intro-card, .test-instructions, .time-estimate {
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.test-instructions ul {
+  padding-left: 1.5rem;
+  margin-top: 1rem;
+}
+
+.test-instructions li {
+  margin-bottom: 0.8rem;
+  line-height: 1.5;
+}
+
+.start-test-btn {
+  font-size: 1.2rem;
+  padding: 0.8rem 2rem;
+  transition: transform 0.2s ease;
+}
+
+.start-test-btn:hover {
+  transform: scale(1.05);
+}
+
+/* Test taking page styles */
+.test-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 30px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.test-phase-indicator {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.phase-badge {
+  display: inline-block;
+  background-color: #4a6fa5;
+  color: white;
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 0.95em;
+  font-weight: 500;
+}
+
+.test-progress {
+  margin-bottom: 30px;
+}
+
+.progress-bar {
+  height: 8px;
+  background-color: #eee;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.progress-fill {
+  height: 100%;
+  background-color: #4a6fa5;
+  border-radius: 4px;
+  transition: width 0.3s ease;
+}
+
+.progress-text {
+  text-align: right;
+  font-size: 0.9em;
+  color: #666;
+}
+
+.question-container {
+  margin-bottom: 30px;
+}
+
+.question-text {
+  font-size: 1.3rem;
+  margin-bottom: 20px;
+  line-height: 1.5;
+  color: #333;
+}
+
+.choices-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.choice-label {
+  display: flex;
+  align-items: center;
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.choice-label:hover {
+  background-color: #f8f9fa;
+  border-color: #aaa;
+}
+
+.choice-label input[type="radio"] {
+  margin-right: 15px;
+  transform: scale(1.2);
+}
+
+.choice-text {
+  font-size: 1rem;
+  color: #333;
+}
+
+.form-buttons {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* Soru tiplerine göre renk özelleştirmeleri */
+[data-question-type="WARM"] .phase-badge {
+  background-color: #e74c3c;
+}
+
+[data-question-type="WARM"] .progress-fill {
+  background-color: #e74c3c;
+}
+
+[data-question-type="WARM_MOIST"] .phase-badge,
+[data-question-type="COLD_MOIST"] .phase-badge {
+  background-color: #2980b9;
+}
+
+[data-question-type="WARM_MOIST"] .progress-fill,
+[data-question-type="COLD_MOIST"] .progress-fill {
+  background-color: #2980b9;
+}
+
+/* Test sonuç sayfası için stiller */
+.result-container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+}
+
+.result-title {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #333;
+  font-weight: 700;
+}
+
+.result-summary {
+  background-color: white;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 30px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.element-properties {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.element-properties h3 {
+  margin-bottom: 15px;
+  color: #333;
+  font-weight: 600;
+}
+
+.property-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.property-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.property-label {
+  font-weight: 600;
+  color: #333;
+}
+
+.property-value {
+  font-weight: 600;
+  padding: 2px 10px;
+  border-radius: 12px;
+  color: white;
+}
+
+.property-value.sıcak {
+  background-color: #e74c3c;
+}
+
+.property-value.soğuk {
+  background-color: #3498db;
+}
+
+.property-value.nemli {
+  background-color: #2980b9;
+}
+
+.property-value.kuru {
+  background-color: #e67e22;
+}
+
+.intensity-bar {
+  height: 10px;
+  background-color: #eee;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.intensity-fill {
+  height: 100%;
+  border-radius: 5px;
+}
+
+.intensity-fill.sıcak {
+  background-color: #e74c3c;
+}
+
+.intensity-fill.soğuk {
+  background-color: #3498db;
+}
+
+.intensity-fill.nemli {
+  background-color: #2980b9;
+}
+
+.intensity-fill.kuru {
+  background-color: #e67e22;
+}
+
+.raw-scores {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85em;
+  color: #666;
+}
+
+.raw-score {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 10px;
+  background-color: #f8f9fa;
+}
+
+.raw-score.warm {
+  color: #e74c3c;
+}
+
+.raw-score.cold {
+  color: #3498db;
+}
+
+.raw-score.moist {
+  color: #2980b9;
+}
+
+.raw-score.dry {
+  color: #e67e22;
+}
+
+/* Element kartı ve görselleri için stil tanımlamaları */
+.dominant-element-card {
+  position: relative;
+  padding: 30px;
+  border-radius: 12px;
+  margin-bottom: 30px;
+  overflow: hidden;
+  color: white;
+  text-align: center;
+}
+
+.dominant-element-card.ateş {
+  background: linear-gradient(135deg, #ff5e62, #ff9966);
+}
+
+.dominant-element-card.hava {
+  background: linear-gradient(135deg, #76c5f5, #a1c4fd);
+}
+
+.dominant-element-card.su {
+  background: linear-gradient(135deg, #48c6ef, #6f86d6);
+}
+
+.dominant-element-card.toprak {
+  background: linear-gradient(135deg, #c79081, #dfa579);
+}
+
+.element-image-container {
+  position: relative;
+  margin: 25px auto;
+  width: 100%;
+  max-width: 500px;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+.element-image {
+  width: 100%;
+  height: 280px;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+.element-image:hover {
+  transform: scale(1.05);
+}
+
+.element-badge {
+  display: inline-block;
+  padding: 8px 15px;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-bottom: 15px;
+  backdrop-filter: blur(5px);
+}
+
+.element-icon {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 36px;
+  opacity: 0.8;
+}
+
+.element-title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-top: 20px;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.no-image-text {
+  padding: 40px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  font-size: 1.1rem;
+}
+
+.element-details {
+  background-color: white;
+  border-radius: 10px;
+  padding: 25px;
+  margin-top: 30px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.element-details h3 {
+  margin-bottom: 20px;
+  font-weight: 600;
+  color: #333;
+}
+
+.element-description {
+  line-height: 1.8;
+  font-size: 1.05rem;
+}
+
+.element-recommendations {
+  background-color: white;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 30px 0;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.element-recommendations h3 {
+  margin-bottom: 20px;
+  color: #333;
+  font-weight: 600;
+}
+
+.recommendations-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.recommendation-item {
+  display: flex;
+  gap: 15px;
+  align-items: flex-start;
+}
+
+.recommendation-number {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background-color: #4a6fa5;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.recommendation-text {
+  flex: 1;
+  line-height: 1.5;
+}
+
+/* Element numara kutuları için element renkleri */
+.dominant-element-card.ateş .recommendation-number {
+  background-color: #e74c3c;
+}
+
+.dominant-element-card.hava .recommendation-number {
+  background-color: #3498db;
+}
+
+.dominant-element-card.su .recommendation-number {
+  background-color: #2980b9;
+}
+
+.dominant-element-card.toprak .recommendation-number {
+  background-color: #e67e22;
+}
+
+/* Butonlar için stil tanımlamaları */
+.button-container {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 30px;
+}
+
+.btn {
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  display: inline-block;
+  text-align: center;
+}
+
+.btn-accent {
+  background-color: #4a6fa5;
+  color: white;
+}
+
+.btn-accent:hover {
+  background-color: #3d5d8a;
+  transform: translateY(-2px);
+}
+
+.btn-secondary {
+  background-color: #f2f2f2;
+  color: #333;
+}
+
+.btn-secondary:hover {
+  background-color: #e5e5e5;
+  transform: translateY(-2px);
+}
+
+/* Element detay sayfası için stiller */
+.element-detail {
+  background-color: white;
+  border-radius: var(--card-radius);
+  box-shadow: var(--card-shadow);
+  padding: 40px;
+  margin: 20px 0;
+}
+
+.element-detail h1 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+  color: var(--primary-color);
+  text-align: center;
+}
+
+.element-full-description {
+  background-color: var(--secondary-color);
+  padding: 25px;
+  border-radius: var(--border-radius);
+  margin: 25px 0;
+  font-size: 1.1rem;
+  line-height: 1.8;
+}
+
+.element-sections {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 30px;
+  margin: 30px 0;
+}
+
+.element-section {
+  background-color: var(--secondary-color);
+  border-radius: var(--border-radius);
+  padding: 25px;
+  height: 100%;
+}
+
+.element-card-container {
+  display: flex;
+  justify-content: center;
+  margin: 30px 0;
+}
+
+/* Sonuç bulunamadı durum mesajı için stil */
+.no-result-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 20px;
+  background-color: var(--secondary-color);
+  border-radius: var(--border-radius);
+  margin: 30px 0;
+}
+
+.no-result-icon {
+  font-size: 3rem;
+  color: #8d6e63;
+  margin-bottom: 20px;
+  opacity: 0.7;
+}
+
+.no-result-text {
+  font-size: 1.3rem;
+  margin-bottom: 30px;
+  text-align: center;
+  color: #666;
+}
+
+/* Öneri kutuları için geliştirilmiş stiller */
+.öneri-kutusu {
+  position: relative;
+  background-color: white;
+  padding: 25px 25px 25px 40px;
+  border-radius: var(--border-radius);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.03);
+  transition: var(--transition);
+  border-left: 4px solid var(--accent-color);
+  line-height: 1.6;
+}
+
+.öneri-numara {
+  position: absolute;
+  left: -15px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 30px;
+  height: 30px;
+  background-color: var(--accent-color);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 0.9rem;
+  box-shadow: 0 3px 10px rgba(233, 180, 76, 0.3);
+}
+
+.öneri-içerik {
+  font-size: 1.05rem;
+}
+
+/* Responsive Ayarlar */
+@media (min-width: 992px) {
+  .element-sections {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .test-container, 
+  .result-container {
+    padding: 20px;
   }
   
-  .test-info {
-    margin: 2rem 0;
+  .element-detail {
+    padding: 25px;
   }
   
-  .intro-card, .test-instructions, .time-estimate {
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    padding: 1.5rem;
-    margin-bottom: 1.5rem;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  .dominant-element-card {
+    padding: 20px;
   }
   
-  .test-instructions ul {
-    padding-left: 1.5rem;
-    margin-top: 1rem;
+  .element-image {
+    height: 220px;
   }
   
-  .test-instructions li {
-    margin-bottom: 0.8rem;
-    line-height: 1.5;
+  .element-title {
+    font-size: 1.8rem;
   }
-  
-  .start-test-btn {
-    font-size: 1.2rem;
-    padding: 0.8rem 2rem;
-    transition: transform 0.2s ease;
-  }
-  
-  .start-test-btn:hover {
-    transform: scale(1.05);
-  }
-  
-  /* Test taking page styles */
-  .test-container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 30px;
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  }
-  
-  .test-phase-indicator {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  .phase-badge {
-    display: inline-block;
-    background-color: #4a6fa5;
-    color: white;
-    padding: 6px 16px;
-    border-radius: 20px;
-    font-size: 0.95em;
-    font-weight: 500;
-  }
-  
-  .test-progress {
-    margin-bottom: 30px;
-  }
-  
-  .progress-bar {
-    height: 8px;
-    background-color: #eee;
-    border-radius: 4px;
-    overflow: hidden;
-    margin-bottom: 8px;
-  }
-  
-  .progress-fill {
-    height: 100%;
-    background-color: #4a6fa5;
-    border-radius: 4px;
-    transition: width 0.3s ease;
-  }
-  
-  .progress-text {
-    text-align: right;
-    font-size: 0.9em;
-    color: #666;
-  }
-  
-  .question-container {
-    margin-bottom: 30px;
+}
+
+@media (max-width: 480px) {
+  .test-container,
+  .result-container {
+    padding: 15px;
   }
   
   .question-text {
-    font-size: 1.3rem;
-    margin-bottom: 20px;
-    line-height: 1.5;
-    color: #333;
-  }
-  
-  .choices-container {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
+    font-size: 1.1rem;
   }
   
   .choice-label {
-    display: flex;
-    align-items: center;
-    padding: 12px 15px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-  }
-  
-  .choice-label:hover {
-    background-color: #f8f9fa;
-    border-color: #aaa;
-  }
-  
-  .choice-label input[type="radio"] {
-    margin-right: 15px;
-    transform: scale(1.2);
+    padding: 10px 12px;
   }
   
   .choice-text {
-    font-size: 1rem;
-    color: #333;
-  }
-  
-  .form-buttons {
-    display: flex;
-    justify-content: flex-end;
-  }
-  
-  /* Soru tiplerine göre renk özelleştirmeleri */
-  [data-question-type="WARM"] .phase-badge {
-    background-color: #e74c3c;
-  }
-  
-  [data-question-type="WARM"] .progress-fill {
-    background-color: #e74c3c;
-  }
-  
-  [data-question-type="WARM_MOIST"] .phase-badge,
-  [data-question-type="COLD_MOIST"] .phase-badge {
-    background-color: #2980b9;
-  }
-  
-  [data-question-type="WARM_MOIST"] .progress-fill,
-  [data-question-type="COLD_MOIST"] .progress-fill {
-    background-color: #2980b9;
-  }
-  
-  /* Test sonuç sayfası için stiller */
-  .result-summary {
-    background-color: white;
-    border-radius: 10px;
-    padding: 20px;
-    margin-bottom: 30px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  }
-  
-  .element-properties {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-  
-  .element-properties h3 {
-    margin-bottom: 15px;
-    color: #333;
-    font-weight: 600;
-  }
-  
-  .property-item {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-  
-  .property-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .property-label {
-    font-weight: 600;
-    color: #333;
-  }
-  
-  .property-value {
-    font-weight: 600;
-    padding: 2px 10px;
-    border-radius: 12px;
-    color: white;
-  }
-  
-  .property-value.sıcak {
-    background-color: #e74c3c;
-  }
-  
-  .property-value.soğuk {
-    background-color: #3498db;
-  }
-  
-  .property-value.nemli {
-    background-color: #2980b9;
-  }
-  
-  .property-value.kuru {
-    background-color: #e67e22;
-  }
-  
-  .intensity-bar {
-    height: 10px;
-    background-color: #eee;
-    border-radius: 5px;
-    overflow: hidden;
-  }
-  
-  .intensity-fill {
-    height: 100%;
-    border-radius: 5px;
-  }
-  
-  .intensity-fill.sıcak {
-    background-color: #e74c3c;
-  }
-  
-  .intensity-fill.soğuk {
-    background-color: #3498db;
-  }
-  
-  .intensity-fill.nemli {
-    background-color: #2980b9;
-  }
-  
-  .intensity-fill.kuru {
-    background-color: #e67e22;
-  }
-  
-  .raw-scores {
-    display: flex;
-    justify-content: space-between;
-    font-size: 0.85em;
-    color: #666;
-  }
-  
-  .raw-score {
-    display: inline-block;
-    padding: 2px 8px;
-    border-radius: 10px;
-    background-color: #f8f9fa;
-  }
-  
-  .raw-score.warm {
-    color: #e74c3c;
-  }
-  
-  .raw-score.cold {
-    color: #3498db;
-  }
-  
-  .raw-score.moist {
-    color: #2980b9;
-  }
-  
-  .raw-score.dry {
-    color: #e67e22;
-  }
-  
-  .element-recommendations {
-    background-color: white;
-    border-radius: 10px;
-    padding: 20px;
-    margin: 30px 0;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  }
-  
-  .element-recommendations h3 {
-    margin-bottom: 20px;
-    color: #333;
-    font-weight: 600;
-  }
-  
-  .recommendations-list {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-  }
-  
-  .recommendation-item {
-    display: flex;
-    gap: 15px;
-    align-items: flex-start;
-  }
-  
-  .recommendation-number {
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    background-color: #4a6fa5;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 600;
-    flex-shrink: 0;
-  }
-  
-  .recommendation-text {
-    flex: 1;
-    line-height: 1.5;
-  }
-  
-  /* Element detay sayfası için stiller */
-  .element-detail {
-    background-color: white;
-    border-radius: var(--card-radius);
-    box-shadow: var(--card-shadow);
-    padding: 40px;
-    margin: 20px 0;
-  }
-  
-  .element-detail h1 {
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 700;
-    font-size: 2.5rem;
-    margin-bottom: 30px;
-    color: var(--primary-color);
-    text-align: center;
-  }
-  
-  .element-full-description {
-    background-color: var(--secondary-color);
-    padding: 25px;
-    border-radius: var(--border-radius);
-    margin: 25px 0;
-    font-size: 1.1rem;
-    line-height: 1.8;
-  }
-  
-  .element-sections {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 30px;
-    margin: 30px 0;
-  }
-  
-  .element-section {
-    background-color: var(--secondary-color);
-    border-radius: var(--border-radius);
-    padding: 25px;
-    height: 100%;
-  }
-  
-  .element-card-container {
-    display: flex;
-    justify-content: center;
-    margin: 30px 0;
-  }
-  
-  /* Sonuç bulunamadı durum mesajı için stil */
-  .no-result-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 40px 20px;
-    background-color: var(--secondary-color);
-    border-radius: var(--border-radius);
-    margin: 30px 0;
-  }
-  
-  .no-result-icon {
-    font-size: 3rem;
-    color: #8d6e63;
-    margin-bottom: 20px;
-    opacity: 0.7;
-  }
-  
-  .no-result-text {
-    font-size: 1.3rem;
-    margin-bottom: 30px;
-    text-align: center;
-    color: #666;
-  }
-  
-  /* Öneri kutuları için geliştirilmiş stiller */
-  .öneri-kutusu {
-    position: relative;
-    background-color: white;
-    padding: 25px 25px 25px 40px;
-    border-radius: var(--border-radius);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.03);
-    transition: var(--transition);
-    border-left: 4px solid var(--accent-color);
-    line-height: 1.6;
-  }
-  
-  .öneri-numara {
-    position: absolute;
-    left: -15px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 30px;
-    height: 30px;
-    background-color: var(--accent-color);
-    color: white;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 600;
     font-size: 0.9rem;
-    box-shadow: 0 3px 10px rgba(233, 180, 76, 0.3);
   }
   
-  .öneri-içerik {
-    font-size: 1.05rem;
+  .dominant-element-card {
+    padding: 15px;
   }
   
-  /* Responsive Ayarlar */
-  @media (min-width: 992px) {
-    .element-sections {
-      grid-template-columns: 1fr 1fr;
-    }
+  .element-image {
+    height: 180px;
   }
   
-  @media (max-width: 768px) {
-    .test-container {
-      padding: 20px;
-    }
-    
-    .element-detail {
-      padding: 25px;
-    }
+  .element-icon {
+    font-size: 28px;
+    top: 15px;
+    right: 15px;
   }
   
-  @media (max-width: 480px) {
-    .test-container {
-      padding: 15px;
-    }
-    
-    .question-text {
-      font-size: 1.1rem;
-    }
-    
-    .choice-label {
-      padding: 10px 12px;
-    }
-    
-    .choice-text {
-      font-size: 0.9rem;
-    }
+  .element-badge {
+    font-size: 0.8rem;
+    padding: 6px 12px;
   }
+  
+  .element-title {
+    font-size: 1.6rem;
+  }
+  
+  .button-container {
+    flex-direction: column;
+  }
+  
+  .btn {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+}

@@ -12,61 +12,46 @@
   <div class="result-container">
     <h1 class="result-title">Mizaç Testi Sonucunuz</h1>
     
-    <div class="result-summary">
-      <div class="element-properties">
-        <h3>Temel Özellikleriniz</h3>
-        
-        <div class="property-item">
-          <div class="property-header">
-            <span class="property-label">Sıcaklık/Soğukluk:</span>
-            <span class="property-value {{ warmth_text|lower }}">{{ warmth_text }}</span>
-          </div>
-          <div class="intensity-bar">
-            <div class="intensity-fill {{ warmth_text|lower }}" style="width: {{ scale_percentage_warmth }}%"></div>
-          </div>
-          <div class="raw-scores">
-            <span class="raw-score warm">Sıcak: {{ raw_warm_score }}</span>
-            <span class="raw-score cold">Soğuk: {{ raw_cold_score }}</span>
-          </div>
-        </div>
-        
-        <div class="property-item">
-          <div class="property-header">
-            <span class="property-label">Nemlilik/Kuruluk:</span>
-            <span class="property-value {{ moisture_text|lower }}">{{ moisture_text }}</span>
-          </div>
-          <div class="intensity-bar">
-            <div class="intensity-fill {{ moisture_text|lower }}" style="width: {{ scale_percentage_moisture }}%"></div>
-          </div>
-          <div class="raw-scores">
-            <span class="raw-score moist">Nemli: {{ raw_moist_score }}</span>
-            <span class="raw-score dry">Kuru: {{ raw_dry_score }}</span>
-          </div>
-        </div>
-      </div>
-    </div>
-    
     <div class="result-content">
       <div class="dominant-element-card {{ dominant_element.name|lower }}">
-        {% if dominant_element.name == "Ateş" %}
-          <div class="element-badge">Sıcak + Kuru</div>
-          <div class="element-icon"><i class="fas fa-fire"></i></div>
-          <img src="{% static 'images/fire.jpg' %}" alt="Ateş" class="element-image">
-        {% elif dominant_element.name == "Hava" %}
-          <div class="element-badge">Sıcak + Nemli</div>
-          <div class="element-icon"><i class="fas fa-wind"></i></div>
-          <img src="{% static 'images/air.jpg' %}" alt="Hava" class="element-image">
-        {% elif dominant_element.name == "Su" %}
-          <div class="element-badge">Soğuk + Nemli</div>
-          <div class="element-icon"><i class="fas fa-water"></i></div>
-          <img src="{% static 'images/water.jpg' %}" alt="Su" class="element-image">
-        {% elif dominant_element.name == "Toprak" %}
-          <div class="element-badge">Soğuk + Kuru</div>
-          <div class="element-icon"><i class="fas fa-mountain"></i></div>
-          <img src="{% static 'images/earth.jpg' %}" alt="Toprak" class="element-image">
-        {% else %}
-          <p class="no-image-text">Görsel bulunamadı.</p>
-        {% endif %}
+        <div class="element-badge">
+          {% if dominant_element.name == "Ateş" %}
+            Sıcak + Kuru
+          {% elif dominant_element.name == "Hava" %}
+            Sıcak + Nemli
+          {% elif dominant_element.name == "Su" %}
+            Soğuk + Nemli
+          {% elif dominant_element.name == "Toprak" %}
+            Soğuk + Kuru
+          {% endif %}
+        </div>
+        
+        <div class="element-icon">
+          {% if dominant_element.name == "Ateş" %}
+            <i class="fas fa-fire"></i>
+          {% elif dominant_element.name == "Hava" %}
+            <i class="fas fa-wind"></i>
+          {% elif dominant_element.name == "Su" %}
+            <i class="fas fa-water"></i>
+          {% elif dominant_element.name == "Toprak" %}
+            <i class="fas fa-mountain"></i>
+          {% endif %}
+        </div>
+        
+        <div class="element-image-container">
+          {% if dominant_element.name == "Ateş" %}
+            <img src="{% static 'images/fire.jpg' %}" alt="Ateş Mizacı" class="element-image">
+          {% elif dominant_element.name == "Hava" %}
+            <img src="{% static 'images/air.jpg' %}" alt="Hava Mizacı" class="element-image">
+          {% elif dominant_element.name == "Su" %}
+            <img src="{% static 'images/water.jpg' %}" alt="Su Mizacı" class="element-image">
+          {% elif dominant_element.name == "Toprak" %}
+            <img src="{% static 'images/earth.jpg' %}" alt="Toprak Mizacı" class="element-image">
+          {% else %}
+            <p class="no-image-text">Görsel bulunamadı.</p>
+          {% endif %}
+        </div>
+        
         <h2 class="element-title">{{ dominant_element.name }}</h2>
       </div>
       
