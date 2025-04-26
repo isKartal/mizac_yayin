@@ -1,5 +1,12 @@
 {% extends 'base.html' %}
 {% load static %}
+
+{% block title %}MİZAÇLAR | Test{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/test.css' %}">
+{% endblock %}
+
 {% block content %}
 <div class="container">
   <div class="test-container">
@@ -42,140 +49,4 @@
     </form>
   </div>
 </div>
-
-<style>
-  .test-container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 30px;
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  }
-  
-  .test-phase-indicator {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  .phase-badge {
-    display: inline-block;
-    background-color: #4a6fa5;
-    color: white;
-    padding: 6px 16px;
-    border-radius: 20px;
-    font-size: 0.95em;
-    font-weight: 500;
-  }
-  
-  .test-progress {
-    margin-bottom: 30px;
-  }
-  
-  .progress-bar {
-    height: 8px;
-    background-color: #eee;
-    border-radius: 4px;
-    overflow: hidden;
-    margin-bottom: 8px;
-  }
-  
-  .progress-fill {
-    height: 100%;
-    background-color: #4a6fa5;
-    border-radius: 4px;
-    transition: width 0.3s ease;
-  }
-  
-  .progress-text {
-    text-align: right;
-    font-size: 0.9em;
-    color: #666;
-  }
-  
-  .question-container {
-    margin-bottom: 30px;
-  }
-  
-  .question-text {
-    font-size: 1.3rem;
-    margin-bottom: 20px;
-    line-height: 1.5;
-    color: #333;
-  }
-  
-  .choices-container {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-  }
-  
-  .choice-label {
-    display: flex;
-    align-items: center;
-    padding: 12px 15px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-  }
-  
-  .choice-label:hover {
-    background-color: #f8f9fa;
-    border-color: #aaa;
-  }
-  
-  .choice-label input[type="radio"] {
-    margin-right: 15px;
-    transform: scale(1.2);
-  }
-  
-  .choice-text {
-    font-size: 1rem;
-    color: #333;
-  }
-  
-  .form-buttons {
-    display: flex;
-    justify-content: flex-end;
-  }
-  
-  .btn-primary {
-    background-color: #4a6fa5;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 8px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-  }
-  
-  .btn-primary:hover {
-    background-color: #3d5c89;
-  }
-  
-  .btn-primary i {
-    margin-right: 8px;
-  }
-  
-  /* Soru tiplerine göre renk özelleştirmeleri */
-  [data-question-type="WARM"] .phase-badge {
-    background-color: #e74c3c;
-  }
-  
-  [data-question-type="WARM"] .progress-fill {
-    background-color: #e74c3c;
-  }
-  
-  [data-question-type="WARM_MOIST"] .phase-badge,
-  [data-question-type="COLD_MOIST"] .phase-badge {
-    background-color: #2980b9;
-  }
-  
-  [data-question-type="WARM_MOIST"] .progress-fill,
-  [data-question-type="COLD_MOIST"] .progress-fill {
-    background-color: #2980b9;
-  }
-</style>
 {% endblock %}

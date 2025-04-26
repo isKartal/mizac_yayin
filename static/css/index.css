@@ -1,212 +1,4 @@
-/* Temel Reset */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-:root {
-    --primary-color: #292321;
-    --secondary-color: #ece9e3;
-    --accent-color: #e9b44c;
-    --text-color: #292321;
-    --light-text: #fafafa;
-    --dark-bg: #1a1a1a;
-    --border-radius: 16px;
-    --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
-    --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-}
-
-body {
-    font-family: 'Poppins', sans-serif;
-    background-color: var(--secondary-color);
-    color: var(--text-color);
-    max-width: 100vw;
-    overflow-x: hidden;
-    line-height: 1.6;
-}
-
-.container {
-    width: 100%;
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 0 5%;
-}
-
-.page-container {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-}
-
-/* Header ve Navigasyon */
-.nav-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 5%;
-    background-color: #ece9e3;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.04);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    transition: var(--transition);
-}
-
-.header-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-}
-
-.logo {
-    display: flex;
-    align-items: center;
-}
-
-.logo-img {
-    height: 48px;
-    width: auto;
-    border-radius: 10px;
-    transition: var(--transition);
-}
-
-.logo-img:hover {
-    transform: scale(1.05);
-}
-
-.nav-links {
-    display: flex;
-    gap: 36px;
-}
-
-.nav-item, .login-button {
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 600;
-    text-decoration: none;
-    color: var(--primary-color);
-    padding: 8px 16px;
-    transition: var(--transition);
-    position: relative;
-    letter-spacing: 0.5px;
-}
-
-.nav-item::after, .login-button::after {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 2px;
-    bottom: 0;
-    left: 50%;
-    background-color: var(--accent-color);
-    transition: var(--transition);
-    transform: translateX(-50%);
-}
-
-.nav-item:hover::after, .login-button:hover::after {
-    width: 70%;
-}
-
-.login-button {
-    border: 2px solid var(--accent-color);
-    border-radius: var(--border-radius);
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.login-button:hover {
-    background-color: var(--accent-color);
-    color: var(--light-text);
-}
-
-.login-button:hover::after {
-    width: 0;
-}
-
-/* Profil Dropdown */
-.profile-container {
-    position: relative;
-}
-
-.profile-button {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    background: none;
-    border: 2px solid transparent;
-    border-radius: var(--border-radius);
-    cursor: pointer;
-    padding: 8px 12px;
-    transition: var(--transition);
-    color: var(--primary-color);
-}
-
-.profile-button:hover {
-    border-color: var(--accent-color);
-    background-color: rgba(233, 180, 76, 0.1);
-}
-
-.profile-button i {
-    font-size: 20px;
-    color: var(--primary-color);
-}
-
-.username-display {
-    font-weight: 600;
-    color: var(--primary-color);
-    font-family: 'Montserrat', sans-serif;
-}
-
-.dropdown-content {
-    display: none;
-    position: absolute;
-    right: 0;
-    top: 120%;
-    background-color: white;
-    min-width: 240px;
-    border-radius: var(--border-radius);
-    box-shadow: var(--box-shadow);
-    overflow: hidden;
-    z-index: 1000;
-    opacity: 0;
-    transform: translateY(10px);
-    transition: var(--transition);
-    border: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-.dropdown-content.show {
-    display: block;
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.dropdown-username {
-    padding: 14px 18px;
-    font-weight: 600;
-    border-bottom: 1px solid #eee;
-    color: var(--primary-color);
-    background-color: var(--secondary-color);
-    font-family: 'Montserrat', sans-serif;
-}
-
-.dropdown-content a {
-    padding: 14px 18px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    text-decoration: none;
-    color: var(--primary-color);
-    transition: var(--transition);
-}
-
-.dropdown-content a:hover {
-    background-color: var(--secondary-color);
-    color: var(--accent-color);
-}
-
+/* Index sayfasına özel stil tanımları */
 
 /* Hero Bölümü */
 .hero-section {
@@ -220,9 +12,9 @@ body {
     background-size: cover;
     background-position: center;
     position: relative;
-}
-
-.hero-section::before {
+  }
+  
+  .hero-section::before {
     content: '';
     position: absolute;
     top: 0;
@@ -230,9 +22,9 @@ body {
     width: 100%;
     height: 100%;
     background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5));
-}
-
-.hero-content {
+  }
+  
+  .hero-content {
     max-width: 850px;
     text-align: center;
     color: var(--light-text);
@@ -241,25 +33,18 @@ body {
     transform: translateY(-20px);
     opacity: 0;
     animation: fadeInUp 1s forwards 0.5s;
-}
-
-@keyframes fadeInUp {
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.mizac-nedir-title {
+  }
+  
+  .mizac-nedir-title {
     font-family: 'Poppins', serif;
     font-size: clamp(40px, 5vw, 64px);
     font-weight: 800;
     margin-bottom: 24px;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
     letter-spacing: -0.5px;
-}
-
-.mizac-nedir-text {
+  }
+  
+  .mizac-nedir-text {
     font-family: 'Lora', serif;
     font-weight: 500;
     font-size: clamp(18px, 2vw, 22px);
@@ -267,9 +52,9 @@ body {
     max-width: 740px;
     margin: 0 auto 36px;
     opacity: 0.95;
-}
-
-.start-test-button {
+  }
+  
+  .start-test-button {
     display: inline-flex;
     align-items: center;
     gap: 12px;
@@ -281,65 +66,36 @@ body {
     font-weight: 600;
     font-size: 18px;
     transition: var(--transition);
-}
-
-.start-test-button:hover {
+  }
+  
+  .start-test-button:hover {
     background-color: var(--primary-color);
     transform: translateY(-5px);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-}
-
-/* Element Bölümü */
-.elements-section {
+  }
+  
+  /* Element Bölümü */
+  .elements-section {
     padding: 120px 0;
     opacity: 0;
     transform: translateY(30px);
     transition: var(--transition);
-}
-
-.elements-section.show-section {
+  }
+  
+  .elements-section.show-section {
     opacity: 1;
     transform: translateY(0);
-}
-
-.section-title {
-    text-align: center;
-    font-size: clamp(32px, 4vw, 44px);
-    margin-bottom: 20px;
-    position: relative;
-    padding-bottom: 15px;
-    font-weight: 700;
-    color: var(--primary-color);
-}
-
-.section-title::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 80px;
-    height: 3px;
-    background-color: var(--accent-color);
-}
-
-.section-description {
-    text-align: center;
-    max-width: 800px;
-    margin: 0 auto 60px;
-    font-size: 18px;
-    color: #666;
-}
-
-.element-grid {
+  }
+  
+  .element-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 40px;
     max-width: 1200px;
     margin: 0 auto;
-}
-
-.element-card {
+  }
+  
+  .element-card {
     background-color: white;
     border-radius: var(--border-radius);
     overflow: hidden;
@@ -350,19 +106,19 @@ body {
     transform: translateY(30px);
     opacity: 0;
     transition: var(--transition);
-}
-
-.element-card.appear {
+  }
+  
+  .element-card.appear {
     opacity: 1;
     transform: translateY(0);
-}
-
-.element-card:hover {
+  }
+  
+  .element-card:hover {
     transform: translateY(-10px);
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-}
-
-.element-icon {
+  }
+  
+  .element-icon {
     font-size: 48px;
     margin-bottom: 24px;
     color: var(--accent-color);
@@ -370,23 +126,23 @@ body {
     padding: 20px;
     border-radius: 50%;
     background-color: rgba(233, 180, 76, 0.1);
-}
-
-.element-card h3 {
+  }
+  
+  .element-card h3 {
     font-size: 26px;
     font-weight: 700;
     margin-bottom: 16px;
     color: var(--primary-color);
-}
-
-.element-card p {
+  }
+  
+  .element-card p {
     font-size: 16px;
     margin-bottom: 24px;
     color: #666;
     line-height: 1.7;
-}
-
-.element-link {
+  }
+  
+  .element-link {
     display: inline-flex;
     align-items: center;
     gap: 8px;
@@ -394,36 +150,36 @@ body {
     font-weight: 600;
     text-decoration: none;
     transition: var(--transition);
-}
-
-.element-link:hover {
+  }
+  
+  .element-link:hover {
     color: var(--primary-color);
     transform: translateX(5px);
-}
-
-/* Advantage Section */
-.advantage-section {
+  }
+  
+  /* Advantage Section */
+  .advantage-section {
     padding: 120px 0;
     background-color: #f0ece5;
     opacity: 0;
     transform: translateY(30px);
     transition: var(--transition);
-}
-
-.advantage-section.show-section {
+  }
+  
+  .advantage-section.show-section {
     opacity: 1;
     transform: translateY(0);
-}
-
-.advantage-grid {
+  }
+  
+  .advantage-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 30px;
     max-width: 1200px;
     margin: 0 auto;
-}
-
-.advantage-card {
+  }
+  
+  .advantage-card {
     background-color: white;
     border-radius: var(--border-radius);
     padding: 40px 30px;
@@ -432,19 +188,19 @@ body {
     transition: var(--transition);
     transform: translateY(30px);
     opacity: 0;
-}
-
-.advantage-card.appear {
+  }
+  
+  .advantage-card.appear {
     opacity: 1;
     transform: translateY(0);
-}
-
-.advantage-card:hover {
+  }
+  
+  .advantage-card:hover {
     transform: translateY(-10px);
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-}
-
-.advantage-icon {
+  }
+  
+  .advantage-icon {
     font-size: 36px;
     color: var(--accent-color);
     margin-bottom: 24px;
@@ -452,23 +208,23 @@ body {
     padding: 20px;
     border-radius: 50%;
     background-color: rgba(233, 180, 76, 0.1);
-}
-
-.advantage-card h3 {
+  }
+  
+  .advantage-card h3 {
     font-size: 22px;
     font-weight: 700;
     margin-bottom: 16px;
     color: var(--primary-color);
-}
-
-.advantage-card p {
+  }
+  
+  .advantage-card p {
     font-size: 16px;
     color: #666;
     line-height: 1.7;
-}
-
-/* CTA Bölümü */
-.cta-section {
+  }
+  
+  /* CTA Bölümü */
+  .cta-section {
     background-color: var(--primary-color);
     color: var(--light-text);
     padding: 100px 0;
@@ -476,31 +232,31 @@ body {
     opacity: 0;
     transform: translateY(30px);
     transition: var(--transition);
-}
-
-.cta-section.show-section {
+  }
+  
+  .cta-section.show-section {
     opacity: 1;
     transform: translateY(0);
-}
-
-.cta-content {
+  }
+  
+  .cta-content {
     max-width: 800px;
     margin: 0 auto;
-}
-
-.cta-content h2 {
+  }
+  
+  .cta-content h2 {
     font-size: clamp(32px, 4vw, 44px);
     margin-bottom: 24px;
     font-weight: 700;
-}
-
-.cta-content p {
+  }
+  
+  .cta-content p {
     font-size: 18px;
     margin-bottom: 36px;
     opacity: 0.9;
-}
-
-.cta-button {
+  }
+  
+  .cta-button {
     display: inline-flex;
     align-items: center;
     gap: 12px;
@@ -512,576 +268,52 @@ body {
     font-weight: 600;
     font-size: 18px;
     transition: var(--transition);
-}
-
-.cta-button:hover {
+  }
+  
+  .cta-button:hover {
     background-color: var(--light-text);
     color: var(--primary-color);
     transform: translateY(-5px);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-}
-
-/* Footer */
-footer {
-    background-color: var(--dark-bg);
-    color: var(--light-text);
-    padding: 80px 0 30px;
-    margin-top: auto;
-}
-
-.footer-content {
-    display: grid;
-    grid-template-columns: 1fr 2fr 1fr;
-    gap: 60px;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding-bottom: 40px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.footer-logo {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.footer-logo-img {
-    height: 60px;
-    border-radius: 10px;
-}
-
-.footer-logo p {
-    font-size: 16px;
-    opacity: 0.8;
-    margin-top: 10px;
-}
-
-.footer-links {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 40px;
-}
-
-.footer-column h3 {
-    font-size: 18px;
-    margin-bottom: 20px;
-    color: var(--accent-color);
-    font-weight: 600;
-}
-
-.footer-column ul {
-    list-style: none;
-}
-
-.footer-column ul li {
-    margin-bottom: 12px;
-}
-
-.footer-column ul li a {
-    color: var(--light-text);
-    text-decoration: none;
-    transition: var(--transition);
-    opacity: 0.8;
-}
-
-.footer-column ul li a:hover {
-    color: var(--accent-color);
-    opacity: 1;
-    transform: translateX(5px);
-}
-
-.footer-social h3 {
-    font-size: 18px;
-    margin-bottom: 20px;
-    color: var(--accent-color);
-    font-weight: 600;
-}
-
-.social-icons {
-    display: flex;
-    gap: 16px;
-    margin-top: 15px;
-}
-
-.social-icons a {
-    color: var(--light-text);
-    font-size: 18px;
-    transition: var(--transition);
-    background-color: rgba(255, 255, 255, 0.1);
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.social-icons a:hover {
-    color: var(--accent-color);
-    background-color: rgba(255, 255, 255, 0.2);
-    transform: translateY(-3px);
-}
-
-.footer-bottom {
-    text-align: center;
-    padding-top: 30px;
-    font-size: 14px;
-    opacity: 0.7;
-}
-
-/* Element özellikleri */
-.fire-icon {
-    color: #bc1823;
-    background-color: rgba(235, 67, 49, 0.1);
-}
-
-.air-icon {
-    color: #c9c9c6;
-    background-color: rgba(10, 14, 19, 0.1);
-}
-
-.earth-icon {
-    color: #6d412a;
-    background-color: rgba(39, 174, 96, 0.1);
-}
-
-.water-icon {
-    color: #145da0;
-    background-color: rgba(0, 172, 193, 0.1);
-}
-
-/* Animasyon sınıfları */
-.appear {
-    opacity: 1 !important;
-    transform: translateY(0) !important;
-}
-
-.hamburger-button {
-    display: none;
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 24px;
-    color: var(--primary-color);
-    transition: var(--transition);
-    z-index: 1001;
-}
-
-.hamburger-button:hover, .hamburger-button.active {
-    color: var(--accent-color);
-    transform: scale(1.1);
-}
-
-/* Yan Çekmece Menü */
-.side-menu {
-    position: fixed;
-    top: 0;
-    right: -300px; /* Başlangıçta ekranın dışında */
-    width: 300px;
-    height: 100vh;
-    background-color: var(--secondary-color);
-    box-shadow: -5px 0 20px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
-    transition: right 0.3s ease;
-    padding: 80px 20px 30px;
-    overflow-y: auto;
-}
-
-.side-menu.open {
-    right: 0; /* Menü açıldığında ekranın içine gelir */
-}
-
-.menu-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 999;
-    display: none;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.menu-overlay.active {
-    display: block;
-    opacity: 1;
-}
-
-.side-menu-header {
-    padding-bottom: 20px;
-    margin-bottom: 20px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-.user-info {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 20px;
-}
-
-.user-avatar {
-    font-size: 28px;
-    color: var(--primary-color);
-}
-
-.user-name {
-    font-weight: 600;
-    font-size: 18px;
-    color: var(--primary-color);
-}
-
-.side-menu-nav {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.side-menu-item {
-    display: flex;
-    align-items: center;
-    padding: 12px 15px;
-    border-radius: var(--border-radius);
-    text-decoration: none;
-    color: var(--primary-color);
-    font-weight: 500;
-    transition: var(--transition);
-    gap: 12px;
-}
-
-.side-menu-item:hover {
-    background-color: rgba(233, 180, 76, 0.1);
-    color: var(--accent-color);
-}
-
-.side-menu-item i {
-    width: 24px;
-    font-size: 18px;
-}
-
-.side-menu-item.active {
-    background-color: var(--accent-color);
-    color: var(--light-text);
-}
-
-.side-menu .section-title {
-    font-size: 14px;
-    color: #666;
-    margin-bottom: 10px;
-    padding-left: 15px;
-    text-align: left;
-    font-weight: normal;
-}
-
-.side-menu .section-title::after {
-    display: none;
-}
-/* Scroll Efekti */
-.nav-container.scrolled {
-    padding: 8px 5%;
-    background-color: rgba(236, 233, 227, 0.98);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-}
-
-.mobile-only {
-    display: none !important;
-}
-
-.mobile-auth {
-    display: none;
-}
-/* Responsive */
-@media (max-width: 1100px) {
-    .element-grid, .advantage-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 30px;
-    }
-    
-    .footer-content {
-        grid-template-columns: 1fr 1fr;
-        gap: 40px;
-    }
-    
-    .footer-social {
-        grid-column: span 2;
-    }
-
-    .nav-links {
-        gap: 20px;
-    }
-    
-    .nav-item {
-        padding: 6px 10px;
-        font-size: 15px;
-    }
-    
-    .nav-links, .profile-container, .login-button {
-        display: none;
-    }
-    
-    .hamburger-button {
-        display: block;
-    }
-    
-    .header-content {
-        display: flex;
-        justify-content: space-between;
-    }
-}
-
-@media (max-width: 768px) {
-    .nav-container {
-        padding: 10px 5%;
-    }
-    
-    .logo-img {
-        height: 40px;
-    }
-    
-    /* Hamburger Menü Görünür Olsun */
-    .hamburger-button {
-        display: block;
-    }
-    
-    /* Profil Butonu Düzenlemeleri */
-    .username-display {
-        display: none;
-    }
-    
-    .profile-button {
-        padding: 8px;
-    }
-    
-    .nav-links {
-        display: none;
-        flex-direction: column;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100vh;
-        background-color: rgba(236, 233, 227, 0.98);
-        padding: 80px 20px 40px;
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        text-align: center;
-        gap: 20px;
-        z-index: 1000;
-        justify-content: center;
-        align-items: center;
-        -webkit-backdrop-filter: blur(10px);
-        backdrop-filter: blur(10px);
-    }
-    
-    .nav-links.open {
-        display: flex;
-        animation: fadeIn 0.3s ease forwards;
-    }
-
-    @keyframes fadeIn {
-        from {
-            opacity: 0;
-        }
-        to {
-            opacity: 1;
-        }
-    }
-
-    /* Mobil Menü Öğeleri */
-    .nav-item {
-        font-size: 18px;
-        padding: 12px 20px;
-        width: 200px;
-        text-align: center;
-        border-radius: var(--border-radius);
-    }
-    
-    .nav-item:hover {
-        background-color: rgba(233, 180, 76, 0.1);
-    }
-    
-    .nav-item::after {
-        display: none;
-    }
-    
-    /* Mobil Menüde Ek Profil/Giriş Butonları */
-    .mobile-auth {
-        display: flex;
-    }
-    
-    .mobile-only {
-        display: flex !important;
-        justify-content: center;
-        background-color: rgba(255, 255, 255, 0.5);
-        border-radius: var(--border-radius);
-        padding: 12px 20px !important;
-    }
-    
-    .mobile-only:hover {
-        background-color: rgba(233, 180, 76, 0.2);
-    }
-    
-    /* Menü İkon Geçiş Efekti */
-    .hamburger-button .fas {
-        transition: all 0.3s ease;
-    }
-    
+  }
+  
+  /* Responsive Ayarlar - Index sayfasına özel */
+  @media (max-width: 768px) {
     .hero-section {
-        height: auto;
-        padding: 120px 5%;
-    }
-
-    .footer-logo-img {
-        height: auto;
-        border-radius: 1px;
+      height: auto;
+      padding: 120px 5%;
     }
     
     .advantage-grid {
-        grid-template-columns: 1fr;
+      grid-template-columns: 1fr;
     }
     
     .element-grid {
-        grid-template-columns: 1fr;
-        gap: 30px;
+      grid-template-columns: 1fr;
+      gap: 30px;
     }
-    
-    .footer-content {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 30px;
-        text-align: center;
-        padding: 0 20px;
-    }
-    
-    .footer-logo, .footer-links, .footer-social {
-        width: 100%;
-    }
-    
-    .footer-logo {
-        margin-bottom: 20px;
-    }
-    
-    .footer-links {
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-    }
-    
-    .footer-column {
-        margin-bottom: 15px;
-    }
-    
-    .footer-column h3 {
-        font-size: 18px;
-        margin-bottom: 10px;
-    }
-    
-    .footer-column ul {
-        padding: 0;
-        list-style: none;
-    }
-    
-    .footer-column ul li {
-        margin: 8px 0;
-    }
-    
-    .footer-column ul li a {
-        font-size: 16px;
-        color: var(--light-text);
-        opacity: 0.9;
-    }
-    
-    .footer-social h3 {
-        font-size: 18px;
-        margin-bottom: 10px;
-    }
-    
-    .social-icons {
-        display: flex;
-        justify-content: center;
-        gap: 16px;
-    }
-    
-    .social-icons a {
-        width: 40px;
-        height: 40px;
-        font-size: 18px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    
-    .footer-bottom {
-        margin-top: 20px;
-        font-size: 14px;
-    }
-}
-
-@media (max-width: 480px) {
-
-    .nav-container {
-        padding: 10px 4%;
-    }
-    
-    .nav-container.scrolled {
-        padding: 6px 4%;
-    }
-    
-    .side-menu {
-        width: 270px;
-    }
-    
-    .logo-img {
-        height: 40px;
-    }
-
-    .login-button {
-        padding: 7px 12px;
-        font-size: 15px;
-    }
-    
-    .dropdown-content {
-        min-width: 220px;
-        right: -10px;
-    }
+  }
+  
+  @media (max-width: 480px) {
     .element-card, .advantage-card {
-        padding: 30px 20px;
+      padding: 30px 20px;
     }
     
     .element-icon, .advantage-icon {
-        font-size: 36px;
-        padding: 15px;
+      font-size: 36px;
+      padding: 15px;
     }
     
     .element-card h3, .advantage-card h3 {
-        font-size: 20px;
-    }
-    
-    .section-title {
-        font-size: 28px;
+      font-size: 20px;
     }
     
     .cta-content h2 {
-        font-size: 28px;
+      font-size: 28px;
     }
     
     .start-test-button, .cta-button {
-        padding: 14px 28px;
-        font-size: 16px;
+      padding: 14px 28px;
+      font-size: 16px;
     }
-    
-    .footer-column h3, 
-    .footer-social h3 {
-        font-size: 16px;
-    }
-    
-    .footer-column ul li a {
-        font-size: 14px;
-    }
-    
-    .footer-bottom {
-        font-size: 12px;
-    }
-}
+  }

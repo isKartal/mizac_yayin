@@ -1,254 +1,12 @@
-/* HTML ve body yüksekliği tam doldurur */
-html, body {
-  height: 100%;
-}
+/* Temperaments sayfasına özel stil tanımları */
 
-/* Reset */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-/* Root Değişkenleri */
-:root {
-  --primary-color: #292321;
-  --secondary-color: #ece9e3;
-  --accent-color: #e9b44c;
-  --text-color: #292321;
-  --light-text: #fafafa;
-  --dark-bg: #1a1a1a;
-  --border-radius: 16px;
-  --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
-  --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-}
-
-/* Genel Gövde Stili */
-body {
-  font-family: 'Poppins', sans-serif;
-  background-color: var(--secondary-color);
-  color: var(--text-color);
-  line-height: 1.6;
-}
-
-/* Sayfa Konteyneri */
-.page-container {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
-
-/* Header ve Navigasyon (değiştirilmedi) */
-.nav-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px 5%;
-  background-color: #ece9e3;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.04);
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  transition: var(--transition);
-}
-
-.header-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-}
-
-.logo {
-  display: flex;
-  align-items: center;
-}
-
-.logo-img {
-  height: 48px;
-  width: auto;
-  border-radius: 10px;
-  transition: var(--transition);
-}
-
-.logo-img:hover {
-  transform: scale(1.05);
-}
-
-.nav-links {
-  display: flex;
-  gap: 36px;
-}
-
-.nav-item, .login-button {
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 600;
-  text-decoration: none;
-  color: var(--primary-color);
-  padding: 8px 16px;
-  transition: var(--transition);
-  position: relative;
-  letter-spacing: 0.5px;
-}
-
-.nav-item::after, .login-button::after {
-  content: '';
-  position: absolute;
-  width: 0;
-  height: 2px;
-  bottom: 0;
-  left: 50%;
-  background-color: var(--accent-color);
-  transition: var(--transition);
-  transform: translateX(-50%);
-}
-
-.nav-item:hover::after, .login-button:hover::after {
-  width: 70%;
-}
-
-.login-button {
-  border: 2px solid var(--accent-color);
-  border-radius: var(--border-radius);
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.login-button:hover {
-  background-color: var(--accent-color);
-  color: var(--light-text);
-}
-
-.login-button:hover::after {
-  width: 0;
-}
-
-/* Profil Dropdown - Index.css'den güncellendi */
-.profile-container {
-  position: relative;
-}
-
-.profile-button {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  background: none;
-  border: 2px solid transparent;
-  border-radius: var(--border-radius);
-  cursor: pointer;
-  padding: 8px 12px;
-  transition: var(--transition);
-  color: var(--primary-color);
-}
-
-.profile-button:hover {
-  border-color: var(--accent-color);
-  background-color: rgba(233, 180, 76, 0.1);
-}
-
-.profile-button i {
-  font-size: 20px;
-  color: var(--primary-color);
-}
-
-.username-display {
-  font-weight: 600;
-  color: var(--primary-color);
-  font-family: 'Montserrat', sans-serif;
-}
-
-.dropdown-content {
-  display: none;
-  position: absolute;
-  right: 0;
-  top: 120%;
-  background-color: white;
-  min-width: 240px;
-  border-radius: var(--border-radius);
-  box-shadow: var(--box-shadow);
-  overflow: hidden;
-  z-index: 1000;
-  opacity: 0;
-  transform: translateY(10px);
-  transition: var(--transition);
-  border: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-.dropdown-content.show {
-  display: block;
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.dropdown-username {
-  padding: 14px 18px;
-  font-weight: 600;
-  border-bottom: 1px solid #eee;
-  color: var(--primary-color);
-  background-color: var(--secondary-color);
-  font-family: 'Montserrat', sans-serif;
-}
-
-.dropdown-content a {
-  padding: 14px 18px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  text-decoration: none;
-  color: var(--primary-color);
-  transition: var(--transition);
-}
-
-.dropdown-content a:hover {
-  background-color: var(--secondary-color);
-  color: var(--accent-color);
-}
-
-/* Hamburger Menü */
-.hamburger-button {
-  display: none;
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 24px;
-  color: var(--primary-color);
-  transition: var(--transition);
-}
-
-.hamburger-button:hover,
-.hamburger-button.active {
-  color: var(--accent-color);
-}
-
+/* Özel Bölüm Başlığı ve Açıklaması */
 .section-description {
   text-align: center;
   max-width: 600px;
   margin: 0 auto 40px;
   font-size: 18px;
   color: #666;
-}
-
-/* Mevcut CSS kodlarının üzerine ek olarak .section-title'a eklemeler yapıyoruz */
-.section-title {
-  text-align: center;
-  font-size: clamp(32px, 4vw, 44px);
-  font-weight: 700;
-  color: var(--primary-color);
-  margin-top: 40px; /* Başlığı biraz aşağı alır */
-  margin-bottom: 20px;
-  text-transform: uppercase;
-  position: relative;
-}
-/* Başlığın altına, açıklama metniyle arasında çizgi ekle */
-.section-title::after {
-  content: '';
-  display: block;
-  width: 80px;
-  height: 3px;
-  margin: 10px auto 0;
-  background-color: var(--accent-color);
 }
 
 /* Flip Kart Konteyneri */
@@ -327,27 +85,6 @@ body {
   font-size: 32px;
 }
 
-/* Renk Ayarları */
-.card-circle.fire {
-  color: #bc1823;
-  background-color: rgba(235, 67, 49, 0.1);
-}
-
-.card-circle.air {
-  color: #c9c9c6;
-  background-color: rgba(10, 14, 19, 0.1);
-}
-
-.card-circle.water {
-  color: #145da0;
-  background-color: rgba(0, 172, 193, 0.1);
-}
-
-.card-circle.earth {
-  color: #6d412a;
-  background-color: rgba(39, 174, 96, 0.1);
-}
-
 .flip-card-front h3,
 .flip-card-back h3 {
   font-size: 1.6rem;
@@ -374,234 +111,394 @@ body {
   transform: translateX(5px);
 }
 
-/* Footer */
-footer {
-  background-color: var(--dark-bg);
-  color: var(--light-text);
-  padding: 80px 0 30px;
-  margin-top: auto;
+/* Mizaç Detay Sayfaları için Özel Stiller */
+/* Su Mizacı */
+.water-personality,
+.fire-personality,
+.air-personality,
+.earth-personality {
+  padding: 80px 0;
+  background: linear-gradient(135deg, #ece9e3);
 }
 
-.footer-content {
-  display: grid;
-  grid-template-columns: 1fr 2fr 1fr;
-  gap: 60px;
+.water-personality-container,
+.fire-personality-container,
+.air-personality-container,
+.earth-personality-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
   max-width: 1200px;
   margin: 0 auto;
-  padding-bottom: 40px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0 5%;
+  flex-wrap: wrap;
 }
 
-.footer-logo {
+/* Metin (sol) Bölümü */
+.water-personality-text,
+.fire-personality-text,
+.air-personality-text,
+.earth-personality-text {
+  flex: 1 1 500px;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.3s;
+}
+
+.water-personality-title,
+.fire-personality-title,
+.air-personality-title,
+.earth-personality-title {
+  font-size: clamp(32px, 4vw, 44px);
+  font-weight: 700;
+  color: #292321;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+.water-personality-desc,
+.fire-personality-desc,
+.air-personality-desc,
+.earth-personality-desc {
+  font-size: 18px;
+  color: #555;
+  margin-bottom: 40px;
+  line-height: 1.6;
+}
+
+/* Bilgi Kartları */
+.water-personality-cards,
+.fire-personality-cards,
+.air-personality-cards,
+.earth-personality-cards {
   display: flex;
-  flex-direction: column;
-  gap: 15px;
+  gap: 20px;
+  flex-wrap: wrap;
 }
 
-.footer-logo-img {
-  height: 60px;
-  border-radius: 10px;
+.water-personality-card,
+.fire-personality-card,
+.air-personality-card,
+.earth-personality-card {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.07);
+  padding: 20px;
+  flex: 1 1 150px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: default;
 }
 
-.footer-logo p {
-  font-size: 16px;
-  opacity: 0.8;
-  margin-top: 10px;
+.water-personality-card:hover,
+.fire-personality-card:hover,
+.air-personality-card:hover,
+.earth-personality-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
 }
 
-.footer-links {
+.water-personality-card i,
+.fire-personality-card i,
+.air-personality-card i,
+.earth-personality-card i {
+  font-size: 28px;
+  color: #e9b44c;
+  margin-bottom: 10px;
+}
+
+.water-personality-card h3,
+.fire-personality-card h3,
+.air-personality-card h3,
+.earth-personality-card h3 {
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+  color: #292321;
+}
+
+.water-personality-card p,
+.fire-personality-card p,
+.air-personality-card p,
+.earth-personality-card p {
+  font-size: 0.9rem;
+  color: #666;
+  line-height: 1.4;
+}
+
+/* Görsel (sağ) Bölümü */
+.water-personality-image,
+.fire-personality-image,
+.air-personality-image,
+.earth-personality-image {
+  flex: 1 1 100px;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.3s;
+  text-align: center;
+}
+
+.water-personality-image img,
+.fire-personality-image img,
+.air-personality-image img,
+.earth-personality-image img {
+  width: 100%;
+  max-width: 500px;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.07);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.water-personality-image img:hover,
+.fire-personality-image img:hover,
+.air-personality-image img:hover,
+.earth-personality-image img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+/* Animasyon flicker efekti - Ateş için */
+@keyframes flicker {
+  0% { transform: scale(1) rotate(0deg); opacity: 1; }
+  50% { transform: scale(1.1) rotate(3deg); opacity: 0.9; }
+  100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+
+/* Fire card için animasyon */
+.fire-personality-card i {
+  animation: flicker 2s infinite;
+}
+
+/* Flip Kart için Ek Stiller */
+.flip-card {
+  background-color: transparent;
+  width: 220px;
+  height: 300px;
+  perspective: 1200px;
+}
+
+/* Görünürlük Sınıfı */
+.appear {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+
+/* Element detay sayfası için stiller */
+.element-detail {
+  background-color: white;
+  border-radius: var(--card-radius);
+  box-shadow: var(--card-shadow);
+  padding: 40px;
+  margin: 20px 0;
+  text-align: center;
+}
+
+.element-detail h1 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+  color: var(--primary-color);
+  text-align: center;
+}
+
+.element-full-description {
+  background-color: var(--secondary-color);
+  padding: 25px;
+  border-radius: var(--border-radius);
+  margin: 25px 0;
+  font-size: 1.1rem;
+  line-height: 1.8;
+}
+
+/* Karakteristik özellikleri için stiller */
+.characteristics {
+  background-color: white;
+  padding: 25px;
+  border-radius: var(--border-radius);
+  margin: 25px 0;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.03);
+  line-height: 1.8;
+}
+
+.element-detail h2 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 1.8rem;
+  margin: 30px 0 15px;
+  color: var(--primary-color);
+  position: relative;
+  padding-left: 15px;
+}
+
+.element-detail h2::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 5px;
+  height: 25px;
+  background-color: var(--accent-color);
+  border-radius: 3px;
+}
+
+/* Tavsiyeler bölümü için modern stil */
+.recommendations {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 40px;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  margin: 25px 0;
 }
 
-.footer-column h3 {
-  font-size: 18px;
-  margin-bottom: 20px;
-  color: var(--accent-color);
-  font-weight: 600;
-}
-
-.footer-column ul {
-  list-style: none;
-}
-
-.footer-column ul li {
-  margin-bottom: 12px;
-}
-
-.footer-column ul li a {
-  color: var(--light-text);
-  text-decoration: none;
+.öneri-kutusu {
+  position: relative;
+  background-color: white;
+  padding: 25px 25px 25px 40px;
+  border-radius: var(--border-radius);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.03);
   transition: var(--transition);
-  opacity: 0.8;
+  border-left: 4px solid var(--accent-color);
+  line-height: 1.6;
 }
 
-.footer-column ul li a:hover {
-  color: var(--accent-color);
-  opacity: 1;
-  transform: translateX(5px);
+.öneri-kutusu:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
 }
 
-.footer-social h3 {
-  font-size: 18px;
-  margin-bottom: 20px;
-  color: var(--accent-color);
-  font-weight: 600;
-}
-
-.social-icons {
-  display: flex;
-  gap: 16px;
-  margin-top: 15px;
-}
-
-.social-icons a {
-  color: var(--light-text);
-  font-size: 18px;
-  transition: var(--transition);
-  background-color: rgba(255, 255, 255, 0.1);
+.öneri-numara {
+  position: absolute;
+  left: -15px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 30px;
+  height: 30px;
+  background-color: var(--accent-color);
+  color: white;
   border-radius: 50%;
-  width: 40px;
-  height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
+  font-weight: 600;
+  font-size: 0.9rem;
+  box-shadow: 0 3px 10px rgba(233, 180, 76, 0.3);
 }
 
-.social-icons a:hover {
-  color: var(--accent-color);
-  background-color: rgba(255, 255, 255, 0.2);
-  transform: translateY(-3px);
+.öneri-içerik {
+  font-size: 1.05rem;
 }
 
-.footer-bottom {
-  text-align: center;
-  padding-top: 30px;
-  font-size: 14px;
-  opacity: 0.7;
+/* Dominant element card styling */
+.dominant-element-card {
+  background-color: white;
+  border-radius: var(--card-radius);
+  box-shadow: var(--card-shadow);
+  padding: 30px;
+  margin: 20px 0;
+  position: relative;
+  overflow: hidden;
+  transition: var(--transition);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-/* Responsive Ayarlar */
-@media (max-width: 1100px) {
-  .footer-content {
-    grid-template-columns: 1fr 1fr;
-    gap: 40px;
-  }
-  
-  .footer-social {
-    grid-column: span 2;
+.dominant-element-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.element-image {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  border-radius: var(--card-radius);
+  object-fit: cover;
+  aspect-ratio: 4/3;
+  margin-bottom: 20px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transition: var(--transition);
+}
+
+.element-title {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 2rem;
+  margin: 15px 0;
+  color: var(--primary-color);
+  position: relative;
+  padding-bottom: 10px;
+}
+
+.element-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background-color: var(--accent-color);
+  border-radius: 2px;
+}
+
+.element-icon {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  font-size: 2rem;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+.element-badge {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background-color: var(--accent-color);
+  color: white;
+  padding: 5px 15px;
+  border-radius: 30px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  box-shadow: 0 3px 10px rgba(233, 180, 76, 0.3);
+}
+
+/* Responsive Ayarlar - Temperaments sayfasına özel */
+@media (max-width: 992px) {
+  .flip-cards {
+    gap: 20px;
   }
 }
 
 @media (max-width: 768px) {
-  .nav-container {
-    padding: 15px 5%;
-  }
-  
-  .hamburger-button {
-    display: block;
-  }
-  
-  .nav-links {
-    display: none;
+  .water-personality-container,
+  .fire-personality-container,
+  .air-personality-container,
+  .earth-personality-container {
     flex-direction: column;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100%;
-    background-color: #ece9e3;
-    padding: 20px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
     text-align: center;
-    gap: 15px;
-    z-index: 999;
   }
   
-  .nav-links.open {
-    display: flex;
-  }
-
-  .username-display {
-    display: none;
-  }
-  
-  .footer-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 30px;
-    text-align: center;
-    padding: 0 20px;
+  .water-personality-text, .water-personality-image,
+  .fire-personality-text, .fire-personality-image,
+  .air-personality-text, .air-personality-image,
+  .earth-personality-text, .earth-personality-image {
+    flex: 1 1 100%;
   }
   
-  .footer-logo, .footer-links, .footer-social {
-    width: 100%;
-  }
-  
-  .footer-logo {
-    margin-bottom: 20px;
-  }
-  
-  .footer-links {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-  
-  .footer-column {
-    margin-bottom: 15px;
-  }
-  
-  .footer-column h3 {
-    font-size: 18px;
-    margin-bottom: 10px;
-  }
-  
-  .footer-column ul {
-    padding: 0;
-    list-style: none;
-  }
-  
-  .footer-column ul li {
-    margin: 8px 0;
-  }
-  
-  .footer-column ul li a {
-    font-size: 16px;
-    color: var(--light-text);
-    opacity: 0.9;
-  }
-  
-  .footer-social h3 {
-    font-size: 18px;
-    margin-bottom: 10px;
-  }
-  
-  .social-icons {
-    display: flex;
+  .water-personality-cards,
+  .fire-personality-cards,
+  .air-personality-cards,
+  .earth-personality-cards {
     justify-content: center;
-    gap: 16px;
-  }
-  
-  .social-icons a {
-    width: 40px;
-    height: 40px;
-    font-size: 18px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .footer-bottom {
-    margin-top: 20px;
-    font-size: 14px;
-  }
-}
-
-@media (max-width: 992px) {
-  .flip-cards {
-    gap: 20px;
   }
 }
 
@@ -618,44 +515,5 @@ footer {
   
   .flip-card-back p {
     font-size: 0.85rem;
-  }
-  
-  .element-card, .advantage-card {
-    padding: 30px 20px;
-  }
-  
-  .element-icon, .advantage-icon {
-    font-size: 36px;
-    padding: 15px;
-  }
-  
-  .element-card h3, .advantage-card h3 {
-    font-size: 20px;
-  }
-  
-  .section-title {
-    font-size: 28px;
-  }
-  
-  .cta-content h2 {
-    font-size: 28px;
-  }
-  
-  .start-test-button, .cta-button {
-    padding: 14px 28px;
-    font-size: 16px;
-  }
-  
-  .footer-column h3, 
-  .footer-social h3 {
-    font-size: 16px;
-  }
-  
-  .footer-column ul li a {
-    font-size: 14px;
-  }
-  
-  .footer-bottom {
-    font-size: 12px;
   }
 }
