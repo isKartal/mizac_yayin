@@ -79,7 +79,7 @@
 }
 
 .flip-card:nth-child(2) .flip-card-back {
-  background: linear-gradient(135deg, #3498db, #a1c4fd); /* Hava */
+  background: linear-gradient(135deg, #c9c9c6, #d5d1d1); /* Hava */
 }
 
 .flip-card:nth-child(3) .flip-card-back {
@@ -108,7 +108,7 @@
 }
 
 .card-circle.air {
-  background-color: rgba(52, 152, 219, 0.15);
+  background-color: rgba(138, 141, 143, 0.15);
 }
 
 .card-circle.water {
@@ -125,7 +125,7 @@
 }
 
 .card-circle.air i {
-  color: #3498db;
+  color: #c9c9c6;
 }
 
 .card-circle.water i {
