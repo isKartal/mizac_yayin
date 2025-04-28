@@ -44,18 +44,20 @@
           {{ element.characteristics|linebreaks }}
         </div>
       </div>
-    
+      
       <div class="element-section">
-        <h2>Tavsiyeler</h2>
+        <h2>Öneriler</h2>
         <div class="recommendations">
-          {% for recommendation in element.recommendations.all|dictsort:"order" %}
-            <div class="öneri-kutusu">
-              <div class="öneri-numara">{{ forloop.counter }}</div>
-              <div class="öneri-içerik">{{ recommendation.text }}</div>
+          <p>Bu mizaç tipi için kişiselleştirilmiş önerileri görmek için giriş yapın ve profilinizi ziyaret edin.</p>
+          {% if user.is_authenticated %}
+            <div class="button-container">
+              <a href="{% url 'my_suggestions' %}" class="btn btn-primary">Önerilerime Git</a>
             </div>
-          {% empty %}
-            <p class="no-data-message">Tavsiye bulunamadı.</p>
-          {% endfor %}
+          {% else %}
+            <div class="button-container">
+              <a href="{% url 'login' %}" class="btn btn-primary">Giriş Yap</a>
+            </div>
+          {% endif %}
         </div>
       </div>
     </div>

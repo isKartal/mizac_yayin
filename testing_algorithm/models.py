@@ -14,15 +14,6 @@ class ElementType(models.Model):
     def __str__(self):
         return self.name
 
-class Recommendation(models.Model):
-    """Mizaç tiplerine göre öneriler"""
-    element = models.ForeignKey(ElementType, on_delete=models.CASCADE, related_name='recommendations')
-    text = models.TextField()
-    order = models.PositiveIntegerField(default=0, help_text='Önerilerin sıralaması için kullanılabilir.')
-    
-    def __str__(self):
-        return f"{self.element.name} - {self.text[:30]}"
-
 class Test(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField()

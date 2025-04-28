@@ -1,15 +1,10 @@
 # admin.py
 import nested_admin
 from django.contrib import admin
-from .models import ElementType, Test, Question, Choice, TestResult, TestResultDetail, Recommendation
-
-class RecommendationInline(admin.TabularInline):
-    model = Recommendation
-    extra = 1
+from .models import ElementType, Test, Question, Choice, TestResult, TestResultDetail
 
 class ElementTypeAdmin(admin.ModelAdmin):
     list_display = ('name', 'is_warm', 'is_moist')
-    inlines = [RecommendationInline]
 
 admin.site.register(ElementType, ElementTypeAdmin)
 
@@ -72,5 +67,3 @@ class TestResultAdmin(admin.ModelAdmin):
     )
 
 admin.site.register(TestResult, TestResultAdmin)
-
-admin.site.register(Recommendation)
