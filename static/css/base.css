@@ -692,19 +692,49 @@ footer {
 }
 
 /* Responsive Ayarlar */
+/* Responsive Ayarlar - Footer Düzenlemeleri */
 @media (max-width: 1100px) {
   .element-grid, .stats-grid {
     grid-template-columns: 1fr 1fr;
     gap: 30px;
   }
   
+  /* Footer 3 sütunlu yapısını koruyoruz */
   .footer-content {
-    grid-template-columns: 1fr 1fr;
-    gap: 40px;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
   }
   
+  /* Logo ve yazı hizalaması */
+  .footer-logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    text-align: center;
+  }
+  
+  .footer-logo-img {
+    height: 65px;
+    max-width: 100%;
+    object-fit: contain;
+  }
+  
+  .footer-logo p {
+    margin-top: 12px;
+    width: 100%;
+    text-align: center;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+  
+  /* Sosyal medya bölümü sağda kalıyor */
   .footer-social {
-    grid-column: span 2;
+    text-align: right;
+  }
+  
+  .social-icons {
+    justify-content: flex-end;
   }
   
   .nav-links {
@@ -725,7 +755,9 @@ footer {
   }
 }
 
-@media (max-width: 768px) {
+/* Orta boyutlu tabletler için */
+
+@media (max-width: 900px) {
   .nav-container {
     padding: 15px 5%;
   }
@@ -761,18 +793,82 @@ footer {
     font-size: 2rem;
   }
   
+  /* Footer mobil düzeni */
   .footer-content {
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
     text-align: center;
+    padding: 0 20px;
+  }
+  
+  .footer-logo {
+    width: 100%;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .footer-logo-img {
+    height: 70px;
+    max-width: 90%;
+  }
+  
+  .footer-logo p {
+    text-align: center;
+    width: 100%;
+    margin-top: 15px;
+    font-size: 16px;
+    line-height: 1.6;
   }
   
   .footer-links {
-    grid-template-columns: 1fr;
-    gap: 20px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    width: 100%;
+    gap: 30px;
+  }
+  
+  .footer-column {
+    margin-bottom: 0;
+  }
+  
+  .footer-column h3 {
+    font-size: 18px;
+    margin-bottom: 15px;
+  }
+  
+  .footer-column ul {
+    padding: 0;
+    list-style: none;
+  }
+  
+  .footer-column ul li {
+    margin: 10px 0;
+  }
+  
+  .footer-column ul li a {
+    font-size: 16px;
+    color: var(--light-text);
+    opacity: 0.9;
+  }
+  
+  .footer-social {
+    width: 100%;
+    margin-top: 10px;
+    text-align: center;
+  }
+  
+  .footer-social h3 {
+    font-size: 18px;
+    margin-bottom: 15px;
   }
   
   .social-icons {
     justify-content: center;
+    gap: 20px;
   }
   
   .btn {
@@ -800,65 +896,9 @@ footer {
   .mobile-only:hover {
     background-color: rgba(233, 180, 76, 0.2);
   }
-  
-  .footer-logo-img {
-    height: auto;
-    border-radius: 1px;
-  }
-
-  .footer-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 30px;
-    text-align: center;
-    padding: 0 20px;
-  }
-
-  .footer-logo, .footer-links, .footer-social {
-    width: 100%;
-  }
-
-  .footer-logo {
-    margin-bottom: 20px;
-  }
-
-  .footer-links {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-
-  .footer-column {
-    margin-bottom: 15px;
-  }
-
-  .footer-column h3 {
-    font-size: 18px;
-    margin-bottom: 10px;
-  }
-
-  .footer-column ul {
-    padding: 0;
-    list-style: none;
-  }
-
-  .footer-column ul li {
-    margin: 8px 0;
-  }
-
-  .footer-column ul li a {
-    font-size: 16px;
-    color: var(--light-text);
-    opacity: 0.9;
-  }
-
-  .footer-social h3 {
-    font-size: 18px;
-    margin-bottom: 10px;
-  }
 }
 
+/* Küçük mobil cihazlar için */
 @media (max-width: 480px) {
   .container {
     width: 95%;
@@ -895,16 +935,32 @@ footer {
     font-size: 28px;
   }
   
+  .footer-links {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+  
   .footer-column h3, 
   .footer-social h3 {
-    font-size: 16px;
+    font-size: 18px;
+    margin-bottom: 12px;
   }
   
   .footer-column ul li a {
-    font-size: 14px;
+    font-size: 15px;
+  }
+  
+  .footer-logo-img {
+    height: 60px;
+  }
+  
+  .footer-logo p {
+    font-size: 15px;
   }
   
   .footer-bottom {
-    font-size: 12px;
+    font-size: 13px;
+    padding-top: 25px;
+    margin-top: 10px;
   }
 }

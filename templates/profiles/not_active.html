@@ -39,15 +39,15 @@
                     {% endif %}
                     <div class="content-title">{{ content.title }}</div>
                     <div class="interaction-buttons">
-                        <button class="interaction-button like-button {% if content.is_liked %}liked{% endif %}" 
+                        <button class="interaction-button like-button {% if content.user_interactions.liked %}liked{% endif %}" 
                                 data-content-id="{{ content.id }}">
-                            <i class="{% if content.is_liked %}fas{% else %}far{% endif %} fa-heart"></i>
+                            <i class="{% if content.user_interactions.liked %}fas{% else %}far{% endif %} fa-heart"></i>
                             <span class="like-count">{{ content.like_count }}</span>
                         </button>
-                        <button class="interaction-button save-button {% if content.is_saved %}saved{% endif %}" 
+                        <button class="interaction-button save-button {% if content.user_interactions.saved %}saved{% endif %}" 
                                 data-content-id="{{ content.id }}">
-                            <i class="{% if content.is_saved %}fas{% else %}far{% endif %} fa-bookmark"></i>
-                            <span class="save-text">{% if content.is_saved %}Kaydedildi{% else %}Kaydet{% endif %}</span>
+                            <i class="{% if content.user_interactions.saved %}fas{% else %}far{% endif %} fa-bookmark"></i>
+                            <span class="save-text">{% if content.user_interactions.saved %}Kaydedildi{% else %}Kaydet{% endif %}</span>
                         </button>
                     </div>
                 </div>
