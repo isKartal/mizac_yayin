@@ -62,16 +62,9 @@
     </div>
     
     <div class="element-recommendations">
-      <h3>Sizin İçin Öneriler</h3>
-      <div class="recommendations-list">
-        {% for recommendation in dominant_element.recommendations.all|dictsort:"order" %}
-          <div class="recommendation-item">
-            <div class="recommendation-number">{{ forloop.counter }}</div>
-            <div class="recommendation-text">{{ recommendation.text }}</div>
-          </div>
-        {% empty %}
-          <p>Bu mizaç tipi için henüz öneriler eklenmemiş.</p>
-        {% endfor %}
+      <h3>Daha fazla öneri için profilinizi ziyaret edin!</h3>
+      <div class="button-container">
+        <a href="{% url 'my_suggestions' %}" class="btn btn-accent">Önerilerime Git</a>
       </div>
     </div>
     
