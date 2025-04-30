@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}MİZAÇLAR | Önerilerim{% endblock %}
+{% block title %}MİZAÇLAR | {{ dominant_element }} Önerilerim{% endblock %}
 
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'css/profiles.css' %}">
@@ -12,7 +12,8 @@
     <div class="profile-settings-container">
         <!-- Header Section -->
         <div class="profile-header">
-            <h1>Size Özel Önerilerimiz</h1>
+            <h1>{{ dominant_element }} Mizacınız İçin Öneriler</h1>
+            <p class="element-description">Size özel olarak hazırlanmış, mizacınızın özelliklerine uygun içerikler</p>
         </div>
 
         <!-- Main Content Grid -->
@@ -39,21 +40,21 @@
                     {% endif %}
                     <div class="content-title">{{ content.title }}</div>
                     <div class="interaction-buttons">
-                        <button class="interaction-button like-button {% if content.user_interactions.liked %}liked{% endif %}" 
+                        <button class="interaction-button like-button {% if content.is_liked %}liked{% endif %}" 
                                 data-content-id="{{ content.id }}">
-                            <i class="{% if content.user_interactions.liked %}fas{% else %}far{% endif %} fa-heart"></i>
+                            <i class="{% if content.is_liked %}fas{% else %}far{% endif %} fa-heart"></i>
                             <span class="like-count">{{ content.like_count }}</span>
                         </button>
-                        <button class="interaction-button save-button {% if content.user_interactions.saved %}saved{% endif %}" 
+                        <button class="interaction-button save-button {% if content.is_saved %}saved{% endif %}" 
                                 data-content-id="{{ content.id }}">
-                            <i class="{% if content.user_interactions.saved %}fas{% else %}far{% endif %} fa-bookmark"></i>
-                            <span class="save-text">{% if content.user_interactions.saved %}Kaydedildi{% else %}Kaydet{% endif %}</span>
+                            <i class="{% if content.is_saved %}fas{% else %}far{% endif %} fa-bookmark"></i>
+                            <span class="save-text">{% if content.is_saved %}Kaydedildi{% else %}Kaydet{% endif %}</span>
                         </button>
                     </div>
                 </div>
                 {% empty %}
                 <div class="empty-content">
-                    <p>Henüz öneri içeriği eklenmemiştir.</p>
+                    <p>{{ dominant_element }} mizacı için henüz öneri içeriği eklenmemiştir.</p>
                 </div>
                 {% endfor %}
             </div>

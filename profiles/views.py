@@ -14,19 +14,22 @@ def profiles(request):
 
 @login_required
 def my_temperament(request):
+    """Kullanıcının mizaç sonucunu gösterir"""
     test_result = TestResult.objects.filter(user=request.user).order_by('-date_taken').first()
+    
     if test_result:
-        dominant = test_result.dominant_element.name
-        if dominant == "Ateş":
-            return redirect('fire_more')
-        elif dominant == "Hava":
-            return redirect('air_more')
-        elif dominant == "Su":
-            return redirect('water_more')
-        elif dominant == "Toprak":
-            return redirect('earth_more')
-    # Eğer test sonucu yoksa, kullanıcıyı teste yönlendirebilirsiniz
-    return redirect('test_list')
+        # Element bilgisini al
+        dominant_element = test_result.dominant_element
+        
+        context = {
+            'result': test_result,
+            'dominant_element': dominant_element,
+        }
+        return render(request, 'profiles/my_temperament.html', context)
+    else:
+        # Eğer test sonucu yoksa, kullanıcıya bilgi mesajı göster ve test sayfasına yönlendir
+        messages.info(request, "Mizaç sonucunuzu görmek için önce mizaç testini çözmelisiniz.")
+        return redirect('test_list')
 
 @login_required
 def my_suggestions(request):
@@ -34,49 +37,29 @@ def my_suggestions(request):
     # Kullanıcının test sonucunu al
     test_result = TestResult.objects.filter(user=request.user).order_by('-date_taken').first()
     
+    # Eğer kullanıcı henüz testi çözmemişse test sayfasına yönlendir
+    if not test_result:
+        messages.warning(request, "Önerileri görmek için önce mizaç testini çözmelisiniz.")
+        return redirect('test_list')
+    
     # Kullanıcının etkileşimlerini önceden sorgula
     user_interactions = UserContentInteraction.objects.filter(user=request.user)
     interactions_dict = {interaction.content_id: interaction for interaction in user_interactions}
     
-    if test_result:
-        # Kullanıcının baskın elementine göre içerik önerilerini al
-        try:
-            # Test sisteminizdeki element adını alıyoruz
-            dominant_element_name = test_result.dominant_element.name
-        except AttributeError:
-            # Eğer dominant_element bir isim özelliği içermiyorsa
-            # Test sisteminizdeki sonuç yapısına bağlı olarak burası değişebilir
-            dominant_element_name = test_result.dominant  # veya test sisteminize uygun şekilde düzenleyin
-        
-        # İçerikleri al ve beğenileri dahil et
-        recommended_contents = RecommendedContent.objects.filter(
-            is_active=True, 
-            related_element_name=dominant_element_name
-        ).annotate(
-            like_count=Count('user_interactions', filter=Q(user_interactions__liked=True))
-        ).order_by('order', '-created_at')
-        
-        # Popüler içerikleri al
-        popular_contents = RecommendedContent.objects.filter(
-            is_active=True
-        ).exclude(
-            related_element_name=dominant_element_name
-        ).annotate(
-            like_count=Count('user_interactions', filter=Q(user_interactions__liked=True))
-        ).order_by('order', '-created_at')[:8]
-        
-        # İçerikleri birleştir
-        all_contents = list(recommended_contents) + list(popular_contents)
-    else:
-        # Eğer test sonucu yoksa, varsayılan içerikleri göster
-        all_contents = RecommendedContent.objects.filter(
-            is_active=True
-        ).annotate(
-            like_count=Count('user_interactions', filter=Q(user_interactions__liked=True))
-        ).order_by('order', '-created_at')
+    # Test sonucundan dominant element ismini al
+    dominant_element_name = test_result.dominant_element.name
+    
+    # SADECE kullanıcının baskın elementine göre içerik önerilerini al
+    # Popüler içerikleri dahil etmiyoruz, SADECE mizaç tipine uygun olanlar gösterilecek
+    recommended_contents = RecommendedContent.objects.filter(
+        is_active=True, 
+        related_element_name=dominant_element_name
+    ).annotate(
+        like_count=Count('user_interactions', filter=Q(user_interactions__liked=True))
+    ).order_by('order', '-created_at')
     
     # İçerikler için etkileşim bilgilerini hazırla
-    for content in all_contents:
+    for content in recommended_contents:
         # Etkileşim bilgisini geçici bir özellik olarak ekle (veritabanı ilişkisini değiştirmeden)
         if content.id in interactions_dict:
             # Kullanıcının bu içerikle etkileşimi varsa, özelliklerini kopyalayalım
@@ -106,11 +89,13 @@ def my_suggestions(request):
     categories = ContentCategory.objects.all()
     
     context = {
-        'contents': all_contents,
+        'contents': recommended_contents,  # Artık sadece kullanıcının mizacına ait içerikler var
         'categories': categories,
+        'dominant_element': dominant_element_name,
     }
     
-    return render(request, 'profiles/not_active.html', context)
+    # my_suggestions.html şablonunu kullanıyoruz
+    return render(request, 'profiles/my_suggestions.html', context)
 
 @login_required
 def content_detail(request, content_id):

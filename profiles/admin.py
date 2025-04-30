@@ -14,6 +14,27 @@ class RecommendedContentAdmin(admin.ModelAdmin):
     search_fields = ('title', 'short_description', 'content')
     list_editable = ('is_active', 'order')
     date_hierarchy = 'created_at'
+    
+    # Mizaç elementi için sabit değerler belirliyoruz
+    ELEMENT_CHOICES = [
+        ('Ateş', 'Ateş'),
+        ('Hava', 'Hava'),
+        ('Su', 'Su'),
+        ('Toprak', 'Toprak'),
+    ]
+    
+    def formfield_for_dbfield(self, db_field, **kwargs):
+        """Mizaç elementi için açılır liste göster"""
+        if db_field.name == 'related_element_name':
+            kwargs['widget'] = admin.widgets.AdminTextInputWidget(attrs={'list': 'element_choices'})
+            from django import forms
+            form_field = forms.CharField(
+                help_text='Aşağıdaki değerlerden birini seçin veya girin: Ateş, Hava, Su, Toprak',
+                widget=forms.Select(choices=self.ELEMENT_CHOICES)
+            )
+            return form_field
+        return super().formfield_for_dbfield(db_field, **kwargs)
+    
     fieldsets = (
         ('Temel Bilgiler', {
             'fields': ('title', 'short_description', 'content', 'image')
