@@ -36,7 +36,8 @@ def fire_more(request):
             is_users_element = test_result.dominant_element.name == "Ateş"
             context = {
                 'is_users_element': is_users_element,
-                'has_test_result': True
+                'has_test_result': True,
+                'dominant_element': test_result.dominant_element
             }
         else:
             context = {
@@ -60,7 +61,8 @@ def water_more(request):
             is_users_element = test_result.dominant_element.name == "Su"
             context = {
                 'is_users_element': is_users_element,
-                'has_test_result': True
+                'has_test_result': True,
+                'dominant_element': test_result.dominant_element
             }
         else:
             context = {
@@ -84,7 +86,8 @@ def air_more(request):
             is_users_element = test_result.dominant_element.name == "Hava"
             context = {
                 'is_users_element': is_users_element,
-                'has_test_result': True
+                'has_test_result': True,
+                'dominant_element': test_result.dominant_element
             }
         else:
             context = {
@@ -108,7 +111,8 @@ def earth_more(request):
             is_users_element = test_result.dominant_element.name == "Toprak"
             context = {
                 'is_users_element': is_users_element,
-                'has_test_result': True
+                'has_test_result': True,
+                'dominant_element': test_result.dominant_element
             }
         else:
             context = {

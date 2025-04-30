@@ -8,59 +8,178 @@
 {% endblock %}
 
 {% block content %}
-<!-- Air Mizacı Kişilik Bölümü -->
+<!-- Hava Mizacının Kişilik Bölümü -->
 <section class="air-personality">
-  <div class="air-personality-container">
-    <!-- Sol: Metin ve Kartlar -->
-    <div class="air-personality-text">
-      <h1 class="air-personality-title">Hava Mizacının Gücü</h1>
-      <p class="air-personality-desc">
-        Hava mizacına sahip bireyler, yenilikçi fikirleri, güçlü iletişim yetenekleri ve açık zihinleriyle tanınır. Esnek düşünce yapıları sayesinde her ortamda uyum sağlarlar.
-      </p>
-      <div class="air-personality-cards">
-        <div class="air-personality-card">
-          <i class="fas fa-comments"></i>
-          <h3>İletişim</h3>
-          <p>Akıcı ve etkili konuşma yeteneği.</p>
+  <div class="container">
+    <div class="temperament-header">
+      <div class="element-badge air">Hava Mizacı</div>
+      <h1 class="temperament-title">Hava Mizacının Gücü</h1>
+    </div>
+    
+    {% if has_test_result %}
+      <div class="user-temperament-bar {% if is_users_element %}is-match{% endif %}">
+        <div class="temperament-icon {% if is_users_element %}air{% else %}{{ dominant_element.name|lower }}{% endif %}">
+          <i class="fas {% if is_users_element %}fa-wind{% elif dominant_element.name == 'Ateş' %}fa-fire{% elif dominant_element.name == 'Su' %}fa-water{% elif dominant_element.name == 'Toprak' %}fa-mountain{% endif %}"></i>
         </div>
-        <div class="air-personality-card">
-          <i class="fas fa-brain"></i>
-          <h3>Analitik</h3>
-          <p>Farklı bakış açılarıyla derin düşünme.</p>
+        <div class="temperament-info">
+          {% if is_users_element %}
+            <h3>Bu Sizin Mizacınız!</h3>
+            <p>Hava mizacına sahipsiniz. Buradaki bilgiler ve öneriler sizin için özel olarak hazırlanmıştır.</p>
+            <div class="temperament-actions">
+              <a href="{% url 'my_suggestions' %}" class="btn btn-primary">Önerilerime Git</a>
+            </div>
+          {% else %}
+            <h3>Bu Sizin Mizacınız Değil</h3>
+            <p>Siz <span class="element-text {{ dominant_element.name|lower }}">{{ dominant_element.name }}</span> mizacına sahipsiniz. Kendi mizacınız hakkında bilgi almak için sayfanızı ziyaret edin.</p>
+            <div class="temperament-actions">
+              {% if dominant_element.name == "Ateş" %}
+                <a href="{% url 'fire_more' %}" class="btn btn-primary">Kendi Mizacıma Git</a>
+              {% elif dominant_element.name == "Su" %}
+                <a href="{% url 'water_more' %}" class="btn btn-primary">Kendi Mizacıma Git</a>
+              {% elif dominant_element.name == "Toprak" %}
+                <a href="{% url 'earth_more' %}" class="btn btn-primary">Kendi Mizacıma Git</a>
+              {% endif %}
+            </div>
+          {% endif %}
         </div>
-        <div class="air-personality-card">
-          <i class="fas fa-lightbulb"></i>
-          <h3>Yaratıcılık</h3>
-          <p>Yeni fikirler ve inovatif çözümler üretme.</p>
+      </div>
+    {% elif request.user.is_authenticated and not has_test_result %}
+      <div class="user-temperament-bar no-result">
+        <div class="temperament-icon">
+          <i class="fas fa-question"></i>
+        </div>
+        <div class="temperament-info">
+          <h3>Mizaç Testini Henüz Çözmediniz</h3>
+          <p>Kendi mizacınızı öğrenmek ve size özel içerikler görmek için mizaç testini çözün.</p>
+          <div class="temperament-actions">
+            <a href="{% url 'test_list' %}" class="btn btn-primary">Teste Başla</a>
+          </div>
+        </div>
+      </div>
+    {% elif not request.user.is_authenticated %}
+      <div class="user-temperament-bar not-logged">
+        <div class="temperament-icon">
+          <i class="fas fa-user-circle"></i>
+        </div>
+        <div class="temperament-info">
+          <h3>Mizacınızı Keşfedin</h3>
+          <p>Kendi mizacınızı öğrenmek ve size özel öneriler almak için giriş yapın ve testi çözün.</p>
+          <div class="temperament-actions">
+            <a href="{% url 'login' %}" class="btn btn-primary">Giriş Yap</a>
+            <a href="{% url 'register' %}" class="btn btn-secondary">Kayıt Ol</a>
+          </div>
+        </div>
+      </div>
+    {% endif %}
+    
+    <div class="air-personality-container">
+      <!-- Sol: Metin ve Bilgi Kartları -->
+      <div class="air-personality-text">
+        <p class="air-personality-desc">
+          Hava mizacına sahip bireyler, iletişime açık, analitik ve sosyal yönleri güçlü kişilerdir. Esnek düşünce yapıları sayesinde her ortamda uyum sağlar, farklı bakış açıları geliştirme ve analiz etme konusunda ustadırlar.
+        </p>
+        <div class="air-personality-cards">
+          <div class="air-personality-card">
+            <i class="fas fa-comments"></i>
+            <h3>İletişim</h3>
+            <p>Akıcı ve etkili konuşma yeteneği.</p>
+          </div>
+          <div class="air-personality-card">
+            <i class="fas fa-brain"></i>
+            <h3>Analitik</h3>
+            <p>Farklı bakış açılarıyla derin düşünme.</p>
+          </div>
+          <div class="air-personality-card">
+            <i class="fas fa-lightbulb"></i>
+            <h3>Yaratıcılık</h3>
+            <p>Yeni fikirler ve inovatif çözümler üretme.</p>
+          </div>
+        </div>
+      </div>
+      <!-- Sağ: Görsel Bölümü -->
+      <div class="air-personality-image">
+        <img src="{% static 'images/air-personality.jpg' %}" alt="Hava Mizacı">
+      </div>
+    </div>
+    
+    <div class="temperament-characteristics">
+      <h2 class="section-title">Hava Mizacının Karakteristik Özellikleri</h2>
+      <div class="characteristics-grid">
+        <div class="characteristic-item">
+          <div class="characteristic-icon">
+            <i class="fas fa-comments-alt"></i>
+          </div>
+          <div class="characteristic-content">
+            <h3>Sosyal Beceri</h3>
+            <p>Hava mizaçlı kişiler, sosyal ortamlarda kendilerini rahatça ifade edebilir ve geniş bir arkadaş çevresi kurarlar. Farklı insan gruplarıyla kolayca iletişim kurabilir ve bağlantı oluşturabilirler.</p>
+          </div>
+        </div>
+        <div class="characteristic-item">
+          <div class="characteristic-icon">
+            <i class="fas fa-sitemap"></i>
+          </div>
+          <div class="characteristic-content">
+            <h3>Çok Yönlülük</h3>
+            <p>Hava mizaçlı kişiler çok yönlüdürler. Birden fazla konu veya projeyle aynı anda ilgilenebilir, farklı perspektifleri anlayabilir ve çeşitli alanlarda beceri geliştirebilirler.</p>
+          </div>
+        </div>
+        <div class="characteristic-item">
+          <div class="characteristic-icon">
+            <i class="fas fa-chalkboard-teacher"></i>
+          </div>
+          <div class="characteristic-content">
+            <h3>Bilgiyi Aktarma</h3>
+            <p>Karmaşık bilgileri başkalarının anlayabileceği şekilde aktarmada ustadırlar. Öğretmenlik, danışmanlık veya iletişim gerektiren mesleklerde başarılı olurlar.</p>
+          </div>
+        </div>
+        <div class="characteristic-item">
+          <div class="characteristic-icon">
+            <i class="fas fa-random"></i>
+          </div>
+          <div class="characteristic-content">
+            <h3>Esneklik</h3>
+            <p>Hava mizaçlı kişiler, değişen koşullara hızla adapte olabilirler. Sabit fikirli değillerdir ve yeni düşünce sistemlerine, farklı yaşam tarzlarına veya beklenmedik durumlara kolayca uyum sağlayabilirler.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="temperament-recommendations">
+      <h2 class="section-title">Hava Mizacı İçin Öneriler</h2>
+      <div class="recommendations-content">
+        <div class="recommendations-image">
+          <img src="{% static 'images/air-recommendations.jpg' %}" alt="Hava Mizacı Önerileri">
+        </div>
+        <div class="recommendations-list">
+          <div class="recommendation-item">
+            <div class="recommendation-number">1</div>
+            <p>Düzenli not alma alışkanlığı geliştirin. Fikirlerinizi kaydetmek, hızlı düşünce akışınızı yapılandırmanıza ve projelere odaklanmanıza yardımcı olacaktır.</p>
+          </div>
+          <div class="recommendation-item">
+            <div class="recommendation-number">2</div>
+            <p>Tamamlanmış görevleri görselleştirerek motivasyonunuzu artırın. Proje yönetim araçları veya yapılacaklar listesi, çok yönlü ilgi alanlarınızı organize etmenize yardımcı olabilir.</p>
+          </div>
+          <div class="recommendation-item">
+            <div class="recommendation-number">3</div>
+            <p>Düzenli olarak doğada vakit geçirin. Açık havada yürüyüş veya diğer aktiviteler, zihninizi tazeleyecek ve yaratıcı düşünmenize yardımcı olacaktır.</p>
+          </div>
+          <div class="recommendation-item">
+            <div class="recommendation-number">4</div>
+            <p>Tartışmalarda empati kurmaya çalışın. Analitik yapınız bazen duygusal bağlamları göz ardı etmenize neden olabilir, bu yüzden karşınızdakinin duygularını anlamak için bilinçli bir çaba gösterin.</p>
+          </div>
+          <div class="recommendation-item">
+            <div class="recommendation-number">5</div>
+            <p>Düzenli meditasyon pratiği, zihinsel odaklanmanızı artırabilir ve düşüncelerinizin dağılmasını önleyebilir. Günde sadece 5-10 dakikalık bir meditasyon bile fark yaratabilir.</p>
+          </div>
         </div>
       </div>
       
-      <!-- Test sonucu varsa ve kullanıcının mizacı Hava ise -->
-      {% if has_test_result and is_users_element %}
-      <div class="element-match-box">
-        <i class="fas fa-check-circle"></i>
-        <p>Bu sizin baskın mizacınız! Sizin için özel önerileri görmek için <a href="{% url 'my_suggestions' %}">buraya tıklayın</a>.</p>
-      </div>
-      {% elif has_test_result and not is_users_element %}
-      <div class="element-different-box">
-        <i class="fas fa-info-circle"></i>
-        <p>Bu sizin baskın mizacınız değil. Kendi mizacınız için önerileri görmek için <a href="{% url 'my_temperament' %}">buraya tıklayın</a>.</p>
-      </div>
-      {% elif request.user.is_authenticated and not has_test_result %}
-      <div class="element-test-box">
-        <i class="fas fa-exclamation-circle"></i>
-        <p>Henüz mizaç testini çözmediniz. Kendi mizacınızı öğrenmek için <a href="{% url 'test_list' %}">testi çözün</a>.</p>
-      </div>
-      {% elif not request.user.is_authenticated %}
-      <div class="element-login-box">
-        <i class="fas fa-user-circle"></i>
-        <p>Mizacınızı öğrenmek ve size özel öneriler almak için <a href="{% url 'login' %}">giriş yapın</a> ve testi çözün.</p>
-      </div>
+      {% if is_users_element %}
+        <div class="recommendation-cta">
+          <p>Size özel hazırlanmış daha fazla öneri içeriği için öneriler sayfanızı ziyaret edin.</p>
+          <a href="{% url 'my_suggestions' %}" class="btn btn-accent">Önerilerime Git</a>
+        </div>
       {% endif %}
-    </div>
-    <!-- Sağ: Görsel -->
-    <div class="air-personality-image">
-      <img src="{% static 'images/air-personality.jpg' %}" alt="Hava Mizacı">
     </div>
   </div>
 </section>
@@ -69,7 +188,7 @@
 {% block extra_js %}
 <script>
   document.addEventListener('DOMContentLoaded', function() {
-    // Intersection Observer: air-personality-text ve air-personality-image görünür olduğunda "appear" sınıfı ekle
+    // Intersection Observer: air-personality-text ve air-personality-image görünür olduğunda "appear" sınıfını ekle
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -78,7 +197,7 @@
       });
     }, { threshold: 0.1 });
     
-    document.querySelectorAll('.air-personality-text, .air-personality-image').forEach(el => {
+    document.querySelectorAll('.air-personality-text, .air-personality-image, .characteristic-item, .recommendation-item').forEach(el => {
       observer.observe(el);
     });
   });

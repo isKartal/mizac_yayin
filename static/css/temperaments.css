@@ -670,3 +670,725 @@
   margin-top: 10px;
   font-style: italic;
 }
+
+/* Temperament sayfaları için ek stiller */
+
+.temperament-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.element-badge {
+  display: inline-block;
+  padding: 8px 20px;
+  border-radius: 30px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.element-badge.fire {
+  background-color: rgba(231, 76, 60, 0.2);
+  color: #e74c3c;
+}
+
+.element-badge.air {
+  background-color: rgba(52, 152, 219, 0.2);
+  color: #3498db;
+}
+
+.element-badge.water {
+  background-color: rgba(41, 128, 185, 0.2);
+  color: #2980b9;
+}
+
+.element-badge.earth {
+  background-color: rgba(230, 126, 34, 0.2);
+  color: #e67e22;
+}
+
+.temperament-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  margin-bottom: 20px;
+}
+
+/* Kullanıcının mizaç bilgisi çubuğu */
+.user-temperament-bar {
+  display: flex;
+  align-items: center;
+  padding: 25px;
+  margin-bottom: 50px;
+  border-radius: 20px;
+  background-color: white;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  position: relative;
+  overflow: hidden;
+}
+
+.user-temperament-bar::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 5px;
+  height: 100%;
+  background-color: #ddd;
+}
+
+.user-temperament-bar.is-match::before {
+  background-color: #2ecc71;
+}
+
+.user-temperament-bar.no-result::before {
+  background-color: #f1c40f;
+}
+
+.user-temperament-bar.not-logged::before {
+  background-color: #9b59b6;
+}
+
+.temperament-icon {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 25px;
+  background-color: var(--secondary-color);
+  flex-shrink: 0;
+}
+
+.temperament-icon i {
+  font-size: 30px;
+  color: #666;
+}
+
+.temperament-icon.fire i {
+  color: #e74c3c;
+}
+
+.temperament-icon.air i {
+  color: #3498db;
+}
+
+.temperament-icon.water i {
+  color: #2980b9;
+}
+
+.temperament-icon.earth i {
+  color: #e67e22;
+}
+
+.temperament-info {
+  flex: 1;
+}
+
+.temperament-info h3 {
+  font-size: 1.3rem;
+  margin-bottom: 8px;
+  color: var(--primary-color);
+}
+
+.temperament-info p {
+  color: #666;
+  margin-bottom: 15px;
+}
+
+.element-text {
+  font-weight: 600;
+}
+
+.element-text.ateş {
+  color: #e74c3c;
+}
+
+.element-text.hava {
+  color: #3498db;
+}
+
+.element-text.su {
+  color: #2980b9;
+}
+
+.element-text.toprak {
+  color: #e67e22;
+}
+
+.temperament-actions {
+  display: flex;
+  gap: 15px;
+}
+
+/* Karakteristik özellikleri */
+.temperament-characteristics {
+  margin: 80px 0;
+}
+
+.section-title {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: var(--primary-color);
+  text-align: center;
+  margin-bottom: 40px;
+  position: relative;
+  padding-bottom: 15px;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  width: 80px;
+  height: 3px;
+  background-color: var(--accent-color);
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 2px;
+}
+
+.characteristics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(45%, 1fr));
+  gap: 30px;
+}
+
+.characteristic-item {
+  display: flex;
+  background-color: white;
+  border-radius: 15px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+  padding: 25px;
+  transition: var(--transition);
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.characteristic-item.appear {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.characteristic-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+.characteristic-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: var(--secondary-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 20px;
+  flex-shrink: 0;
+}
+
+.characteristic-icon i {
+  font-size: 24px;
+  color: var(--accent-color);
+}
+
+.characteristic-content {
+  flex: 1;
+}
+
+.characteristic-content h3 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  color: var(--primary-color);
+}
+
+.characteristic-content p {
+  color: #666;
+  line-height: 1.5;
+}
+
+/* Tavsiyeler bölümü */
+.temperament-recommendations {
+  margin: 80px 0;
+}
+
+.recommendations-content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  align-items: center;
+}
+
+.recommendations-image {
+  flex: 1;
+  min-width: 300px;
+}
+
+.recommendations-image img {
+  width: 100%;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  transition: var(--transition);
+}
+
+.recommendations-image img:hover {
+  transform: scale(1.02);
+}
+
+.recommendations-list {
+  flex: 1;
+  min-width: 300px;
+}
+
+.recommendation-item {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 25px;
+  opacity: 0;
+  transform: translateX(20px);
+  transition: var(--transition);
+}
+
+.recommendation-item.appear {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.recommendation-number {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: var(--accent-color);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  margin-right: 15px;
+  flex-shrink: 0;
+}
+
+.recommendation-cta {
+  text-align: center;
+  margin-top: 50px;
+  padding: 30px;
+  background-color: var(--secondary-color);
+  border-radius: 20px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+}
+
+.recommendation-cta p {
+  margin-bottom: 20px;
+  font-size: 1.1rem;
+  color: var(--primary-color);
+}
+
+/* Responsive ayarlar */
+@media (max-width: 768px) {
+  .characteristics-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .user-temperament-bar {
+    flex-direction: column;
+    text-align: center;
+    padding: 30px 20px;
+  }
+  
+  .temperament-icon {
+    margin-right: 0;
+    margin-bottom: 20px;
+  }
+  
+  .temperament-actions {
+    justify-content: center;
+  }
+  
+  .recommendation-item {
+    margin-bottom: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .characteristic-item {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .characteristic-icon {
+    margin-right: 0;
+    margin-bottom: 15px;
+  }
+}
+
+/* Mizaçlar ana sayfası için geliştirilmiş stil tanımları */
+
+.temperament-description {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 40px;
+  font-size: 1.1rem;
+  color: #666;
+  line-height: 1.6;
+}
+
+/* Flip kartlar için geliştirilen stiller */
+.temperament-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+  margin: 60px 0;
+}
+
+.temperament-card-container {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.5s ease;
+}
+
+.temperament-card-container.appear {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.flip-card {
+  width: 260px;
+  height: 340px;
+  perspective: 1500px;
+  margin-bottom: 20px;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+  transform-style: preserve-3d;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+}
+
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front,
+.flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+}
+
+.flip-card-front {
+  background-color: white;
+}
+
+.flip-card-back {
+  background-color: var(--primary-color);
+  color: white;
+  transform: rotateY(180deg);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.flip-card.fire .flip-card-back {
+  background: linear-gradient(135deg, #e74c3c, #ff9966);
+}
+
+.flip-card.air .flip-card-back {
+  background: linear-gradient(135deg, #3498db, #a1c4fd);
+}
+
+.flip-card.water .flip-card-back {
+  background: linear-gradient(135deg, #2980b9, #6f86d6);
+}
+
+.flip-card.earth .flip-card-back {
+  background: linear-gradient(135deg, #e67e22, #dfa579);
+}
+
+.card-circle {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 25px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.flip-card:hover .card-circle {
+  transform: scale(1.1);
+}
+
+.card-circle i {
+  font-size: 36px;
+}
+
+.flip-card-front h3 {
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+  color: var(--primary-color);
+  font-weight: 700;
+}
+
+.flip-card-front p {
+  color: #666;
+  font-size: 1rem;
+}
+
+.flip-card-back h3 {
+  font-size: 1.6rem;
+  margin-bottom: 15px;
+  font-weight: 700;
+}
+
+.flip-card-back p {
+  margin-bottom: 25px;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.card-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: rgba(255, 255, 255, 0.2);
+  padding: 10px 20px;
+  border-radius: 30px;
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.card-link:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+  transform: translateX(5px);
+}
+
+/* Mizacın Avantajları Bölümü */
+.temperament-info-section {
+  margin: 80px 0;
+  padding: 40px 0;
+  background-color: var(--secondary-color);
+  border-radius: 20px;
+}
+
+.advantages-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+  padding: 0 30px;
+}
+
+.advantage-item {
+  display: flex;
+  background-color: white;
+  border-radius: 15px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+  padding: 25px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.5s ease;
+}
+
+.advantage-item.appear {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.advantage-item:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+.advantage-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: var(--accent-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 20px;
+  flex-shrink: 0;
+}
+
+.advantage-icon i {
+  font-size: 24px;
+  color: white;
+}
+
+.advantage-content {
+  flex: 1;
+}
+
+.advantage-content h3 {
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+.advantage-content p {
+  color: #666;
+  line-height: 1.6;
+  font-size: 0.95rem;
+}
+
+/* CTA bölümü */
+.temperament-cta {
+  text-align: center;
+  padding: 60px 30px;
+  margin: 40px 0;
+  background-color: var(--primary-color);
+  color: white;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.temperament-cta h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  font-weight: 700;
+}
+
+.temperament-cta p {
+  max-width: 700px;
+  margin: 0 auto 30px;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  opacity: 0.9;
+}
+
+.cta-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.btn-lg {
+  padding: 15px 40px;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.btn-outline {
+  background-color: transparent;
+  border: 2px solid white;
+  color: white;
+}
+
+.btn-outline:hover {
+  background-color: white;
+  color: var(--primary-color);
+  transform: translateY(-5px);
+}
+
+/* Responsive ayarlar */
+@media (max-width: 992px) {
+  .advantages-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .temperament-cards {
+    gap: 20px;
+  }
+  
+  .flip-card {
+    width: 230px;
+    height: 320px;
+  }
+  
+  .flip-card-front h3 {
+    font-size: 1.5rem;
+  }
+  
+  .flip-card-back h3 {
+    font-size: 1.4rem;
+  }
+  
+  .card-circle {
+    width: 70px;
+    height: 70px;
+  }
+  
+  .card-circle i {
+    font-size: 28px;
+  }
+  
+  .temperament-cta h2 {
+    font-size: 1.7rem;
+  }
+  
+  .temperament-cta p {
+    font-size: 1rem;
+  }
+  
+  .cta-buttons {
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+  }
+  
+  .btn-lg {
+    width: 100%;
+    max-width: 300px;
+  }
+  
+  .advantage-item {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .advantage-icon {
+    margin: 0 auto 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .temperament-cards {
+    gap: 15px;
+  }
+  
+  .flip-card {
+    width: 100%;
+    max-width: 280px;
+    height: 300px;
+  }
+  
+  .advantage-item {
+    padding: 20px;
+  }
+  
+  .advantage-icon {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .advantage-icon i {
+    font-size: 20px;
+  }
+  
+  .advantage-content h3 {
+    font-size: 1.2rem;
+  }
+}
