@@ -16,53 +16,101 @@
             <p class="element-description">Size özel olarak hazırlanmış, mizacınızın özelliklerine uygun içerikler</p>
         </div>
 
-        <!-- Main Content Grid -->
-        <div class="profile-card">
-            <!-- Content Navigation - Kategori Geçişi İçin -->
-            <div class="content-navigation">
-                <div class="nav-buttons">
-                    <button class="nav-button" id="prevCategory"><i class="fas fa-chevron-left"></i></button>
-                    <span class="nav-title" id="categoryTitle">Tüm İçerikler</span>
-                    <button class="nav-button" id="nextCategory"><i class="fas fa-chevron-right"></i></button>
+        <!-- KENDİ MİZACINA ÖZEL ÖNERİLER BÖLÜMÜ -->
+        <div class="profile-card recommendations-container">
+            <h2 class="recommendations-title">Sizin İçin Öneriler</h2>
+            <p class="recommendations-subtitle">{{ dominant_element }} mizacınıza uygun kişiselleştirilmiş içerikler</p>
+
+            <!-- Kendi Mizacı İçerikler Grid Container -->
+            <div class="grid-container">
+                <div class="grid-wrapper" id="myContentWrapper">
+                    <div class="my-content-grid" id="myContentGrid">
+                        {% for content in contents %}
+                            <div class="content-card" data-content-id="{{ content.id }}" data-category="{{ content.category.id }}">
+                                {% if content.image %}
+                                <div class="content-image" style="background-image: url('{{ content.image.url }}')"></div>
+                                {% else %}
+                                <div class="content-image placeholder-image">
+                                    <i class="fas fa-book-open"></i>
+                                </div>
+                                {% endif %}
+                                <div class="content-title">{{ content.title }}</div>
+                                <div class="interaction-buttons">
+                                    <button class="interaction-button like-button {% if content.is_liked %}liked{% endif %}" 
+                                            data-content-id="{{ content.id }}">
+                                        <i class="{% if content.is_liked %}fas{% else %}far{% endif %} fa-heart"></i>
+                                        <span class="like-count">{{ content.like_count }}</span>
+                                    </button>
+                                    <button class="interaction-button save-button {% if content.is_saved %}saved{% endif %}" 
+                                            data-content-id="{{ content.id }}">
+                                        <i class="{% if content.is_saved %}fas{% else %}far{% endif %} fa-bookmark"></i>
+                                        <span class="save-text">{% if content.is_saved %}Kaydedildi{% else %}Kaydet{% endif %}</span>
+                                    </button>
+                                </div>
+                            </div>
+                        {% empty %}
+                            <div class="empty-content">
+                                <p>{{ dominant_element }} mizacı için henüz öneri içeriği eklenmemiştir.</p>
+                            </div>
+                        {% endfor %}
+                    </div>
                 </div>
             </div>
 
-            <!-- Content Grid -->
-            <div class="content-grid" id="contentGrid">
-                {% for content in contents %}
-                <div class="content-card" data-content-id="{{ content.id }}" data-category="{{ content.category.id }}">
-                    {% if content.image %}
-                    <div class="content-image" style="background-image: url('{{ content.image.url }}')"></div>
-                    {% else %}
-                    <div class="content-image placeholder-image">
-                        <i class="fas fa-book-open"></i>
-                    </div>
-                    {% endif %}
-                    <div class="content-title">{{ content.title }}</div>
-                    <div class="interaction-buttons">
-                        <button class="interaction-button like-button {% if content.is_liked %}liked{% endif %}" 
-                                data-content-id="{{ content.id }}">
-                            <i class="{% if content.is_liked %}fas{% else %}far{% endif %} fa-heart"></i>
-                            <span class="like-count">{{ content.like_count }}</span>
-                        </button>
-                        <button class="interaction-button save-button {% if content.is_saved %}saved{% endif %}" 
-                                data-content-id="{{ content.id }}">
-                            <i class="{% if content.is_saved %}fas{% else %}far{% endif %} fa-bookmark"></i>
-                            <span class="save-text">{% if content.is_saved %}Kaydedildi{% else %}Kaydet{% endif %}</span>
-                        </button>
-                    </div>
+            <!-- Kendi Mizacı Kaydırma Kontrolleri -->
+            <div class="scroll-controls">
+                <button class="scroll-button" id="prevMyContent" disabled>
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <div class="pagination-indicator" id="myContentPagination">
+                    <!-- Pagination dots will be added dynamically -->
                 </div>
-                {% empty %}
-                <div class="empty-content">
-                    <p>{{ dominant_element }} mizacı için henüz öneri içeriği eklenmemiştir.</p>
-                </div>
-                {% endfor %}
+                <button class="scroll-button" id="nextMyContent">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- BÖLÜM AYIRICI -->
+        <div class="section-divider">
+            <span class="section-divider-text">Tüm Mizaçlar İçin Öneriler</span>
+        </div>
+
+        <!-- TÜM MİZAÇLAR İÇİN ÖNERİLER BÖLÜMÜ -->
+        <div class="profile-card recommendations-container">
+            <h2 class="recommendations-title">Keşfedilecek İçerikler</h2>
+            <p class="recommendations-subtitle">Farklı mizaç tipleri için önerilen içerikler</p>
+
+            <!-- Element Sekmeleri -->
+            <div class="element-tabs">
+                <div class="element-tab active" data-element="all">Tümü</div>
+                <div class="element-tab" data-element="Ateş">Ateş</div>
+                <div class="element-tab" data-element="Hava">Hava</div>
+                <div class="element-tab" data-element="Su">Su</div>
+                <div class="element-tab" data-element="Toprak">Toprak</div>
             </div>
 
-            <!-- Pagination Dots - Sayfa Geçişi İçin -->
-            <div class="pagination-dots" id="paginationDots">
-                <!-- Sayfalama noktaları JS ile dinamik olarak oluşturulacak -->
-                <i class="fas fa-arrow-right" id="nextPageArrow"></i>
+            <!-- Tüm Mizaçlar İçerikler Grid Container -->
+            <div class="grid-container">
+                <div class="grid-wrapper" id="allContentWrapper">
+                    <div class="all-content-grid" id="allContentGrid">
+                        <!-- Burada tüm mizaçlar için içerikler görüntülenecek -->
+                        <!-- Bu kısım JavaScript ile dinamik olarak doldurulacak -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tüm Mizaçlar Kaydırma Kontrolleri -->
+            <div class="scroll-controls">
+                <button class="scroll-button" id="prevAllContent" disabled>
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <div class="pagination-indicator" id="allContentPagination">
+                    <!-- Pagination dots will be added dynamically -->
+                </div>
+                <button class="scroll-button" id="nextAllContent">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
             </div>
         </div>
     </div>
@@ -107,172 +155,246 @@
 {% block extra_js %}
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    // Tüm içerik kartları
-    const contentCards = document.querySelectorAll('.content-card');
-    const itemsPerPage = 6; // Her sayfada 6 içerik (3x2 grid)
+    // ---------- KENDİ MİZACI İÇİN ÖNERİLER ----------
+    // Kendi mizacı içerik kartları
+    const myContentCards = document.querySelectorAll('.my-content-grid .content-card');
+    const myItemsPerPage = 3; // Her sayfada 3 içerik (yan yana 3x1 grid)
     
-    // Kategori değişkenleri
-    const categoryTitle = document.getElementById('categoryTitle');
-    const prevCategoryBtn = document.getElementById('prevCategory');
-    const nextCategoryBtn = document.getElementById('nextCategory');
+    // Kendi mizacı sayfalama değişkenleri
+    let myCurrentPage = 0;
+    let myTotalPages = Math.ceil(myContentCards.length / myItemsPerPage);
     
-    // Benzersiz kategorileri topla
-    const categories = [];
-    const categoryNames = {};
-    
-    // Tüm kategorileri topla
-    {% for category in categories %}
-        categories.push("{{ category.id }}");
-        categoryNames["{{ category.id }}"] = "{{ category.name }}";
-    {% endfor %}
-    
-    // Eğer kategori yoksa, "Tüm İçerikler" kategorisini ekle
-    if (categories.length === 0) {
-        categories.push("all");
-        categoryNames["all"] = "Tüm İçerikler";
-    }
-    
-    let currentCategoryIndex = 0;
-    let currentPage = 0;
-    let currentModalContentId = null;
-    
-    // Sayfalama değişkenleri
-    let visibleCards = [];
-    let totalPages = 0;
-    
-    // İçerikleri kategoriye göre filtrele
-    function filterByCategory(categoryId) {
-        // Tüm kartları sıfırla
-        contentCards.forEach(card => {
-            card.style.display = 'none';
-        });
+    // Pagination noktalarını oluştur - kendi mizacı için
+    function createMyPaginationDots() {
+        const paginationContainer = document.getElementById('myContentPagination');
+        paginationContainer.innerHTML = '';
         
-        // Geçerli kategoriyi güncelle
-        if (categoryId === "all") {
-            // "Tüm İçerikler" kategorisi için tüm kartları göster
-            visibleCards = [...contentCards];
-            categoryTitle.textContent = categoryNames["all"];
-        } else {
-            // Belirli kategoriye ait kartları filtrele
-            visibleCards = Array.from(contentCards).filter(card => 
-                card.getAttribute('data-category') === categoryId
-            );
-            categoryTitle.textContent = categoryNames[categoryId];
-        }
-        
-        // Toplam sayfa sayısını güncelle
-        totalPages = Math.ceil(visibleCards.length / itemsPerPage);
-        
-        // Sayfalama noktalarını güncelle
-        updatePaginationDots();
-        
-        // İlk sayfayı göster
-        showPage(0);
-    }
-    
-    // Sayfalama noktalarını oluştur/güncelle
-    function updatePaginationDots() {
-        const paginationDots = document.getElementById('paginationDots');
-        if (!paginationDots) return;
-        
-        // Mevcut noktaları temizle
-        while (paginationDots.firstChild) {
-            if (paginationDots.firstChild.id === 'nextPageArrow') {
-                break;
-            }
-            paginationDots.removeChild(paginationDots.firstChild);
-        }
-        
-        // Yeni noktaları ekle
-        const nextArrow = document.getElementById('nextPageArrow');
-        for (let i = 0; i < totalPages; i++) {
-            const dot = document.createElement('span');
-            dot.classList.add('dot');
+        for (let i = 0; i < myTotalPages; i++) {
+            const dot = document.createElement('div');
+            dot.classList.add('page-dot');
             if (i === 0) dot.classList.add('active');
             dot.dataset.page = i;
             
-            // Tıklama olayı ekle
             dot.addEventListener('click', function() {
-                showPage(parseInt(this.dataset.page));
+                showMyPage(parseInt(this.dataset.page));
             });
             
-            // nextArrow'dan önce ekle
-            if (nextArrow) {
-                paginationDots.insertBefore(dot, nextArrow);
-            } else {
-                paginationDots.appendChild(dot);
-            }
+            paginationContainer.appendChild(dot);
         }
     }
     
-    // Sayfa gösterme fonksiyonu
-    function showPage(pageNum) {
-        if (pageNum < 0 || pageNum >= totalPages) return;
+    // Sayfa gösterme fonksiyonu - kendi mizacı için
+    function showMyPage(pageNum) {
+        if (pageNum < 0 || pageNum >= myTotalPages) return;
         
-        // Tüm kartları gizle
-        visibleCards.forEach(card => {
-            card.style.display = 'none';
-        });
+        const wrapper = document.getElementById('myContentWrapper');
+        const grid = document.getElementById('myContentGrid');
+        const gridWidth = grid.offsetWidth;
         
-        // Geçerli sayfadaki kartları göster
-        const start = pageNum * itemsPerPage;
-        const end = Math.min(start + itemsPerPage, visibleCards.length);
-        
-        for (let i = start; i < end; i++) {
-            if (visibleCards[i]) {
-                visibleCards[i].style.display = '';
-            }
-        }
+        wrapper.style.transform = `translateX(-${pageNum * gridWidth}px)`;
         
         // Aktif noktayı güncelle
-        const dots = document.querySelectorAll('.pagination-dots .dot');
+        const dots = document.querySelectorAll('#myContentPagination .page-dot');
         dots.forEach((dot, index) => {
             dot.classList.toggle('active', index === pageNum);
         });
         
-        currentPage = pageNum;
+        // Kaydırma butonlarını güncelle
+        document.getElementById('prevMyContent').disabled = pageNum === 0;
+        document.getElementById('nextMyContent').disabled = pageNum === myTotalPages - 1;
+        
+        myCurrentPage = pageNum;
     }
     
-    // Kategori geçişi
-    function changeCategory(direction) {
-        currentCategoryIndex = (currentCategoryIndex + direction + categories.length) % categories.length;
-        filterByCategory(categories[currentCategoryIndex]);
-    }
+    // Kaydırma butonlarına olay ekle - kendi mizacı için
+    document.getElementById('prevMyContent').addEventListener('click', function() {
+        showMyPage(myCurrentPage - 1);
+    });
     
-    // Kategori butonlarına olay ekle
-    if (prevCategoryBtn) {
-        prevCategoryBtn.addEventListener('click', function() {
-            changeCategory(-1);
+    document.getElementById('nextMyContent').addEventListener('click', function() {
+        showMyPage(myCurrentPage + 1);
+    });
+    
+    // ---------- TÜM MİZAÇLAR İÇİN ÖNERİLER ----------
+    // Bütün içerik verilerini al (bu veriyi AJAX ile almalısınız)
+    let allContents = []; // Bu diziyi AJAX ile dolduracağız
+    let filteredContents = []; // Aktif filtrelenen içerikler
+    
+    // Element filtreleri
+    const elementTabs = document.querySelectorAll('.element-tab');
+    let activeElement = 'all';
+    
+    // Tüm mizaçlar için sayfalama değişkenleri
+    const allItemsPerPage = 6; // Her sayfada 6 içerik (3x2 grid)
+    let allCurrentPage = 0;
+    let allTotalPages = 0;
+    
+    // Element sekmelerine tıklama olayı ekle
+    elementTabs.forEach(tab => {
+        tab.addEventListener('click', function() {
+            // Aktif sekmeyi değiştir
+            elementTabs.forEach(t => t.classList.remove('active'));
+            this.classList.add('active');
+            
+            // Element filtresini uygula
+            activeElement = this.dataset.element;
+            filterContents();
         });
+    });
+    
+    // İçerikleri filtrele
+    function filterContents() {
+        if (activeElement === 'all') {
+            filteredContents = [...allContents];
+        } else {
+            filteredContents = allContents.filter(content => 
+                content.related_element_name === activeElement
+            );
+        }
+        
+        // Sayfalama bilgilerini güncelle
+        allTotalPages = Math.ceil(filteredContents.length / allItemsPerPage);
+        allCurrentPage = 0;
+        
+        // İçerikleri göster ve sayfalama noktalarını oluştur
+        renderAllContents();
+        createAllPaginationDots();
     }
     
-    if (nextCategoryBtn) {
-        nextCategoryBtn.addEventListener('click', function() {
-            changeCategory(1);
+    // Tüm içerikleri göster
+    function renderAllContents() {
+        const grid = document.getElementById('allContentGrid');
+        grid.innerHTML = '';
+        
+        if (filteredContents.length === 0) {
+            const emptyMessage = document.createElement('div');
+            emptyMessage.className = 'empty-content';
+            emptyMessage.innerHTML = '<p>Bu element için henüz içerik eklenmemiştir.</p>';
+            grid.appendChild(emptyMessage);
+            return;
+        }
+        
+        // İçerikleri grida ekle
+        filteredContents.forEach(content => {
+            const card = document.createElement('div');
+            card.className = 'content-card';
+            card.dataset.contentId = content.id;
+            card.dataset.category = content.category_id;
+            
+            // Element rozetini göster
+            const elementBadgeClass = getElementBadgeClass(content.related_element_name);
+            
+            card.innerHTML = `
+                <div class="card-element-badge ${elementBadgeClass}">${content.related_element_name}</div>
+                ${content.image ? 
+                    `<div class="content-image" style="background-image: url('${content.image}')"></div>` : 
+                    `<div class="content-image placeholder-image"><i class="fas fa-book-open"></i></div>`
+                }
+                <div class="content-title">${content.title}</div>
+                <div class="interaction-buttons">
+                    <button class="interaction-button like-button ${content.is_liked ? 'liked' : ''}" 
+                            data-content-id="${content.id}">
+                        <i class="${content.is_liked ? 'fas' : 'far'} fa-heart"></i>
+                        <span class="like-count">${content.like_count || 0}</span>
+                    </button>
+                    <button class="interaction-button save-button ${content.is_saved ? 'saved' : ''}" 
+                            data-content-id="${content.id}">
+                        <i class="${content.is_saved ? 'fas' : 'far'} fa-bookmark"></i>
+                        <span class="save-text">${content.is_saved ? 'Kaydedildi' : 'Kaydet'}</span>
+                    </button>
+                </div>
+            `;
+            
+            // İçerik kartına tıklama olayı ekle
+            card.addEventListener('click', function(e) {
+                if (!e.target.closest('.interaction-button')) {
+                    openContentModal(content.id);
+                }
+            });
+            
+            // Beğenme ve kaydetme butonlarına olay ekle
+            const likeButton = card.querySelector('.like-button');
+            likeButton.addEventListener('click', function(e) {
+                e.stopPropagation();
+                toggleLike(content.id, this);
+            });
+            
+            const saveButton = card.querySelector('.save-button');
+            saveButton.addEventListener('click', function(e) {
+                e.stopPropagation();
+                toggleSave(content.id, this);
+            });
+            
+            grid.appendChild(card);
         });
+        
+        // İlk sayfayı göster
+        showAllPage(0);
     }
     
-    // Sayfalama butonuna olay ekle
-    const nextPageArrow = document.getElementById('nextPageArrow');
-    if (nextPageArrow) {
-        nextPageArrow.addEventListener('click', function() {
-            if (currentPage < totalPages - 1) {
-                showPage(currentPage + 1);
-            } else {
-                showPage(0); // Son sayfadaysa ilk sayfaya git
-            }
+    // Element sınıf adını al
+    function getElementBadgeClass(elementName) {
+        switch(elementName) {
+            case 'Ateş': return 'element-badge-fire';
+            case 'Hava': return 'element-badge-air';
+            case 'Su': return 'element-badge-water';
+            case 'Toprak': return 'element-badge-earth';
+            default: return '';
+        }
+    }
+    
+    // Pagination noktalarını oluştur - tüm mizaçlar için
+    function createAllPaginationDots() {
+        const paginationContainer = document.getElementById('allContentPagination');
+        paginationContainer.innerHTML = '';
+        
+        for (let i = 0; i < allTotalPages; i++) {
+            const dot = document.createElement('div');
+            dot.classList.add('page-dot');
+            if (i === 0) dot.classList.add('active');
+            dot.dataset.page = i;
+            
+            dot.addEventListener('click', function() {
+                showAllPage(parseInt(this.dataset.page));
+            });
+            
+            paginationContainer.appendChild(dot);
+        }
+    }
+    
+    // Sayfa gösterme fonksiyonu - tüm mizaçlar için
+    function showAllPage(pageNum) {
+        if (pageNum < 0 || pageNum >= allTotalPages) return;
+        
+        const wrapper = document.getElementById('allContentWrapper');
+        const grid = document.getElementById('allContentGrid');
+        const gridWidth = grid.offsetWidth;
+        
+        wrapper.style.transform = `translateX(-${pageNum * gridWidth}px)`;
+        
+        // Aktif noktayı güncelle
+        const dots = document.querySelectorAll('#allContentPagination .page-dot');
+        dots.forEach((dot, index) => {
+            dot.classList.toggle('active', index === pageNum);
         });
+        
+        // Kaydırma butonlarını güncelle
+        document.getElementById('prevAllContent').disabled = pageNum === 0;
+        document.getElementById('nextAllContent').disabled = pageNum === allTotalPages - 1;
+        
+        allCurrentPage = pageNum;
     }
     
-    // Modal işlemleri
-    const modal = document.getElementById('contentModal');
-    const closeButton = document.getElementById('closeModal');
-    const modalTitle = document.getElementById('modalTitle');
-    const modalContent = document.getElementById('modalContent');
-    const prevModalContent = document.getElementById('prevModalContent');
-    const modalLikeBtn = document.getElementById('modalLikeBtn');
-    const modalSaveBtn = document.getElementById('modalSaveBtn');
+    // Kaydırma butonlarına olay ekle - tüm mizaçlar için
+    document.getElementById('prevAllContent').addEventListener('click', function() {
+        showAllPage(allCurrentPage - 1);
+    });
     
+    document.getElementById('nextAllContent').addEventListener('click', function() {
+        showAllPage(allCurrentPage + 1);
+    });
+    
+    // ---------- ORTAK FONKSİYONLAR ----------
     // Beğenme işlevi
     function toggleLike(contentId, button) {
         fetch(`/profiles/content/${contentId}/toggle_like/`, {
@@ -294,6 +416,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 likeCountElements.forEach(elem => {
                     elem.textContent = data.like_count || 0;
                 });
+                
+                // AllContents içinde ilgili içeriği güncelle
+                const contentIndex = allContents.findIndex(c => c.id === parseInt(contentId));
+                if (contentIndex !== -1) {
+                    allContents[contentIndex].is_liked = data.liked;
+                    allContents[contentIndex].like_count = data.like_count || 0;
+                }
             }
         })
         .catch(error => console.error('Error:', error));
@@ -314,6 +443,12 @@ document.addEventListener('DOMContentLoaded', function() {
             if (data.success) {
                 // Tüm kartlarda ve modalda güncelleme yap
                 updateSaveButtons(contentId, data.saved);
+                
+                // AllContents içinde ilgili içeriği güncelle
+                const contentIndex = allContents.findIndex(c => c.id === parseInt(contentId));
+                if (contentIndex !== -1) {
+                    allContents[contentIndex].is_saved = data.saved;
+                }
             }
         })
         .catch(error => console.error('Error:', error));
@@ -337,7 +472,8 @@ document.addEventListener('DOMContentLoaded', function() {
         });
         
         // Modal beğenme butonunu güncelle (eğer gösteriliyorsa)
-        if (currentModalContentId === contentId && modalLikeBtn) {
+        const modalLikeBtn = document.getElementById('modalLikeBtn');
+        if (modalLikeBtn && modalLikeBtn.dataset.contentId === contentId) {
             const modalIcon = modalLikeBtn.querySelector('i');
             modalLikeBtn.classList.toggle('liked', isLiked);
             
@@ -374,7 +510,8 @@ document.addEventListener('DOMContentLoaded', function() {
         });
         
         // Modal kaydetme butonunu güncelle (eğer gösteriliyorsa)
-        if (currentModalContentId === contentId && modalSaveBtn) {
+        const modalSaveBtn = document.getElementById('modalSaveBtn');
+        if (modalSaveBtn && modalSaveBtn.dataset.contentId === contentId) {
             const modalIcon = modalSaveBtn.querySelector('i');
             modalSaveBtn.classList.toggle('saved', isSaved);
             
@@ -390,80 +527,86 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    // Beğen butonlarına tıklama olayı ekle
-    document.querySelectorAll('.like-button').forEach(button => {
-        button.addEventListener('click', function(e) {
-            e.stopPropagation(); // Kart tıklamasını engelle
-            const contentId = this.getAttribute('data-content-id');
-            toggleLike(contentId, this);
-        });
-    });
+    // Modal işlemleri
+    const modal = document.getElementById('contentModal');
+    const closeButton = document.getElementById('closeModal');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalContent = document.getElementById('modalContent');
+    const prevModalContent = document.getElementById('prevModalContent');
+    const modalLikeBtn = document.getElementById('modalLikeBtn');
+    const modalSaveBtn = document.getElementById('modalSaveBtn');
+    let currentModalContentId = null;
     
-    // Kaydet butonlarına tıklama olayı ekle
-    document.querySelectorAll('.save-button').forEach(button => {
-        button.addEventListener('click', function(e) {
-            e.stopPropagation(); // Kart tıklamasını engelle
-            const contentId = this.getAttribute('data-content-id');
-            toggleSave(contentId, this);
-        });
-    });
-    
-    // İçerik kartlarına tıklama olayları
-    contentCards.forEach((card, index) => {
-        card.addEventListener('click', function() {
-            const contentId = this.getAttribute('data-content-id');
-            currentModalContentId = contentId;
-            
-            // İçeriği AJAX ile çek
-            fetch(`/profiles/content/${contentId}/detail/`)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('İçerik yüklenirken bir hata oluştu');
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    // Modal içeriğini doldur
-                    modalTitle.textContent = data.title;
-                    modalContent.innerHTML = data.content;
-                    
-                    // Modal beğenme/kaydetme butonlarını güncelle
-                    if (modalLikeBtn) {
-                        updateLikeButtons(contentId, data.liked);
-                    }
-                    
-                    if (modalSaveBtn) {
-                        updateSaveButtons(contentId, data.saved);
-                    }
-                    
-                    // Modal beğen butonuna olay ekle
-                    if (modalLikeBtn) {
-                        modalLikeBtn.onclick = function() {
-                            toggleLike(contentId, this);
-                        };
-                    }
-                    
-                    // Modal kaydet butonuna olay ekle
-                    if (modalSaveBtn) {
-                        modalSaveBtn.onclick = function() {
-                            toggleSave(contentId, this);
-                        };
-                    }
-                    
-                    // Modalı göster
-                    modal.classList.add('active');
-                    document.body.style.overflow = 'hidden'; // Arka planı kaydırmayı engelle
-                })
-                .catch(error => {
-                    console.error('Hata:', error);
-                    // Hata durumunda da modal açılsın, ancak hata mesajı gösterilsin
-                    modalTitle.textContent = this.querySelector('.content-title').textContent;
-                    modalContent.innerHTML = '<p>İçerik yüklenirken bir hata oluştu. Lütfen daha sonra tekrar deneyin.</p>';
-                    modal.classList.add('active');
-                    document.body.style.overflow = 'hidden';
-                });
-        });
-    });
+    // İçerik modalını aç
+    function openContentModal(contentId) {
+        currentModalContentId = contentId;
+        
+        // İçeriği AJAX ile çek
+        fetch(`/profiles/content/${contentId}/detail/`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('İçerik yüklenirken bir hata oluştu');
+                }
+                return response.json();
+            })
+            .then(data => {
+                // Modal içeriğini doldur
+                modalTitle.textContent = data.title;
+                modalContent.innerHTML = data.content;
+                
+                // Beğenme/kaydetme butonlarını güncelle
+                modalLikeBtn.dataset.contentId = contentId;
+                modalSaveBtn.dataset.contentId = contentId;
+                
+                const modalIcon = modalLikeBtn.querySelector('i');
+                modalLikeBtn.classList.toggle('liked', data.liked);
+                
+                if (data.liked) {
+                    modalIcon.classList.remove('far');
+                    modalIcon.classList.add('fas');
+                    modalLikeBtn.innerHTML = `<i class="fas fa-heart"></i> Beğenildi`;
+                } else {
+                    modalIcon.classList.remove('fas');
+                    modalIcon.classList.add('far');
+                    modalLikeBtn.innerHTML = `<i class="far fa-heart"></i> Beğen`;
+                }
+                
+                const saveIcon = modalSaveBtn.querySelector('i');
+                modalSaveBtn.classList.toggle('saved', data.saved);
+                
+                if (data.saved) {
+                    saveIcon.classList.remove('far');
+                    saveIcon.classList.add('fas');
+                    modalSaveBtn.innerHTML = `<i class="fas fa-bookmark"></i> Kaydedildi`;
+                } else {
+                    saveIcon.classList.remove('fas');
+                    saveIcon.classList.add('far');
+                    modalSaveBtn.innerHTML = `<i class="far fa-bookmark"></i> Kaydet`;
+                }
+                
+                // Modal beğen butonuna olay ekle
+                modalLikeBtn.onclick = function() {
+                    toggleLike(contentId, this);
+                };
+                
+                // Modal kaydet butonuna olay ekle
+                modalSaveBtn.onclick = function() {
+                    toggleSave(contentId, this);
+                };
+                
+                // Modalı göster
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden'; // Arka planı kaydırmayı engelle
+            })
+            .catch(error => {
+                console.error('Hata:', error);
+                // Hata durumunda da modal açılsın, ancak hata mesajı gösterilsin
+                modalTitle.textContent = "İçerik";
+                modalContent.innerHTML = '<p>İçerik yüklenirken bir hata oluştu. Lütfen daha sonra tekrar deneyin.</p>';
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+    }
     
     // Modal kapatma olayı
     if (closeButton) {
@@ -483,52 +626,64 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Modal içinde önceki/sonraki içeriğe geçiş
-    if (prevModalContent) {
-        prevModalContent.addEventListener('click', function() {
-            // Modalda gösterilen içeriğin indexini bul
-            const currentCardIndex = Array.from(visibleCards).findIndex(card => 
-                card.getAttribute('data-content-id') === currentModalContentId
-            );
-            
-            if (currentCardIndex === -1 || visibleCards.length <= 1) return;
-            
-            // Bir önceki içeriğe geç
-            const prevIndex = (currentCardIndex - 1 + visibleCards.length) % visibleCards.length;
-            const prevCard = visibleCards[prevIndex];
-            const prevContentId = prevCard.getAttribute('data-content-id');
-            currentModalContentId = prevContentId;
-            
-            // Yeni içeriği yükle
-            fetch(`/profiles/content/${prevContentId}/detail/`)
-                .then(response => response.json())
-                .then(data => {
-                    modalTitle.textContent = data.title;
-                    modalContent.innerHTML = data.content;
-                    
-                    // Beğen/kaydet butonlarını güncelle
-                    updateLikeButtons(prevContentId, data.liked);
-                    updateSaveButtons(prevContentId, data.saved);
-                    
-                    // Modal butonlarına olay dinleyicileri güncelle
-                    if (modalLikeBtn) {
-                        modalLikeBtn.onclick = function() {
-                            toggleLike(prevContentId, this);
-                        };
-                    }
-                    
-                    if (modalSaveBtn) {
-                        modalSaveBtn.onclick = function() {
-                            toggleSave(prevContentId, this);
-                        };
-                    }
-                })
-                .catch(error => {
-                    console.error('Hata:', error);
-                    modalContent.innerHTML = '<p>İçerik yüklenirken bir hata oluştu.</p>';
-                });
+    // İçerik kartlarına tıklama olayları
+    myContentCards.forEach((card) => {
+        card.addEventListener('click', function(e) {
+            if (!e.target.closest('.interaction-button')) {
+                const contentId = this.getAttribute('data-content-id');
+                openContentModal(contentId);
+            }
         });
+    });
+    
+    // Kendi mizacı içerik sayfalama noktalarını oluştur
+    createMyPaginationDots();
+    
+    // AJAX ile tüm içerikleri al
+    function fetchAllContents() {
+        // AJAX isteği ile tüm içerikleri al
+        fetch('/profiles/api/all_contents/')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('İçerikler alınırken bir hata oluştu');
+                }
+                return response.json();
+            })
+            .then(data => {
+                // Tüm içerikleri diziye aktar
+                allContents = data.contents;
+                
+                // Filtreleme yap ve içerikleri göster
+                filterContents();
+            })
+            .catch(error => {
+                console.error('Hata:', error);
+                // Hata durumunda boş bir dizi kullan
+                allContents = [];
+                filterContents();
+            });
     }
+    
+    // Sayfa yüklendiğinde içerikleri al
+    fetchAllContents();
+    
+    // Beğen butonlarına tıklama olayı ekle
+    document.querySelectorAll('.like-button').forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.stopPropagation(); // Kart tıklamasını engelle
+            const contentId = this.getAttribute('data-content-id');
+            toggleLike(contentId, this);
+        });
+    });
+    
+    // Kaydet butonlarına tıklama olayı ekle
+    document.querySelectorAll('.save-button').forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.stopPropagation(); // Kart tıklamasını engelle
+            const contentId = this.getAttribute('data-content-id');
+            toggleSave(contentId, this);
+        });
+    });
     
     // CSRF token'ı almak için yardımcı fonksiyon
     function getCookie(name) {
@@ -545,9 +700,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         return cookieValue;
     }
-    
-    // Başlangıçta ilk kategoriyi göster
-    filterByCategory(categories[0]);
 });
 </script>
 {% endblock %}
