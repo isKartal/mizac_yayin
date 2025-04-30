@@ -10,57 +10,176 @@
 {% block content %}
 <!-- Su Mizacının Kişilik Bölümü -->
 <section class="water-personality">
-  <div class="water-personality-container">
-    <!-- Sol: Metin ve Bilgi Kartları -->
-    <div class="water-personality-text">
-      <h1 class="water-personality-title">Su Mizacının Derinliği</h1>
-      <p class="water-personality-desc">
-        Su mizacına sahip bireyler, sakin, derin ve uyumlu yapılarıyla öne çıkar. Duygusal zekâları ve güçlü empati yetenekleri sayesinde çevrelerine ilham verirler.
-      </p>
-      <div class="water-personality-cards">
-        <div class="water-personality-card">
-          <i class="fas fa-heart"></i>
-          <h3>Empati</h3>
-          <p>Başkalarının duygularını içtenlikle anlayabilme.</p>
+  <div class="container">
+    <div class="temperament-header">
+      <div class="element-badge water">Su Mizacı</div>
+      <h1 class="temperament-title">Su Mizacının Derinliği</h1>
+    </div>
+    
+    {% if has_test_result %}
+      <div class="user-temperament-bar {% if is_users_element %}is-match{% endif %}">
+        <div class="temperament-icon {% if is_users_element %}water{% else %}{{ dominant_element.name|lower }}{% endif %}">
+          <i class="fas {% if is_users_element %}fa-water{% elif dominant_element.name == 'Ateş' %}fa-fire{% elif dominant_element.name == 'Hava' %}fa-wind{% elif dominant_element.name == 'Toprak' %}fa-mountain{% endif %}"></i>
         </div>
-        <div class="water-personality-card">
-          <i class="fas fa-water"></i>
-          <h3>Duygusallık</h3>
-          <p>Derin hisler ve sezgisel yaklaşımlar.</p>
+        <div class="temperament-info">
+          {% if is_users_element %}
+            <h3>Bu Sizin Mizacınız!</h3>
+            <p>Su mizacına sahipsiniz. Buradaki bilgiler ve öneriler sizin için özel olarak hazırlanmıştır.</p>
+            <div class="temperament-actions">
+              <a href="{% url 'my_suggestions' %}" class="btn btn-primary">Önerilerime Git</a>
+            </div>
+          {% else %}
+            <h3>Bu Sizin Mizacınız Değil</h3>
+            <p>Siz <span class="element-text {{ dominant_element.name|lower }}">{{ dominant_element.name }}</span> mizacına sahipsiniz. Kendi mizacınız hakkında bilgi almak için sayfanızı ziyaret edin.</p>
+            <div class="temperament-actions">
+              {% if dominant_element.name == "Ateş" %}
+                <a href="{% url 'fire_more' %}" class="btn btn-primary">Kendi Mizacıma Git</a>
+              {% elif dominant_element.name == "Hava" %}
+                <a href="{% url 'air_more' %}" class="btn btn-primary">Kendi Mizacıma Git</a>
+              {% elif dominant_element.name == "Toprak" %}
+                <a href="{% url 'earth_more' %}" class="btn btn-primary">Kendi Mizacıma Git</a>
+              {% endif %}
+            </div>
+          {% endif %}
         </div>
-        <div class="water-personality-card">
-          <i class="fas fa-eye"></i>
-          <h3>Sezgi</h3>
-          <p>İçsel farkındalık ve bilgelik.</p>
+      </div>
+    {% elif request.user.is_authenticated and not has_test_result %}
+      <div class="user-temperament-bar no-result">
+        <div class="temperament-icon">
+          <i class="fas fa-question"></i>
+        </div>
+        <div class="temperament-info">
+          <h3>Mizaç Testini Henüz Çözmediniz</h3>
+          <p>Kendi mizacınızı öğrenmek ve size özel içerikler görmek için mizaç testini çözün.</p>
+          <div class="temperament-actions">
+            <a href="{% url 'test_list' %}" class="btn btn-primary">Teste Başla</a>
+          </div>
+        </div>
+      </div>
+    {% elif not request.user.is_authenticated %}
+      <div class="user-temperament-bar not-logged">
+        <div class="temperament-icon">
+          <i class="fas fa-user-circle"></i>
+        </div>
+        <div class="temperament-info">
+          <h3>Mizacınızı Keşfedin</h3>
+          <p>Kendi mizacınızı öğrenmek ve size özel öneriler almak için giriş yapın ve testi çözün.</p>
+          <div class="temperament-actions">
+            <a href="{% url 'login' %}" class="btn btn-primary">Giriş Yap</a>
+            <a href="{% url 'register' %}" class="btn btn-secondary">Kayıt Ol</a>
+          </div>
+        </div>
+      </div>
+    {% endif %}
+    
+    <div class="water-personality-container">
+      <!-- Sol: Metin ve Bilgi Kartları -->
+      <div class="water-personality-text">
+        <p class="water-personality-desc">
+          Su mizacına sahip bireyler, sakin, derin ve uyumlu yapılarıyla öne çıkar. Duygusal zekâları ve güçlü empati yetenekleri sayesinde çevrelerine ilham verirler. İlişkilerinde uyumlu ve anlayışlı bir tutum sergilerler.
+        </p>
+        <div class="water-personality-cards">
+          <div class="water-personality-card">
+            <i class="fas fa-heart"></i>
+            <h3>Empati</h3>
+            <p>Başkalarının duygularını içtenlikle anlayabilme.</p>
+          </div>
+          <div class="water-personality-card">
+            <i class="fas fa-water"></i>
+            <h3>Duygusallık</h3>
+            <p>Derin hisler ve sezgisel yaklaşımlar.</p>
+          </div>
+          <div class="water-personality-card">
+            <i class="fas fa-eye"></i>
+            <h3>Sezgi</h3>
+            <p>İçsel farkındalık ve bilgelik.</p>
+          </div>
+        </div>
+      </div>
+      <!-- Sağ: Görsel Bölümü -->
+      <div class="water-personality-image">
+        <img src="{% static 'images/water-personality.jpg' %}" alt="Su Mizacı">
+      </div>
+    </div>
+    
+    <div class="temperament-characteristics">
+      <h2 class="section-title">Su Mizacının Karakteristik Özellikleri</h2>
+      <div class="characteristics-grid">
+        <div class="characteristic-item">
+          <div class="characteristic-icon">
+            <i class="fas fa-hands-helping"></i>
+          </div>
+          <div class="characteristic-content">
+            <h3>Yardımseverlik</h3>
+            <p>Su mizaçlı kişiler, doğal bir şekilde başkalarının ihtiyaçlarını algılar ve yardım etmekten büyük tatmin duyarlar. İnsanları dinlemek ve desteklemek onların en belirgin özelliklerindendir.</p>
+          </div>
+        </div>
+        <div class="characteristic-item">
+          <div class="characteristic-icon">
+            <i class="fas fa-comment-dots"></i>
+          </div>
+          <div class="characteristic-content">
+            <h3>İyi Dinleyici</h3>
+            <p>Sabırlı ve dikkatli dinleyicilerdir. Konuşmaktan çok dinlemeyi tercih eder ve karşısındakini gerçekten anlamak için çaba gösterirler. Bu özellikleri, güvenilir sırdaş olmalarını sağlar.</p>
+          </div>
+        </div>
+        <div class="characteristic-item">
+          <div class="characteristic-icon">
+            <i class="fas fa-paint-brush"></i>
+          </div>
+          <div class="characteristic-content">
+            <h3>Yaratıcı İfade</h3>
+            <p>Zengin bir duygusal dünyaları vardır ve bunu sanat, müzik veya yazı gibi yaratıcı yollarla ifade etmeyi severler. Duygusal derinlikleri, sanatsal ifadelerine özgünlük katar.</p>
+          </div>
+        </div>
+        <div class="characteristic-item">
+          <div class="characteristic-icon">
+            <i class="fas fa-seedling"></i>
+          </div>
+          <div class="characteristic-content">
+            <h3>Sezgisel Yaklaşım</h3>
+            <p>Duygusal ipuçlarını ve sözsüz iletişimi okumada ustadırlar. Sezgileriyle hareket eder ve çoğu zaman analitik düşünmeden önce hislerini dinlerler. Bu da onlara karmaşık sosyal durumlarda avantaj sağlar.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="temperament-recommendations">
+      <h2 class="section-title">Su Mizacı İçin Öneriler</h2>
+      <div class="recommendations-content">
+        <div class="recommendations-image">
+          <img src="{% static 'images/water-recommendations.jpg' %}" alt="Su Mizacı Önerileri">
+        </div>
+        <div class="recommendations-list">
+          <div class="recommendation-item">
+            <div class="recommendation-number">1</div>
+            <p>Duygusal sınırlar koymayı öğrenin. Başkalarının duygularını kendi duygularınızdan ayırt etmek için mindfulness uygulamaları yapabilirsiniz.</p>
+          </div>
+          <div class="recommendation-item">
+            <div class="recommendation-number">2</div>
+            <p>Günlük tutmak, zengin duygusal dünyanızı anlamanıza ve ifade etmenize yardımcı olabilir. Düzenli yazma alışkanlığı edinmeye çalışın.</p>
+          </div>
+          <div class="recommendation-item">
+            <div class="recommendation-number">3</div>
+            <p>Yaratıcı hobiler edinmek, duygusal enerjinizi olumlu bir şekilde kanalize etmenize yardımcı olacaktır. Resim, müzik veya yazı gibi aktivitelere zaman ayırın.</p>
+          </div>
+          <div class="recommendation-item">
+            <div class="recommendation-number">4</div>
+            <p>Su içerisinde vakit geçirmek sizin için terapötik olabilir. Yüzme, spa, ılık duşlar veya doğal su kaynakları yanında zaman geçirin.</p>
+          </div>
+          <div class="recommendation-item">
+            <div class="recommendation-number">5</div>
+            <p>"Hayır" demeyi öğrenin. Başkalarına yardım ederken kendi ihtiyaçlarınızı göz ardı etmemeye dikkat edin. Sağlıklı sınırlar koymak, uzun vadeli ilişkiler için önemlidir.</p>
+          </div>
         </div>
       </div>
       
-      <!-- Test sonucu varsa ve kullanıcının mizacı Su ise -->
-      {% if has_test_result and is_users_element %}
-      <div class="element-match-box">
-        <i class="fas fa-check-circle"></i>
-        <p>Bu sizin baskın mizacınız! Sizin için özel önerileri görmek için <a href="{% url 'my_suggestions' %}">buraya tıklayın</a>.</p>
-      </div>
-      {% elif has_test_result and not is_users_element %}
-      <div class="element-different-box">
-        <i class="fas fa-info-circle"></i>
-        <p>Bu sizin baskın mizacınız değil. Kendi mizacınız için önerileri görmek için <a href="{% url 'my_temperament' %}">buraya tıklayın</a>.</p>
-      </div>
-      {% elif request.user.is_authenticated and not has_test_result %}
-      <div class="element-test-box">
-        <i class="fas fa-exclamation-circle"></i>
-        <p>Henüz mizaç testini çözmediniz. Kendi mizacınızı öğrenmek için <a href="{% url 'test_list' %}">testi çözün</a>.</p>
-      </div>
-      {% elif not request.user.is_authenticated %}
-      <div class="element-login-box">
-        <i class="fas fa-user-circle"></i>
-        <p>Mizacınızı öğrenmek ve size özel öneriler almak için <a href="{% url 'login' %}">giriş yapın</a> ve testi çözün.</p>
-      </div>
+      {% if is_users_element %}
+        <div class="recommendation-cta">
+          <p>Size özel hazırlanmış daha fazla öneri içeriği için öneriler sayfanızı ziyaret edin.</p>
+          <a href="{% url 'my_suggestions' %}" class="btn btn-accent">Önerilerime Git</a>
+        </div>
       {% endif %}
-    </div>
-    <!-- Sağ: Görsel Bölümü -->
-    <div class="water-personality-image">
-      <img src="{% static 'images/water-personality.jpg' %}" alt="Su Mizacının Derinliği">
     </div>
   </div>
 </section>
@@ -78,7 +197,7 @@
       });
     }, { threshold: 0.1 });
     
-    document.querySelectorAll('.water-personality-text, .water-personality-image').forEach(el => {
+    document.querySelectorAll('.water-personality-text, .water-personality-image, .characteristic-item, .recommendation-item').forEach(el => {
       observer.observe(el);
     });
   });

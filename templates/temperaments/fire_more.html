@@ -10,57 +10,176 @@
 {% block content %}
 <!-- Ateş Mizacının Kişilik Bölümü -->
 <section class="fire-personality">
-  <div class="fire-personality-container">
-    <!-- Sol: Metin ve Bilgi Kartları -->
-    <div class="fire-personality-text">
-      <h1 class="fire-personality-title">Ateş Mizacının Gücü</h1>
-      <p class="fire-personality-desc">
-        Ateş mizacına sahip bireyler, hırslı, lider ruhlu ve enerjik yapılarıyla öne çıkar. Dinamik, atılgan ve tutku dolu olan bu kişiler risk almayı sever ve yenilikçi çözümler üretirler.
-      </p>
-      <div class="fire-personality-cards">
-        <div class="fire-personality-card">
-          <i class="fas fa-bolt"></i>
-          <h3>Enerji</h3>
-          <p>Yüksek motivasyon ve canlılık.</p>
+  <div class="container">
+    <div class="temperament-header">
+      <div class="element-badge fire">Ateş Mizacı</div>
+      <h1 class="temperament-title">Ateş Mizacının Gücü</h1>
+    </div>
+    
+    {% if has_test_result %}
+      <div class="user-temperament-bar {% if is_users_element %}is-match{% endif %}">
+        <div class="temperament-icon {% if is_users_element %}fire{% else %}{{ dominant_element.name|lower }}{% endif %}">
+          <i class="fas {% if is_users_element %}fa-fire{% elif dominant_element.name == 'Hava' %}fa-wind{% elif dominant_element.name == 'Su' %}fa-water{% elif dominant_element.name == 'Toprak' %}fa-mountain{% endif %}"></i>
         </div>
-        <div class="fire-personality-card">
-          <i class="fas fa-chess-king"></i>
-          <h3>Liderlik</h3>
-          <p>Önderlik etme ve yön verme yeteneği.</p>
+        <div class="temperament-info">
+          {% if is_users_element %}
+            <h3>Bu Sizin Mizacınız!</h3>
+            <p>Ateş mizacına sahipsiniz. Buradaki bilgiler ve öneriler sizin için özel olarak hazırlanmıştır.</p>
+            <div class="temperament-actions">
+              <a href="{% url 'my_suggestions' %}" class="btn btn-primary">Önerilerime Git</a>
+            </div>
+          {% else %}
+            <h3>Bu Sizin Mizacınız Değil</h3>
+            <p>Siz <span class="element-text {{ dominant_element.name|lower }}">{{ dominant_element.name }}</span> mizacına sahipsiniz. Kendi mizacınız hakkında bilgi almak için sayfanızı ziyaret edin.</p>
+            <div class="temperament-actions">
+              {% if dominant_element.name == "Hava" %}
+                <a href="{% url 'air_more' %}" class="btn btn-primary">Kendi Mizacıma Git</a>
+              {% elif dominant_element.name == "Su" %}
+                <a href="{% url 'water_more' %}" class="btn btn-primary">Kendi Mizacıma Git</a>
+              {% elif dominant_element.name == "Toprak" %}
+                <a href="{% url 'earth_more' %}" class="btn btn-primary">Kendi Mizacıma Git</a>
+              {% endif %}
+            </div>
+          {% endif %}
         </div>
-        <div class="fire-personality-card">
-          <i class="fas fa-fire-alt"></i>
-          <h3>Tutku</h3>
-          <p>İçten ve tutkulu yaklaşımlar.</p>
+      </div>
+    {% elif request.user.is_authenticated and not has_test_result %}
+      <div class="user-temperament-bar no-result">
+        <div class="temperament-icon">
+          <i class="fas fa-question"></i>
+        </div>
+        <div class="temperament-info">
+          <h3>Mizaç Testini Henüz Çözmediniz</h3>
+          <p>Kendi mizacınızı öğrenmek ve size özel içerikler görmek için mizaç testini çözün.</p>
+          <div class="temperament-actions">
+            <a href="{% url 'test_list' %}" class="btn btn-primary">Teste Başla</a>
+          </div>
+        </div>
+      </div>
+    {% elif not request.user.is_authenticated %}
+      <div class="user-temperament-bar not-logged">
+        <div class="temperament-icon">
+          <i class="fas fa-user-circle"></i>
+        </div>
+        <div class="temperament-info">
+          <h3>Mizacınızı Keşfedin</h3>
+          <p>Kendi mizacınızı öğrenmek ve size özel öneriler almak için giriş yapın ve testi çözün.</p>
+          <div class="temperament-actions">
+            <a href="{% url 'login' %}" class="btn btn-primary">Giriş Yap</a>
+            <a href="{% url 'register' %}" class="btn btn-secondary">Kayıt Ol</a>
+          </div>
+        </div>
+      </div>
+    {% endif %}
+    
+    <div class="fire-personality-container">
+      <!-- Sol: Metin ve Bilgi Kartları -->
+      <div class="fire-personality-text">
+        <p class="fire-personality-desc">
+          Ateş mizacına sahip bireyler, hırslı, lider ruhlu ve enerjik yapılarıyla öne çıkar. Dinamik, atılgan ve tutku dolu olan bu kişiler risk almayı sever ve yenilikçi çözümler üretirler.
+        </p>
+        <div class="fire-personality-cards">
+          <div class="fire-personality-card">
+            <i class="fas fa-bolt"></i>
+            <h3>Enerji</h3>
+            <p>Yüksek motivasyon ve canlılık.</p>
+          </div>
+          <div class="fire-personality-card">
+            <i class="fas fa-chess-king"></i>
+            <h3>Liderlik</h3>
+            <p>Önderlik etme ve yön verme yeteneği.</p>
+          </div>
+          <div class="fire-personality-card">
+            <i class="fas fa-fire-alt"></i>
+            <h3>Tutku</h3>
+            <p>İçten ve tutkulu yaklaşımlar.</p>
+          </div>
+        </div>
+      </div>
+      <!-- Sağ: Görsel Bölümü -->
+      <div class="fire-personality-image">
+        <img src="{% static 'images/fire-personality.jpg' %}" alt="Ateş Mizacı">
+      </div>
+    </div>
+    
+    <div class="temperament-characteristics">
+      <h2 class="section-title">Ateş Mizacının Karakteristik Özellikleri</h2>
+      <div class="characteristics-grid">
+        <div class="characteristic-item">
+          <div class="characteristic-icon">
+            <i class="fas fa-trophy"></i>
+          </div>
+          <div class="characteristic-content">
+            <h3>Rekabetçi Doğa</h3>
+            <p>Ateş mizaçlı bireyler için rekabet, kendilerini motive eden en önemli faktörlerden biridir. Hedeflerine ulaşmak için büyük bir kararlılıkla çalışır ve rakiplerine karşı avantaj sağlamak için stratejiler geliştirirler.</p>
+          </div>
+        </div>
+        <div class="characteristic-item">
+          <div class="characteristic-icon">
+            <i class="fas fa-lightbulb"></i>
+          </div>
+          <div class="characteristic-content">
+            <h3>Yenilikçi Düşünce</h3>
+            <p>Yeni fikirler üretmekte ustadırlar. Alışılmışın dışına çıkma cesaretleri, yenilikçi ve benzersiz çözümler bulmalarını sağlar. Risk almaktan korkmaz, aksine bunu heyecan verici bulurlar.</p>
+          </div>
+        </div>
+        <div class="characteristic-item">
+          <div class="characteristic-icon">
+            <i class="fas fa-users"></i>
+          </div>
+          <div class="characteristic-content">
+            <h3>Etkileyici İletişim</h3>
+            <p>İletişim yetenekleri genellikle çok güçlüdür. Fikirlerini net ve ikna edici bir şekilde ifade edebilirler. Bu özellik, liderlik pozisyonlarında başarılı olmalarına katkıda bulunur.</p>
+          </div>
+        </div>
+        <div class="characteristic-item">
+          <div class="characteristic-icon">
+            <i class="fas fa-heartbeat"></i>
+          </div>
+          <div class="characteristic-content">
+            <h3>Tutkulu Bağlılık</h3>
+            <p>Hedeflerine ve inandıkları şeylere tutkuyla bağlanırlar. Bu tutku, onları karşılaştıkları zorluklar karşısında bile vazgeçmemeye ve ısrarla devam etmeye iter.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="temperament-recommendations">
+      <h2 class="section-title">Ateş Mizacı İçin Öneriler</h2>
+      <div class="recommendations-content">
+        <div class="recommendations-image">
+          <img src="{% static 'images/fire-recommendations.jpg' %}" alt="Ateş Mizacı Önerileri">
+        </div>
+        <div class="recommendations-list">
+          <div class="recommendation-item">
+            <div class="recommendation-number">1</div>
+            <p>Düzenli fiziksel aktivite, enerjinizi doğru kanalize etmenize yardımcı olacaktır. Özellikle rekabetçi sporlar sizin için idealdir.</p>
+          </div>
+          <div class="recommendation-item">
+            <div class="recommendation-number">2</div>
+            <p>Gün içinde kısa meditasyon molaları vermek, hızlı düşünce akışınızı dengelemenize ve daha odaklı kalmanıza yardımcı olabilir.</p>
+          </div>
+          <div class="recommendation-item">
+            <div class="recommendation-number">3</div>
+            <p>Yenilikçi fikirlerinizi ve yaratıcı düşüncelerinizi not almak için bir günlük tutun. Bu, ilham geldiğinde fikirlerinizi kaybetmemenizi sağlar.</p>
+          </div>
+          <div class="recommendation-item">
+            <div class="recommendation-number">4</div>
+            <p>Aktif dinleme becerilerinizi geliştirin. Konuşmadan önce karşınızdakini tam olarak anlamak, iletişim çatışmalarını azaltacaktır.</p>
+          </div>
+          <div class="recommendation-item">
+            <div class="recommendation-number">5</div>
+            <p>Kararlarınızı vermeden önce kendinize düşünme süresi tanıyın. Bu, dürtüsel davranışları azaltır ve daha dengeli seçimler yapmanızı sağlar.</p>
+          </div>
         </div>
       </div>
       
-      <!-- Test sonucu varsa ve kullanıcının mizacı Ateş ise -->
-      {% if has_test_result and is_users_element %}
-      <div class="element-match-box">
-        <i class="fas fa-check-circle"></i>
-        <p>Bu sizin baskın mizacınız! Sizin için özel önerileri görmek için <a href="{% url 'my_suggestions' %}">buraya tıklayın</a>.</p>
-      </div>
-      {% elif has_test_result and not is_users_element %}
-      <div class="element-different-box">
-        <i class="fas fa-info-circle"></i>
-        <p>Bu sizin baskın mizacınız değil. Kendi mizacınız için önerileri görmek için <a href="{% url 'my_temperament' %}">buraya tıklayın</a>.</p>
-      </div>
-      {% elif request.user.is_authenticated and not has_test_result %}
-      <div class="element-test-box">
-        <i class="fas fa-exclamation-circle"></i>
-        <p>Henüz mizaç testini çözmediniz. Kendi mizacınızı öğrenmek için <a href="{% url 'test_list' %}">testi çözün</a>.</p>
-      </div>
-      {% elif not request.user.is_authenticated %}
-      <div class="element-login-box">
-        <i class="fas fa-user-circle"></i>
-        <p>Mizacınızı öğrenmek ve size özel öneriler almak için <a href="{% url 'login' %}">giriş yapın</a> ve testi çözün.</p>
-      </div>
+      {% if is_users_element %}
+        <div class="recommendation-cta">
+          <p>Size özel hazırlanmış daha fazla öneri içeriği için öneriler sayfanızı ziyaret edin.</p>
+          <a href="{% url 'my_suggestions' %}" class="btn btn-accent">Önerilerime Git</a>
+        </div>
       {% endif %}
-    </div>
-    <!-- Sağ: Görsel Bölümü -->
-    <div class="fire-personality-image">
-      <img src="{% static 'images/fire-personality.jpg' %}" alt="Ateş Mizacı">
     </div>
   </div>
 </section>
@@ -78,12 +197,7 @@
       });
     }, { threshold: 0.1 });
     
-    document.querySelectorAll('.fire-personality-text, .fire-personality-image').forEach(el => {
-      observer.observe(el);
-    });
-    
-    // Ek olarak flip kartlardaki ikonlara da animasyon uygulamak için observer (opsiyonel)
-    document.querySelectorAll('.flip-card').forEach(el => {
+    document.querySelectorAll('.fire-personality-text, .fire-personality-image, .characteristic-item, .recommendation-item').forEach(el => {
       observer.observe(el);
     });
   });

@@ -10,22 +10,38 @@ from .models import RecommendedContent, UserContentInteraction, ContentCategory
 @login_required
 def profiles(request):
     """ Profil ana sayfasını gösterir """
-    return render(request, 'profiles/profiles.html')
+    # Etkileşim istatistiklerini hesapla
+    viewed_count = UserContentInteraction.objects.filter(user=request.user, viewed=True).count()
+    liked_count = UserContentInteraction.objects.filter(user=request.user, liked=True).count()
+    saved_count = UserContentInteraction.objects.filter(user=request.user, saved=True).count()
+    
+    return render(request, 'profiles/profiles.html', {
+        'viewed_count': viewed_count,
+        'liked_count': liked_count,
+        'saved_count': saved_count
+    })
 
 @login_required
 def my_temperament(request):
-    """Kullanıcının mizaç sonucunu gösterir"""
+    """Kullanıcının mizaç sonucunu kontrol eder ve ilgili mizaç sayfasına yönlendirir"""
     test_result = TestResult.objects.filter(user=request.user).order_by('-date_taken').first()
     
     if test_result:
         # Element bilgisini al
         dominant_element = test_result.dominant_element
         
-        context = {
-            'result': test_result,
-            'dominant_element': dominant_element,
-        }
-        return render(request, 'profiles/my_temperament.html', context)
+        # Element adına göre uygun mizaç sayfasına yönlendir
+        if dominant_element.name == "Ateş":
+            return redirect('fire_more')
+        elif dominant_element.name == "Hava":
+            return redirect('air_more')
+        elif dominant_element.name == "Su":
+            return redirect('water_more')
+        elif dominant_element.name == "Toprak":
+            return redirect('earth_more')
+        else:
+            # Tanımlanamayan element durumunda genel mizaç sayfasına yönlendir
+            return redirect('temperaments')
     else:
         # Eğer test sonucu yoksa, kullanıcıya bilgi mesajı göster ve test sayfasına yönlendir
         messages.info(request, "Mizaç sonucunuzu görmek için önce mizaç testini çözmelisiniz.")

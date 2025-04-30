@@ -8,112 +8,203 @@
 {% endblock %}
 
 {% block content %}
-<!-- Mizac Bölümü -->
+<!-- Mizaç Bölümü -->
 <section class="temperaments-overview">
   <div class="container">
-    <h2 class="section-title">Mizaç Nedir?</h2>
-    <p class="section-description">
-      Temel mizaç tiplerinden hangisine sahip olduğunuzu keşfetmek için kartlara tıklayın.
-    </p>
+    <div class="temperament-header">
+      <h1 class="temperament-title">4 Temel Mizaç Tipi</h1>
+      <p class="temperament-description">
+        Mizaç, bir kişinin doğuştan gelen, hayata bakışını ve tepkilerini şekillendiren karakter özellikleridir. Temel mizaç tiplerinden hangisine sahip olduğunuzu keşfedin.
+      </p>
+    </div>
     
     {% if has_test_result %}
-    <div class="user-temperament-info">
-      <p>Mizaç testinizin sonucunda baskın mizacınız: <strong>{{ user_element.name }}</strong></p>
-      <div class="temperament-actions">
-        <a href="{% url 'my_temperament' %}" class="btn btn-accent">Mizacımı Görüntüle</a>
-        <a href="{% url 'my_suggestions' %}" class="btn btn-primary">Önerilerime Git</a>
+      <div class="user-temperament-bar is-match">
+        <div class="temperament-icon {{ user_element.name|lower }}">
+          <i class="fas {% if user_element.name == 'Ateş' %}fa-fire{% elif user_element.name == 'Hava' %}fa-wind{% elif user_element.name == 'Su' %}fa-water{% elif user_element.name == 'Toprak' %}fa-mountain{% endif %}"></i>
+        </div>
+        <div class="temperament-info">
+          <h3>Sizin Mizacınız: {{ user_element.name }}</h3>
+          <p>Mizaç testinizin sonucuna göre baskın mizacınız <span class="element-text {{ user_element.name|lower }}">{{ user_element.name }}</span>. Mizacınız hakkında detaylı bilgi almak için sayfanızı ziyaret edin.</p>
+          <div class="temperament-actions">
+            {% if user_element.name == "Ateş" %}
+              <a href="{% url 'fire_more' %}" class="btn btn-primary">Mizacımı İncele</a>
+            {% elif user_element.name == "Hava" %}
+              <a href="{% url 'air_more' %}" class="btn btn-primary">Mizacımı İncele</a>
+            {% elif user_element.name == "Su" %}
+              <a href="{% url 'water_more' %}" class="btn btn-primary">Mizacımı İncele</a>
+            {% elif user_element.name == "Toprak" %}
+              <a href="{% url 'earth_more' %}" class="btn btn-primary">Mizacımı İncele</a>
+            {% endif %}
+            <a href="{% url 'my_suggestions' %}" class="btn btn-accent">Önerilerime Git</a>
+          </div>
+        </div>
       </div>
-    </div>
     {% elif request.user.is_authenticated and not has_test_result %}
-    <div class="test-invitation">
-      <p>Henüz mizaç testini çözmemişsiniz. Kendi mizaç tipinizi öğrenmek için hemen testi çözün!</p>
-      <a href="{% url 'test_list' %}" class="btn btn-primary">Teste Başla</a>
-    </div>
-    {% else %}
-    <div class="login-invitation">
-      <p>Kendi mizaç tipinizi öğrenmek ve kişiselleştirilmiş öneriler almak için üye olun ve ücretsiz testi çözün.</p>
-      <div class="login-actions">
-        <a href="{% url 'login' %}" class="btn btn-primary">Giriş Yap</a>
-        <a href="{% url 'register' %}" class="btn btn-secondary">Kayıt Ol</a>
+      <div class="user-temperament-bar no-result">
+        <div class="temperament-icon">
+          <i class="fas fa-question"></i>
+        </div>
+        <div class="temperament-info">
+          <h3>Mizacınızı Keşfedin</h3>
+          <p>Henüz mizaç testini çözmediniz. Kendi mizaç tipinizi öğrenmek ve size özel öneriler almak için hemen testi çözün!</p>
+          <div class="temperament-actions">
+            <a href="{% url 'test_list' %}" class="btn btn-primary">Teste Başla</a>
+          </div>
+        </div>
       </div>
-    </div>
+    {% else %}
+      <div class="user-temperament-bar not-logged">
+        <div class="temperament-icon">
+          <i class="fas fa-user-circle"></i>
+        </div>
+        <div class="temperament-info">
+          <h3>Kendi Mizacınızı Öğrenin</h3>
+          <p>Mizaç tipinizi öğrenmek ve size özel öneriler almak için üye olun ve ücretsiz testi çözün.</p>
+          <div class="temperament-actions">
+            <a href="{% url 'login' %}" class="btn btn-primary">Giriş Yap</a>
+            <a href="{% url 'register' %}" class="btn btn-secondary">Kayıt Ol</a>
+          </div>
+        </div>
+      </div>
     {% endif %}
     
-    <div class="flip-cards">
-      <!-- Ateş Kartı -->
-      <div class="flip-card">
-        <div class="flip-card-inner">
-          <div class="flip-card-front">
-            <div class="card-circle fire">
-              <i class="fas fa-fire"></i>
+    <div class="temperament-cards">
+      <div class="temperament-card-container">
+        <div class="flip-card fire">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <div class="card-circle fire">
+                <i class="fas fa-fire"></i>
+              </div>
+              <h3>Ateş</h3>
+              <p>Enerjik, tutkulu, lider ruhlu</p>
             </div>
-            <h3>Ateş</h3>
-          </div>
-          <div class="flip-card-back">
-            <h3>Ateş</h3>
-            <p>Enerjik, tutkulu, lider ruhlu.</p>
-            <a href="{% url 'fire_more' %}" class="card-link">
-              Daha Fazlası <i class="fas fa-arrow-right"></i>
-            </a>
+            <div class="flip-card-back">
+              <h3>Ateş Mizacı</h3>
+              <p>Dinamik, hırslı ve lider ruhuyla tanınan Ateş mizaçlı kişiler, hedeflerine odaklanır ve etraflarındaki insanlara ilham verirler.</p>
+              <a href="{% url 'fire_more' %}" class="card-link">
+                Daha Fazlası <i class="fas fa-arrow-right"></i>
+              </a>
+            </div>
           </div>
         </div>
       </div>
       
-      <!-- Hava Kartı -->
-      <div class="flip-card">
-        <div class="flip-card-inner">
-          <div class="flip-card-front">
-            <div class="card-circle air">
-              <i class="fas fa-wind"></i>
+      <div class="temperament-card-container">
+        <div class="flip-card air">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <div class="card-circle air">
+                <i class="fas fa-wind"></i>
+              </div>
+              <h3>Hava</h3>
+              <p>İletişim, analitik, sosyal</p>
             </div>
-            <h3>Hava</h3>
-          </div>
-          <div class="flip-card-back">
-            <h3>Hava</h3>
-            <p>İletişim, analitik, sosyal.</p>
-            <a href="{% url 'air_more' %}" class="card-link">
-              Daha Fazlası <i class="fas fa-arrow-right"></i>
-            </a>
+            <div class="flip-card-back">
+              <h3>Hava Mizacı</h3>
+              <p>Hava mizacına sahip kişiler iletişim becerileri, analitik düşünme yetenekleri ve sosyal uyumlarıyla öne çıkarlar.</p>
+              <a href="{% url 'air_more' %}" class="card-link">
+                Daha Fazlası <i class="fas fa-arrow-right"></i>
+              </a>
+            </div>
           </div>
         </div>
       </div>
       
-      <!-- Su Kartı -->
-      <div class="flip-card">
-        <div class="flip-card-inner">
-          <div class="flip-card-front">
-            <div class="card-circle water">
-              <i class="fas fa-water"></i>
+      <div class="temperament-card-container">
+        <div class="flip-card water">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <div class="card-circle water">
+                <i class="fas fa-water"></i>
+              </div>
+              <h3>Su</h3>
+              <p>Duygusal, empatik, sakin</p>
             </div>
-            <h3>Su</h3>
-          </div>
-          <div class="flip-card-back">
-            <h3>Su</h3>
-            <p>Duygusal, empatik, sakin.</p>
-            <a href="{% url 'water_more' %}" class="card-link">
-              Daha Fazlası <i class="fas fa-arrow-right"></i>
-            </a>
+            <div class="flip-card-back">
+              <h3>Su Mizacı</h3>
+              <p>Su mizaçlı kişiler, duygusal derinlik, güçlü empati ve içsel farkındalık özellikleriyle çevrelerinde huzur yaratırlar.</p>
+              <a href="{% url 'water_more' %}" class="card-link">
+                Daha Fazlası <i class="fas fa-arrow-right"></i>
+              </a>
+            </div>
           </div>
         </div>
       </div>
       
-      <!-- Toprak Kartı -->
-      <div class="flip-card">
-        <div class="flip-card-inner">
-          <div class="flip-card-front">
-            <div class="card-circle earth">
-              <i class="fas fa-mountain"></i>
+      <div class="temperament-card-container">
+        <div class="flip-card earth">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <div class="card-circle earth">
+                <i class="fas fa-mountain"></i>
+              </div>
+              <h3>Toprak</h3>
+              <p>Güvenilir, sabırlı, disiplinli</p>
             </div>
-            <h3>Toprak</h3>
-          </div>
-          <div class="flip-card-back">
-            <h3>Toprak</h3>
-            <p>Güvenilir, sabırlı, disiplinli.</p>
-            <a href="{% url 'earth_more' %}" class="card-link">
-              Daha Fazlası <i class="fas fa-arrow-right"></i>
-            </a>
+            <div class="flip-card-back">
+              <h3>Toprak Mizacı</h3>
+              <p>Toprak mizaçlı kişiler, güvenilirlik, sabır ve pratik yaklaşımlarıyla tanınır. Kararlı ve düzenli yapılarıyla dikkat çekerler.</p>
+              <a href="{% url 'earth_more' %}" class="card-link">
+                Daha Fazlası <i class="fas fa-arrow-right"></i>
+              </a>
+            </div>
           </div>
         </div>
+      </div>
+    </div>
+    
+    <div class="temperament-info-section">
+      <h2 class="section-title">Mizacınızı Bilmenin Avantajları</h2>
+      <div class="advantages-grid">
+        <div class="advantage-item">
+          <div class="advantage-icon">
+            <i class="fas fa-brain"></i>
+          </div>
+          <div class="advantage-content">
+            <h3>Kendinizi Anlama</h3>
+            <p>Mizacınızı bilmek, kişisel eğilimlerinizi, güçlü yanlarınızı ve gelişim alanlarınızı daha iyi anlamanızı sağlar. Bu kendinizi kabul etmenize ve daha bilinçli kararlar almanıza yardımcı olur.</p>
+          </div>
+        </div>
+        <div class="advantage-item">
+          <div class="advantage-icon">
+            <i class="fas fa-users"></i>
+          </div>
+          <div class="advantage-content">
+            <h3>İlişkileri Geliştirme</h3>
+            <p>Kendinizi ve başkalarının mizaçlarını anlayarak, ilişkilerinizde daha uyumlu olabilir, çatışmaları azaltabilir ve daha derin bağlar kurabilirsiniz.</p>
+          </div>
+        </div>
+        <div class="advantage-item">
+          <div class="advantage-icon">
+            <i class="fas fa-briefcase"></i>
+          </div>
+          <div class="advantage-content">
+            <h3>Kariyer Başarısı</h3>
+            <p>Doğal yeteneklerinize uygun kariyer seçimleri yaparak iş hayatında daha mutlu ve başarılı olabilirsiniz. Mizacınızı bilerek, güçlü yönlerinizi ön plana çıkarabilirsiniz.</p>
+          </div>
+        </div>
+        <div class="advantage-item">
+          <div class="advantage-icon">
+            <i class="fas fa-heart"></i>
+          </div>
+          <div class="advantage-content">
+            <h3>Kişisel Gelişim</h3>
+            <p>Mizacınızı anlayarak, kişisel gelişim yolculuğunuzu daha bilinçli ve hedefe yönelik şekillendirebilirsiniz. Bu, daha dengeli ve tatmin edici bir hayat sürmenize yardımcı olur.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="temperament-cta">
+      <h2>Mizaç Testini Çözün, Kendinizi Keşfedin</h2>
+      <p>Ücretsiz mizaç testimizi çözerek kendi mizaç tipinizi öğrenin ve size özel tavsiyelere erişin.</p>
+      <div class="cta-buttons">
+        <a href="{% url 'test_list' %}" class="btn btn-lg btn-primary">Teste Başla</a>
+        {% if not request.user.is_authenticated %}
+          <a href="{% url 'login' %}" class="btn btn-lg btn-outline">Giriş Yap</a>
+        {% endif %}
       </div>
     </div>
   </div>
@@ -123,7 +214,7 @@
 {% block extra_js %}
 <script>
   document.addEventListener('DOMContentLoaded', function() {
-    // Intersection Observer: flip kartlar görünür olduğunda animasyon ekle
+    // Intersection Observer: temperament kartları ve avantajlar görünür olduğunda "appear" sınıfını ekle
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -132,7 +223,7 @@
       });
     }, { threshold: 0.1 });
     
-    document.querySelectorAll('.flip-card').forEach(el => {
+    document.querySelectorAll('.temperament-card-container, .advantage-item').forEach(el => {
       observer.observe(el);
     });
   });
