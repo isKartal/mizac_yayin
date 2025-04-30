@@ -15,6 +15,30 @@
     <p class="section-description">
       Temel mizaç tiplerinden hangisine sahip olduğunuzu keşfetmek için kartlara tıklayın.
     </p>
+    
+    {% if has_test_result %}
+    <div class="user-temperament-info">
+      <p>Mizaç testinizin sonucunda baskın mizacınız: <strong>{{ user_element.name }}</strong></p>
+      <div class="temperament-actions">
+        <a href="{% url 'my_temperament' %}" class="btn btn-accent">Mizacımı Görüntüle</a>
+        <a href="{% url 'my_suggestions' %}" class="btn btn-primary">Önerilerime Git</a>
+      </div>
+    </div>
+    {% elif request.user.is_authenticated and not has_test_result %}
+    <div class="test-invitation">
+      <p>Henüz mizaç testini çözmemişsiniz. Kendi mizaç tipinizi öğrenmek için hemen testi çözün!</p>
+      <a href="{% url 'test_list' %}" class="btn btn-primary">Teste Başla</a>
+    </div>
+    {% else %}
+    <div class="login-invitation">
+      <p>Kendi mizaç tipinizi öğrenmek ve kişiselleştirilmiş öneriler almak için üye olun ve ücretsiz testi çözün.</p>
+      <div class="login-actions">
+        <a href="{% url 'login' %}" class="btn btn-primary">Giriş Yap</a>
+        <a href="{% url 'register' %}" class="btn btn-secondary">Kayıt Ol</a>
+      </div>
+    </div>
+    {% endif %}
+    
     <div class="flip-cards">
       <!-- Ateş Kartı -->
       <div class="flip-card">

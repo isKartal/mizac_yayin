@@ -34,6 +34,29 @@
           <p>Değişimlere karşı sabit ve kararlıdır.</p>
         </div>
       </div>
+      
+      <!-- Test sonucu varsa ve kullanıcının mizacı Toprak ise -->
+      {% if has_test_result and is_users_element %}
+      <div class="element-match-box">
+        <i class="fas fa-check-circle"></i>
+        <p>Bu sizin baskın mizacınız! Sizin için özel önerileri görmek için <a href="{% url 'my_suggestions' %}">buraya tıklayın</a>.</p>
+      </div>
+      {% elif has_test_result and not is_users_element %}
+      <div class="element-different-box">
+        <i class="fas fa-info-circle"></i>
+        <p>Bu sizin baskın mizacınız değil. Kendi mizacınız için önerileri görmek için <a href="{% url 'my_temperament' %}">buraya tıklayın</a>.</p>
+      </div>
+      {% elif request.user.is_authenticated and not has_test_result %}
+      <div class="element-test-box">
+        <i class="fas fa-exclamation-circle"></i>
+        <p>Henüz mizaç testini çözmediniz. Kendi mizacınızı öğrenmek için <a href="{% url 'test_list' %}">testi çözün</a>.</p>
+      </div>
+      {% elif not request.user.is_authenticated %}
+      <div class="element-login-box">
+        <i class="fas fa-user-circle"></i>
+        <p>Mizacınızı öğrenmek ve size özel öneriler almak için <a href="{% url 'login' %}">giriş yapın</a> ve testi çözün.</p>
+      </div>
+      {% endif %}
     </div>
     <!-- Sağ: Görsel Bölümü -->
     <div class="earth-personality-image">

@@ -577,3 +577,96 @@
     font-size: 0.85rem;
   }
 }
+
+/* Mizaç sayfaları için bilgi kutuları */
+.element-match-box,
+.element-different-box,
+.element-test-box,
+.element-login-box {
+  margin-top: 30px;
+  padding: 15px 20px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.element-match-box {
+  background-color: rgba(46, 204, 113, 0.1);
+  border-left: 4px solid #2ecc71;
+}
+
+.element-match-box i {
+  color: #2ecc71;
+  font-size: 1.5rem;
+}
+
+.element-different-box {
+  background-color: rgba(52, 152, 219, 0.1);
+  border-left: 4px solid #3498db;
+}
+
+.element-different-box i {
+  color: #3498db;
+  font-size: 1.5rem;
+}
+
+.element-test-box {
+  background-color: rgba(241, 196, 15, 0.1);
+  border-left: 4px solid #f1c40f;
+}
+
+.element-test-box i {
+  color: #f1c40f;
+  font-size: 1.5rem;
+}
+
+.element-login-box {
+  background-color: rgba(155, 89, 182, 0.1);
+  border-left: 4px solid #9b59b6;
+}
+
+.element-login-box i {
+  color: #9b59b6;
+  font-size: 1.5rem;
+}
+
+/* Temperaments sayfası için stiller */
+.user-temperament-info,
+.test-invitation,
+.login-invitation {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 12px;
+  margin: 20px 0 40px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.user-temperament-info p,
+.test-invitation p,
+.login-invitation p {
+  font-size: 1.1rem;
+  margin-bottom: 15px;
+}
+
+.temperament-actions,
+.login-actions {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.user-temperament-info strong {
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+/* Profiles sayfası için özel stiller */
+.element-description {
+  text-align: center;
+  color: #777;
+  margin-top: 10px;
+  font-style: italic;
+}

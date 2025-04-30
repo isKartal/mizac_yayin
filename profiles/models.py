@@ -15,13 +15,24 @@ class ContentCategory(models.Model):
 
 class RecommendedContent(models.Model):
     """Önerilen içerikler için model"""
+    ELEMENT_CHOICES = [
+        ('Ateş', 'Ateş'),
+        ('Hava', 'Hava'),
+        ('Su', 'Su'),
+        ('Toprak', 'Toprak'),
+    ]
+    
     title = models.CharField(max_length=200, verbose_name="Başlık")
     short_description = models.TextField(verbose_name="Kısa Açıklama")
     content = models.TextField(verbose_name="İçerik")
     image = models.ImageField(upload_to='content_images/', blank=True, null=True, verbose_name="Görsel")
     category = models.ForeignKey(ContentCategory, on_delete=models.CASCADE, related_name="contents", verbose_name="Kategori")
-    related_element_name = models.CharField(max_length=50, blank=True, null=True, verbose_name="İlgili Mizaç Elementi", 
-                                         help_text="Ateş, Hava, Su veya Toprak değerlerinden birini girin")
+    related_element_name = models.CharField(
+        max_length=50, 
+        verbose_name="İlgili Mizaç Elementi", 
+        choices=ELEMENT_CHOICES,
+        help_text="Ateş, Hava, Su veya Toprak değerlerinden birini seçin"
+    )
     is_active = models.BooleanField(default=True, verbose_name="Aktif mi?")
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Oluşturulma Tarihi")
     updated_at = models.DateTimeField(auto_now=True, verbose_name="Güncellenme Tarihi")
