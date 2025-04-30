@@ -98,6 +98,64 @@ def my_suggestions(request):
     return render(request, 'profiles/my_suggestions.html', context)
 
 @login_required
+def api_all_contents(request):
+    """Tüm mizaç tipleri için öneri içeriklerini dönen API"""
+    # Kullanıcının etkileşimlerini al
+    user_interactions = UserContentInteraction.objects.filter(user=request.user)
+    interactions_dict = {interaction.content_id: interaction for interaction in user_interactions}
+    
+    # Tüm aktif içerikleri al
+    all_contents = RecommendedContent.objects.filter(
+        is_active=True
+    ).annotate(
+        like_count=Count('user_interactions', filter=Q(user_interactions__liked=True))
+    ).order_by('related_element_name', 'order', '-created_at')
+    
+    # İçerik listesini hazırla
+    contents_list = []
+    
+    for content in all_contents:
+        # Etkileşim bilgisini sözlükten al veya varsayılanları kullan
+        if content.id in interactions_dict:
+            interaction = interactions_dict[content.id]
+            is_liked = interaction.liked
+            is_saved = interaction.saved
+            is_viewed = interaction.viewed
+        else:
+            is_liked = False
+            is_saved = False
+            is_viewed = False
+            
+            # Yeni etkileşim oluştur ve kaydet
+            interaction = UserContentInteraction(
+                user=request.user,
+                content=content,
+                liked=False,
+                saved=False,
+                viewed=False
+            )
+            interaction.save()
+        
+        # İçerik bilgilerini sözlüğe çevir
+        content_dict = {
+            'id': content.id,
+            'title': content.title,
+            'short_description': content.short_description,
+            'image': content.image.url if content.image else None,
+            'category_id': content.category.id,
+            'category_name': content.category.name,
+            'related_element_name': content.related_element_name,
+            'like_count': content.like_count,
+            'is_liked': is_liked,
+            'is_saved': is_saved,
+            'is_viewed': is_viewed,
+        }
+        
+        contents_list.append(content_dict)
+    
+    return JsonResponse({'contents': contents_list})
+
+@login_required
 def content_detail(request, content_id):
     """ İçerik detaylarını AJAX ile dönen view """
     content = get_object_or_404(RecommendedContent, id=content_id, is_active=True)
