@@ -13,68 +13,12 @@
   <div class="container">
     <div class="temperament-header">
       <div class="element-badge earth">Toprak Mizacı</div>
-      <h1 class="temperament-title">Toprak Mizacının Gücü</h1>
     </div>
-    
-    {% if has_test_result %}
-      <div class="user-temperament-bar {% if is_users_element %}is-match{% endif %}">
-        <div class="temperament-icon {% if is_users_element %}earth{% else %}{{ dominant_element.name|lower }}{% endif %}">
-          <i class="fas {% if is_users_element %}fa-mountain{% elif dominant_element.name == 'Ateş' %}fa-fire{% elif dominant_element.name == 'Hava' %}fa-wind{% elif dominant_element.name == 'Su' %}fa-water{% endif %}"></i>
-        </div>
-        <div class="temperament-info">
-          {% if is_users_element %}
-            <h3>Bu Sizin Mizacınız!</h3>
-            <p>Toprak mizacına sahipsiniz. Buradaki bilgiler ve öneriler sizin için özel olarak hazırlanmıştır.</p>
-            <div class="temperament-actions">
-              <a href="{% url 'my_suggestions' %}" class="btn btn-primary">Önerilerime Git</a>
-            </div>
-          {% else %}
-            <h3>Bu Sizin Mizacınız Değil</h3>
-            <p>Siz <span class="element-text {{ dominant_element.name|lower }}">{{ dominant_element.name }}</span> mizacına sahipsiniz. Kendi mizacınız hakkında bilgi almak için sayfanızı ziyaret edin.</p>
-            <div class="temperament-actions">
-              {% if dominant_element.name == "Ateş" %}
-                <a href="{% url 'fire_more' %}" class="btn btn-primary">Kendi Mizacıma Git</a>
-              {% elif dominant_element.name == "Hava" %}
-                <a href="{% url 'air_more' %}" class="btn btn-primary">Kendi Mizacıma Git</a>
-              {% elif dominant_element.name == "Su" %}
-                <a href="{% url 'water_more' %}" class="btn btn-primary">Kendi Mizacıma Git</a>
-              {% endif %}
-            </div>
-          {% endif %}
-        </div>
-      </div>
-    {% elif request.user.is_authenticated and not has_test_result %}
-      <div class="user-temperament-bar no-result">
-        <div class="temperament-icon">
-          <i class="fas fa-question"></i>
-        </div>
-        <div class="temperament-info">
-          <h3>Mizaç Testini Henüz Çözmediniz</h3>
-          <p>Kendi mizacınızı öğrenmek ve size özel içerikler görmek için mizaç testini çözün.</p>
-          <div class="temperament-actions">
-            <a href="{% url 'test_list' %}" class="btn btn-primary">Teste Başla</a>
-          </div>
-        </div>
-      </div>
-    {% elif not request.user.is_authenticated %}
-      <div class="user-temperament-bar not-logged">
-        <div class="temperament-icon">
-          <i class="fas fa-user-circle"></i>
-        </div>
-        <div class="temperament-info">
-          <h3>Mizacınızı Keşfedin</h3>
-          <p>Kendi mizacınızı öğrenmek ve size özel öneriler almak için giriş yapın ve testi çözün.</p>
-          <div class="temperament-actions">
-            <a href="{% url 'login' %}" class="btn btn-primary">Giriş Yap</a>
-            <a href="{% url 'register' %}" class="btn btn-secondary">Kayıt Ol</a>
-          </div>
-        </div>
-      </div>
-    {% endif %}
     
     <div class="earth-personality-container">
       <!-- Sol: Metin ve Bilgi Kartları -->
       <div class="earth-personality-text">
+        <h1 class="temperament-title">Toprak Mizacının Gücü</h1>
         <p class="earth-personality-desc">
           Toprak mizacına sahip bireyler, güvenilir, sabırlı ve disiplinlidir. Sağlam temeller üzerine inşa edilmiş karakterleri sayesinde pratik çözümler sunar, istikrar ve denge sağlarlar. Sorumluluk sahibi ve düzenli yapıları ile dikkat çekerler.
         </p>
@@ -147,9 +91,6 @@
     <div class="temperament-recommendations">
       <h2 class="section-title">Toprak Mizacı İçin Öneriler</h2>
       <div class="recommendations-content">
-        <div class="recommendations-image">
-          <img src="{% static 'images/earth-recommendations.jpg' %}" alt="Toprak Mizacı Önerileri">
-        </div>
         <div class="recommendations-list">
           <div class="recommendation-item">
             <div class="recommendation-number">1</div>
@@ -173,13 +114,6 @@
           </div>
         </div>
       </div>
-      
-      {% if is_users_element %}
-        <div class="recommendation-cta">
-          <p>Size özel hazırlanmış daha fazla öneri içeriği için öneriler sayfanızı ziyaret edin.</p>
-          <a href="{% url 'my_suggestions' %}" class="btn btn-accent">Önerilerime Git</a>
-        </div>
-      {% endif %}
     </div>
   </div>
 </section>
