@@ -109,7 +109,7 @@
 {% block extra_js %}
 <script>
   document.addEventListener('DOMContentLoaded', function() {
-    // Intersection Observer: temperament kartları ve avantajlar görünür olduğunda "appear" sınıfını ekle
+    // IntersectionObserver: Elementler görünür olduğunda "appear" sınıfını eklemek için
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -118,7 +118,8 @@
       });
     }, { threshold: 0.1 });
     
-    document.querySelectorAll('.temperament-card-container, .advantage-item').forEach(el => {
+    // Sadece ana sayfadaki kart konteynerlerini izle
+    document.querySelectorAll('.temperament-card-container').forEach(el => {
       observer.observe(el);
     });
   });
