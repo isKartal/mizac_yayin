@@ -129,23 +129,23 @@
 
 /* Element kartları için özel renk tanımları */
 .fire-icon {
-  color: #e74c3c; /* Ateş için turuncu-kırmızı */
-  background-color: rgba(231, 76, 60, 0.15); /* Arka plan için hafif turuncu */
+  color: #e74c3c; /* Ateş için kırmızı */
+  background-color: rgba(231, 76, 60, 0.15);
 }
 
 .air-icon {
-  color: #c9c9c6; /* Hava için mavi */
-  background-color: rgba(138, 141, 143, 0.15); /* Arka plan için hafif mavi */
+  color: #78909c; /* Hava için gri */
+  background-color: rgba(120, 144, 156, 0.15);
 }
 
 .earth-icon {
-  color: #e67e22; /* Toprak için yeşil */
-  background-color: rgba(230, 126, 34, 0.15); /* Arka plan için hafif yeşil */
+  color: #8d6e63; /* Toprak için kahverengi */
+  background-color: rgba(141, 110, 99, 0.15);
 }
 
 .water-icon {
-  color: #2980b9; /* Su için mor */
-  background-color: rgba(41, 128, 185, 0.15); /* Arka plan için hafif mor */
+  color: #2980b9; /* Su için mavi */
+  background-color: rgba(41, 128, 185, 0.15);
 }
 
 .element-card h3 {
