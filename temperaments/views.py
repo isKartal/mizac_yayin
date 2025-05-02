@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from testing_algorithm.models import TestResult
-from profiles.models import RecommendedContent  # Content yerine RecommendedContent modelini kullanıyoruz
+from profiles.models import RecommendedContent, UserContentInteraction
+from django.db.models import Count, Q
 
 def temperaments(request):
     """Tüm mizaçları gösteren genel sayfa"""
@@ -29,11 +30,34 @@ def temperaments(request):
 def fire_more(request):
     """Ateş mizacı detay sayfası"""
     
-    # Ateş mizacı için önerileri getir
+    # Ateş mizacı için önerileri getir (en fazla 3 tane)
+    # İşlem yapılırken beğeni sayısına göre en popüler içerikler ilk 3'te olacak
     element_suggestions = RecommendedContent.objects.filter(
         related_element_name='Ateş',
         is_active=True
-    ).order_by('-created_at')[:3]  # En son 3 öneriyi al
+    ).annotate(
+        like_count=Count('user_interactions', filter=Q(user_interactions__liked=True))
+    ).order_by('-like_count', '-created_at')[:3]
+    
+    # Kullanıcının giriş yapmış olması durumunda, beğeni bilgilerini ekle
+    if request.user.is_authenticated:
+        # Kullanıcının etkileşimlerini al
+        user_interactions = UserContentInteraction.objects.filter(user=request.user)
+        interactions_dict = {interaction.content_id: interaction for interaction in user_interactions}
+        
+        # İçerikler için etkileşim bilgilerini hazırla
+        for content in element_suggestions:
+            if content.id in interactions_dict:
+                # Kullanıcının bu içerikle etkileşimi varsa, özelliklerini kopyalayalım
+                interaction = interactions_dict[content.id]
+                content.is_liked = interaction.liked
+                content.is_saved = interaction.saved
+                content.is_viewed = interaction.viewed
+            else:
+                # Etkileşim yoksa, varsayılan değerleri ayarla
+                content.is_liked = False
+                content.is_saved = False
+                content.is_viewed = False
     
     context = {
         'element_name': 'Ateş',
@@ -65,11 +89,34 @@ def fire_more(request):
 def water_more(request):
     """Su mizacı detay sayfası"""
     
-    # Su mizacı için önerileri getir
+    # Su mizacı için önerileri getir (en fazla 3 tane)
+    # İşlem yapılırken beğeni sayısına göre en popüler içerikler ilk 3'te olacak
     element_suggestions = RecommendedContent.objects.filter(
         related_element_name='Su',
         is_active=True
-    ).order_by('-created_at')[:3]  # En son 3 öneriyi al
+    ).annotate(
+        like_count=Count('user_interactions', filter=Q(user_interactions__liked=True))
+    ).order_by('-like_count', '-created_at')[:3]
+    
+    # Kullanıcının giriş yapmış olması durumunda, beğeni bilgilerini ekle
+    if request.user.is_authenticated:
+        # Kullanıcının etkileşimlerini al
+        user_interactions = UserContentInteraction.objects.filter(user=request.user)
+        interactions_dict = {interaction.content_id: interaction for interaction in user_interactions}
+        
+        # İçerikler için etkileşim bilgilerini hazırla
+        for content in element_suggestions:
+            if content.id in interactions_dict:
+                # Kullanıcının bu içerikle etkileşimi varsa, özelliklerini kopyalayalım
+                interaction = interactions_dict[content.id]
+                content.is_liked = interaction.liked
+                content.is_saved = interaction.saved
+                content.is_viewed = interaction.viewed
+            else:
+                # Etkileşim yoksa, varsayılan değerleri ayarla
+                content.is_liked = False
+                content.is_saved = False
+                content.is_viewed = False
     
     context = {
         'element_name': 'Su',
@@ -101,11 +148,34 @@ def water_more(request):
 def air_more(request):
     """Hava mizacı detay sayfası"""
     
-    # Hava mizacı için önerileri getir
+    # Hava mizacı için önerileri getir (en fazla 3 tane)
+    # İşlem yapılırken beğeni sayısına göre en popüler içerikler ilk 3'te olacak
     element_suggestions = RecommendedContent.objects.filter(
         related_element_name='Hava',
         is_active=True
-    ).order_by('-created_at')[:3]  # En son 3 öneriyi al
+    ).annotate(
+        like_count=Count('user_interactions', filter=Q(user_interactions__liked=True))
+    ).order_by('-like_count', '-created_at')[:3]  
+    
+    # Kullanıcının giriş yapmış olması durumunda, beğeni bilgilerini ekle
+    if request.user.is_authenticated:
+        # Kullanıcının etkileşimlerini al
+        user_interactions = UserContentInteraction.objects.filter(user=request.user)
+        interactions_dict = {interaction.content_id: interaction for interaction in user_interactions}
+        
+        # İçerikler için etkileşim bilgilerini hazırla
+        for content in element_suggestions:
+            if content.id in interactions_dict:
+                # Kullanıcının bu içerikle etkileşimi varsa, özelliklerini kopyalayalım
+                interaction = interactions_dict[content.id]
+                content.is_liked = interaction.liked
+                content.is_saved = interaction.saved
+                content.is_viewed = interaction.viewed
+            else:
+                # Etkileşim yoksa, varsayılan değerleri ayarla
+                content.is_liked = False
+                content.is_saved = False
+                content.is_viewed = False
     
     context = {
         'element_name': 'Hava',
@@ -137,11 +207,34 @@ def air_more(request):
 def earth_more(request):
     """Toprak mizacı detay sayfası"""
     
-    # Toprak mizacı için önerileri getir
+    # Toprak mizacı için önerileri getir (en fazla 3 tane)
+    # İşlem yapılırken beğeni sayısına göre en popüler içerikler ilk 3'te olacak
     element_suggestions = RecommendedContent.objects.filter(
         related_element_name='Toprak',
         is_active=True
-    ).order_by('-created_at')[:3]  # En son 3 öneriyi al
+    ).annotate(
+        like_count=Count('user_interactions', filter=Q(user_interactions__liked=True))
+    ).order_by('-like_count', '-created_at')[:3]
+    
+    # Kullanıcının giriş yapmış olması durumunda, beğeni bilgilerini ekle
+    if request.user.is_authenticated:
+        # Kullanıcının etkileşimlerini al
+        user_interactions = UserContentInteraction.objects.filter(user=request.user)
+        interactions_dict = {interaction.content_id: interaction for interaction in user_interactions}
+        
+        # İçerikler için etkileşim bilgilerini hazırla
+        for content in element_suggestions:
+            if content.id in interactions_dict:
+                # Kullanıcının bu içerikle etkileşimi varsa, özelliklerini kopyalayalım
+                interaction = interactions_dict[content.id]
+                content.is_liked = interaction.liked
+                content.is_saved = interaction.saved
+                content.is_viewed = interaction.viewed
+            else:
+                # Etkileşim yoksa, varsayılan değerleri ayarla
+                content.is_liked = False
+                content.is_saved = False
+                content.is_viewed = False
     
     context = {
         'element_name': 'Toprak',
