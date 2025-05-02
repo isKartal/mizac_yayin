@@ -1,4 +1,4 @@
-/* Base styles for temperaments */
+/* Mizaç stilleri için temel ayarlar */
 :root {
   --primary-color: #292321;
   --secondary-color: #ece9e3;
@@ -9,7 +9,7 @@
   --transition: all 0.3s ease;
   --light-text: #ffffff;
 
- /* Mizaç sayfası için element renkleri */
+  /* Mizaç element renkleri */
   --fire-color: #e74c3c;     /* Parlak kırmızı */
   --fire-bg: rgba(231, 76, 60, 0.2);
   --air-color: #78909c;      /* Gri-mavi */
@@ -20,7 +20,7 @@
   --earth-bg: rgba(141, 110, 99, 0.2);
 }
 
-/* Section description shared styles */
+/* Bölüm stilleri */
 .section-description, .temperament-description {
   text-align: center;
   max-width: 800px;
@@ -30,7 +30,6 @@
   line-height: 1.6;
 }
 
-/* Temperament header */
 .temperament-header {
   text-align: center;
   margin-bottom: 40px;
@@ -43,7 +42,29 @@
   margin-bottom: 20px;
 }
 
-/* Element badges */
+.section-title {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: var(--primary-color);
+  text-align: center;
+  margin-bottom: 40px;
+  position: relative;
+  padding-bottom: 15px;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  width: 80px;
+  height: 3px;
+  background-color: var(--accent-color);
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 2px;
+}
+
+/* Element rozetleri */
 .element-badge {
   display: inline-block;
   padding: 8px 20px;
@@ -54,26 +75,26 @@
 }
 
 .element-badge.fire {
-  background-color: rgba(231, 76, 60, 0.2);
-  color: #e74c3c;
+  background-color: var(--fire-bg);
+  color: var(--fire-color);
 }
 
 .element-badge.air {
-  background-color: rgba(120, 144, 156, 0.2);
-  color: #78909c;
+  background-color: var(--air-bg);
+  color: var(--air-color);
 }
 
 .element-badge.water {
-  background-color: rgba(41, 128, 185, 0.2);
-  color: #2980b9;
+  background-color: var(--water-bg);
+  color: var(--water-color);
 }
 
 .element-badge.earth {
-  background-color: rgba(141, 110, 99, 0.2);
-  color: #8d6e63;
+  background-color: var(--earth-bg);
+  color: var(--earth-color);
 }
 
-/* Flip card base styles */
+/* Çevirilebilir kart stilleri */
 .flip-card {
   background-color: transparent;
   width: 260px;
@@ -120,25 +141,24 @@
   text-align: center;
 }
 
-/* Element-specific flip card backgrounds */
+/* Element türüne göre çevirilebilir kart arkaplanları */
 .flip-card.fire .flip-card-back {
-  background: linear-gradient(135deg, #e74c3c, #ff5252);
+  background: linear-gradient(135deg, var(--fire-color), #ff5252);
 }
 
 .flip-card.air .flip-card-back {
-  background: linear-gradient(135deg, #78909c, #b0bec5);
+  background: linear-gradient(135deg, var(--air-color), #b0bec5);
 }
 
 .flip-card.water .flip-card-back {
-  background: linear-gradient(135deg, #2980b9, #64b5f6);
+  background: linear-gradient(135deg, var(--water-color), #64b5f6);
 }
 
 .flip-card.earth .flip-card-back {
-  background: linear-gradient(135deg, #8d6e63, #bcaaa4);
+  background: linear-gradient(135deg, var(--earth-color), #bcaaa4);
 }
 
-
-/* Card circles */
+/* Kart daireleri */
 .card-circle {
   width: 90px;
   height: 90px;
@@ -148,7 +168,7 @@
   justify-content: center;
   margin-bottom: 25px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
+  transition: var(--transition);
 }
 
 .flip-card:hover .card-circle {
@@ -159,7 +179,7 @@
   font-size: 36px;
 }
 
-/* Element-specific card circle styles */
+/* Element türüne göre kart daire stilleri */
 .card-circle.fire {
   background-color: rgba(231, 76, 60, 0.15);
 }
@@ -177,22 +197,22 @@
 }
 
 .card-circle.fire i {
-  color: #e74c3c;
+  color: var(--fire-color);
 }
 
 .card-circle.air i {
-  color: #78909c;
+  color: var(--air-color);
 }
 
 .card-circle.water i {
-  color: #2980b9;
+  color: var(--water-color);
 }
 
 .card-circle.earth i {
-  color: #8d6e63;
+  color: var(--earth-color);
 }
 
-/* Card text styles */
+/* Kart metin stilleri */
 .flip-card-front h3 {
   font-size: 1.8rem;
   margin-bottom: 10px;
@@ -218,7 +238,7 @@
   line-height: 1.5;
 }
 
-/* Card link */
+/* Kart bağlantısı */
 .card-link {
   display: inline-flex;
   align-items: center;
@@ -229,7 +249,7 @@
   color: white;
   text-decoration: none;
   font-weight: 600;
-  transition: all 0.3s ease;
+  transition: var(--transition);
 }
 
 .card-link:hover {
@@ -237,7 +257,7 @@
   transform: translateX(5px);
 }
 
-/* Temperament cards container */
+/* Mizaç kartları konteyneri */
 .temperament-cards {
   display: flex;
   flex-wrap: wrap;
@@ -257,7 +277,7 @@
   transform: translateY(0);
 }
 
-/* Personality containers for all elements */
+/* Tüm elementler için kişilik konteynerleri */
 .water-personality-container,
 .fire-personality-container,
 .air-personality-container,
@@ -272,7 +292,7 @@
   flex-wrap: wrap;
 }
 
-/* Personality text sections */
+/* Kişilik metin bölümleri */
 .water-personality-text,
 .fire-personality-text,
 .air-personality-text,
@@ -280,7 +300,7 @@
   flex: 1 1 500px;
   opacity: 0;
   transform: translateY(30px);
-  transition: all 0.3s;
+  transition: var(--transition);
 }
 
 .water-personality-desc,
@@ -293,7 +313,7 @@
   line-height: 1.6;
 }
 
-/* Personality card containers */
+/* Kişilik kart konteynerleri */
 .water-personality-cards,
 .fire-personality-cards,
 .air-personality-cards,
@@ -303,7 +323,7 @@
   flex-wrap: wrap;
 }
 
-/* Individual personality cards */
+/* Bireysel kişilik kartları */
 .water-personality-card,
 .fire-personality-card,
 .air-personality-card,
@@ -331,7 +351,7 @@
 .air-personality-card i,
 .earth-personality-card i {
   font-size: 28px;
-  color: #e9b44c;
+  color: var(--accent-color);
   margin-bottom: 10px;
 }
 
@@ -341,7 +361,7 @@
 .earth-personality-card h3 {
   font-size: 1.1rem;
   margin-bottom: 8px;
-  color: #292321;
+  color: var(--primary-color);
 }
 
 .water-personality-card p,
@@ -353,7 +373,7 @@
   line-height: 1.4;
 }
 
-/* Personality images */
+/* Kişilik görselleri */
 .water-personality-image,
 .fire-personality-image,
 .air-personality-image,
@@ -361,7 +381,7 @@
   flex: 1 1 100px;
   opacity: 0;
   transform: translateY(30px);
-  transition: all 0.3s;
+  transition: var(--transition);
   text-align: center;
 }
 
@@ -373,7 +393,7 @@
   max-width: 500px;
   border-radius: 16px;
   box-shadow: 0 10px 30px rgba(0,0,0,0.07);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: var(--transition);
 }
 
 .water-personality-image img:hover,
@@ -384,18 +404,47 @@
   box-shadow: 0 10px 20px rgba(0,0,0,0.2);
 }
 
-/* Section title */
-.section-title {
+/* Animasyonlar */
+@keyframes flicker {
+  0% { transform: scale(1) rotate(0deg); opacity: 1; }
+  50% { transform: scale(1.1) rotate(3deg); opacity: 0.9; }
+  100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+
+.fire-personality-card i {
+  animation: flicker 2s infinite;
+}
+
+/* Animasyonlar için görünür durumu */
+.appear {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+
+/* Mizaç Önerileri Bileşeni */
+.temperament-suggestions {
+  margin: 70px 0;
+  padding: 40px 0;
+  background-color: var(--secondary-color);
+  border-radius: 20px;
+}
+
+.suggestions-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.suggestions-header h2 {
   font-size: 1.8rem;
   font-weight: 600;
   color: var(--primary-color);
-  text-align: center;
-  margin-bottom: 40px;
+  margin-bottom: 10px;
   position: relative;
   padding-bottom: 15px;
+  display: inline-block;
 }
 
-.section-title::after {
+.suggestions-header h2::after {
   content: '';
   position: absolute;
   width: 80px;
@@ -407,213 +456,207 @@
   border-radius: 2px;
 }
 
-/* Characteristics section */
-.temperament-characteristics {
-  margin: 80px 0;
+.suggestions-header p {
+  color: #666;
+  font-size: 1rem;
+  max-width: 600px;
+  margin: 0 auto;
 }
 
-.characteristics-grid {
+.suggestions-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(45%, 1fr));
-  gap: 30px;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 25px;
+  padding: 0 5%;
+  margin-bottom: 30px;
 }
 
-.characteristic-item {
-  display: flex;
+.suggestion-card {
   background-color: white;
-  border-radius: 15px;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
-  padding: 25px;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
   transition: var(--transition);
+  position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
   opacity: 0;
   transform: translateY(20px);
 }
 
-.characteristic-item:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-}
-
-.characteristic-icon {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  background-color: var(--secondary-color);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-right: 20px;
-  flex-shrink: 0;
-}
-
-.characteristic-icon i {
-  font-size: 24px;
-  color: var(--accent-color);
-}
-
-.characteristic-content {
-  flex: 1;
-}
-
-.characteristic-content h3 {
-  font-size: 1.2rem;
-  margin-bottom: 10px;
-  color: var(--primary-color);
-}
-
-.characteristic-content p {
-  color: #666;
-  line-height: 1.5;
-}
-
-/* Recommendations section */
-.temperament-recommendations {
-  margin: 80px 0;
-}
-
-.recommendations-content {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 40px;
-  align-items: center;
-}
-
-.recommendations-list {
-  flex: 1;
-  min-width: 300px;
-}
-
-.recommendation-item {
-  display: flex;
-  align-items: flex-start;
-  margin-bottom: 25px;
-  opacity: 0;
-  transform: translateX(20px);
-  transition: var(--transition);
-}
-
-.recommendation-number {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  background-color: var(--accent-color);
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 600;
-  margin-right: 15px;
-  flex-shrink: 0;
-}
-
-/* Advantages section */
-.temperament-info-section {
-  margin: 80px 0;
-  padding: 40px 0;
-  background-color: var(--secondary-color);
-  border-radius: 20px;
-}
-
-.advantages-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 30px;
-  padding: 0 30px;
-}
-
-.advantage-item {
-  display: flex;
-  background-color: white;
-  border-radius: 15px;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
-  padding: 25px;
-  opacity: 0;
-  transform: translateY(20px);
-  transition: all 0.5s ease;
-}
-
-.advantage-item:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-}
-
-.advantage-icon {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  background-color: var(--accent-color);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-right: 20px;
-  flex-shrink: 0;
-}
-
-.advantage-icon i {
-  font-size: 24px;
-  color: white;
-}
-
-.advantage-content {
-  flex: 1;
-}
-
-.advantage-content h3 {
-  font-size: 1.3rem;
-  margin-bottom: 10px;
-  color: var(--primary-color);
-  font-weight: 600;
-}
-
-.advantage-content p {
-  color: #666;
-  line-height: 1.6;
-  font-size: 0.95rem;
-}
-
-/* Animations */
-@keyframes flicker {
-  0% { transform: scale(1) rotate(0deg); opacity: 1; }
-  50% { transform: scale(1.1) rotate(3deg); opacity: 0.9; }
-  100% { transform: scale(1) rotate(0deg); opacity: 1; }
-}
-
-.fire-personality-card i {
-  animation: flicker 2s infinite;
-}
-
-/* Appear state for animations */
-.appear {
-  opacity: 1 !important;
-  transform: translateY(0) !important;
-}
-
-.recommendation-item.appear {
-  opacity: 1;
-  transform: translateX(0);
-}
-
-.advantage-item.appear {
+.suggestion-card.appear {
   opacity: 1;
   transform: translateY(0);
 }
 
-/* Responsive styles */
+.suggestion-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+.suggestion-image {
+  height: 180px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.suggestion-image::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent);
+}
+
+.placeholder-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f0f0f0;
+}
+
+.placeholder-image i {
+  font-size: 2.5rem;
+  color: #ccc;
+}
+
+.suggestion-element {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  z-index: 5;
+  backdrop-filter: blur(5px);
+}
+
+.suggestion-element.ates, .suggestion-element.fire {
+  background-color: var(--fire-bg);
+  color: var(--fire-color);
+}
+
+.suggestion-element.hava, .suggestion-element.air {
+  background-color: var(--air-bg);
+  color: var(--air-color);
+}
+
+.suggestion-element.su, .suggestion-element.water {
+  background-color: var(--water-bg);
+  color: var(--water-color);
+}
+
+.suggestion-element.toprak, .suggestion-element.earth {
+  background-color: var(--earth-bg);
+  color: var(--earth-color);
+}
+
+.suggestion-category {
+  position: absolute;
+  bottom: 15px;
+  left: 15px;
+  padding: 5px 10px;
+  background-color: rgba(255, 255, 255, 0.9);
+  color: var(--primary-color);
+  border-radius: 20px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  z-index: 5;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.suggestion-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--primary-color);
+  margin: 20px 20px 10px;
+  line-height: 1.4;
+}
+
+.suggestion-description {
+  padding: 0 20px;
+  color: #777;
+  font-size: 0.9rem;
+  margin-bottom: 20px;
+  flex: 1;
+}
+
+.suggestion-actions {
+  display: flex;
+  padding: 15px 20px;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  background-color: #f9f9f9;
+  justify-content: space-between;
+}
+
+.suggestion-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: #777;
+  font-size: 0.9rem;
+  padding: 8px 12px;
+  border-radius: 20px;
+  transition: var(--transition);
+}
+
+.suggestion-button:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.suggestion-button.liked {
+  color: var(--fire-color);
+}
+
+.suggestion-button.saved {
+  color: var(--air-color);
+}
+
+.suggestions-more {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.more-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 25px;
+  background-color: var(--accent-color);
+  color: var(--primary-color);
+  border-radius: 30px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: var(--transition);
+  box-shadow: 0 5px 15px rgba(233, 180, 76, 0.3);
+}
+
+.more-link:hover {
+  background-color: #d9a43c;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(233, 180, 76, 0.4);
+}
+
+/* Duyarlı tasarım stilleri */
 @media (max-width: 992px) {
-  .advantages-grid {
-    grid-template-columns: 1fr;
-  }
-  
   .temperament-cards {
     gap: 20px;
+  }
+  
+  .suggestions-grid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   }
 }
 
 @media (max-width: 768px) {
-  .characteristics-grid {
-    grid-template-columns: 1fr;
-  }
-  
   .water-personality-container,
   .fire-personality-container,
   .air-personality-container,
@@ -662,17 +705,8 @@
     font-size: 28px;
   }
   
-  .advantage-item {
-    flex-direction: column;
-    text-align: center;
-  }
-  
-  .advantage-icon {
-    margin: 0 auto 15px;
-  }
-  
-  .characteristic-item {
-    margin-bottom: 20px;
+  .suggestions-grid {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -687,31 +721,11 @@
     height: 300px;
   }
   
-  .characteristic-item {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
+  .suggestions-header h2 {
+    font-size: 1.5rem;
   }
   
-  .characteristic-icon {
-    margin-right: 0;
-    margin-bottom: 15px;
-  }
-  
-  .advantage-item {
-    padding: 20px;
-  }
-  
-  .advantage-icon {
-    width: 50px;
-    height: 50px;
-  }
-  
-  .advantage-icon i {
-    font-size: 20px;
-  }
-  
-  .advantage-content h3 {
-    font-size: 1.2rem;
+  .more-link {
+    width: 90%;
   }
 }
