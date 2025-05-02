@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.http import JsonResponse
 from django.utils import timezone
-from django.db.models import Count, Exists, OuterRef, Prefetch, Q
+from django.db.models import Count, Q
 from testing_algorithm.models import TestResult
 from .models import RecommendedContent, UserContentInteraction, ContentCategory
 
@@ -171,40 +171,62 @@ def api_all_contents(request):
     
     return JsonResponse({'contents': contents_list})
 
-@login_required
+# content_detail fonksiyonunu güncelledim - login_required dekoratörünü kaldırdım
 def content_detail(request, content_id):
     """ İçerik detaylarını AJAX ile dönen view """
     content = get_object_or_404(RecommendedContent, id=content_id, is_active=True)
     
-    # Kullanıcının içerikle etkileşimini güncelle
-    interaction, created = UserContentInteraction.objects.get_or_create(
-        user=request.user,
-        content=content
-    )
-    
-    if not interaction.viewed:
-        interaction.viewed = True
-        interaction.viewed_at = timezone.now()
-        interaction.save()
-    
-    # İçeriğin beğeni sayısını hesapla
-    like_count = UserContentInteraction.objects.filter(content=content, liked=True).count()
-    
-    # JSON formatında içerik detaylarını döndür
-    data = {
-        'id': content.id,
-        'title': content.title,
-        'content': content.content,
-        'image': content.image.url if content.image else None,
-        'category': content.category.name,
-        'category_id': content.category.id,
-        'related_element': content.related_element_name,
-        'like_count': like_count,
-        'liked': interaction.liked,
-        'saved': interaction.saved,
-    }
+    # Kullanıcı giriş yapmışsa etkileşim bilgilerini güncelle
+    if request.user.is_authenticated:
+        interaction, created = UserContentInteraction.objects.get_or_create(
+            user=request.user,
+            content=content
+        )
+        
+        if not interaction.viewed:
+            interaction.viewed = True
+            interaction.viewed_at = timezone.now()
+            interaction.save()
+        
+        # Beğeni sayısını hesapla
+        like_count = UserContentInteraction.objects.filter(content=content, liked=True).count()
+        
+        # JSON formatında içerik detaylarını döndür
+        data = {
+            'id': content.id,
+            'title': content.title,
+            'content': content.content,
+            'image': content.image.url if content.image else None,
+            'category': content.category.name,
+            'category_id': content.category.id,
+            'related_element': content.related_element_name,
+            'like_count': like_count,
+            'liked': interaction.liked,
+            'saved': interaction.saved,
+        }
+    else:
+        # Giriş yapmayan kullanıcılar için
+        # Beğeni sayısını hesapla
+        like_count = UserContentInteraction.objects.filter(content=content, liked=True).count()
+        
+        # JSON formatında içerik detaylarını döndür
+        data = {
+            'id': content.id,
+            'title': content.title,
+            'content': content.content,
+            'image': content.image.url if content.image else None,
+            'category': content.category.name,
+            'category_id': content.category.id,
+            'related_element': content.related_element_name,
+            'like_count': like_count,
+            'liked': False,  # Giriş yapmadığı için beğenmemiş
+            'saved': False,  # Giriş yapmadığı için kaydetmemiş
+        }
     
     return JsonResponse(data)
+
+# Bu işlemler için login_required dekoratörünü korunmalı
+from django.contrib.auth.decorators import login_required
 
 @login_required
 def toggle_like_content(request, content_id):

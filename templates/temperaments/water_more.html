@@ -132,6 +132,9 @@
 {% endblock %}
 
 {% block extra_js %}
+
+<script src="{% static 'js/temperament_detail.js' %}"></script>
+
 <script>
   document.addEventListener('DOMContentLoaded', function() {
     // Öneri kartlarına tıklama olayı ekle
@@ -581,4 +584,5 @@
     }
   });
   </script>
+
 {% endblock %}
